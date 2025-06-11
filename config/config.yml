@@ -11,7 +11,14 @@ test_files:
       prim_text_correction: [0, -1]
       ignore_stext: true
       data_correction: [0, -1]
-      text_data_correction: [0, -1]
+      allow_header_text_offset_mismatch: true
+      version_override: FCS3.1
+
+  - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
+    options:
+      ignore_stext: true
+      prim_text_correction: [0, -1]
+      data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
     
