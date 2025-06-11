@@ -109,10 +109,23 @@ test_files:
       # use_literal_delims: true
       # prim_text_correction: [0, -1]
 
-    # "Beckman Coulter - Gallios.LMD",
-    # "Beckman Coulter - MoFlo Astrios - linear settings.fcs",
-    # "Beckman Coulter - MoFlo Astrios - log settings.fcs",
-    # "Beckman Coulter - MoFlo XDP.fcs",
+  # this parses fine but spews tons of warnings. Some are for dropping keys
+  # that are parsed as ints but should be floats (ie ff is wrong), will also
+  # freak out that PnB is one greater than 2^32-1
+  - name: Beckman Coulter - MoFlo Astrios - linear settings.fcs
+    options:
+      other_width: 14
+
+  # ditto
+  - name: Beckman Coulter - MoFlo Astrios - log settings.fcs
+    options:
+      other_width: 14
+
+  # suffers from PnE log X,0 error
+  # - name: Beckman Coulter - MoFlo XDP.fcs
+  #   options:
+  #     other_width: 14
+
     # "Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs",
     # "Cytek DxP10 - APC COMP BEADS011.fcs",
     # "Cytek DxP10 - BLANK COMP BEADS007.fcs",
