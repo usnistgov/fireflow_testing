@@ -1,4 +1,10 @@
 test_files:
+  # Each of these Accuri files has roughly the same set of problems
+  # - DATA offset end is 1 too high
+  # - STEXT doesn't exist but overlaps with TEXT (and is weirdly very different)
+  # - contains $VOL and $SPILLOVER yet is 3.0 and not 3.1
+  # - in some case DATA in TEXT is wildly off (its safe to ignore since HEADER
+  #   is correct)
   - name: Accuri - C6.fcs
     options:
       ignore_stext: true
@@ -21,12 +27,32 @@ test_files:
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
+
+  - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
+    options:
+      ignore_stext: true
+      prim_text_correction: [0, -1]
+      data_correction: [0, -1]
+      allow_header_text_offset_mismatch: true
+      version_override: FCS3.1
+
+  # TODO fixing this requires forcing PnB/BYTEORD
+  # - name: 1 WT_001.fcs
+  #   options:
+  #     squish_offsets: true
     
-    # "1 WT_001.fcs",
-    # "3215apc 100004.fcs",
-    # "Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs",
-    # "Accuri - C6 - A03 HPB - CD45 PerCP.fcs",
-    # "Applied Biosystems - Attune.fcs",
+  # TODO fixing this requires forcing PnB/BYTEORD
+  # - name: 3215apc 100004.fcs
+  #   options: {}
+    
+  - name: Applied Biosystems - Attune.fcs
+    options:
+      # has weird trailing space after TEXT
+      prim_text_correction: [0, -9]
+      # this TEXT has blanks
+      use_literal_delims: true
+      allow_empty: true
+
     # "BD - FACS Aria II.fcs",
     # "BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs",
     # "BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs",
