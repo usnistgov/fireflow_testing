@@ -53,14 +53,62 @@ test_files:
       use_literal_delims: true
       allow_empty: true
 
-    # "BD - FACS Aria II.fcs",
-    # "BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs",
-    # "BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs",
-    # "BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs",
-    # "BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs",
-    # "BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs",
-    # "Beckman Coulter - Cyan.fcs",
-    # "Beckman Coulter - Cytomics FC500.LMD",
+  # this file also has $P14DISPLAY, not only which is deviant (the right keyword
+  # is $PnD) but it's version is 3.0 not 3.1. It also isn't the correct value
+  # ("LIN" vs "Linear,0,0")
+  - name: BD - FACS Aria II.fcs
+    options:
+      # analysis has -1 for end
+      allow_negative: true
+      
+  # this one seems near perfect except for the offset spacing thing
+  - name: BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
+    options:
+      repair_offset_spaces: true
+
+  # ditto
+  - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
+    options:
+      repair_offset_spaces: true
+
+  # ditto
+  - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
+    options:
+      repair_offset_spaces: true
+
+  # ditto
+  - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
+    options:
+      repair_offset_spaces: true
+
+  # DATA offset for this is way beyond end of file, which ff currently
+  # doesn't check
+  # - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
+  #   options:
+  #     repair_offset_spaces: true
+  
+
+  # this file suffers from the dreaded "PnE log X,0 error" (ie the log min is 0,
+  # which is math that should only exist in an LLM)
+  # - name: Beckman Coulter - Cyan.fcs
+  #   options:
+  #     other_width: 10
+
+  # this file has a known issue in that the CXP software uses 10 for PnB
+  # when the actual width is 16, need to update ff to fix this
+  # - name: Beckman Coulter - Cytomics FC500.LMD
+  #   options:
+  #     use_literal_delims: true
+  #     prim_text_correction: [0, -1]
+
+  # this parses fine but has a space in front of the PnE keywords so they drop,
+  # is also DFCxTOy for x and y greater than PAR, which is nonsense
+  - name: Beckman Coulter - Gallios.LMD
+    options:
+      {}
+      # use_literal_delims: true
+      # prim_text_correction: [0, -1]
+
     # "Beckman Coulter - Gallios.LMD",
     # "Beckman Coulter - MoFlo Astrios - linear settings.fcs",
     # "Beckman Coulter - MoFlo Astrios - log settings.fcs",
