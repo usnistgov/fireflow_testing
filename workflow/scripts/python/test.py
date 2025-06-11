@@ -1,6 +1,11 @@
 import pyreflow as pf  # type: ignore
 from typing import Any
 from pathlib import Path
+import warnings
+import logging
+
+logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG) # type: ignore
+logging.captureWarnings(True)
 
 
 def main(smk: Any):
@@ -31,17 +36,20 @@ def main(smk: Any):
     except KeyError:
         pass
 
-    try:
-        x = opts["text_data_correction"]
-        opts["text_data_correction"] = (x[0], x[1])
-    except KeyError:
-        pass
+    def as_tup(key: str):
+        try:
+            x = opts[key]
+            opts[key] = (x[0], x[1])
+        except KeyError:
+            pass
 
-    try:
-        x = opts["data_correction"]
-        opts["data_correction"] = (x[0], x[1])
-    except KeyError:
-        pass
+    as_tup("prim_text_correction")
+    as_tup("supp_text_correction")
+    as_tup("data_correction")
+    as_tup("analysis_correction")
+    as_tup("text_data_correction")
+    as_tup("text_analysis_correction")
+
 
     pf.fcs_read_std_dataset(i, **opts)
     o.touch()

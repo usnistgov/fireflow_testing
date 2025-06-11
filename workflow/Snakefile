@@ -6,6 +6,8 @@ rule test_files:
         "resources/fcs/{testname}",
     output:
         "results/pass/{testname}.txt",
+    log:
+        "results/log/warnings_{testname}.log"
     conda:
         "envs/pyreflow.yml"
     script:

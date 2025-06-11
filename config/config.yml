@@ -5,10 +5,18 @@ test_files:
       version_override: FCS3.1
       data_correction: [0, -1]
       text_data_correction: [0, -1]
+
+  - name: Accuri - C6 - A01 H2O.fcs
+    options:
+      prim_text_correction: [0, -1]
+      ignore_stext: true
+      data_correction: [0, -1]
+      text_data_correction: [0, -1]
+      allow_header_text_offset_mismatch: true
+      version_override: FCS3.1
     
     # "1 WT_001.fcs",
     # "3215apc 100004.fcs",
-    # "Accuri - C6 - A01 H2O.fcs",
     # "Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs",
     # "Accuri - C6 - A03 HPB - CD45 PerCP.fcs",
     # "Applied Biosystems - Attune.fcs",
