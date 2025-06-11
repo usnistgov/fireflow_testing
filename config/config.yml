@@ -1,0 +1,46 @@
+test_files:
+  - name: Accuri - C6.fcs
+    options:
+      ignore_stext: true
+      version_override: FCS3.1
+      data_correction: [0, -1]
+      text_data_correction: [0, -1]
+    
+    # "1 WT_001.fcs",
+    # "3215apc 100004.fcs",
+    # "Accuri - C6 - A01 H2O.fcs",
+    # "Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs",
+    # "Accuri - C6 - A03 HPB - CD45 PerCP.fcs",
+    # "Applied Biosystems - Attune.fcs",
+    # "BD - FACS Aria II.fcs",
+    # "BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs",
+    # "BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs",
+    # "BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs",
+    # "BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs",
+    # "BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs",
+    # "Beckman Coulter - Cyan.fcs",
+    # "Beckman Coulter - Cytomics FC500.LMD",
+    # "Beckman Coulter - Gallios.LMD",
+    # "Beckman Coulter - MoFlo Astrios - linear settings.fcs",
+    # "Beckman Coulter - MoFlo Astrios - log settings.fcs",
+    # "Beckman Coulter - MoFlo XDP.fcs",
+    # "Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs",
+    # "Cytek DxP10 - APC COMP BEADS011.fcs",
+    # "Cytek DxP10 - BLANK COMP BEADS007.fcs",
+    # "Cytek DxP10 - FITC COMP BEADS008.fcs",
+    # "Cytek DxP10 - PERCP COMP BEADS010.fcs",
+    # "Cytek DxP10 - PE COMP BEADS009.fcs",
+    # "MVa2011-06-30_fcs30.fcs",
+    # "MVa2011-06-30_fcs30c.fcs",
+    # "MVa2011-06-30_fcs31.fcs",
+    # "Millipore - easyCyte 6HT-2L - InCyte.fcs",
+    # "Miltenyi Biotec - MACSQuant Analyzer.fcs",
+    # "Partec - PAS - 8 peak beads.FCS",
+    # "Stratedigm - S1400 - 8 Peaks Beads.fcs",
+    # "System II listmode with extra info in bits D10-D15.LMD",
+    # "Verity Software House - GemStoneGeneratedData - 500000events.fcs",
+    # "iCyt - Eclipse.lmd",
+    # "iCyt - Eclipse - 8 peak.lmd",
+    # "iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd",
+    # "iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd",
+    # "iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd",
