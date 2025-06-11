@@ -1,0 +1,15 @@
+.snakemake
+resources
+results
+
+*.png
+*.xlsx
+*.tsv
+*.tsv.gz
+*.gz
+*.pdf
+*.pyc
+*.fcs
+
+!static/
+!static/*
