@@ -36,14 +36,20 @@ test_files:
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
 
-  # TODO fixing this requires forcing PnB/BYTEORD
-  # - name: 1 WT_001.fcs
-  #   options:
-  #     squish_offsets: true
+  - name: 1 WT_001.fcs
+    options:
+      # second DATA offset is 0
+      squish_offsets: true
+      # offsets have whitespace
+      trim_value_whitespace: true
+      # STEXT duplicates TEXT
+      ignore_stext: true
+      # BYTEORD is should only be 2 bytes
+      integer_byteord_override: [1,2]
     
-  # TODO fixing this requires forcing PnB/BYTEORD
-  # - name: 3215apc 100004.fcs
-  #   options: {}
+  - name: 3215apc 100004.fcs
+    options:
+      integer_byteord_override: [3,2,1]
     
   - name: Applied Biosystems - Attune.fcs
     options:
@@ -53,39 +59,45 @@ test_files:
       use_literal_delims: true
       allow_empty: true
 
-  # this file also has $P14DISPLAY, not only which is deviant (the right keyword
-  # is $PnD) but it's version is 3.0 not 3.1. It also isn't the correct value
-  # ("LIN" vs "Linear,0,0")
   - name: BD - FACS Aria II.fcs
     options:
       # analysis has -1 for end
       allow_negative: true
+      # this file also has $P14DISPLAY, not only which is deviant (the right
+      # keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't the
+      # correct value ("LIN" vs "Linear,0,0")
+      allow_pseudostandard: true
       
-  # this one seems near perfect except for the offset spacing thing
+  # this one seems near perfect except for the offset spacing thing, lots of
+  # keys are also only whitespace so blanks need to be allowed
   - name: BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
     options:
-      repair_offset_spaces: true
+      trim_value_whitespace: true
+      allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
     options:
-      repair_offset_spaces: true
+      trim_value_whitespace: true
+      allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
     options:
-      repair_offset_spaces: true
+      trim_value_whitespace: true
+      allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
     options:
-      repair_offset_spaces: true
+      trim_value_whitespace: true
+      allow_empty: true
 
   # DATA offset for this is way beyond end of file, which ff currently
   # doesn't check
   # - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
   #   options:
-  #     repair_offset_spaces: true
+  #     trim_value_whitespace: true
   
 
   # this file suffers from the dreaded "PnE log X,0 error" (ie the log min is 0,
@@ -101,14 +113,15 @@ test_files:
   #     use_literal_delims: true
   #     prim_text_correction: [0, -1]
 
-  # this parses fine but has a space in front of the PnE keywords so they drop,
-  # is also DFCxTOy for x and y greater than PAR, which is nonsense
   - name: Beckman Coulter - Gallios.LMD
     options:
-      {}
-      # use_literal_delims: true
-      # prim_text_correction: [0, -1]
-
+      # lots of DFCxTOy keys (which don't even match $PAR), and also $PnG
+      allow_pseudostandard: true
+      # PnE has space in front of it
+      trim_value_whitespace: true
+      # trimming spaces results in lots of blank keys
+      allow_empty: true
+      
   # this parses fine but spews tons of warnings. Some are for dropping keys
   # that are parsed as ints but should be floats (ie ff is wrong), will also
   # freak out that PnB is one greater than 2^32-1
