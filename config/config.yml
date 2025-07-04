@@ -100,18 +100,27 @@ test_files:
   #     trim_value_whitespace: true
   
 
-  # this file suffers from the dreaded "PnE log X,0 error" (ie the log min is 0,
-  # which is math that should only exist in an LLM)
-  # - name: Beckman Coulter - Cyan.fcs
-  #   options:
-  #     other_width: 10
+  - name: Beckman Coulter - Cyan.fcs
+    options:
+      other_width: 10
+      # dreaded PnE log issue
+      fix_log_scale_offsets: true
+      integer_byteord_override: [1,2]
+      # DATA offsets in TEXT are wrong
+      allow_header_text_offset_mismatch: true
 
-  # this file has a known issue in that the CXP software uses 10 for PnB
-  # when the actual width is 16, need to update ff to fix this
-  # - name: Beckman Coulter - Cytomics FC500.LMD
-  #   options:
-  #     use_literal_delims: true
-  #     prim_text_correction: [0, -1]
+  - name: Beckman Coulter - Cytomics FC500.LMD
+    options:
+      use_literal_delims: true
+      # offsets are apparently systemically off
+      prim_text_correction: [0, -1]
+      data_correction: [0, -1]
+      # this file has a known issue in that the CXP software uses 10 for PnB
+      # when the actual width is 16
+      integer_widths_from_byteord: true
+      # has lots of DFCxTOy stuff, and mysterious kws like $RUNNUMBER and
+      # $INSTADDRESS
+      allow_pseudostandard: true
 
   - name: Beckman Coulter - Gallios.LMD
     options:
@@ -135,27 +144,102 @@ test_files:
       other_width: 14
 
   # suffers from PnE log X,0 error
-  # - name: Beckman Coulter - MoFlo XDP.fcs
-  #   options:
-  #     other_width: 14
+  - name: Beckman Coulter - MoFlo XDP.fcs
+    options:
+      other_width: 14
+      fix_log_scale_offsets: true
 
-    # "Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs",
-    # "Cytek DxP10 - APC COMP BEADS011.fcs",
-    # "Cytek DxP10 - BLANK COMP BEADS007.fcs",
-    # "Cytek DxP10 - FITC COMP BEADS008.fcs",
-    # "Cytek DxP10 - PERCP COMP BEADS010.fcs",
-    # "Cytek DxP10 - PE COMP BEADS009.fcs",
-    # "MVa2011-06-30_fcs30.fcs",
-    # "MVa2011-06-30_fcs30c.fcs",
-    # "MVa2011-06-30_fcs31.fcs",
-    # "Millipore - easyCyte 6HT-2L - InCyte.fcs",
-    # "Miltenyi Biotec - MACSQuant Analyzer.fcs",
-    # "Partec - PAS - 8 peak beads.FCS",
-    # "Stratedigm - S1400 - 8 Peaks Beads.fcs",
-    # "System II listmode with extra info in bits D10-D15.LMD",
-    # "Verity Software House - GemStoneGeneratedData - 500000events.fcs",
-    # "iCyt - Eclipse.lmd",
-    # "iCyt - Eclipse - 8 peak.lmd",
-    # "iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd",
-    # "iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd",
-    # "iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd",
+  - name: Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
+    options: {}
+
+  - name: Cytek DxP10 - APC COMP BEADS011.fcs
+    options: {}
+
+  - name: Cytek DxP10 - BLANK COMP BEADS007.fcs
+    options: {}
+    
+  - name: Cytek DxP10 - FITC COMP BEADS008.fcs
+    options: {}
+    
+  - name: Cytek DxP10 - PERCP COMP BEADS010.fcs
+    options: {}
+    
+  - name: Cytek DxP10 - PE COMP BEADS009.fcs
+    options: {}
+    
+  - name: MVa2011-06-30_fcs30.fcs
+    options: {}
+    
+  - name: MVa2011-06-30_fcs30c.fcs
+    options: {}
+    
+  - name: MVa2011-06-30_fcs31.fcs
+    options:
+      prim_text_correction: [0, -1]
+      supp_text_correction: [0, -1]
+      data_correction: [0, -1]
+      text_data_correction: [0, -1]
+      # not sure what OTHER is doing here, it looks like STEXT
+      max_other: 0
+    
+  # ...???
+  - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
+    options:
+      prim_text_correction: [0, 1]
+      # IDK, it looks like some of these kws are xml blobs
+      allow_non_ascii_keywords: true
+      allow_odd: true
+      allow_pseudostandard: true
+      allow_header_text_offset_mismatch: true
+      allow_missing_final_delim: true
+    
+  - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
+    options: {}
+
+  - name: Partec - PAS - 8 peak beads.FCS
+    options:
+      data_correction: [0, -1]
+      integer_byteord_override: [1,2]
+      # $INST/$FIL
+      allow_pseudostandard: true
+
+  - name: Stratedigm - S1400 - 8 Peaks Beads.fcs
+    options:
+      # this is a (rare?) example of a 3.1 file that uses variable bit width;
+      # ...good thing I added this to FF :) Time channel is 32 and rest are 16
+      version_override: FCS3.1
+    
+  - name: System II listmode with extra info in bits D10-D15.LMD
+    options:
+      # $TIME (which is 300, so probably not $TIME(STEP))
+      allow_pseudostandard: true
+      
+  - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
+    options: {}
+  
+  - name: iCyt - Eclipse.lmd
+    options:
+      version_override: FCS3.1
+      # $ETIME (they probably meant $ETIM)
+      allow_pseudostandard: true
+
+  # ditto
+  - name: iCyt - Eclipse - 8 peak.lmd
+    options:
+      version_override: FCS3.1
+      allow_pseudostandard: true
+    
+  - name: iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
+    options:
+      version_override: FCS3.1
+      allow_pseudostandard: true
+    
+  - name: iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
+    options:
+      version_override: FCS3.1
+      allow_pseudostandard: true
+    
+  - name: iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
+    options:
+      version_override: FCS3.1
+      allow_pseudostandard: true
