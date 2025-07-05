@@ -4,7 +4,7 @@ from pathlib import Path
 import warnings
 import logging
 
-logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG) # type: ignore
+logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG)  # type: ignore
 logging.captureWarnings(True)
 
 
@@ -36,10 +36,18 @@ def main(smk: Any):
     except KeyError:
         pass
 
+    try:
+        opts["replace_standard_key_values"] = [
+            (str(x[0]), str(x[1])) for x in opts["replace_standard_key_values"]
+        ]
+    except KeyError:
+        pass
+
     def as_tup(key: str):
         try:
             x = opts[key]
             opts[key] = (x[0], x[1])
+
         except KeyError:
             pass
 
@@ -49,7 +57,6 @@ def main(smk: Any):
     as_tup("analysis_correction")
     as_tup("text_data_correction")
     as_tup("text_analysis_correction")
-
 
     pf.fcs_read_std_dataset(i, **opts)
     o.touch()

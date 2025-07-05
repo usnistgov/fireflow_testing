@@ -7,7 +7,7 @@ test_files:
   #   is correct)
   - name: Accuri - C6.fcs
     options:
-      ignore_stext: true
+      ignore_supp_text: true
       version_override: FCS3.1
       data_correction: [0, -1]
       text_data_correction: [0, -1]
@@ -15,14 +15,14 @@ test_files:
   - name: Accuri - C6 - A01 H2O.fcs
     options:
       prim_text_correction: [0, -1]
-      ignore_stext: true
+      ignore_supp_text: true
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
 
   - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     options:
-      ignore_stext: true
+      ignore_supp_text: true
       prim_text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
@@ -30,7 +30,7 @@ test_files:
 
   - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     options:
-      ignore_stext: true
+      ignore_supp_text: true
       prim_text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
@@ -43,7 +43,7 @@ test_files:
       # offsets have whitespace
       trim_value_whitespace: true
       # STEXT duplicates TEXT
-      ignore_stext: true
+      ignore_supp_text: true
       # BYTEORD is should only be 2 bytes
       integer_byteord_override: [1,2]
     
@@ -93,12 +93,15 @@ test_files:
       trim_value_whitespace: true
       allow_empty: true
 
-  # DATA offset for this is way beyond end of file, which ff currently
-  # doesn't check
-  # - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
-  #   options:
-  #     trim_value_whitespace: true
-  
+  - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
+    options:
+      trim_value_whitespace: true
+      allow_empty: true
+      # this file appears to be cut in half
+      data_correction: [0, -189504]
+      ignore_text_data_offsets: true
+      replace_standard_key_values:
+        - [TOT, 6052]
 
   - name: Beckman Coulter - Cyan.fcs
     options:
@@ -108,6 +111,9 @@ test_files:
       integer_byteord_override: [1,2]
       # DATA offsets in TEXT are wrong
       allow_header_text_offset_mismatch: true
+      # one of the OTHER segments drove off the cliff at the end of the file,
+      # so just ignore them (only one, but lots of empty segments)
+      max_other: 0
 
   - name: Beckman Coulter - Cytomics FC500.LMD
     options:
