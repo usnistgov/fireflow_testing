@@ -5,37 +5,50 @@ test_files:
   # - contains $VOL and $SPILLOVER yet is 3.0 and not 3.1
   # - in some case DATA in TEXT is wildly off (its safe to ignore since HEADER
   #   is correct)
+  # - $SPILLOVER uses numbers instead of channel names
   - name: Accuri - C6.fcs
     options:
+      warnings_are_errors: true
       ignore_supp_text: true
       version_override: FCS3.1
       data_correction: [0, -1]
       text_data_correction: [0, -1]
+      ignore_literal_standard_keys: [SPILLOVER]
 
   - name: Accuri - C6 - A01 H2O.fcs
     options:
+      warnings_are_errors: true
       prim_text_correction: [0, -1]
       ignore_supp_text: true
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
+      ignore_literal_standard_keys: [SPILLOVER]
+      ignore_text_data_offsets: true
 
   - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     options:
+      warnings_are_errors: true
       ignore_supp_text: true
       prim_text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
+      ignore_literal_standard_keys: [SPILLOVER]
+      ignore_text_data_offsets: true
 
   - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     options:
+      warnings_are_errors: true
       ignore_supp_text: true
       prim_text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
       version_override: FCS3.1
+      ignore_literal_standard_keys: [SPILLOVER]
+      ignore_text_data_offsets: true
 
+  # TODO fix warnings
   - name: 1 WT_001.fcs
     options:
       # second DATA offset is 0
@@ -49,52 +62,72 @@ test_files:
     
   - name: 3215apc 100004.fcs
     options:
+      warnings_are_errors: true
       integer_byteord_override: [3,2,1]
     
+  # TODO fix blank warnings
   - name: Applied Biosystems - Attune.fcs
     options:
+      # warnings_are_errors: true
       # has weird trailing space after TEXT
       prim_text_correction: [0, -9]
       # this TEXT has blanks
       use_literal_delims: true
       allow_empty: true
+      # ignore_literal_standard_keys:
+      #   - INST
+      #   - COM
+      #   - SMNO
+      #   - SRC
+      #   - CELLS
+      #   - ABRT
+      #   - TR
+      #   - LOST
 
   - name: BD - FACS Aria II.fcs
     options:
+      warnings_are_errors: true
       # analysis has -1 for end
       allow_negative: true
       # this file also has $P14DISPLAY, not only which is deviant (the right
       # keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't the
       # correct value ("LIN" vs "Linear,0,0")
       allow_pseudostandard: true
+      ignore_literal_standard_keys:
+        - P14DISPLAY
       
   # this one seems near perfect except for the offset spacing thing, lots of
   # keys are also only whitespace so blanks need to be allowed
   - name: BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
     options:
+      # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
     options:
+      # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
     options:
+      # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
     options:
+      # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
 
   - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
     options:
+      # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
       # this file appears to be cut in half
@@ -105,6 +138,8 @@ test_files:
 
   - name: Beckman Coulter - Cyan.fcs
     options:
+      # warnings_are_errors: true
+      trim_value_whitespace: true
       other_width: 10
       # dreaded PnE log issue
       fix_log_scale_offsets: true
@@ -114,9 +149,12 @@ test_files:
       # one of the OTHER segments drove off the cliff at the end of the file,
       # so just ignore them (only one, but lots of empty segments)
       max_other: 0
+      allow_empty: true
 
   - name: Beckman Coulter - Cytomics FC500.LMD
     options:
+      # warnings_are_errors: true
+      trim_value_whitespace: true
       use_literal_delims: true
       # offsets are apparently systemically off
       prim_text_correction: [0, -1]
@@ -124,12 +162,19 @@ test_files:
       # this file has a known issue in that the CXP software uses 10 for PnB
       # when the actual width is 16
       integer_widths_from_byteord: true
-      # has lots of DFCxTOy stuff, and mysterious kws like $RUNNUMBER and
-      # $INSTADDRESS
-      allow_pseudostandard: true
+      allow_empty: true
+      # this has DFC*TO* kws that point to non-existent channels
+      ignore_pattern_standard_keys:
+        - DFC[0-9]TO5
+        - DFC5TO[0-9]
+      # hmm....
+      ignore_literal_standard_keys:
+        - RUNNUMBER
+        - INSTADDRESS
 
   - name: Beckman Coulter - Gallios.LMD
     options:
+      # warnings_are_errors: true
       # lots of DFCxTOy keys (which don't even match $PAR), and also $PnG
       allow_pseudostandard: true
       # PnE has space in front of it
@@ -142,110 +187,160 @@ test_files:
   # freak out that PnB is one greater than 2^32-1
   - name: Beckman Coulter - MoFlo Astrios - linear settings.fcs
     options:
+      # warnings_are_errors: true
       other_width: 14
 
   # ditto
   - name: Beckman Coulter - MoFlo Astrios - log settings.fcs
     options:
+      # warnings_are_errors: true
       other_width: 14
+      # the date format is wrong
+      date_pattern: "%d %b %Y"
 
-  # suffers from PnE log X,0 error
+  # - suffers from PnE log X,0 error
+  # - lots of wavelengths are 0 or some nonsense garbage
   - name: Beckman Coulter - MoFlo XDP.fcs
     options:
+      # warnings_are_errors: true
       other_width: 14
       fix_log_scale_offsets: true
 
   - name: Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
 
   - name: Cytek DxP10 - APC COMP BEADS011.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
 
   - name: Cytek DxP10 - BLANK COMP BEADS007.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
     
   - name: Cytek DxP10 - FITC COMP BEADS008.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
     
   - name: Cytek DxP10 - PERCP COMP BEADS010.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
     
   - name: Cytek DxP10 - PE COMP BEADS009.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
     
   - name: MVa2011-06-30_fcs30.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
+      date_pattern: "%Y-%b-%d"
     
   - name: MVa2011-06-30_fcs30c.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
+      date_pattern: "%Y-%b-%d"
     
   - name: MVa2011-06-30_fcs31.fcs
     options:
+      warnings_are_errors: true
       prim_text_correction: [0, -1]
       supp_text_correction: [0, -1]
       data_correction: [0, -1]
       text_data_correction: [0, -1]
       # not sure what OTHER is doing here, it looks like STEXT
       max_other: 0
+      date_pattern: "%Y-%b-%d"
+      ignore_literal_standard_keys:
+        # this has some negative value
+        - LOST
     
   # ...???
   - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
     options:
+      # warnings_are_errors: true
       prim_text_correction: [0, 1]
+      trim_value_whitespace: true
       # IDK, it looks like some of these kws are xml blobs
       allow_non_ascii_keywords: true
       allow_odd: true
       allow_pseudostandard: true
       allow_header_text_offset_mismatch: true
       allow_missing_final_delim: true
+      date_pattern: "%d-%B-%Y"
+      ignore_text_data_offsets: true
+      ignore_text_analysis_offsets: true
+      version_override: FCS3.1
+      ignore_literal_standard_keys:
+        - R1I
+        - COMMENT
+
     
   - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
 
   - name: Partec - PAS - 8 peak beads.FCS
     options:
+      # warnings_are_errors: true
+      use_literal_delims: true
+      allow_empty: true
       data_correction: [0, -1]
       integer_byteord_override: [1,2]
-      # $INST/$FIL
-      allow_pseudostandard: true
+      date_pattern: "%d-%m-%Y"
+      ignore_literal_standard_keys:
+        - TR # missing first number
+      ignore_pattern_standard_keys:
+        - P[0-8]L # all these are 0.0, frequency is infinite lol
 
   - name: Stratedigm - S1400 - 8 Peaks Beads.fcs
     options:
+      # warnings_are_errors: true
       # this is a (rare?) example of a 3.1 file that uses variable bit width;
       # ...good thing I added this to FF :) Time channel is 32 and rest are 16
       version_override: FCS3.1
     
   - name: System II listmode with extra info in bits D10-D15.LMD
     options:
-      # $TIME (which is 300, so probably not $TIME(STEP))
-      allow_pseudostandard: true
+      # warnings_are_errors: true
+      trim_value_whitespace: true
+      allow_empty: true
+      ignore_literal_standard_keys:
+        - TIME # TIMESTEP?
       
   - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
-    options: {}
+    options:
+      warnings_are_errors: true
   
   - name: iCyt - Eclipse.lmd
     options:
+      warnings_are_errors: true
       version_override: FCS3.1
-      # $ETIME (they probably meant $ETIM)
-      allow_pseudostandard: true
+      rename_standard_keys:
+        - [ETIME, ETIM]
 
   # ditto
   - name: iCyt - Eclipse - 8 peak.lmd
     options:
+      warnings_are_errors: true
       version_override: FCS3.1
-      allow_pseudostandard: true
+      rename_standard_keys:
+        - [ETIME, ETIM]
     
   - name: iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
     options:
+      warnings_are_errors: true
       version_override: FCS3.1
-      allow_pseudostandard: true
+      rename_standard_keys:
+        - [ETIME, ETIM]
     
   - name: iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
     options:
       version_override: FCS3.1
-      allow_pseudostandard: true
+      rename_standard_keys:
+        - [ETIME, ETIM]
     
   - name: iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
     options:
       version_override: FCS3.1
-      allow_pseudostandard: true
+      rename_standard_keys:
+        - [ETIME, ETIM]

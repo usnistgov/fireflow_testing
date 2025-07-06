@@ -43,6 +43,13 @@ def main(smk: Any):
     except KeyError:
         pass
 
+    try:
+        opts["rename_standard_keys"] = [
+            (str(x[0]), str(x[1])) for x in opts["rename_standard_keys"]
+        ]
+    except KeyError:
+        pass
+
     def as_tup(key: str):
         try:
             x = opts[key]
