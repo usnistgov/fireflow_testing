@@ -18,37 +18,6 @@ def main(smk: Any):
             if x["name"] == smk.wildcards.testname
         )
     )
-    try:
-        vo = None
-        match opts["version_override"]:
-            case "FCS2.0":
-                vo = pf.Version.FCS2_0
-            case "FCS3.0":
-                vo = pf.Version.FCS3_0
-            case "FCS3.1":
-                vo = pf.Version.FCS3_1
-            case "FCS3.2":
-                vo = pf.Version.FCS3_2
-            case _:
-                assert False, "invalid version"
-
-        opts["version_override"] = vo
-    except KeyError:
-        pass
-
-    try:
-        opts["replace_standard_key_values"] = [
-            (str(x[0]), str(x[1])) for x in opts["replace_standard_key_values"]
-        ]
-    except KeyError:
-        pass
-
-    try:
-        opts["rename_standard_keys"] = [
-            (str(x[0]), str(x[1])) for x in opts["rename_standard_keys"]
-        ]
-    except KeyError:
-        pass
 
     def as_tup(key: str):
         try:
@@ -58,7 +27,8 @@ def main(smk: Any):
         except KeyError:
             pass
 
-    as_tup("prim_text_correction")
+    as_tup("text_correction")
+    as_tup("ignore_standard_keys")
     as_tup("supp_text_correction")
     as_tup("data_correction")
     as_tup("analysis_correction")

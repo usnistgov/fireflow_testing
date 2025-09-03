@@ -10,42 +10,43 @@ test_files:
     options:
       warnings_are_errors: true
       ignore_supp_text: true
-      version_override: FCS3.1
+      # version_override: FCS3.0
       data_correction: [0, -1]
       text_data_correction: [0, -1]
-      ignore_literal_standard_keys: [SPILLOVER]
+      # BTIM and ETIM look like they have a ":" instead of a "."
+      ignore_standard_keys: [[SPILLOVER, VOL, BTIM, ETIM], []]
 
   - name: Accuri - C6 - A01 H2O.fcs
     options:
       warnings_are_errors: true
-      prim_text_correction: [0, -1]
+      text_correction: [0, -1]
       ignore_supp_text: true
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      version_override: FCS3.1
-      ignore_literal_standard_keys: [SPILLOVER]
+      # version_override: FCS3.1
+      ignore_standard_keys: [[SPILLOVER, VOL], []]
       ignore_text_data_offsets: true
 
   - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     options:
       warnings_are_errors: true
       ignore_supp_text: true
-      prim_text_correction: [0, -1]
+      text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      version_override: FCS3.1
-      ignore_literal_standard_keys: [SPILLOVER]
+      # version_override: FCS3.1
+      ignore_standard_keys: [[SPILLOVER, VOL], []]
       ignore_text_data_offsets: true
 
   - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     options:
       warnings_are_errors: true
       ignore_supp_text: true
-      prim_text_correction: [0, -1]
+      text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      version_override: FCS3.1
-      ignore_literal_standard_keys: [SPILLOVER]
+      # version_override: FCS3.1
+      ignore_standard_keys: [[SPILLOVER, VOL], []]
       ignore_text_data_offsets: true
 
   # TODO fix warnings
@@ -70,11 +71,13 @@ test_files:
     options:
       # warnings_are_errors: true
       # has weird trailing space after TEXT
-      prim_text_correction: [0, -9]
+      text_correction: [0, -9]
       # this TEXT has blanks
       use_literal_delims: true
       allow_empty: true
-      # ignore_literal_standard_keys:
+      # voltage given for time channel
+      ignore_standard_keys: [[P2V], []]
+      # ignore_standard_keys:
       #   - INST
       #   - COM
       #   - SMNO
@@ -93,8 +96,10 @@ test_files:
       # keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't the
       # correct value ("LIN" vs "Linear,0,0")
       allow_pseudostandard: true
-      ignore_literal_standard_keys:
-        - P14DISPLAY
+      # voltage and gain given for time channel
+      # this machine sets gain to be 12.5 for time which is exactly the inverse
+      # of TIMESTEP (0.08); idk why
+      ignore_standard_keys: [[P14DISPLAY, P13V, P13G], []]
       
   # this one seems near perfect except for the offset spacing thing, lots of
   # keys are also only whitespace so blanks need to be allowed
@@ -103,6 +108,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
+      ignore_standard_keys: [[P12G], []]
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
@@ -110,6 +116,8 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
+      # this machine sets gain to be 0.01 for time
+      ignore_standard_keys: [[P12G], []]
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
@@ -117,6 +125,8 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
+      # this machine sets gain to be 0.01 for time
+      ignore_standard_keys: [[P12G], []]
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
@@ -124,6 +134,8 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
+      # this machine sets gain to be 0.01 for time
+      ignore_standard_keys: [[P12G], []]
 
   - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
     options:
@@ -133,8 +145,8 @@ test_files:
       # this file appears to be cut in half
       data_correction: [0, -189504]
       ignore_text_data_offsets: true
-      replace_standard_key_values:
-        - [TOT, 6052]
+      replace_standard_key_values: {TOT: "6052"}
+      ignore_standard_keys: [[P12G], []]
 
   - name: Beckman Coulter - Cyan.fcs
     options:
@@ -150,6 +162,7 @@ test_files:
       # so just ignore them (only one, but lots of empty segments)
       max_other: 0
       allow_empty: true
+      ignore_standard_keys: [[P1O, P1P, P1L, P1V], []]
 
   - name: Beckman Coulter - Cytomics FC500.LMD
     options:
@@ -157,20 +170,18 @@ test_files:
       trim_value_whitespace: true
       use_literal_delims: true
       # offsets are apparently systemically off
-      prim_text_correction: [0, -1]
+      text_correction: [0, -1]
       data_correction: [0, -1]
       # this file has a known issue in that the CXP software uses 10 for PnB
       # when the actual width is 16
       integer_widths_from_byteord: true
       allow_empty: true
-      # this has DFC*TO* kws that point to non-existent channels
-      ignore_pattern_standard_keys:
-        - DFC[0-9]TO5
-        - DFC5TO[0-9]
+      time_pattern: null
       # hmm....
-      ignore_literal_standard_keys:
-        - RUNNUMBER
-        - INSTADDRESS
+      ignore_standard_keys:
+        - [RUNNUMBER, INSTADDRESS]
+        # this has DFC*TO* kws that point to non-existent channels
+        - ["DFC[0-9]TO5", "DFC5TO[0-9]"]
 
   - name: Beckman Coulter - Gallios.LMD
     options:
@@ -189,6 +200,8 @@ test_files:
     options:
       # warnings_are_errors: true
       other_width: 14
+      # PnP for time channel
+      ignore_standard_keys: [[P1P], []]
 
   # ditto
   - name: Beckman Coulter - MoFlo Astrios - log settings.fcs
@@ -197,6 +210,8 @@ test_files:
       other_width: 14
       # the date format is wrong
       date_pattern: "%d %b %Y"
+      # PnP for time channel
+      ignore_standard_keys: [[P1P], []]
 
   # - suffers from PnE log X,0 error
   # - lots of wavelengths are 0 or some nonsense garbage
@@ -205,6 +220,8 @@ test_files:
       # warnings_are_errors: true
       other_width: 14
       fix_log_scale_offsets: true
+      # lots of extra time channel nonsense
+      ignore_standard_keys: [[P1P, P1O, P1L, P1V], []]
 
   - name: Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
     options:
@@ -234,50 +251,54 @@ test_files:
     options:
       warnings_are_errors: true
       date_pattern: "%Y-%b-%d"
+      # time might be "HDR-T" but they also didn't provide $TIMESTEP
+      time_pattern: null
     
   - name: MVa2011-06-30_fcs30c.fcs
     options:
       warnings_are_errors: true
       date_pattern: "%Y-%b-%d"
+      # time might be "HDR-T" but they also didn't provide $TIMESTEP
+      time_pattern: null
     
   - name: MVa2011-06-30_fcs31.fcs
     options:
       warnings_are_errors: true
-      prim_text_correction: [0, -1]
+      text_correction: [0, -1]
       supp_text_correction: [0, -1]
       data_correction: [0, -1]
       text_data_correction: [0, -1]
       # not sure what OTHER is doing here, it looks like STEXT
       max_other: 0
       date_pattern: "%Y-%b-%d"
-      ignore_literal_standard_keys:
-        # this has some negative value
-        - LOST
+      # this has some negative value
+      ignore_standard_keys: [[LOST], []]
     
-  # ...???
-  - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
-    options:
-      # warnings_are_errors: true
-      prim_text_correction: [0, 1]
-      trim_value_whitespace: true
-      # IDK, it looks like some of these kws are xml blobs
-      allow_non_ascii_keywords: true
-      allow_odd: true
-      allow_pseudostandard: true
-      allow_header_text_offset_mismatch: true
-      allow_missing_final_delim: true
-      date_pattern: "%d-%B-%Y"
-      ignore_text_data_offsets: true
-      ignore_text_analysis_offsets: true
-      version_override: FCS3.1
-      ignore_literal_standard_keys:
-        - R1I
-        - COMMENT
-
+  # non-linear gain error, not sure how to handle this cuz not sure what they
+  # meant by this
+  # # ...???
+  # - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
+  #   options:
+  #     # warnings_are_errors: true
+  #     text_correction: [0, 1]
+  #     trim_value_whitespace: true
+  #     # IDK, it looks like some of these kws are xml blobs
+  #     allow_non_ascii_keywords: true
+  #     allow_odd: true
+  #     allow_pseudostandard: true
+  #     allow_header_text_offset_mismatch: true
+  #     allow_missing_final_delim: true
+  #     date_pattern: "%d-%B-%Y"
+  #     ignore_text_data_offsets: true
+  #     ignore_text_analysis_offsets: true
+  #     version_override: FCS3.1
+  #     ignore_standard_keys: [[R1I, COMMENT], []]
     
   - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
     options:
       warnings_are_errors: true
+      time_pattern: "HDR-TM"
+      append_standard_keywords: {TIMESTEP: "1.0"}
 
   - name: Partec - PAS - 8 peak beads.FCS
     options:
@@ -287,10 +308,9 @@ test_files:
       data_correction: [0, -1]
       integer_byteord_override: [1,2]
       date_pattern: "%d-%m-%Y"
-      ignore_literal_standard_keys:
-        - TR # missing first number
-      ignore_pattern_standard_keys:
-        - P[0-8]L # all these are 0.0, frequency is infinite lol
+      # TR missing first number
+      # PnL are 0.0, frequency is infinite lol
+      ignore_standard_keys: [[TR], ["P[0-8]L", "P8(P|O|T|V|F)"]]
 
   - name: Stratedigm - S1400 - 8 Peaks Beads.fcs
     options:
@@ -298,49 +318,46 @@ test_files:
       # this is a (rare?) example of a 3.1 file that uses variable bit width;
       # ...good thing I added this to FF :) Time channel is 32 and rest are 16
       version_override: FCS3.1
+      ignore_standard_keys: [[P38G], []]
     
   - name: System II listmode with extra info in bits D10-D15.LMD
     options:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      ignore_literal_standard_keys:
-        - TIME # TIMESTEP?
+      ignore_standard_keys: [[TIME], []] # TIMESTEP?
+      time_pattern: null
       
   - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
     options:
       warnings_are_errors: true
+      time_pattern: null
   
   - name: iCyt - Eclipse.lmd
     options:
       warnings_are_errors: true
       version_override: FCS3.1
-      rename_standard_keys:
-        - [ETIME, ETIM]
+      rename_standard_keys: {ETIME: ETIM}
 
   # ditto
   - name: iCyt - Eclipse - 8 peak.lmd
     options:
       warnings_are_errors: true
       version_override: FCS3.1
-      rename_standard_keys:
-        - [ETIME, ETIM]
+      rename_standard_keys: {ETIME: ETIM}
     
   - name: iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
     options:
       warnings_are_errors: true
       version_override: FCS3.1
-      rename_standard_keys:
-        - [ETIME, ETIM]
+      rename_standard_keys: {ETIME: ETIM}
     
   - name: iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
     options:
       version_override: FCS3.1
-      rename_standard_keys:
-        - [ETIME, ETIM]
+      rename_standard_keys: {ETIME: ETIM}
     
   - name: iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
     options:
       version_override: FCS3.1
-      rename_standard_keys:
-        - [ETIME, ETIM]
+      rename_standard_keys: {ETIME: ETIM}
