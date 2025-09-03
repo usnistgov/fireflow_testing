@@ -88,8 +88,9 @@ test_files:
       # correct value ("LIN" vs "Linear,0,0")
       # this machine sets gain to be 12.5 for time which is exactly the inverse
       # of TIMESTEP (0.08); idk why
-      ignore_standard_keys: [[P14DISPLAY, P13G], []]
+      ignore_standard_keys: [[P14DISPLAY], []]
       ignore_time_optical_keys: [V]
+      ignore_time_gain: true
       
   # this one seems near perfect except for the offset spacing thing, lots of
   # keys are also only whitespace so blanks need to be allowed
@@ -98,7 +99,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      ignore_standard_keys: [[P12G], []]
+      ignore_time_gain: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
@@ -106,8 +107,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      # this machine sets gain to be 0.01 for time
-      ignore_standard_keys: [[P12G], []]
+      ignore_time_gain: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
@@ -115,8 +115,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      # this machine sets gain to be 0.01 for time
-      ignore_standard_keys: [[P12G], []]
+      ignore_time_gain: true
 
   # ditto
   - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
@@ -124,8 +123,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      # this machine sets gain to be 0.01 for time
-      ignore_standard_keys: [[P12G], []]
+      ignore_time_gain: true
 
   - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
     options:
@@ -136,7 +134,7 @@ test_files:
       data_correction: [0, -189504]
       ignore_text_data_offsets: true
       replace_standard_key_values: {TOT: "6052"}
-      ignore_standard_keys: [[P12G], []]
+      ignore_time_gain: true
 
   - name: Beckman Coulter - Cyan.fcs
     options:
@@ -311,7 +309,7 @@ test_files:
       # this is a (rare?) example of a 3.1 file that uses variable bit width;
       # ...good thing I added this to FF :) Time channel is 32 and rest are 16
       version_override: FCS3.1
-      ignore_standard_keys: [[P38G], []]
+      ignore_time_gain: true
     
   - name: System II listmode with extra info in bits D10-D15.LMD
     options:
