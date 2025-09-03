@@ -2,19 +2,18 @@ test_files:
   # Each of these Accuri files has roughly the same set of problems
   # - DATA offset end is 1 too high
   # - STEXT doesn't exist but overlaps with TEXT (and is weirdly very different)
-  # - contains $VOL and $SPILLOVER yet is 3.0 and not 3.1
   # - in some case DATA in TEXT is wildly off (its safe to ignore since HEADER
   #   is correct)
-  # - $SPILLOVER uses numbers instead of channel names
   - name: Accuri - C6.fcs
     options:
       warnings_are_errors: true
       ignore_supp_text: true
-      # version_override: FCS3.0
+      version_override: FCS3.1
       data_correction: [0, -1]
       text_data_correction: [0, -1]
       # BTIM and ETIM look like they have a ":" instead of a "."
-      ignore_standard_keys: [[SPILLOVER, VOL, BTIM, ETIM], []]
+      ignore_standard_keys: [[BTIM, ETIM], []]
+      parse_indexed_spillover: true
 
   - name: Accuri - C6 - A01 H2O.fcs
     options:
@@ -23,9 +22,10 @@ test_files:
       ignore_supp_text: true
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      # version_override: FCS3.1
-      ignore_standard_keys: [[SPILLOVER, VOL], []]
+      version_override: FCS3.1
       ignore_text_data_offsets: true
+      parse_indexed_spillover: true
+      ignore_standard_keys: [[BTIM, ETIM], []]
 
   - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     options:
@@ -34,9 +34,10 @@ test_files:
       text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      # version_override: FCS3.1
-      ignore_standard_keys: [[SPILLOVER, VOL], []]
+      version_override: FCS3.1
       ignore_text_data_offsets: true
+      parse_indexed_spillover: true
+      ignore_standard_keys: [[BTIM, ETIM], []]
 
   - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     options:
@@ -45,9 +46,10 @@ test_files:
       text_correction: [0, -1]
       data_correction: [0, -1]
       allow_header_text_offset_mismatch: true
-      # version_override: FCS3.1
-      ignore_standard_keys: [[SPILLOVER, VOL], []]
+      version_override: FCS3.1
       ignore_text_data_offsets: true
+      parse_indexed_spillover: true
+      ignore_standard_keys: [[BTIM, ETIM], []]
 
   # TODO fix warnings
   - name: 1 WT_001.fcs
