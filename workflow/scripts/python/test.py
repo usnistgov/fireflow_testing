@@ -19,6 +19,12 @@ def main(smk: Any):
         )
     )
 
+    try:
+        opts["ignore_time_optical_keys"] = set(opts["ignore_time_optical_keys"])
+    except KeyError:
+        pass
+
+
     def as_tup(key: str):
         try:
             x = opts[key]
