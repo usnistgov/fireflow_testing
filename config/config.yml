@@ -95,7 +95,6 @@ test_files:
       # this file also has $P14DISPLAY, not only which is deviant (the right
       # keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't the
       # correct value ("LIN" vs "Linear,0,0")
-      allow_pseudostandard: true
       # voltage and gain given for time channel
       # this machine sets gain to be 12.5 for time which is exactly the inverse
       # of TIMESTEP (0.08); idk why
@@ -187,11 +186,14 @@ test_files:
     options:
       # warnings_are_errors: true
       # lots of DFCxTOy keys (which don't even match $PAR), and also $PnG
-      allow_pseudostandard: true
       # PnE has space in front of it
       trim_value_whitespace: true
       # trimming spaces results in lots of blank keys
       allow_empty: true
+      # - comp matrix has extra values which seems screwy
+      # - has gain despite being 2.0 file
+      # - time has voltage
+      ignore_standard_keys: [[RUNNUMBER], ["P[0-9]+G", "P5V", "DFC[0-9]+TO[0-9]+"]]
       
   # this parses fine but spews tons of warnings. Some are for dropping keys
   # that are parsed as ints but should be floats (ie ff is wrong), will also
