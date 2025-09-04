@@ -11,9 +11,10 @@ test_files:
       version_override: FCS3.1
       data_correction: [0, -1]
       text_data_correction: [0, -1]
-      # BTIM and ETIM look like they have a ":" instead of a "."
-      ignore_standard_keys: [[BTIM, ETIM], []]
       parse_indexed_spillover: true
+      # I'm assuming these are centiseconds and not 1/60th seconds since they
+      # exceed 59 but never exceed 99
+      time_pattern: "%H:%M:%S:%@"
 
   - name: Accuri - C6 - A01 H2O.fcs
     options:
@@ -25,7 +26,7 @@ test_files:
       version_override: FCS3.1
       ignore_text_data_offsets: true
       parse_indexed_spillover: true
-      ignore_standard_keys: [[BTIM, ETIM], []]
+      time_pattern: "%H:%M:%S:%@"
 
   - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     options:
@@ -37,7 +38,7 @@ test_files:
       version_override: FCS3.1
       ignore_text_data_offsets: true
       parse_indexed_spillover: true
-      ignore_standard_keys: [[BTIM, ETIM], []]
+      time_pattern: "%H:%M:%S:%@"
 
   - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     options:
@@ -49,7 +50,7 @@ test_files:
       version_override: FCS3.1
       ignore_text_data_offsets: true
       parse_indexed_spillover: true
-      ignore_standard_keys: [[BTIM, ETIM], []]
+      time_pattern: "%H:%M:%S:%@"
 
   # TODO fix warnings
   - name: 1 WT_001.fcs
@@ -166,7 +167,7 @@ test_files:
       # when the actual width is 16
       integer_widths_from_byteord: true
       allow_empty: true
-      time_pattern: null
+      time_meas_pattern: null
       # hmm....
       ignore_standard_keys:
         - [RUNNUMBER, INSTADDRESS]
@@ -244,14 +245,14 @@ test_files:
       warnings_are_errors: true
       date_pattern: "%Y-%b-%d"
       # time might be "HDR-T" but they also didn't provide $TIMESTEP
-      time_pattern: null
+      time_meas_pattern: null
     
   - name: MVa2011-06-30_fcs30c.fcs
     options:
       warnings_are_errors: true
       date_pattern: "%Y-%b-%d"
       # time might be "HDR-T" but they also didn't provide $TIMESTEP
-      time_pattern: null
+      time_meas_pattern: null
     
   - name: MVa2011-06-30_fcs31.fcs
     options:
@@ -289,7 +290,7 @@ test_files:
   - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
     options:
       warnings_are_errors: true
-      time_pattern: "HDR-TM"
+      time_meas_pattern: "HDR-TM"
       append_standard_keywords: {TIMESTEP: "1.0"}
 
   - name: Partec - PAS - 8 peak beads.FCS
@@ -319,12 +320,12 @@ test_files:
       trim_value_whitespace: true
       allow_empty: true
       ignore_standard_keys: [[TIME], []] # TIMESTEP?
-      time_pattern: null
+      time_meas_pattern: null
       
   - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
     options:
       warnings_are_errors: true
-      time_pattern: null
+      time_meas_pattern: null
   
   - name: iCyt - Eclipse.lmd
     options:
