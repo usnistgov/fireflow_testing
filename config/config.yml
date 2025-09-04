@@ -91,7 +91,7 @@ test_files:
       # correct value ("LIN" vs "Linear,0,0")
       # this machine sets gain to be 12.5 for time which is exactly the inverse
       # of TIMESTEP (0.08); idk why
-      ignore_standard_keys: [[P14DISPLAY], []]
+      demote_from_standard: [[P14DISPLAY], []]
       ignore_time_optical_keys: [V]
       ignore_time_gain: true
       
@@ -169,7 +169,7 @@ test_files:
       allow_empty: true
       time_meas_pattern: null
       # hmm....
-      ignore_standard_keys:
+      demote_from_standard:
         - [RUNNUMBER, INSTADDRESS]
         # this has DFC*TO* kws that point to non-existent channels
         - ["DFC[0-9]TO5", "DFC5TO[0-9]"]
@@ -185,7 +185,7 @@ test_files:
       # - comp matrix has extra values which seems screwy
       # - has gain despite being 2.0 file
       # - time has voltage
-      ignore_standard_keys: [[RUNNUMBER], ["P[0-9]+G", "DFC[0-9]+TO[0-9]+"]]
+      demote_from_standard: [[RUNNUMBER], ["P[0-9]+G", "DFC[0-9]+TO[0-9]+"]]
       ignore_time_optical_keys: [V]
       
   # this parses fine but spews tons of warnings. Some are for dropping keys
@@ -265,7 +265,7 @@ test_files:
       max_other: 0
       date_pattern: "%Y-%b-%d"
       # this has some negative value
-      ignore_standard_keys: [[LOST], []]
+      demote_from_standard: [[LOST], []]
     
   # non-linear gain error, not sure how to handle this cuz not sure what they
   # meant by this
@@ -303,7 +303,7 @@ test_files:
       date_pattern: "%d-%m-%Y"
       # TR missing first number
       # PnL are 0.0, frequency is infinite lol
-      ignore_standard_keys: [[TR], ["P[0-8]L"]]
+      demote_from_standard: [[TR], ["P[0-8]L"]]
       ignore_time_optical_keys: [P, O, T, V, F]
 
   - name: Stratedigm - S1400 - 8 Peaks Beads.fcs
@@ -319,7 +319,7 @@ test_files:
       # warnings_are_errors: true
       trim_value_whitespace: true
       allow_empty: true
-      ignore_standard_keys: [[TIME], []] # TIMESTEP?
+      demote_from_standard: [[TIME], []] # TIMESTEP?
       time_meas_pattern: null
       
   - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs

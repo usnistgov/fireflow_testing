@@ -24,7 +24,6 @@ def main(smk: Any):
     except KeyError:
         pass
 
-
     def as_tup(key: str):
         try:
             x = opts[key]
@@ -35,6 +34,8 @@ def main(smk: Any):
 
     as_tup("text_correction")
     as_tup("ignore_standard_keys")
+    as_tup("promote_to_standard")
+    as_tup("demote_from_standard")
     as_tup("supp_text_correction")
     as_tup("data_correction")
     as_tup("analysis_correction")
