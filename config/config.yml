@@ -185,8 +185,17 @@ test_files:
       # - comp matrix has extra values which seems screwy
       # - has gain despite being 2.0 file
       # - time has voltage
-      demote_from_standard: [[RUNNUMBER], ["P[0-9]+G", "DFC[0-9]+TO[0-9]+"]]
+      version_override: FCS3.0
+      demote_from_standard: [[RUNNUMBER], ["DFC[0-9]+TO[0-9]+"]]
       ignore_time_optical_keys: [V]
+      allow_header_text_offset_mismatch: true
+      append_standard_keywords:
+        TIMESTEP: "1.0"
+        # hack since these are missing (also allow the offsets to mismatch)
+        BEGINDATA: "0"
+        ENDDATA: "0"
+        BEGINANALYSIS: "0"
+        ENDANALYSIS: "0"
       
   # this parses fine but spews tons of warnings. Some are for dropping keys
   # that are parsed as ints but should be floats (ie ff is wrong), will also
