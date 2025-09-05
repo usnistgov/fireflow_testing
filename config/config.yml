@@ -270,22 +270,24 @@ test_files:
   # non-linear gain error, not sure how to handle this cuz not sure what they
   # meant by this
   # # ...???
-  # - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
-  #   options:
-  #     # warnings_are_errors: true
-  #     text_correction: [0, 1]
-  #     trim_value_whitespace: true
-  #     # IDK, it looks like some of these kws are xml blobs
-  #     allow_non_ascii_keywords: true
-  #     allow_odd: true
-  #     allow_pseudostandard: true
-  #     allow_header_text_offset_mismatch: true
-  #     allow_missing_final_delim: true
-  #     date_pattern: "%d-%B-%Y"
-  #     ignore_text_data_offsets: true
-  #     ignore_text_analysis_offsets: true
-  #     version_override: FCS3.1
-  #     ignore_standard_keys: [[R1I, COMMENT], []]
+  - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
+    options:
+      # warnings_are_errors: true
+      text_correction: [0, 1]
+      trim_value_whitespace: true
+      # IDK, it looks like some of these kws are xml blobs
+      allow_non_ascii_keywords: true
+      allow_odd: true
+      allow_pseudostandard: true
+      allow_header_text_offset_mismatch: true
+      allow_missing_final_delim: true
+      date_pattern: "%d-%B-%Y"
+      ignore_text_data_offsets: true
+      ignore_text_analysis_offsets: true
+      version_override: FCS3.1
+      ignore_standard_keys: [[R1I, COMMENT], []]
+      # gain set to non-unit for log transform
+      demote_from_standard: [[P10G], ["P[2-9]G"]]
     
   - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
     options:
