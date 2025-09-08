@@ -1,19 +1,34 @@
 test_files = [x["name"] for x in config["test_files"]]
 
 
-rule test_files:
+rule test_read:
     input:
         "resources/fcs/{testname}",
     output:
-        "results/pass/{testname}.txt",
+        flag="results/read_test/pass/{testname}.txt",
+        fcs="results/read_test/fcs/{testname}",
     log:
-        "results/log/warnings_{testname}.log"
+        "results/log/read/warnings_{testname}.log",
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/test.py"
+        "scripts/python/test_read.py"
+
+
+rule test_double_parse:
+    input:
+        original="resources/fcs/{testname}",
+        std=rules.test_read.output.fcs,
+    output:
+        "results/double_parse/pass/{testname}.txt",
+    log:
+        "results/log/double_parse/warnings_{testname}.log",
+    conda:
+        "envs/pyreflow.yml"
+    script:
+        "scripts/python/test_double_parse.py"
 
 
 rule all:
     input:
-        expand(rules.test_files.output, testname=test_files),
+        expand(rules.test_double_parse.output, testname=test_files),

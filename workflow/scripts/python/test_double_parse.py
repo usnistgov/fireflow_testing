@@ -9,7 +9,8 @@ logging.captureWarnings(True)
 
 
 def main(smk: Any):
-    i = Path(smk.input[0])
+    i_orig = Path(smk.input["original"])
+    i_std = Path(smk.input["std"])
     o = Path(smk.output[0])
     opts = next(
         (
@@ -42,7 +43,14 @@ def main(smk: Any):
     as_tup("text_data_correction")
     as_tup("text_analysis_correction")
 
-    pf.fcs_read_std_dataset(i, **opts)
+    try:
+        std_opts = {"time_meas_pattern": opts["time_meas_pattern"]}
+    except KeyError:
+        std_opts = {}
+
+    core_orig, _ = pf.fcs_read_std_text(i_orig, **opts)
+    core_std, _ = pf.fcs_read_std_text(i_std, other_width=20, **std_opts)
+    assert core_orig == core_std
     o.touch()
 
 
