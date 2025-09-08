@@ -49,7 +49,7 @@ def main(smk: Any):
         std_opts = {}
 
     core_orig, _ = pf.fcs_read_std_text(i_orig, **opts)
-    core_std, _ = pf.fcs_read_std_text(i_std, other_width=20, **std_opts)
+    core_std, _ = pf.fcs_read_std_text(i_std, **std_opts)
     assert core_orig == core_std
     o.touch()
 
