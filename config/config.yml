@@ -368,3 +368,30 @@ test_files:
       options:
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
+
+  FR-FCM-ZZM3:
+    - name: 1c B_ALL_FCV DNA  LOW EVENTS .LMD 
+      options: &navios
+        allow_empty: true
+        trim_value_whitespace: true
+        ignore_time_optical_keys: [V]
+        ignore_supp_text: true
+        demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
+
+    - name: 2c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
+
+    - name: 3c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
+
+    - name: 4c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
+
+    - name: 5c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
+
+    - name: 6c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
+
+    - name: 7c B_ALL_FCV DNA  LOW EVENTS.LMD
+      options: *navios
