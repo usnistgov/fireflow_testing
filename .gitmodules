@@ -1,3 +1,0 @@
-[submodule "workflow/scripts/python/fireflow"]
-	path = workflow/scripts/python/fireflow
-	url = https://github.com/njd2/fireflow.git
