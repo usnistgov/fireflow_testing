@@ -1,4 +1,4 @@
-import pyreflow as pf  # type: ignore
+import pyreflow as pf
 from typing import Any
 from pathlib import Path
 import logging

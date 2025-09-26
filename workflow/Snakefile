@@ -31,8 +31,25 @@ rule test_double_parse:
         "scripts/python/test_double_parse.py"
 
 
+rule write_report:
+    input:
+        expand(
+            "resources/fcs/{fr_id}/{testname}",
+            zip,
+            fr_id=[x[0] for x in tests],
+            testname=[x[1] for x in tests],
+        ),
+    output:
+        machine_table="results/reports/machines.tsv",
+    conda:
+        "envs/pyreflow.yml"
+    script:
+        "scripts/python/make_report.py"
+
+
 rule all:
     input:
+        rules.write_report.output,
         expand(
             rules.test_double_parse.output,
             zip,
