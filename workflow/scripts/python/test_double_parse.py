@@ -1,7 +1,6 @@
 import pyreflow as pf  # type: ignore
 from typing import Any
 from pathlib import Path
-import warnings
 import logging
 
 logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG)  # type: ignore
@@ -19,11 +18,6 @@ def main(smk: Any):
             if x["name"] == smk.wildcards.testname
         )
     )
-
-    try:
-        opts["ignore_time_optical_keys"] = set(opts["ignore_time_optical_keys"])
-    except KeyError:
-        pass
 
     def as_tup(key: str):
         try:
@@ -48,10 +42,10 @@ def main(smk: Any):
     except KeyError:
         std_opts = {}
 
-    core_orig, _ = pf.fcs_read_std_dataset(i_orig, **opts)
+    core_orig, _ = pf.api.fcs_read_std_dataset(i_orig, **opts)
     core_orig.truncate_data(True)
 
-    core_std, _ = pf.fcs_read_std_dataset(i_std, **std_opts)
+    core_std, _ = pf.api.fcs_read_std_dataset(i_std, **std_opts)
     assert core_orig == core_std
     o.touch()
 

@@ -1,5 +1,0 @@
-[flake8]
-# assume black will handle line length appropriately
-extend-ignore = E501
-# pretend "snakemake" variable is already defined
-builtins = snakemake

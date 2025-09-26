@@ -1,0 +1,2 @@
+builtins = ["snakemake"]
+exclude = ["workflow/Snakemake"]

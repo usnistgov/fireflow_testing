@@ -189,7 +189,7 @@ test_files:
       demote_from_standard: [[RUNNUMBER], ["DFC[0-9]+TO[0-9]+"]]
       ignore_time_optical_keys: [V]
       allow_header_text_offset_mismatch: true
-      allow_missing_stext: true
+      allow_missing_supp_text: true
       append_standard_keywords:
         TIMESTEP: "1.0"
         # hack since these are missing (also allow the offsets to mismatch)
