@@ -1,14 +1,16 @@
-test_files = [x["name"] for x in config["test_files"]]
+tests = [
+    (fr_id, s["name"]) for fr_id, specs in config["test_files"].items() for s in specs
+]
 
 
 rule test_read:
     input:
-        "resources/fcs/{testname}",
+        "resources/fcs/{fr_id}/{testname}",
     output:
-        flag="results/read_test/pass/{testname}.txt",
-        fcs="results/read_test/fcs/{testname}",
+        flag="results/read_test/pass/{fr_id}/{testname}.txt",
+        fcs="results/read_test/fcs/{fr_id}/{testname}",
     log:
-        "results/log/read/warnings_{testname}.log",
+        "results/log/read/warnings_{fr_id}_{testname}.log",
     conda:
         "envs/pyreflow.yml"
     script:
@@ -17,12 +19,12 @@ rule test_read:
 
 rule test_double_parse:
     input:
-        original="resources/fcs/{testname}",
+        original="resources/fcs/{fr_id}/{testname}",
         std=rules.test_read.output.fcs,
     output:
-        "results/double_parse/pass/{testname}.txt",
+        "results/double_parse/pass/{fr_id}/{testname}.txt",
     log:
-        "results/log/double_parse/warnings_{testname}.log",
+        "results/log/double_parse/warnings_{fr_id}_{testname}.log",
     conda:
         "envs/pyreflow.yml"
     script:
@@ -31,4 +33,9 @@ rule test_double_parse:
 
 rule all:
     input:
-        expand(rules.test_double_parse.output, testname=test_files),
+        expand(
+            rules.test_double_parse.output,
+            zip,
+            fr_id=[x[0] for x in tests],
+            testname=[x[1] for x in tests],
+        ),
