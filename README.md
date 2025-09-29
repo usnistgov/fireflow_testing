@@ -1,12 +1,12 @@
 Testing environment for [fireflow](https://github.com/usnistgov/fireflow).
 
-The main purpse (so far) is to verify that `fireflow` has support for opening a
+The main purpose (so far) is to verify that `fireflow` has support for opening a
 large variety of files conveniently (that is, by only using configuration flags
 to repair non-compliance).
 
-Note that data integrity (that is, ensuring that the data in the file is that
-data that is actually presented) is at least partly covered by the unit tests in
-`fireflow` itself.
+Note that data integrity (that is, ensuring that the data in the file is the
+same data that is actually presented) is at least partly covered by the unit
+tests in `fireflow` itself.
 
 # Obtaining files
 
