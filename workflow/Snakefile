@@ -1,6 +1,39 @@
+from pathlib import Path
+
 tests = [
     (fr_id, s["name"]) for fr_id, specs in config["test_files"].items() for s in specs
 ]
+
+tools_dir = Path("resources/tools")
+aspera_base_dir = tools_dir / "immport-data-download-tool"
+
+
+rule download_aspera:
+    output:
+        aspera_base_dir / "aspera" / "cli" / "etc" / "aspera-license",
+    params:
+        url="https://downloads.immport.org/data/download/tool/immport-data-download-tool.zip",
+        dst=f"{aspera_base_dir}.zip",
+    shell:
+        """
+        curl -SsqLf -o {params.dst} {params.url} && \
+        unzip -q -o {params.dst} -d $(dirname {aspera_base_dir}) && \
+        rm -f {params.dst}
+        """
+
+
+rule download_immport:
+    input:
+        aspera=rules.download_aspera.output[0],
+        manifest="config/immport_manifest.txt",
+    output:
+        "resources/immport/downloaded.txt",
+    log:
+        "results/log/immport",
+    conda:
+        "envs/immport.yml"
+    script:
+        "scripts/python/download_immport.py"
 
 
 rule test_read:
@@ -49,10 +82,11 @@ rule write_report:
 
 rule all:
     input:
-        rules.write_report.output,
-        expand(
-            rules.test_double_parse.output,
-            zip,
-            fr_id=[x[0] for x in tests],
-            testname=[x[1] for x in tests],
-        ),
+        rules.download_immport.output,
+        # rules.write_report.output,
+        # expand(
+        #     rules.test_double_parse.output,
+        #     zip,
+        #     fr_id=[x[0] for x in tests],
+        #     testname=[x[1] for x in tests],
+        # ),
