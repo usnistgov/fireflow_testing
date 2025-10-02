@@ -25,7 +25,7 @@ rule download_aspera:
 rule download_immport:
     input:
         aspera=rules.download_aspera.output[0],
-        manifest="config/immport_manifest.txt",
+        manifest="config/immport_fcs_manifest.txt",
     output:
         "resources/immport/downloaded.txt",
     log:

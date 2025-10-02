@@ -3,8 +3,9 @@ import os
 import platform
 import subprocess as sp
 import tempfile
+from itertools import groupby
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator, Generator, TypeAlias, Iterable
 
 IMMPORT_URL = "https://www.immport.org"
 IMMPORT_TOKEN_URL = f"{IMMPORT_URL}/auth/token"
@@ -42,6 +43,38 @@ def get_aspera_token(immport_token: str, paths: list[Path]) -> str:
     return str(res["token"])
 
 
+def filter_src_paths(ps: list[Path]) -> list[Path]:
+    """Return three files for each study for cytof, controls, and other samples."""
+    # ASSUME list is already sorted by study
+    CTRL = "Flow_cytometry_compensation_or_control"
+    CYTOF = "CyTOF_result"
+    SAMPLE = "Flow_cytometry_result"
+
+    def go(xs: Iterator[Path]) -> Generator[Path]:
+        nsample = 0
+        ncytof = 0
+        nctrl = 0
+        for x in xs:
+            category = x.parts[2]
+            if category == CTRL:
+                if nctrl < 3:
+                    nctrl = nctrl + 1
+                    yield x
+            elif category == CYTOF:
+                if ncytof < 3:
+                    ncytof = ncytof + 1
+                    yield x
+            elif category == SAMPLE:
+                if nsample < 3:
+                    nsample = nsample + 1
+                    yield x
+            elif nsample < 3:
+                nsample = nsample + 1
+                yield x
+
+    return [x for _, g in groupby(ps, key=lambda p: p.parts[0]) for x in go(g)]
+
+
 def download_file(
     bin_path: Path,
     pkey: Path,
@@ -56,44 +89,64 @@ def download_file(
     later. This requires the --file-pair-list option so we can manually specify
     the destination for each source.
 
-    We can do this with one aspera session which is likely the fastest way to do
-    this, and we can tell aspera to check which files we already have (kinda
-    like rsync). In case all files are already download, this session should
-    only last 1-2 seconds.
+    We can do this with only a few aspera sessions which is likely the fastest
+    way to do this, and we can tell aspera to check which files we already have
+    (kinda like rsync). In case all files are already download, this session
+    should only last 1-2 seconds. The only limitation is that we need to keep
+    the file pair list under 24 KB
+
     """
-    out_paths: list[Path] = []
-    aspera_token = get_aspera_token(immport_token, file_paths)
 
-    with tempfile.NamedTemporaryFile(mode="w", delete_on_close=False) as tf:
-        for src in file_paths:
-            dest = Path(src.parts[0]) / src.name
-            out_paths.append(out_dir / dest)
-            # weirdly, src and dest are on separate lines
-            tf.write(f"{src}\n")
-            tf.write(f"{dest}\n")
+    Pair: TypeAlias = tuple[Path, Path]
+    pairs = [(src, Path(src.parts[0]) / src.name) for src in file_paths]
 
-        tf.close()
+    def split_pairs(_pairs: list[Pair]) -> list[list[Pair]]:
+        acc: list[list[Pair]] = []
+        LIMIT = 24000
+        k = LIMIT  # prime the loop
+        for x, y in _pairs:
+            z = len(str(x)) + len(str(y)) + 2
+            if k + z < LIMIT:
+                k = k + z
+                acc[-1].append((x, y))
+            else:
+                k = z
+                acc.append([(x, y)])
+        return acc
 
-        args: list[str] = [str(bin_path)]
-        args += ["--user", ASPERA_USERNAME]
-        args += ["--host", ASPERA_SERVER]
-        args += ["--mode", "recv"]
-        # these are ports apparently
-        args += ["-O33001", "-P33001"]
-        # specify private key and token
-        args += ["-i", str(pkey)]
-        args += ["-W", aspera_token]
-        # use checksum to test if we need to redownload file
-        args += ["-k", "2"]
-        # preserve timestamps, don't print stuff
-        args += ["-p", "-q"]
-        # specify sources and destination paths
-        args += [f"--file-pair-list={tf.name}"]
-        # specify destination (must be last)
-        args += [str(out_dir)]
-        sp.run(args)
+    def run_ascp(_pairs: Iterable[Pair]) -> None:
+        aspera_token = get_aspera_token(immport_token, [p[0] for p in _pairs])
+        with tempfile.NamedTemporaryFile(mode="w", delete_on_close=False) as tf:
+            for src, dest in _pairs:
+                # weirdly, src and dest are on separate lines
+                tf.write(f"{src}\n")
+                tf.write(f"{dest}\n")
 
-    return out_paths
+            tf.close()
+
+            args: list[str] = [str(bin_path)]
+            args += ["--user", ASPERA_USERNAME]
+            args += ["--host", ASPERA_SERVER]
+            args += ["--mode", "recv"]
+            # these are ports apparently
+            args += ["-O33001", "-P33001"]
+            # specify private key and token
+            args += ["-i", str(pkey)]
+            args += ["-W", aspera_token]
+            # use checksum to test if we need to redownload file
+            args += ["-k", "2"]
+            # preserve timestamps, don't print stuff
+            args += ["-p", "-q"]
+            # specify sources and destination paths
+            args += [f"--file-pair-list={tf.name}"]
+            # specify destination (must be last)
+            args += [str(out_dir)]
+            sp.run(args)
+
+    for xs in split_pairs(pairs):
+        run_ascp(xs)
+
+    return [out_dir / p[1] for p in pairs]
 
 
 def main(smk: Any) -> None:
@@ -119,6 +172,8 @@ def main(smk: Any) -> None:
             s = x.rstrip()
             if s.endswith(".fcs") and not s.startswith("#"):
                 src_paths.append(Path(s))
+
+    src_paths = filter_src_paths(src_paths)
 
     fcs_list_dir.mkdir(exist_ok=True, parents=True)
 
