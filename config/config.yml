@@ -1,6 +1,212 @@
 test_files:
-  immport: {}
-  
+  immport:
+    # FACSCalibur (it seems all these machines have a funny char in CYT which
+    # means we need to use latin1)
+    SDY1:
+      - name: 02054141.003.52632.fcs
+        options:
+          use_latin1: true
+          integer_byteord_override: [2,1]
+          time_meas_pattern: null
+          fix_log_scale_offsets: true
+
+    # no idea what this machine is, the only indication in the file is that it
+    # as made with FACSDiva, so maybe a BD machine
+    SDY4:
+      - name: ES481973.248766.fcs
+        options:
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_gain: true
+
+    # LSRII
+    SDY9:
+      - name: Compensation Controls_7AAD PE-Cy5 Stained Control.240026.fcs
+        options:
+          trim_value_whitespace: true
+          ignore_time_gain: true
+
+      - name: Compensation Controls_7AAD Stained Control--0010.239801.fcs
+        options:
+          trim_value_whitespace: true
+          ignore_time_gain: true
+
+      - name: Compensation Controls_7AAD Stained Control--0011.239826.fcs
+        options:
+          trim_value_whitespace: true
+          ignore_time_gain: true
+
+    # LSRII
+    SDY28:
+      - name: rk012909__001.174865.fcs
+        options: &sdy28
+          trim_value_whitespace: true
+          allow_empty: true
+          time_meas_pattern: null
+
+      - name: rk012909__002.174868.fcs
+        options: *sdy28
+
+      - name: rk012909__003.174870.fcs
+        options: *sdy28
+
+    # FACSCantoII
+    SDY33:
+      - name: ES128227.109527.fcs
+        options: &sdy33
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_gain: true
+
+      - name: ES128228.112011.fcs
+        options: *sdy33
+
+      - name: ES128229.111526.fcs
+        options: *sdy33
+
+    # CyTOF
+    SDY1100:
+      - name: 151110_ASE001_758_moDC_DV2_8h.626416.fcs
+        options: &sdy1100
+          # lots of values which are just one space
+          trim_value_whitespace: true
+          allow_empty: true
+          # one OTHER segment which is a bit too long for the file
+          other_width: 20
+          truncate_offsets: true
+          append_standard_keywords:
+            TIMESTEP: "1.0"
+
+      - name: 151110_ASE001_758_moDC_DV4_8h.626420.fcs
+        options: *sdy1100
+
+      - name: 151110_ASE001_758_moDC_mock_8h.626412.fcs
+        options: *sdy1100
+
+    # Fortessa
+    SDY1115:
+      - name: Adult001_comp_24hrs_Compensation Controls_405B Stained Control_005.632043.635139.fcs
+        options: &sdy1115
+          ignore_time_gain: true
+          # these are valid 3.1 keys but they use bogus values for the display
+          # type (such as "BIEX")
+          demote_from_standard: [[], ["P[0-9]+D"]]
+          version_override: FCS3.1
+
+      - name: Adult001_comp_24hrs_Compensation Controls_405 D 525,2f,50 Stained Control_004.632124.635137.fcs
+        options:
+          <<: *sdy1115
+          # not sure what's wrong with this key, log scale with float layout
+          substitute_standard_key_values: [{}, {"P12E": [".*", "0,0", false]}]
+
+      - name: Adult001_comp_24hrs_Compensation Controls_405 E 450,2f,50 Stained Control_003.632069.635138.fcs
+        options:
+          <<: *sdy1115
+          substitute_standard_key_values: [{}, {"P12E": [".*", "0,0", false]}]
+
+      - name: Adult001_HRV_6hrs.631634.fcs
+        options:
+          <<: *sdy1115
+
+      - name: Adult001_HRV_24hrs.632136.635136.fcs
+        options:
+          <<: *sdy1115
+          # timestamps are a space in this one
+          trim_value_whitespace: true
+          allow_empty: true
+
+      - name: Adult001_unstim_24hrs.632137.635146.fcs
+        options:
+          <<: *sdy1115
+          trim_value_whitespace: true
+          allow_empty: true
+
+    # unknown machine, made with FACSDiva
+    SDY1176:
+      - name: 082.661592.fcs
+        options: &sdy1176
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_gain: true
+
+      - name: 083.661593.fcs
+        options: *sdy1176
+        
+      - name: 084.661594.fcs
+        options: *sdy1176
+
+      - name: 1292966.652906.fcs
+        options: *sdy1176
+
+      - name: 1292968.652920.fcs
+        options: *sdy1176
+
+      - name: 1292970.652921.fcs
+        options: *sdy1176
+
+    # unknown machine, made with FACSDiva
+    SDY1385:
+      - name: Compensation_AViD AmCyan_194.721484.fcs
+        options: &sdy1385
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_gain: true
+
+      - name: Compensation_AViD AmCyan_202.721723.fcs
+        options: *sdy1385
+
+      - name: Compensation_AViD AmCyan_222.722173.fcs
+        options: *sdy1385
+
+      - name: Specimen_001_A10_A10_010.722002.fcs
+        options: *sdy1385
+
+      - name: Specimen_001_A10_A10_010.722262.fcs
+        options: *sdy1385
+
+      - name: Specimen_001_A10_A10_050.722037.fcs
+        options: *sdy1385
+
+    # NovoCyte
+    SDY1502:
+      - name: Specimen1_1-10.732949.fcs
+        options: &sdy1502
+          trim_value_whitespace: true
+          allow_empty: true
+          version_override: FCS3.1
+          demote_from_standard: [[UNICODE], []]
+          ignore_time_optical_keys: [L]
+
+      - name: Specimen1_1-1.732945.fcs
+        options: *sdy1502
+
+      - name: Specimen1_1-10.732949.fcs
+        options: *sdy1502
+
+    # Aurora
+    SDY1625:
+      - name: 1115 - DE 11 color panel.794843.fcs
+        options: &sdy1625
+          # lots of weird padding after TEXT
+          allow_missing_final_delim: true
+          trim_value_whitespace: true
+          allow_empty: true
+
+      - name: 1115 - DE 4 color.744375.fcs
+        options: *sdy1625
+
+      - name: 1160 - DE 11 color panel.794855.fcs
+        options: *sdy1625
+
+      - name: 1689 - DE Isotypes.744381.fcs
+        options: *sdy1625
+
+      - name: 1689 - FM-AF488.744376.fcs
+        options: *sdy1625
+
+      - name: 1689 - FM-APC.744377.fcs
+        options: *sdy1625
+
   flow_repository:
     FR-FCM-ZZZ4:
       # Each of these Accuri files has roughly the same set of problems
