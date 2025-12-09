@@ -82,11 +82,11 @@ rule write_report:
 
 rule all:
     input:
-        rules.download_immport.output,
-        # rules.write_report.output,
-        # expand(
-        #     rules.test_double_parse.output,
-        #     zip,
-        #     fr_id=[x[0] for x in tests],
-        #     testname=[x[1] for x in tests],
-        # ),
+        # rules.download_immport.output,
+        rules.write_report.output,
+        expand(
+            rules.test_double_parse.output,
+            zip,
+            fr_id=[x[0] for x in tests],
+            testname=[x[1] for x in tests],
+        ),

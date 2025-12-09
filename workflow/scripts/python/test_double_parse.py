@@ -36,9 +36,24 @@ def main(smk: Any):
     as_tup("text_analysis_correction")
 
     try:
-        std_opts = {"time_meas_pattern": opts["time_meas_pattern"]}
+        key = "substitute_standard_key_values"
+        x = opts[key]
+        opts[key] = (
+            {k: tuple(z for z in v) for k, v in x[0].items()},
+            {k: tuple(z for z in v) for k, v in x[1].items()},
+        )
     except KeyError:
-        std_opts = {}
+        pass
+
+    std_opts = {"nonstandard_measurement_pattern": "P%n"}
+
+    try:
+        std_opts = {
+            **std_opts,
+            "time_meas_pattern": opts["time_meas_pattern"],
+        }
+    except KeyError:
+        pass
 
     core_orig, _ = pf.api.fcs_read_std_dataset(i_orig, **opts)
     core_orig.truncate_data(True)

@@ -38,6 +38,16 @@ def read_file(p: Path, conf: Any) -> Machine:
     as_tup("text_data_correction")
     as_tup("text_analysis_correction")
 
+    try:
+        key = "substitute_standard_key_values"
+        x = opts[key]
+        opts[key] = (
+            {k: tuple(z for z in v) for k, v in x[0].items()},
+            {k: tuple(z for z in v) for k, v in x[1].items()},
+        )
+    except KeyError:
+        pass
+
     core, _ = pf.api.fcs_read_std_text(p, **opts)
 
     if isinstance(core, pf.CoreTEXT2_0):
