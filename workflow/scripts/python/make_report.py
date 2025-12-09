@@ -6,7 +6,8 @@ import warnings
 
 
 class Machine(NamedTuple):
-    fr_id: str
+    repo: str
+    repo_id: str
     file_name: str
     cyt: str | None
     cytsn: str | None
@@ -15,9 +16,10 @@ class Machine(NamedTuple):
 
 def read_file(p: Path, conf: Any) -> Machine:
     testname = p.name
-    fr_id = p.parent.name
+    repo = p.parent.parent.name
+    id = p.parent.name
     opts = next(
-        (x["options"] for x in conf["test_files"][fr_id] if x["name"] == testname)
+        (x["options"] for x in conf["test_files"][repo][id] if x["name"] == testname)
     )
 
     def as_tup(key: str):
@@ -56,7 +58,8 @@ def read_file(p: Path, conf: Any) -> Machine:
         cytsn = core.cytsn
 
     return Machine(
-        fr_id=fr_id,
+        repo=repo,
+        repo_id=id,
         file_name=testname,
         cyt=core.cyt,
         cytsn=cytsn,

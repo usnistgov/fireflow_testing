@@ -10,10 +10,15 @@ logging.captureWarnings(True)
 def main(smk: Any):
     i = Path(smk.input[0])
     o = Path(smk.output["flag"])
-    fr_id = smk.wildcards.fr_id
+    repo = smk.wildcards.repo
+    id = smk.wildcards.id
     testname = smk.wildcards.testname
     opts = next(
-        (x["options"] for x in smk.config["test_files"][fr_id] if x["name"] == testname)
+        (
+            x["options"]
+            for x in smk.config["test_files"][repo][id]
+            if x["name"] == testname
+        )
     )
 
     def as_tup(key: str):
