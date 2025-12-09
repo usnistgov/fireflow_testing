@@ -45,7 +45,7 @@ def main(smk: Any):
     except KeyError:
         pass
 
-    std_opts = {"nonstandard_measurement_pattern": "P%n"}
+    std_opts = {}
 
     try:
         std_opts = {

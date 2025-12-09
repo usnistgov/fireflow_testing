@@ -16,7 +16,6 @@ test_files:
         # I'm assuming these are centiseconds and not 1/60th seconds since they
         # exceed 59 but never exceed 99
         time_pattern: "%H:%M:%S:%@"
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Accuri - C6 - A01 H2O.fcs
       options:
@@ -29,7 +28,6 @@ test_files:
         ignore_text_data_offsets: true
         parse_indexed_spillover: true
         time_pattern: "%H:%M:%S:%@"
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
       options:
@@ -42,7 +40,6 @@ test_files:
         ignore_text_data_offsets: true
         parse_indexed_spillover: true
         time_pattern: "%H:%M:%S:%@"
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Accuri - C6 - A03 HPB - CD45 PerCP.fcs
       options:
@@ -55,7 +52,6 @@ test_files:
         ignore_text_data_offsets: true
         parse_indexed_spillover: true
         time_pattern: "%H:%M:%S:%@"
-        nonstandard_measurement_pattern: "P%n"
   
     - name: 1 WT_001.fcs
       options:
@@ -69,13 +65,11 @@ test_files:
         integer_byteord_override: [1,2]
         # BTIM/ETIM have milliseconds
         time_pattern: "%H:%M:%S:%3f"
-        nonstandard_measurement_pattern: "P%n"
       
     - name: 3215apc 100004.fcs
       options:
         warnings_are_errors: true
         integer_byteord_override: [3,2,1]
-        nonstandard_measurement_pattern: "P%n"
       
     # TODO fix blank warnings
     - name: Applied Biosystems - Attune.fcs
@@ -87,7 +81,6 @@ test_files:
         allow_empty: true
         # voltage given for time channel
         ignore_time_optical_keys: [V]
-        nonstandard_measurement_pattern: "P%n"
   
     - name: BD - FACS Aria II.fcs
       options:
@@ -103,7 +96,6 @@ test_files:
         # DATATYPE is F but scales are log with non-unit gain
         substitute_standard_key_values: [{}, {"P[0-9]+E": [".*", "0,0", false]}]
         demote_from_standard: [[P14DISPLAY], ["P[0-9]+G"]]
-        nonstandard_measurement_pattern: "P%n"
         
     # this one seems near perfect except for the offset spacing thing, lots of
     # keys are also only whitespace so blanks need to be allowed
@@ -113,7 +105,6 @@ test_files:
         trim_value_whitespace: true
         allow_empty: true
         ignore_time_gain: true
-        nonstandard_measurement_pattern: "P%n"
   
     # ditto
     - name: BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
@@ -122,7 +113,6 @@ test_files:
         trim_value_whitespace: true
         allow_empty: true
         ignore_time_gain: true
-        nonstandard_measurement_pattern: "P%n"
   
     # ditto
     - name: BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
@@ -131,7 +121,6 @@ test_files:
         trim_value_whitespace: true
         allow_empty: true
         ignore_time_gain: true
-        nonstandard_measurement_pattern: "P%n"
   
     # ditto
     - name: BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
@@ -140,7 +129,6 @@ test_files:
         trim_value_whitespace: true
         allow_empty: true
         ignore_time_gain: true
-        nonstandard_measurement_pattern: "P%n"
   
     - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
       options:
@@ -152,7 +140,6 @@ test_files:
         ignore_text_data_offsets: true
         replace_standard_key_values: {TOT: "6052"}
         ignore_time_gain: true
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Beckman Coulter - Cyan.fcs
       options:
@@ -172,7 +159,6 @@ test_files:
         # all the wavelengths are 0.0 (infinite energy, nice idea)
         demote_from_standard: [[], ["P[0-9]+L"]]
         date_pattern: "%d %b %Y"
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Beckman Coulter - Cytomics FC500.LMD
       options:
@@ -192,7 +178,6 @@ test_files:
           - [RUNNUMBER, INSTADDRESS]
           # this has DFC*TO* kws that point to non-existent channels
           - ["DFC[0-9]TO5", "DFC5TO[0-9]"]
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Beckman Coulter - Gallios.LMD
       options:
@@ -217,7 +202,6 @@ test_files:
           ENDDATA: "0"
           BEGINANALYSIS: "0"
           ENDANALYSIS: "0"
-        nonstandard_measurement_pattern: "P%n"
         
     # this parses fine but spews tons of warnings. Some are for dropping keys
     # that are parsed as ints but should be floats (ie ff is wrong), will also
@@ -228,7 +212,6 @@ test_files:
         other_width: 14
         ignore_time_optical_keys: [P]
         date_pattern: "%d %b %Y"
-        nonstandard_measurement_pattern: "P%n"
   
     # ditto
     - name: Beckman Coulter - MoFlo Astrios - log settings.fcs
@@ -250,37 +233,30 @@ test_files:
         ignore_time_optical_keys: [P, O, L, V]
         date_pattern: "%d %b %Y"
         demote_from_standard: [[], ["P[0-9]+L"]]
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Cytek DxP10 - APC COMP BEADS011.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Cytek DxP10 - BLANK COMP BEADS007.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
       
     - name: Cytek DxP10 - FITC COMP BEADS008.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
       
     - name: Cytek DxP10 - PERCP COMP BEADS010.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
       
     - name: Cytek DxP10 - PE COMP BEADS009.fcs
       options:
         warnings_are_errors: true
-        nonstandard_measurement_pattern: "P%n"
       
     - name: MVa2011-06-30_fcs30.fcs
       options:
@@ -310,7 +286,6 @@ test_files:
         date_pattern: "%Y-%b-%d"
         # this has some negative value
         demote_from_standard: [[LOST], []]
-        nonstandard_measurement_pattern: "P%n"
       
     - name: Millipore - easyCyte 6HT-2L - InCyte.fcs
       options:
@@ -331,7 +306,6 @@ test_files:
         # float layout with log scaling and gain
         demote_from_standard: [[], ["P[0-9]+G"]]
         substitute_standard_key_values: [{}, {"P[0-9]+E": [".*", "0,0", false]}]
-        nonstandard_measurement_pattern: "P%n"
       
     - name: Miltenyi Biotec - MACSQuant Analyzer.fcs
       options:
@@ -351,7 +325,6 @@ test_files:
         # PnL is 0, PKN is 0
         demote_from_standard: [[TR], ["P[0-8]L", "PKN[0-8]"]]
         ignore_time_optical_keys: [P, O, T, V, F]
-        nonstandard_measurement_pattern: "P%n"
   
     - name: Stratedigm - S1400 - 8 Peaks Beads.fcs
       options:
@@ -361,7 +334,6 @@ test_files:
         version_override: FCS3.1
         ignore_time_gain: true
         time_pattern: "%H:%M:%S:%!"
-        nonstandard_measurement_pattern: "P%n"
       
     - name: System II listmode with extra info in bits D10-D15.LMD
       options:
@@ -370,7 +342,6 @@ test_files:
         allow_empty: true
         demote_from_standard: [[TIME], []] # TIMESTEP?
         time_meas_pattern: null
-        nonstandard_measurement_pattern: "P%n"
         
     - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
       options:
@@ -382,7 +353,6 @@ test_files:
         warnings_are_errors: true
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
-        nonstandard_measurement_pattern: "P%n"
   
     # ditto
     - name: iCyt - Eclipse - 8 peak.lmd
@@ -390,26 +360,22 @@ test_files:
         warnings_are_errors: true
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
-        nonstandard_measurement_pattern: "P%n"
       
     - name: iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
       options:
         warnings_are_errors: true
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
-        nonstandard_measurement_pattern: "P%n"
       
     - name: iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
       options:
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
-        nonstandard_measurement_pattern: "P%n"
       
     - name: iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
       options:
         version_override: FCS3.1
         rename_standard_keys: {ETIME: ETIM}
-        nonstandard_measurement_pattern: "P%n"
 
   FR-FCM-ZZM3:
     - name: 1c B_ALL_FCV DNA  LOW EVENTS .LMD 
@@ -419,7 +385,6 @@ test_files:
         ignore_time_optical_keys: [V]
         ignore_supp_text: true
         demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
-        nonstandard_measurement_pattern: "P%n"
 
     - name: 2c B_ALL_FCV DNA  LOW EVENTS.LMD
       options: *navios

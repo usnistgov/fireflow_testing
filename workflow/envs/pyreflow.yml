@@ -5,7 +5,7 @@ channels:
 dependencies:
   - maturin=1.8.7
   - pip:
-    - git+https://github.com/njd2/fireflow.git@9daecd40c3ed9b17ccb1347c0adfb226b6d9095a#subdirectory=pyreflow
+    - git+https://github.com/njd2/fireflow.git@237cd5f680deeb758d6933fdec5be0922a922857#subdirectory=pyreflow
 
   # dev stuff
   - ruff=0.13.2
