@@ -14,27 +14,29 @@ test_files:
     # as made with FACSDiva, so maybe a BD machine
     SDY4:
       - name: ES481973.248766.fcs
-        options:
+        options: &sdy4
           trim_value_whitespace: true
           allow_empty: true
           ignore_time_gain: true
 
+      - name: ES481974.248771.fcs
+        options: *sdy4
+
+      - name: ES481975.248774.fcs
+        options: *sdy4
+
     # LSRII
     SDY9:
       - name: Compensation Controls_7AAD PE-Cy5 Stained Control.240026.fcs
-        options:
+        options: &sdy9
           trim_value_whitespace: true
           ignore_time_gain: true
 
       - name: Compensation Controls_7AAD Stained Control--0010.239801.fcs
-        options:
-          trim_value_whitespace: true
-          ignore_time_gain: true
+        options: *sdy9
 
       - name: Compensation Controls_7AAD Stained Control--0011.239826.fcs
-        options:
-          trim_value_whitespace: true
-          ignore_time_gain: true
+        options: *sdy9
 
     # LSRII
     SDY28:
@@ -64,7 +66,98 @@ test_files:
       - name: ES128229.111526.fcs
         options: *sdy33
 
-    # CyTOF
+    # CyTOF (5.1.562)
+    SDY112: 
+      - name: 081712-Mike-Study 15-2011-15026_cells_found.504108.fcs
+        options: &sdy112
+          append_standard_keywords:
+            TIMESTEP: "1.0"
+
+      - name: 081712-Mike-Study 15-2011-15028_cells_found.504109.fcs
+        options: *sdy112
+
+      - name: 081712-Mike-Study 15-2011-15029_cells_found.504110.fcs
+        options: *sdy112
+
+    # FACScan
+    SDY196:
+      - name: SUB120116_004C0104A001_001.346425.fcs
+        options: &sdy196
+          use_latin1: true
+          integer_byteord_override: [2,1]
+          fix_log_scale_offsets: true
+          time_meas_pattern: null
+
+      - name: SUB120116_004C0104A001_002.346428.fcs
+        options: *sdy196
+
+      - name: SUB120116_004C0104A001_003.346430.fcs
+        options: *sdy196
+
+      - name: SUB120116_004C0104A001_004.346432.fcs
+        options: *sdy196
+
+      - name: SUB120116_004C0104A001_006.346436.fcs
+        options: *sdy196
+
+      - name: SUB120116_004C0104A001_008.346440.fcs
+        options: *sdy196
+
+    # FACSCanto
+    SDY284:
+      - name: 082808amhC1_Tube_001.177408.fcs
+        options: &sdy284
+          trim_value_whitespace: true
+          ignore_time_gain: true
+
+      - name: 082808amhC1_Tube_002.177410.fcs
+        options: *sdy284
+
+      - name: 082808amhC1_Tube_003.177412.fcs
+        options: *sdy284
+
+    # FACSAria
+    SDY506:
+      - name: Compensation Specimen_APC CD8 Stained Control.515710.fcs
+        options: &sdy506
+          trim_value_whitespace: true
+          ignore_time_gain: true
+
+      - name: Compensation Specimen_FITC- CD107AB Stained Control.515711.fcs
+        options: *sdy506
+        
+      - name: Compensation Specimen_PE DextramerStained Control.515712.fcs
+        options: *sdy506
+
+    # FACSAriaII
+    SDY820:
+      - name: Specimen_001_TP0001_001.605667.fcs
+        options: &sdy820
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_gain: true
+
+      - name: Specimen_001_TP0003_002.605679.fcs
+        options: *sdy820
+
+      - name: Specimen_001_TP0004_001.605680.fcs
+        options: *sdy820
+
+    # FACSAriaIII
+    SDY997:
+      - name: 090616_200-0104-K_001.627795.fcs
+        options: &sdy997
+          ignore_time_gain: true
+          trim_value_whitespace: true
+          allow_empty: true
+          
+      - name: 090616_200-0127-K_002.627836.fcs
+        options: *sdy997
+
+      - name: 090616_200-0608-K_003.627877.fcs
+        options: *sdy997
+
+    # CyTOF (6.0.626)
     SDY1100:
       - name: 151110_ASE001_758_moDC_DV2_8h.626416.fcs
         options: &sdy1100
@@ -82,6 +175,21 @@ test_files:
 
       - name: 151110_ASE001_758_moDC_mock_8h.626412.fcs
         options: *sdy1100
+
+    # CyTOF (unknown version)
+    SDY1108:
+      - name: TIN_BLD1_B6Antibodies_Day3.627157.fcs
+        options: &sdy1108
+          data_correction: [0, -1]
+          text_data_correction: [0, -1]
+          append_standard_keywords:
+            TIMESTEP: "1.0"
+
+      - name: TIN_BLD1_B6Antibodies_Day8.627160.fcs
+        options: *sdy1108
+
+      - name: TIN_BLD1_CD1Antibodies_Day3.627162.fcs
+        options: *sdy1108
 
     # Fortessa
     SDY1115:
@@ -167,6 +275,23 @@ test_files:
       - name: Specimen_001_A10_A10_050.722037.fcs
         options: *sdy1385
 
+    # CyTOF (1.0.0)
+    SDY1396:
+      - name: Sample_172169_Day1_WBC_15July2020_01_1.808052.fcs
+        options: &sdy1396
+          allow_nonunique: true
+          append_standard_keywords:
+            TIMESTEP: "1.0"
+          ignore_time_gain: true
+          trim_value_whitespace: true
+          allow_empty: true
+          version_override: FCS3.1
+          # idk what happened here, this is weird
+          demote_from_standard: [[CYTSN_$DATE], []]
+          
+      - name: Sample_172169_Month3_WBC_15July2020_01_1.808053.fcs
+        options: *sdy1396
+
     # NovoCyte
     SDY1502:
       - name: Specimen1_1-10.732949.fcs
@@ -206,6 +331,86 @@ test_files:
 
       - name: 1689 - FM-APC.744377.fcs
         options: *sdy1625
+
+    # Attune
+    SDY1655:
+      - name: 2020-03-18_HuMyl_Drop001_Experiment_Group_D3.774192.fcs
+        options: &sdy1655
+          trim_value_whitespace: true
+          allow_empty: true
+          ignore_time_optical_keys: [V, L, F]
+
+      - name: 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
+        options: *sdy1655
+
+      - name: 2020-03-18_HuMyl_Drop001_Experiment_Group_D7.774195.fcs
+        options: *sdy1655
+
+    # FACSverse
+    SDY1666:
+      - name: 12-219-1.784751.fcs
+        options: &sdy1666
+          trim_value_whitespace: true
+          allow_empty: true
+
+      - name: 12-219-2.784753.fcs
+        options: *sdy1666
+
+      - name: 12-Mock-1.784754.fcs
+        options: *sdy1666
+
+    # CyTOF (7.0.5189)
+    SDY1669:
+      - name: c01_Batch2_1_singles_P11.858221.fcs
+        options: &sdy1669
+          trim_value_whitespace: true
+          allow_empty: true
+          append_standard_keywords:
+            TIMESTEP: "1.0"
+
+      - name: c01_Batch3_1_singles_P09.858243.fcs
+        options: *sdy1669
+
+      - name: c01_Batch4_1_singles_P10.858266.fcs
+        options: *sdy1669
+
+    # Cytek DxP10
+    SDY1944:
+      - name: direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
+        options: &sdy1944
+          trim_value_whitespace: true
+          allow_empty: true
+          version_override: FCS3.1
+
+      - name: direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
+        options: *sdy1944
+
+      - name: direct_kit_baso_300uL_2_VD5_20211019.853081.fcs
+        options: *sdy1944
+
+      - name: direct_kit_baso_300uL_3_VD1_20211007.853082.fcs
+        options: *sdy1944
+
+      - name: WBC_100uL_control_VD1_07312021.853011.fcs
+        options: *sdy1944
+
+      - name: WBC_100uL_control_VD1_20210803.853016.fcs
+        options: *sdy1944
+
+      - name: WBC_100uL_control_VD1_20210812.853019.fcs
+        options: *sdy1944
+
+    # cytof2
+    SDY2947:
+      - name: CCR4-FMO.1208727.fcs
+        options: &sdy2947
+          time_meas_pattern: null
+
+      - name: CCR6-FMO.1208728.fcs
+        options: *sdy2947
+
+      - name: CCR7-FMO.1208729.fcs
+        options: *sdy2947
 
   flow_repository:
     FR-FCM-ZZZ4:
