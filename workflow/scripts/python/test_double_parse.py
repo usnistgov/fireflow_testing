@@ -8,13 +8,18 @@ logging.captureWarnings(True)
 
 
 def main(smk: Any):
-    fr_id = smk.wildcards.fr_id
+    repo = smk.wildcards.repo
+    id = smk.wildcards.id
     testname = smk.wildcards.testname
     i_orig = Path(smk.input["original"])
     i_std = Path(smk.input["std"])
     o = Path(smk.output[0])
     opts = next(
-        (x["options"] for x in smk.config["test_files"][fr_id] if x["name"] == testname)
+        (
+            x["options"]
+            for x in smk.config["test_files"][repo][id]
+            if x["name"] == testname
+        )
     )
 
     def as_tup(key: str):
@@ -36,9 +41,24 @@ def main(smk: Any):
     as_tup("text_analysis_correction")
 
     try:
-        std_opts = {"time_meas_pattern": opts["time_meas_pattern"]}
+        key = "substitute_standard_key_values"
+        x = opts[key]
+        opts[key] = (
+            {k: tuple(z for z in v) for k, v in x[0].items()},
+            {k: tuple(z for z in v) for k, v in x[1].items()},
+        )
     except KeyError:
-        std_opts = {}
+        pass
+
+    std_opts = {}
+
+    try:
+        std_opts = {
+            **std_opts,
+            "time_meas_pattern": opts["time_meas_pattern"],
+        }
+    except KeyError:
+        pass
 
     core_orig, _ = pf.api.fcs_read_std_dataset(i_orig, **opts)
     core_orig.truncate_data(True)
