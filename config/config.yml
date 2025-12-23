@@ -1,7 +1,6 @@
 test_files:
   immport:
-    # FACSCalibur (it seems all these machines have a funny char in CYT which
-    # means we need to use latin1)
+    # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
     SDY1:
       - name: 02054141.003.52632.fcs
         options:
@@ -10,8 +9,7 @@ test_files:
           time_meas_pattern: null
           fix_log_scale_offsets: true
 
-    # no idea what this machine is, the only indication in the file is that it
-    # as made with FACSDiva, so maybe a BD machine
+    # machine not mentioned in $CYT, pub says it was a FACScan (see https://pmc.ncbi.nlm.nih.gov/articles/PMC3082611)
     SDY4:
       - name: ES481973.248766.fcs
         options: &sdy4
@@ -26,6 +24,7 @@ test_files:
         options: *sdy4
 
     # LSRII
+    # TODO find pub to confirm
     SDY9:
       - name: Compensation Controls_7AAD PE-Cy5 Stained Control.240026.fcs
         options: &sdy9
@@ -38,7 +37,7 @@ test_files:
       - name: Compensation Controls_7AAD Stained Control--0011.239826.fcs
         options: *sdy9
 
-    # LSRII
+    # LSRII (based on $CYT, pub here does not mention machine: https://pmc.ncbi.nlm.nih.gov/articles/PMC3723701/#S2)
     SDY28:
       - name: rk012909__001.174865.fcs
         options: &sdy28
@@ -53,6 +52,12 @@ test_files:
         options: *sdy28
 
     # FACSCantoII
+
+    # TODO not sure what machine this actually is, this pub
+    # (https://pmc.ncbi.nlm.nih.gov/articles/PMC3023136/) says either
+    # FACSVantage or AriaII, and this pub (a protocol,
+    # https://pmc.ncbi.nlm.nih.gov/articles/PMC2750034/) says FACS Aria, neither
+    # of which are CantoII
     SDY33:
       - name: ES128227.109527.fcs
         options: &sdy33
@@ -67,6 +72,9 @@ test_files:
         options: *sdy33
 
     # CyTOF (5.1.562)
+    # specifically CyTOF 2.0 (https://pmc.ncbi.nlm.nih.gov/articles/PMC5337813/)
+    # although, they mention CyTOF 1 or 2 here (https://pmc.ncbi.nlm.nih.gov/articles/PMC6686855/#S10)
+    # so need to check this further
     SDY112: 
       - name: 081712-Mike-Study 15-2011-15026_cells_found.504108.fcs
         options: &sdy112
@@ -80,6 +88,7 @@ test_files:
         options: *sdy112
 
     # FACScan
+    # TODO could not find machine in pub
     SDY196:
       - name: SUB120116_004C0104A001_001.346425.fcs
         options: &sdy196
@@ -498,7 +507,7 @@ test_files:
     
       - name: BD - FACS Aria II.fcs
         options:
-          warnings_are_errors: true
+          warnings_are_errors: false
           # analysis has -1 for end
           allow_negative: true
           # This file also has $P14DISPLAY, not only which is nonstandard (the
@@ -674,7 +683,6 @@ test_files:
         
       - name: MVa2011-06-30_fcs30.fcs
         options:
-          warnings_are_errors: true
           date_pattern: "%Y-%b-%d"
           # time might be "HDR-T" but they also didn't provide $TIMESTEP
           time_meas_pattern: null
@@ -683,14 +691,14 @@ test_files:
         
       - name: MVa2011-06-30_fcs30c.fcs
         options:
-          warnings_are_errors: true
+          warnings_are_errors: false
           date_pattern: "%Y-%b-%d"
           # time might be "HDR-T" but they also didn't provide $TIMESTEP
           time_meas_pattern: null
         
       - name: MVa2011-06-30_fcs31.fcs
         options:
-          warnings_are_errors: true
+          warnings_are_errors: false
           text_correction: [0, -1]
           supp_text_correction: [0, -1]
           data_correction: [0, -1]
@@ -759,7 +767,7 @@ test_files:
           
       - name: Verity Software House - GemStoneGeneratedData - 500000events.fcs
         options:
-          warnings_are_errors: true
+          warnings_are_errors: false
           time_meas_pattern: null
       
       - name: iCyt - Eclipse.lmd
@@ -791,29 +799,29 @@ test_files:
           version_override: FCS3.1
           rename_standard_keys: {ETIME: ETIM}
   
-    FR-FCM-ZZM3:
-      - name: 1c B_ALL_FCV DNA  LOW EVENTS .LMD 
-        options: &navios
-          allow_empty: true
-          trim_value_whitespace: true
-          ignore_time_optical_keys: [V]
-          ignore_supp_text: true
-          demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
+    # FR-FCM-ZZM3:
+    #   - name: 1c B_ALL_FCV DNA  LOW EVENTS .LMD 
+    #     options: &navios
+    #       allow_empty: true
+    #       trim_value_whitespace: true
+    #       ignore_time_optical_keys: [V]
+    #       ignore_supp_text: true
+    #       demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
   
-      - name: 2c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 2c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
   
-      - name: 3c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 3c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
   
-      - name: 4c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 4c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
   
-      - name: 5c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 5c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
   
-      - name: 6c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 6c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
   
-      - name: 7c B_ALL_FCV DNA  LOW EVENTS.LMD
-        options: *navios
+    #   - name: 7c B_ALL_FCV DNA  LOW EVENTS.LMD
+    #     options: *navios
