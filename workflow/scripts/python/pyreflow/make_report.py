@@ -3,6 +3,7 @@ from typing import Any, NamedTuple
 from pathlib import Path
 import csv
 import warnings
+from common.config import FCSConfig
 
 
 class Machine(NamedTuple):
@@ -14,43 +15,19 @@ class Machine(NamedTuple):
     sys: str | None
 
 
-def read_file(p: Path, conf: Any) -> Machine:
+def read_file(p: Path, conf: FCSConfig) -> Machine:
     testname = p.name
     repo = p.parent.parent.name
     id = p.parent.name
-    opts = next(
-        (x["options"] for x in conf["test_files"][repo][id] if x["name"] == testname)
+
+    rconf = (
+        conf.test_files.immport
+        if repo == "immport"
+        else conf.test_files.flow_repository
     )
+    opts = next((x.options for x in rconf[id] if x.name == testname))
 
-    def as_tup(key: str):
-        try:
-            x = opts[key]
-            opts[key] = (x[0], x[1])
-
-        except KeyError:
-            pass
-
-    as_tup("text_correction")
-    as_tup("ignore_standard_keys")
-    as_tup("promote_to_standard")
-    as_tup("demote_from_standard")
-    as_tup("supp_text_correction")
-    as_tup("data_correction")
-    as_tup("analysis_correction")
-    as_tup("text_data_correction")
-    as_tup("text_analysis_correction")
-
-    try:
-        key = "substitute_standard_key_values"
-        x = opts[key]
-        opts[key] = (
-            {k: tuple(z for z in v) for k, v in x[0].items()},
-            {k: tuple(z for z in v) for k, v in x[1].items()},
-        )
-    except KeyError:
-        pass
-
-    core, _ = pf.api.fcs_read_std_text(p, **opts)
+    core, _ = opts.read_std_text(p)
 
     if isinstance(core, pf.CoreTEXT2_0):
         cytsn = None
@@ -67,7 +44,7 @@ def read_file(p: Path, conf: Any) -> Machine:
     )
 
 
-def main(smk: Any):
+def main(smk: Any) -> None:
     o = Path(smk.output["machine_table"])
 
     warnings.simplefilter("ignore")

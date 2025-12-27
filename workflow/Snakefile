@@ -1,15 +1,22 @@
 from pathlib import Path
 
+sys.path.extend(["./workflow/scripts/python"])
+from common.config import FCSConfig, ImmportSrc, FlowRepoSrc
+
+config = FCSConfig.parse_obj(config)
+
 fr_tests = [
-    ("flow_repository", id, s["name"])
-    for id, specs in config["test_files"]["flow_repository"].items()
-    for s in specs
+    ("flow_repository", f.src.fr_id, n)
+    for f in config.test_files
+    if isinstance(f.src, FlowRepoSrc)
+    for n in f.src.file_names
 ]
 
 im_tests = [
-    ("immport", id, s["name"])
-    for id, specs in config["test_files"]["immport"].items()
-    for s in specs
+    ("immport", f"SDY{f.src.immport_id}", n)
+    for f in config.test_files
+    if isinstance(f.src, ImmportSrc)
+    for n in f.src.file_names
 ]
 
 tests = [*fr_tests, *im_tests]
@@ -43,7 +50,7 @@ rule download_immport:
     conda:
         "envs/immport.yml"
     script:
-        "scripts/python/download_immport.py"
+        "scripts/python/immport/download_immport.py"
 
 
 rule test_read:
@@ -57,7 +64,7 @@ rule test_read:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/test_read.py"
+        "scripts/python/pyreflow/test_read.py"
 
 
 rule test_double_parse:
@@ -71,7 +78,7 @@ rule test_double_parse:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/test_double_parse.py"
+        "scripts/python/pyreflow/test_double_parse.py"
 
 
 rule write_report:
@@ -88,7 +95,7 @@ rule write_report:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/make_report.py"
+        "scripts/python/pyreflow/make_report.py"
 
 
 rule all:
