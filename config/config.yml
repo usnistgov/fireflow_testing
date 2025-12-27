@@ -14,7 +14,7 @@ test_files:
       - name: ES481973.248766.fcs
         options: &sdy4
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
 
       - name: ES481974.248771.fcs
@@ -42,7 +42,7 @@ test_files:
       - name: rk012909__001.174865.fcs
         options: &sdy28
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           time_meas_pattern: null
 
       - name: rk012909__002.174868.fcs
@@ -62,7 +62,7 @@ test_files:
       - name: ES128227.109527.fcs
         options: &sdy33
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
 
       - name: ES128228.112011.fcs
@@ -143,7 +143,7 @@ test_files:
       - name: Specimen_001_TP0001_001.605667.fcs
         options: &sdy820
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
 
       - name: Specimen_001_TP0003_002.605679.fcs
@@ -158,7 +158,7 @@ test_files:
         options: &sdy997
           ignore_time_gain: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           
       - name: 090616_200-0127-K_002.627836.fcs
         options: *sdy997
@@ -172,7 +172,7 @@ test_files:
         options: &sdy1100
           # lots of values which are just one space
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           # one OTHER segment which is a bit too long for the file
           other_width: 20
           truncate_offsets: true
@@ -230,20 +230,20 @@ test_files:
           <<: *sdy1115
           # timestamps are a space in this one
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
 
       - name: Adult001_unstim_24hrs.632137.635146.fcs
         options:
           <<: *sdy1115
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
 
     # unknown machine, made with FACSDiva
     SDY1176:
       - name: 082.661592.fcs
         options: &sdy1176
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
 
       - name: 083.661593.fcs
@@ -266,7 +266,7 @@ test_files:
       - name: Compensation_AViD AmCyan_194.721484.fcs
         options: &sdy1385
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
 
       - name: Compensation_AViD AmCyan_202.721723.fcs
@@ -293,7 +293,7 @@ test_files:
             TIMESTEP: "1.0"
           ignore_time_gain: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           version_override: FCS3.1
           # idk what happened here, this is weird
           demote_from_standard: [[CYTSN_$DATE], []]
@@ -306,7 +306,7 @@ test_files:
       - name: Specimen1_1-10.732949.fcs
         options: &sdy1502
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           version_override: FCS3.1
           demote_from_standard: [[UNICODE], []]
           ignore_time_optical_keys: [L]
@@ -324,7 +324,7 @@ test_files:
           # lots of weird padding after TEXT
           allow_missing_final_delim: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
 
       - name: 1115 - DE 4 color.744375.fcs
         options: *sdy1625
@@ -346,7 +346,7 @@ test_files:
       - name: 2020-03-18_HuMyl_Drop001_Experiment_Group_D3.774192.fcs
         options: &sdy1655
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_optical_keys: [V, L, F]
 
       - name: 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
@@ -360,7 +360,7 @@ test_files:
       - name: 12-219-1.784751.fcs
         options: &sdy1666
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
 
       - name: 12-219-2.784753.fcs
         options: *sdy1666
@@ -373,7 +373,7 @@ test_files:
       - name: c01_Batch2_1_singles_P11.858221.fcs
         options: &sdy1669
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           append_standard_keywords:
             TIMESTEP: "1.0"
 
@@ -388,7 +388,7 @@ test_files:
       - name: direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
         options: &sdy1944
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           version_override: FCS3.1
 
       - name: direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
@@ -501,7 +501,7 @@ test_files:
           trim_trailing_whitespace: true
           # this TEXT has blanks
           use_literal_delims: true
-          allow_empty: true
+          allow_empty_values: true
           # voltage given for time channel
           ignore_time_optical_keys: [V]
     
@@ -526,7 +526,7 @@ test_files:
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
     
       # ditto
@@ -534,7 +534,7 @@ test_files:
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
     
       # ditto
@@ -542,7 +542,7 @@ test_files:
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
     
       # ditto
@@ -550,14 +550,14 @@ test_files:
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_gain: true
     
       - name: BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           # this file appears to be cut in half
           data_correction: [0, -189504]
           ignore_text_data_offsets: true
@@ -577,7 +577,7 @@ test_files:
           # one of the OTHER segments drove off the cliff at the end of the file,
           # so just ignore them (only one, but lots of empty segments)
           max_other: 0
-          allow_empty: true
+          allow_empty_values: true
           ignore_time_optical_keys: [P, L, V, O]
           # all the wavelengths are 0.0 (infinite energy, nice idea)
           demote_from_standard: [[], ["P[0-9]+L"]]
@@ -594,7 +594,7 @@ test_files:
           # this file has a known issue in that the CXP software uses 10 for PnB
           # when the actual width is 16
           integer_widths_from_byteord: true
-          allow_empty: true
+          allow_empty_values: true
           time_meas_pattern: null
           # hmm....
           demote_from_standard:
@@ -609,7 +609,7 @@ test_files:
           # PnE has space in front of it
           trim_value_whitespace: true
           # trimming spaces results in lots of blank keys
-          allow_empty: true
+          allow_empty_values: true
           # - comp matrix has extra values which seems screwy
           # - has gain despite being 2.0 file
           # - time has voltage
@@ -739,7 +739,7 @@ test_files:
         options:
           # warnings_are_errors: true
           use_literal_delims: true
-          allow_empty: true
+          allow_empty_values: true
           data_correction: [0, -1]
           integer_byteord_override: [1,2]
           date_pattern: "%d-%m-%Y"
@@ -761,7 +761,7 @@ test_files:
         options:
           # warnings_are_errors: true
           trim_value_whitespace: true
-          allow_empty: true
+          allow_empty_values: true
           demote_from_standard: [[TIME], []] # TIMESTEP?
           time_meas_pattern: null
           
@@ -802,7 +802,7 @@ test_files:
     # FR-FCM-ZZM3:
     #   - name: 1c B_ALL_FCV DNA  LOW EVENTS .LMD 
     #     options: &navios
-    #       allow_empty: true
+    #       allow_empty_values: true
     #       trim_value_whitespace: true
     #       ignore_time_optical_keys: [V]
     #       ignore_supp_text: true
