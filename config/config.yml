@@ -195,6 +195,12 @@ machines:
     vendor: sony
     cyt_values: [Eclipse Analyzer]
 
+  sony_id7000:
+    name: ID7000
+    vendor: sony
+    spectral: true
+    cyt_values: [ID7000]
+
   sony_sa3800:
     name: SA3800
     vendor: sony
@@ -1380,4 +1386,16 @@ test_files:
         ignore_time_optical_keys: [V]
         ignore_supp_text: true
         demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
+
+  - src:
+      fr_id: FR-FCM-Z7CH
+      file_names:
+        - B02 Unstained WLSM.fcs
+        - B03 BUV395 WLSM.fcs
+        - B04 BUV496 WLSM.fcs
+    parse:
+      options:
+        max_other: 0
+        text_correction: [0, -1]
+        demote_from_standard: [[CYTN], []]
   
