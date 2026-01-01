@@ -3,7 +3,7 @@ import warnings
 import pyreflow as pf
 from typing import Any, NamedTuple
 from pathlib import Path
-from common.config import FCSConfig
+from common.config import FCSConfig, RepoType
 
 
 class Machine(NamedTuple):
@@ -17,20 +17,11 @@ class Machine(NamedTuple):
 
 def read_file(p: Path, conf: FCSConfig) -> Machine:
     testname = p.name
-    repo = p.parent.parent.name
+    repo = RepoType(p.parent.parent.name)
     id = p.parent.name
+    opts = conf.find_file_options(repo, testname, id)
 
-    fs = conf.test_files
-    rconf = next(
-        (
-            c
-            for c in fs
-            if testname in c.src.file_names
-            and id == (c.src.immport_id if repo == "immport" else c.src.fr_id)
-        ),
-    )
-
-    core, _ = rconf.options.to_std_text_config().read_std_text(p)
+    core, _ = opts.to_std_text_config().read_std_text(p)
 
     if isinstance(core, pf.CoreTEXT2_0):
         cytsn = None

@@ -1,4 +1,15 @@
 test_files:
+  # Sony SA3800
+  - src:
+      url_root: https://zenodo.org/records/7971252/files/
+      dataset_id: zenodo_SonySA3800
+      filemap:
+        a1.fcs: A01%20Well%20-%20A01%20WLSM.fcs
+        a2.fcs: A02%20Well%20-%20A02%20WLSM.fcs
+        a3.fcs: A03%20Well%20-%20A03%20WLSM.fcs
+    options:
+      ignore_supp_text: true
+  
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
       immport_id: SDY1

@@ -1,9 +1,18 @@
 from pathlib import Path
+import urllib
 
 sys.path.extend(["./workflow/scripts/python"])
-from common.config import FCSConfig, ImmportSrc, FlowRepoSrc
+from common.config import FCSConfig, ImmportSrc, FlowRepoSrc, PlainUrlSrc
 
 config = FCSConfig.parse_obj(config)
+
+
+plain_url_tests = [
+    ("plain_url", f.src.dataset_id, n)
+    for f in config.test_files
+    if isinstance(f.src, PlainUrlSrc)
+    for n in f.src.filemap
+]
 
 fr_tests = [
     ("flow_repository", f.src.fr_id, n)
@@ -19,7 +28,7 @@ im_tests = [
     for n in f.src.file_names
 ]
 
-tests = [*fr_tests, *im_tests]
+tests = [*fr_tests, *im_tests, *plain_url_tests]
 
 tools_dir = Path("resources/tools")
 aspera_base_dir = tools_dir / "immport-data-download-tool"
@@ -51,6 +60,17 @@ rule download_immport:
         "envs/immport.yml"
     script:
         "scripts/python/immport/download_immport.py"
+
+
+rule download_plain_url:
+    output:
+        "resources/plain_url/{id}/{testname}",
+    params:
+        url=lambda wildcards: config.get_url(wildcards.testname, wildcards.id),
+    shell:
+        """
+        curl -SsLqf {params.url} > {output}
+        """
 
 
 rule test_read:
