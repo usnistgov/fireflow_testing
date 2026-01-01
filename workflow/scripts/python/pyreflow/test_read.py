@@ -13,7 +13,7 @@ def main(smk: Any) -> None:
     repo = RepoType(smk.wildcards.repo)
     id = smk.wildcards.id
     testname = smk.wildcards.testname
-    opts = smk.config.find_file_options(repo, testname, id)
+    opts = smk.config.find_file_options(repo, testname, id).options
 
     core, _ = opts.read_std_dataset(i)
     o.touch()

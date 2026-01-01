@@ -1,8 +1,14 @@
 from urllib.parse import urljoin
 from enum import Enum
-from pydantic import BaseModel as BaseModel_
-from typing import TypeAlias
+from pydantic import BaseModel as BaseModel_, model_validator
+from typing import TypeAlias, NewType, Self
 from pyreflow.pydantic import PyreflowReadStdDatasetConfig
+
+MachineId = NewType("MachineId", str)
+VendorId = NewType("VendorId", str)
+
+MachineName = NewType("MachineName", str)
+VendorName = NewType("VendorName", str)
 
 
 class RepoType(Enum):
@@ -36,13 +42,55 @@ class ImmportSrc(BaseModel):
 AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc
 
 
-class FileConfig(BaseModel):
-    src: AnySrc
+class ParseConfig(BaseModel):
+    machine: MachineId | None = None
     options: PyreflowReadStdDatasetConfig
 
 
+class FileConfig(BaseModel):
+    src: AnySrc
+    parse: ParseConfig
+
+
+class Machine(BaseModel):
+    name: MachineName
+    vendor: VendorId
+    cyt_values: list[str] = []
+    sorting: bool = False
+    imaging: bool = False
+    spectral: bool = False
+
+
 class FCSConfig(BaseModel):
+    machines: dict[MachineId, Machine]
+    vendors: dict[VendorId, VendorName]
     test_files: list[FileConfig]
+
+    # TODO test that all CYT values are unique across machines
+
+    @model_validator(mode="after")
+    def vendors_match(self) -> Self:
+        vs = set([x.vendor for x in self.machines.values()])
+        assert vs.issubset(set(self.vendors)), "some vendor IDs are not configured"
+        return self
+
+    @model_validator(mode="after")
+    def machines_match(self) -> Self:
+        ms = set(
+            [x.parse.machine for x in self.test_files if x.parse.machine is not None]
+        )
+        assert ms.issubset(set(self.machines)), "some machine IDs are not configured"
+        return self
+
+    def get_machine(self, cyt: str | None, i: MachineId | None) -> Machine | None:
+        if i is not None:
+            return self.machines[i]
+        elif cyt is not None:
+            return next(
+                (m for m in self.machines.values() if cyt in m.cyt_values), None
+            )
+        else:
+            return None
 
     def get_url(self, file_name: str, repo_id: str) -> str:
         ret = next(
@@ -59,11 +107,8 @@ class FCSConfig(BaseModel):
         return ret
 
     def find_file_options(
-        self,
-        repo_type: RepoType,
-        file_name: str,
-        repo_id: str,
-    ) -> PyreflowReadStdDatasetConfig:
+        self, repo_type: RepoType, file_name: str, repo_id: str
+    ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
                 return (src.dataset_id, list(src.filemap.keys()))
@@ -87,4 +132,4 @@ class FCSConfig(BaseModel):
         assert ret is not None, (
             f"could not find config for {file_name} and {repo_id} which is a {repo_type}"
         )
-        return ret.options
+        return ret.parse

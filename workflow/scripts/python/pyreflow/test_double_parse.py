@@ -16,7 +16,7 @@ def main(smk: Any) -> None:
     repo = RepoType(smk.wildcards.repo)
     id = smk.wildcards.id
     testname = smk.wildcards.testname
-    opts = smk.config.find_file_options(repo, testname, id)
+    opts = smk.config.find_file_options(repo, testname, id).options
 
     std_opts = PyreflowReadStdDatasetConfig(time_meas_pattern=opts.time_meas_pattern)
 
