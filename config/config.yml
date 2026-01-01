@@ -1417,4 +1417,24 @@ test_files:
       options:
         allow_other_feature: true
         trim_value_whitespace: true
+
+  # Partec PAS
+  - src:
+      fr_id: FR-FCM-Z45W
+      file_names:
+        - Solanum_pseudocapsicum_fruit-skin.FCS
+        - Solanum_pseudocapsicum_mature-leaf.FCS
+        - Solanum_pseudocapsicum_petal-blades.FCS
+        - Solanum_pseudocapsicum_root.FCS
+        - Solanum_pseudocapsicum_stem.FCS
+        - Solanum_pseudocapsicum_young-leaf.FCS
+    parse:
+      options:
+        data_correction: [0, -1]
+        date_pattern: "%d-%m-%Y"
+        integer_byteord_override: [1,2]
+        demote_from_standard: [[TR], ["P[0-9]+L", "PKN[0-9]+"]]
+        dedup_measurement_names: true
+        ignore_time_optical_keys: [P, O, T, F, V]
   
+
