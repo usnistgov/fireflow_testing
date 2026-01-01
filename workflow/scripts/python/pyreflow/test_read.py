@@ -12,14 +12,17 @@ def main(smk: Any) -> None:
     repo = smk.wildcards.repo
     id = smk.wildcards.id
     testname = smk.wildcards.testname
-    rconf = (
-        smk.config.test_files.immport
-        if repo == "immport"
-        else smk.config.test_files.flow_repository
+    fs = smk.config.test_files
+    rconf = next(
+        (
+            c
+            for c in fs
+            if testname in c.src.file_names
+            and id == (c.src.immport_id if repo == "immport" else c.src.fr_id)
+        ),
     )
-    opts = next((x.options for x in rconf[id] if x.name == testname))
 
-    core, _ = opts.read_std_dataset(i)
+    core, _ = rconf.options.read_std_dataset(i)
     o.touch()
     core.write_dataset(smk.output["fcs"], skip_conversion_check=True)
 

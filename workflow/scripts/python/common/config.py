@@ -15,7 +15,7 @@ class FlowRepoSrc(BaseModel):
 
 
 class ImmportSrc(BaseModel):
-    immport_id: int
+    immport_id: str
     file_names: list[str]
 
 

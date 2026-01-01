@@ -14,12 +14,16 @@ def main(smk: Any) -> None:
     i_orig = Path(smk.input["original"])
     i_std = Path(smk.input["std"])
     o = Path(smk.output[0])
-    rconf = (
-        smk.config.test_files.immport
-        if repo == "immport"
-        else smk.config.test_files.flow_repository
+    fs = smk.config.test_files
+    rconf = next(
+        (
+            c
+            for c in fs
+            if testname in c.src.file_names
+            and id == (c.src.immport_id if repo == "immport" else c.src.fr_id)
+        )
     )
-    opts = next((x.options for x in rconf[id] if x.name == testname))
+    opts = rconf.options
 
     std_opts = PyreflowReadStdDatasetConfig(time_meas_pattern=opts.time_meas_pattern)
 

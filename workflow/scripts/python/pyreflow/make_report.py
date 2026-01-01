@@ -1,8 +1,8 @@
+import csv
+import warnings
 import pyreflow as pf
 from typing import Any, NamedTuple
 from pathlib import Path
-import csv
-import warnings
 from common.config import FCSConfig
 
 
@@ -20,14 +20,17 @@ def read_file(p: Path, conf: FCSConfig) -> Machine:
     repo = p.parent.parent.name
     id = p.parent.name
 
-    rconf = (
-        conf.test_files.immport
-        if repo == "immport"
-        else conf.test_files.flow_repository
+    fs = conf.test_files
+    rconf = next(
+        (
+            c
+            for c in fs
+            if testname in c.src.file_names
+            and id == (c.src.immport_id if repo == "immport" else c.src.fr_id)
+        ),
     )
-    opts = next((x.options for x in rconf[id] if x.name == testname))
 
-    core, _ = opts.read_std_text(p)
+    core, _ = rconf.options.to_std_text_config().read_std_text(p)
 
     if isinstance(core, pf.CoreTEXT2_0):
         cytsn = None

@@ -1,7 +1,7 @@
 test_files:
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
-      immport_id: 1
+      immport_id: SDY1
       file_names:
         - 02054141.003.52632.fcs
     options:
@@ -12,7 +12,7 @@ test_files:
 
   # machine not mentioned in $CYT, pub says it was a FACScan (see https://pmc.ncbi.nlm.nih.gov/articles/PMC3082611)
   - src:
-      immport_id: 4
+      immport_id: SDY4
       file_names:
         - ES481973.248766.fcs
         - ES481974.248771.fcs
@@ -25,7 +25,7 @@ test_files:
   # LSRII
   # TODO find pub to confirm
   - src:
-      immport_id: 9
+      immport_id: SDY9
       file_names:
         - Compensation Controls_7AAD PE-Cy5 Stained Control.240026.fcs
         - Compensation Controls_7AAD Stained Control--0010.239801.fcs
@@ -36,7 +36,7 @@ test_files:
 
   # LSRII (based on $CYT, pub here does not mention machine: https://pmc.ncbi.nlm.nih.gov/articles/PMC3723701/#S2)
   - src:
-      immport_id: 28
+      immport_id: SDY28
       file_names:
         - rk012909__001.174865.fcs
         - rk012909__002.174868.fcs
@@ -54,7 +54,7 @@ test_files:
   # https://pmc.ncbi.nlm.nih.gov/articles/PMC2750034/) says FACS Aria, neither
   # of which are CantoII
   - src:
-      immport_id: 33
+      immport_id: SDY33
       file_names:
         - ES128227.109527.fcs
         - ES128228.112011.fcs
@@ -69,7 +69,7 @@ test_files:
   # although, they mention CyTOF 1 or 2 here (https://pmc.ncbi.nlm.nih.gov/articles/PMC6686855/#S10)
   # so need to check this further
   - src:
-      immport_id: 112 
+      immport_id: SDY112 
       file_names:
         - 081712-Mike-Study 15-2011-15026_cells_found.504108.fcs
         - 081712-Mike-Study 15-2011-15028_cells_found.504109.fcs
@@ -81,7 +81,7 @@ test_files:
   # FACScan
   # TODO could not find machine in pub
   - src:
-      immport_id: 196
+      immport_id: SDY196
       file_names:
         - SUB120116_004C0104A001_001.346425.fcs
         - SUB120116_004C0104A001_002.346428.fcs
@@ -97,7 +97,7 @@ test_files:
 
   # FACSCanto
   - src:
-      immport_id: 284
+      immport_id: SDY284
       file_names:
         - 082808amhC1_Tube_001.177408.fcs
         - 082808amhC1_Tube_002.177410.fcs
@@ -108,7 +108,7 @@ test_files:
 
   # FACSAria
   - src:
-      immport_id: 506
+      immport_id: SDY506
       file_names:
         - Compensation Specimen_APC CD8 Stained Control.515710.fcs
         - Compensation Specimen_FITC- CD107AB Stained Control.515711.fcs
@@ -119,7 +119,7 @@ test_files:
 
   # FACSAriaII
   - src:
-      immport_id: 820
+      immport_id: SDY820
       file_names: 
         - Specimen_001_TP0001_001.605667.fcs
         - Specimen_001_TP0003_002.605679.fcs
@@ -131,7 +131,7 @@ test_files:
 
   # FACSAriaIII
   - src:
-      immport_id: 997
+      immport_id: SDY997
       file_names:
         - 090616_200-0104-K_001.627795.fcs
         - 090616_200-0127-K_002.627836.fcs
@@ -143,7 +143,7 @@ test_files:
         
   # CyTOF (6.0.626)
   - src:
-      immport_id: 1100
+      immport_id: SDY1100
       file_names: 
         - 151110_ASE001_758_moDC_DV2_8h.626416.fcs
         - 151110_ASE001_758_moDC_DV4_8h.626420.fcs
@@ -160,7 +160,7 @@ test_files:
 
   # CyTOF (unknown version)
   - src:
-      immport_id: 1108
+      immport_id: SDY1108
       file_names:
         - TIN_BLD1_B6Antibodies_Day3.627157.fcs
         - TIN_BLD1_B6Antibodies_Day8.627160.fcs
@@ -173,7 +173,7 @@ test_files:
 
   # Fortessa
   - src:
-      immport_id: 1115
+      immport_id: SDY1115
       file_names:
         - Adult001_comp_24hrs_Compensation Controls_405B Stained Control_005.632043.635139.fcs
     options: &sdy1115
@@ -184,7 +184,7 @@ test_files:
       version_override: FCS3.1
 
   - src:
-      immport_id: 1115
+      immport_id: SDY1115
       file_names:
         - Adult001_comp_24hrs_Compensation Controls_405 D 525,2f,50 Stained Control_004.632124.635137.fcs
         - Adult001_comp_24hrs_Compensation Controls_405 E 450,2f,50 Stained Control_003.632069.635138.fcs
@@ -194,7 +194,7 @@ test_files:
       substitute_standard_key_values: [{}, {"P12E": [".*", "0,0", false]}]
 
   - src:
-      immport_id: 1115
+      immport_id: SDY1115
       file_names:
         - Adult001_HRV_24hrs.632136.635136.fcs
         - Adult001_unstim_24hrs.632137.635146.fcs
@@ -206,7 +206,7 @@ test_files:
 
   # unknown machine, made with FACSDiva
   - src:
-      immport_id: 1176
+      immport_id: SDY1176
       file_names:
         - 082.661592.fcs
         - 083.661593.fcs
@@ -221,7 +221,7 @@ test_files:
 
   # unknown machine, made with FACSDiva
   - src:
-      immport_id: 1385
+      immport_id: SDY1385
       file_names:
         - Compensation_AViD AmCyan_194.721484.fcs
         - Compensation_AViD AmCyan_202.721723.fcs
@@ -236,7 +236,7 @@ test_files:
 
   # CyTOF (1.0.0)
   - src:
-      immport_id: 1396
+      immport_id: SDY1396
       file_names:
         - Sample_172169_Day1_WBC_15July2020_01_1.808052.fcs
         - Sample_172169_Month3_WBC_15July2020_01_1.808053.fcs
@@ -253,7 +253,7 @@ test_files:
         
   # NovoCyte
   - src:
-      immport_id: 1502
+      immport_id: SDY1502
       file_names:
         - Specimen1_1-10.732949.fcs
         - Specimen1_1-1.732945.fcs
@@ -267,7 +267,7 @@ test_files:
 
   # Aurora
   - src:
-      immport_id: 1625
+      immport_id: SDY1625
       file_names:
         - 1115 - DE 11 color panel.794843.fcs
         - 1115 - DE 4 color.744375.fcs
@@ -283,7 +283,7 @@ test_files:
 
   # Attune
   - src:
-      immport_id: 1655
+      immport_id: SDY1655
       file_names:
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D3.774192.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
@@ -296,7 +296,7 @@ test_files:
 
   # FACSverse
   - src:
-      immport_id: 1666
+      immport_id: SDY1666
       file_names:
         - 12-219-1.784751.fcs
         - 12-219-2.784753.fcs
@@ -307,7 +307,7 @@ test_files:
 
   # CyTOF (7.0.5189)
   - src:
-      immport_id: 1669
+      immport_id: SDY1669
       file_names:
         - c01_Batch2_1_singles_P11.858221.fcs
         - c01_Batch3_1_singles_P09.858243.fcs
@@ -320,7 +320,7 @@ test_files:
 
   # Cytek DxP10
   - src:
-      immport_id: 1944
+      immport_id: SDY1944
       file_names:
         - direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
         - direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
@@ -336,7 +336,7 @@ test_files:
 
   # cytof2
   - src:
-      immport_id: 2947
+      immport_id: SDY2947
       file_names:
         - CCR4-FMO.1208727.fcs
         - CCR6-FMO.1208728.fcs
