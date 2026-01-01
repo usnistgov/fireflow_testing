@@ -9,6 +9,7 @@ vendors:
   sbt: Standard Biotools
   strat: Stratedigm
   sysmex: Sysmex-Partec
+  vsh: Verity Software House
 
 machines:
   at_novocyte:
@@ -176,6 +177,10 @@ machines:
   tfs_attune_nxt:
     name: Attune NxT
     vendor: tfs
+
+  vsh_gemstone:
+    name: GemStone (software only)
+    vendor: vsh
 
 test_files:
   # Sony SA3800
@@ -1061,15 +1066,15 @@ test_files:
         demote_from_standard: [[TIME], []] # TIMESTEP?
         time_meas_pattern: null
         
-  # TODO don't require a machine for this one
-  # - src:
-  #     fr_id: FR-FCM-ZZZ4
-  #     file_names:
-  #       - Verity Software House - GemStoneGeneratedData - 500000events.fcs
-  #   parse:
-  #     options:
-  #       warnings_are_errors: false
-  #       time_meas_pattern: null
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - Verity Software House - GemStoneGeneratedData - 500000events.fcs
+    parse:
+      machine: vsh_gemstone
+      options:
+        warnings_are_errors: false
+        time_meas_pattern: null
     
   - src:
       fr_id: FR-FCM-ZZZ4
