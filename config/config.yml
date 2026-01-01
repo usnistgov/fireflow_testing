@@ -316,7 +316,8 @@ test_files:
         p1_tp1.fcs: ID1_Panel1_TP1.fcs
         p1_tp2.fcs: ID1_Panel1_TP2.fcs
         p1_tp3.fcs: ID1_Panel1_TP3.fcs
-        p2_tp1.fcs: ID1_Panel2_TP1.fcs
+        # $CYT for this file says its from a Fortessa (shrug emoji)
+        # p2_tp1.fcs: ID1_Panel2_TP1.fcs
         p2_tp2.fcs: ID1_Panel2_TP2.fcs
         p2_tp3.fcs: ID1_Panel2_TP3.fcs
     parse:
@@ -765,6 +766,53 @@ test_files:
         allow_empty_values: true
         demote_from_standard: [[TIMESTEP], []]
         time_meas_pattern: null
+
+  # LSRII (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC3585146/ and
+  # https://pmc.ncbi.nlm.nih.gov/articles/PMC3469550/)
+  - src:
+      immport_id: SDY100
+      file_names:
+        - 138085.294085.fcs
+        - 138086.294088.fcs
+        - 138087.294090.fcs
+    parse:
+      machine: bd_lsr2
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # easycyte (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8026190/#sec11)
+  - src:
+      immport_id: SDY1680
+      file_names:
+        - 07B_G10_G10_082.786252.fcs
+        - 07B_G12_G12_084.786253.fcs
+        - 07B_G2_G02_074.786248.fcs
+        - Comps2_A8_A08_068.786629.fcs
+        - Comps2_A8_A08_070.786608.fcs
+        - Comps2_B8_B08_070.786630.fcs
+    parse:
+      machine: cytek_easycyte
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # Helios (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8761119/#S10)
+  - src:
+      immport_id: SDY2189
+      file_names:
+        - c01_B1_singlets_null_Singlets_2047_12_24_20.1031667.fcs
+        - c01_B2_singlets_null_Singlets_2050_12_24_20.1031686.fcs
+        - c01_B3_singlets_null_Singlets_2049_12_24_20.1031680.fcs
+    parse:
+      machine: sbt_helios
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        append_standard_keywords:
+          TIMESTEP: "1.0"
 
   # Each of these Accuri files has roughly the same set of problems
   # - DATA offset end is 1 too high
