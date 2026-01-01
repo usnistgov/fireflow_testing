@@ -30,6 +30,14 @@ machines:
     imaging: true
     cyt_values: [FACSDiscover A8]
 
+  bd_s8:
+    name: FACSDiscover S8
+    vendor: bd
+    spectral: true
+    imaging: true
+    sorting: true
+    cyt_values: [FACSDiscover S8]
+
   bd_aria:
     name: FACSAria
     vendor: bd
@@ -1387,6 +1395,7 @@ test_files:
         ignore_supp_text: true
         demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
 
+  # Sony ID7000
   - src:
       fr_id: FR-FCM-Z7CH
       file_names:
@@ -1398,4 +1407,14 @@ test_files:
         max_other: 0
         text_correction: [0, -1]
         demote_from_standard: [[CYTN], []]
+
+  # FACSDiscover S8
+  - src:
+      fr_id: FR-FCM-Z73V
+      file_names:
+        - Unstained Monocytes_001.fcs
+    parse:
+      options:
+        allow_other_feature: true
+        trim_value_whitespace: true
   
