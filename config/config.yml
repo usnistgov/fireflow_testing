@@ -2,6 +2,7 @@ vendors:
   at: Agilent Technologies
   bd: BD Biosciences
   bc: Beckman Coulter
+  br: Bio-Rad
   cytek: Cytek Biosciences
   mbt: Miltenyi Biotec
   sony: Sony Biotechnology
@@ -22,11 +23,12 @@ machines:
     vendor: bd
     cyt_values: [Accuri C6]
 
-  bd_influx:
-    name: Influx
+  bd_a8:
+    name: FACSDiscover A8
     vendor: bd
-    sorting: true
-    cyt_values: [inFlux v7 Sorter]
+    spectral: true
+    imaging: true
+    cyt_values: [FACSDiscover A8]
 
   bd_aria:
     name: FACSAria
@@ -53,6 +55,11 @@ machines:
     vendor: bd
     cyt_values: [FACSCantoII]
 
+  bd_celesta:
+    name: FACSCelesta
+    vendor: bd
+    cyt_values: [FACSCelesta]
+
   bd_facscalibur:
     name: FACSCalibur
     vendor: bd
@@ -75,10 +82,31 @@ machines:
       - LSRFortessa
       - SORP LSRFortessa (LSRFortessa)
 
+  bd_fortessa_x20:
+    name: LSRFortessa X-20
+    vendor: bd
+    cyt_values:
+      - LSRFortessa X20 (LSRFortessa)
+
+  bd_influx:
+    name: Influx
+    vendor: bd
+    sorting: true
+    cyt_values: [inFlux v7 Sorter]
+
   bd_lsr2:
     name: LSR II
     vendor: bd
     cyt_values: [LSRII]
+
+  bd_lyric:
+    name: FACSLyric
+    vendor: bd
+    cyt_values: [BD FACSLyric]
+
+  bd_symph_a5:
+    name: FACS Symphony A5
+    vendor: bd
 
   bc_astrios:
     name: MoFlo Astrios
@@ -115,15 +143,17 @@ machines:
     sorting: true
     cyt_values: [MoFlo XDP]
 
+  br_ze5:
+    name: ZE5
+    vendor: br
+    cyt_values: [YETI]
+
   cytek_aurora:
     name: Aurora
     vendor: cytek
     spectral: true
     cyt_values: [Aurora]
 
-  cytek_xp5:
-    name: xP5
-    vendor: cytek
 
   cytek_dxp10:
     name: DxP10
@@ -131,6 +161,16 @@ machines:
 
   cytek_easycyte:
     name: Guava easyCyte
+    vendor: cytek
+
+  cytek_imgstr:
+    name: Image Stream
+    vendor: cytek
+    imaging: true
+    cyt_values: [Image Stream]
+
+  cytek_xp5:
+    name: xP5
     vendor: cytek
 
   sbt_cytof1:
@@ -194,6 +234,95 @@ test_files:
     parse:
       options:
         ignore_supp_text: true
+
+  # Attune NxT
+  - src:
+      url_root: https://zenodo.org/records/7352402/files/
+      dataset_id: zenodo_AttuneNxt
+      filemap:
+        bl1.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL1-A.fcs
+        bl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL3-A.fcs
+        rl1.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL1-A.fcs
+        rl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL3-A.fcs
+    parse:
+      machine: tfs_attune_nxt
+      options:
+        trim_trailing_whitespace: true
+        ignore_time_optical_keys: [V, F, L]
+
+  # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
+  - src:
+      url_root: https://zenodo.org/records/7982165/files/
+      dataset_id: zenodo_Helios
+      filemap:
+        am_non_jak2.fcs: AM_Non_JAK2.fcs
+        cj_jakj2.fcs: CJ_JAK2.fcs
+        fd_non_jak2.fcs: FD_Non_JAK2.fcs
+    parse:
+      machine: sbt_helios
+      options:
+        text_correction: [0, -1]
+        data_correction: [0, -1]
+        text_data_correction: [0, -1]
+        append_standard_keywords:
+          TIMESTEP: "1.0"
+
+  # FACSDiscover A8
+  - src:
+      url_root: https://zenodo.org/records/15726118/files/
+      dataset_id: zenodo_FACSDiscoverA8
+      filemap:
+        hd20_bm.fcs: HD%20BM%201.fcs
+        hd_pbmc.fcs: HD%20PBMC.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_other_feature: true
+
+  # Imagestream
+  - src:
+      url_root: https://zenodo.org/records/15726118/files/
+      dataset_id: zenodo_Imagestream
+      filemap:
+        no_ab.fcs: No%20ab%202_3.fcs
+        ritux.fcs: Ritux%202_5.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        trim_intra_value_whitespace: true
+        ignore_supp_text: true
+        append_standard_keywords:
+          TIMESTEP: "1.0"
+
+  # FASCLyric
+  - src:
+      url_root: https://zenodo.org/records/17222100/files/
+      dataset_id: zenodo_FACSLyric
+      filemap:
+        4g2_t1.fcs: 20250409_DV2_4G2_T1_340.fcs
+        4g2_t2.fcs: 20250409_DV2_4G2_T2_340_001.fcs
+        4g2_t3.fcs: 20250409_DV2_4G2_T3_340.fcs
+        scfv_t1.fcs: 20250409_DV2_SCFV_T1_400.fcs
+        scfv_t2.fcs: 20250409_DV2_SCFV_T2_400.fcs
+        scfv_t3.fcs: 20250409_DV2_SCFV_T3_400.fcs
+    parse:
+      options: {}
+
+  # FASCSymphony A5
+  - src:
+      url_root: https://zenodo.org/records/13928969/files/
+      dataset_id: zenodo_FACSSymphonyA5
+      filemap:
+        p1_tp1.fcs: ID1_Panel1_TP1.fcs
+        p1_tp2.fcs: ID1_Panel1_TP2.fcs
+        p1_tp3.fcs: ID1_Panel1_TP3.fcs
+        p2_tp1.fcs: ID1_Panel2_TP1.fcs
+        p2_tp2.fcs: ID1_Panel2_TP2.fcs
+        p2_tp3.fcs: ID1_Panel2_TP3.fcs
+    parse:
+      machine: bd_symph_a5
+      options:
+        ignore_time_gain: true
   
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
@@ -574,6 +703,67 @@ test_files:
         - CCR7-FMO.1208729.fcs
     parse:
       options:
+        time_meas_pattern: null
+
+  # ZE5
+  - src:
+      immport_id: SDY1640
+      # TODO these first three need an additional correction for DATA in HEADER,
+      # but this won't work now in the larger group because the correction is
+      # also blindly applied to empty offsets, so 0,0 -> 0,-1
+      file_names:
+        # - A10 IL-10-APC.771563.fcs
+        # - A1 CD4-BV605.771554.fcs
+        # - A1 CXCR3-BV421.787857.fcs
+        - A1 1592-AK-2  DMSO.771568.fcs
+        - A1 1592-AK-2  DMSO.787875.fcs
+        - A1 2109-AK-1  DMSO.787905.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        text_data_correction: [0, -1]
+        demote_from_standard: [[TR], []]
+        ignore_time_optical_keys: [V, O]
+
+  # FACSCelesta
+  - src:
+      immport_id: SDY2583
+      file_names:
+        - DBG100_CP10.1137063.fcs
+        - DBG100_CP16.1137913.fcs
+        - DBG100_CP22.1138763.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # Fortessa X-20
+  - src:
+      immport_id: SDY1734
+      file_names:
+        - Alexa_Fluor_488_C_053.807010.fcs
+        - Alexa_Fluor_647_C_055.807011.fcs
+        - APC-Cy7_C_057.807014.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # Fortessa X-20
+  - src:
+      immport_id: SDY1734
+      file_names:
+        - L1-001_C-1_PfRBC.807009.fcs
+        - L1-001_C-1_uRBC.807097.fcs
+        - L1-001_D11_PfRBC.807025.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        demote_from_standard: [[TIMESTEP], []]
         time_meas_pattern: null
 
   # Each of these Accuri files has roughly the same set of problems

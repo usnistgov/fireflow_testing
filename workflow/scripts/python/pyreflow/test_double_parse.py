@@ -18,12 +18,16 @@ def main(smk: Any) -> None:
     testname = smk.wildcards.testname
     opts = smk.config.find_file_options(repo, testname, id).options
 
-    std_opts = PyreflowReadStdDatasetConfig(time_meas_pattern=opts.time_meas_pattern)
+    std_opts = PyreflowReadStdDatasetConfig(
+        time_meas_pattern=opts.time_meas_pattern,
+        allow_other_feature=opts.allow_other_feature,
+    )
 
     core_orig, _ = opts.read_std_dataset(i_orig)
     core_orig.truncate_data(True)
 
     core_std, _ = std_opts.read_std_dataset(i_std)
+    assert core_orig.mode == core_std.mode
     assert core_orig == core_std
     o.touch()
 
