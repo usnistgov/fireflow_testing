@@ -90,12 +90,15 @@ class FCSConfig(BaseModel):
         assert ms.issubset(set(self.machines)), "some machine IDs are not configured"
         return self
 
-    def get_machine(self, cyt: str | None, i: MachineId | None) -> Machine | None:
+    def get_machine(
+        self, cyt: str | None, i: MachineId | None
+    ) -> tuple[MachineId, Machine] | None:
         if i is not None:
-            return self.machines[i]
+            return (i, self.machines[i])
         elif cyt is not None:
             return next(
-                (m for m in self.machines.values() if cyt in m.cyt_values), None
+                ((mi, m) for mi, m in self.machines.items() if cyt in m.cyt_values),
+                None,
             )
         else:
             return None

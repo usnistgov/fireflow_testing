@@ -15,6 +15,7 @@ class MachineMetadata(NamedTuple):
     cyt: str | None
     cytsn: str | None
     sys: str | None
+    software: str | None
 
 
 def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
@@ -31,13 +32,43 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
     else:
         cytsn = core.cytsn
 
-    machine = (
+    mres = (
         conf.get_machine(core.cyt, parse.machine)
         if core.cyt != ""
-        else (conf.machines[parse.machine] if parse.machine is not None else None)
+        else (
+            (parse.machine, conf.machines[parse.machine])
+            if parse.machine is not None
+            else None
+        )
     )
-    assert machine is not None, f"could not find machine for {core.cyt} for {p}"
+    assert mres is not None, f"could not find machine for {core.cyt} for {p}"
+    machineid = mres[0]
+    machine = mres[1]
     vendor = conf.vendors[machine.vendor]
+
+    software = None
+    if machine.vendor in ["bd", "cytek"]:
+        try:
+            software = core.nonstandard_keywords["CREATOR"]
+        except KeyError:
+            pass
+    elif machine.vendor in ["at"]:
+        try:
+            software = core.nonstandard_keywords["#NCCreator"]
+        except KeyError:
+            pass
+    elif machineid == "tfs_attune":
+        software = core.cyt
+    elif machineid in ["bc_cyan", "bc_xdp", "bc_astrios"]:
+        if core.sys is not None:
+            software = core.sys.split(" / ")[0]
+    elif machine.vendor in ["bc"]:
+        try:
+            software = core.nonstandard_keywords["SWVER"]
+        except KeyError:
+            pass
+    elif machineid == "bc_fc500":
+        software = core.sys
 
     return MachineMetadata(
         repo=repo,
@@ -48,6 +79,7 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
         sys=core.sys,
         vendor=vendor,
         machine=machine,
+        software=software,
     )
 
 
@@ -62,6 +94,7 @@ def main(smk: Any) -> None:
         header = [
             "vendor",
             "machine",
+            "software",
             "spectral",
             "imaging",
             "sorting",
@@ -82,6 +115,7 @@ def main(smk: Any) -> None:
                 [
                     r.vendor,
                     m.name,
+                    r.software,
                     m.spectral,
                     m.imaging,
                     m.sorting,
