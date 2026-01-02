@@ -110,7 +110,7 @@ machines:
   bd_lsr2:
     name: LSR II
     vendor: bd
-    cyt_values: [LSRII]
+    cyt_values: [LSRII, "Guinevere (LSRII)"]
 
   bd_lyric:
     name: FACSLyric
@@ -433,6 +433,47 @@ test_files:
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
+  # FACSCalibur
+  - src:
+      immport_id: SDY194
+      file_names:
+        - 100.204.414416.fcs
+        - 100R.205.414418.fcs
+    parse:
+      options:
+        use_latin1: true
+        integer_byteord_override: [2,1]
+        time_meas_pattern: null
+        fix_log_scale_offsets: true
+
+  # FACSCalibur
+  - src:
+      immport_id: SDY199
+      file_names:
+        - SUB120119_0041C0404A001_002.346966.fcs
+        - SUB120119_0041C0404A001_003.346968.fcs
+        - SUB120119_0041C0404A001_004.346970.fcs
+    parse:
+      options:
+        use_latin1: true
+        integer_byteord_override: [2,1]
+        time_meas_pattern: null
+        fix_log_scale_offsets: true
+
+  # FACSCalibur
+  - src:
+      immport_id: SDY217
+      file_names:
+        - Data.001 day 10 ova alone.393110.fcs
+        - Data.001 day 4 ova alone.393102.fcs
+        - Data.001 day 5 no antigen.393086.fcs
+    parse:
+      options:
+        use_latin1: true
+        integer_byteord_override: [2,1]
+        time_meas_pattern: null
+        fix_log_scale_offsets: true
+
   # machine not mentioned in $CYT, pub says it was a FACScan (see https://pmc.ncbi.nlm.nih.gov/articles/PMC3082611)
   - src:
       immport_id: SDY4
@@ -442,6 +483,55 @@ test_files:
         - ES481975.248774.fcs
     parse:
       machine: bd_facscan
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC3585146/ and
+  # https://pmc.ncbi.nlm.nih.gov/articles/PMC3469550/)
+  - src:
+      immport_id: SDY100
+      file_names:
+        - 138085.294085.fcs
+        - 138086.294088.fcs
+        - 138087.294090.fcs
+    parse:
+      machine: bd_lsr2
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5728448/#sec4
+  - src:
+      immport_id: SDY1176
+      file_names:
+        - 082.661592.fcs
+        - 083.661593.fcs
+        - 084.661594.fcs
+        - 1292966.652906.fcs
+        - 1292968.652920.fcs
+        - 1292970.652921.fcs
+    parse:
+      machine: bd_lsr2
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6559862/#Sec10
+  - src:
+      immport_id: SDY1385
+      file_names:
+        - Compensation_AViD AmCyan_194.721484.fcs
+        - Compensation_AViD AmCyan_202.721723.fcs
+        - Compensation_AViD AmCyan_222.722173.fcs
+        - Specimen_001_A10_A10_010.722002.fcs
+        - Specimen_001_A10_A10_010.722262.fcs
+        - Specimen_001_A10_A10_050.722037.fcs
+    parse:
+      machine: bd_lsr2
       options:
         trim_value_whitespace: true
         allow_empty_values: true
@@ -472,6 +562,71 @@ test_files:
         trim_value_whitespace: true
         allow_empty_values: true
         time_meas_pattern: null
+
+  # LSRII
+  - src:
+      immport_id: SDY1015
+      file_names:
+        - E04_AI_T01_Compensation Controls_B 530,2f,30 Stained Control.615893.fcs
+        - E04_AI_T01_Compensation Controls_B 710,2f,50 Stained Control.615894.fcs
+        - E04_AI_T01_Compensation Controls_R 670,2f,30 Stained Control.615895.fcs
+        - E04D01IIMMCYXXPL_090613RFa14PANELZ_1980215.616295.fcs
+        - E04D01IIMMCYXXPL_090613RFv13PANELZ_1980216.616299.fcs
+        - E04D01IIMMCYXXPL_090613RIc14PANELZ_1980219.616300.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII
+  - src:
+      immport_id: SDY1041
+      file_names:
+        - Compensation TF 07242015_PerCP-Cy5-5 Stained Control.625600.fcs
+        - Compensation TF 07242015_PE-Texas Red Stained Control.625598.fcs
+        - Compensation TF 07242015_QDot 705 Stained Control.625608.fcs
+        - D146 Ex A2 NLV_Bld.624444.fcs
+        - D146 Ex A2 NLV_BM.624461.fcs
+        - D146 Ex A2 NLV_Col.624465.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII
+  - src:
+      immport_id: SDY1086
+      file_names:
+        - 06092015-VAX002-TFH-Day0_ABX10.720881.fcs
+        - 06092015-VAX002-TFH-Day0_ABX14.720888.fcs
+        - 06092015-VAX002-TFH-Day0_ABX15.720890.fcs
+        - 06092015-VAX002-TFH-Day7_Tfh-Control.720880.fcs
+        - 0614PB_ABX-CTRL.721004.fcs
+        - 0614Tfh_ABX-Control.720930.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
+
+  # LSRII
+  - src:
+      immport_id: SDY1302
+      file_names:
+        - NGL010_Compensation Controls_Blue A 710,2f,50 Stained Control.700173.fcs
+        - NGL010_Compensation Controls_Blue B 515,2f,20 Stained Control.700174.fcs
+        - NGL010_Compensation Controls_Green A 780,2f,40 Stained Control.700175.fcs
+        - PROP0510192-1_NOAG_A01.697887.fcs
+        - PROP0510192-1_SEB_D01.697888.fcs
+        - PROP0510192-1_TPHE_A01.700465.fcs
+    parse:
+      machine: bd_lsr2
+      options:
+        trim_value_whitespace: true
+        allow_empty_values: true
+        ignore_time_gain: true
 
   # FACSCantoII
 
@@ -518,6 +673,20 @@ test_files:
         - SUB120116_004C0104A001_004.346432.fcs
         - SUB120116_004C0104A001_006.346436.fcs
         - SUB120116_004C0104A001_008.346440.fcs
+    parse:
+      options:
+        use_latin1: true
+        integer_byteord_override: [2,1]
+        fix_log_scale_offsets: true
+        time_meas_pattern: null
+
+  # FACScan
+  - src:
+      immport_id: SDY241
+      file_names:
+        - 10374c.137534.fcs
+        - 10374l.137586.fcs
+        - 10374m.137530.fcs
     parse:
       options:
         use_latin1: true
@@ -645,39 +814,6 @@ test_files:
         trim_value_whitespace: true
         allow_empty_values: true
 
-  # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5728448/#sec4
-  - src:
-      immport_id: SDY1176
-      file_names:
-        - 082.661592.fcs
-        - 083.661593.fcs
-        - 084.661594.fcs
-        - 1292966.652906.fcs
-        - 1292968.652920.fcs
-        - 1292970.652921.fcs
-    parse:
-      machine: bd_lsr2
-      options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
-
-  # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6559862/#Sec10
-  - src:
-      immport_id: SDY1385
-      file_names:
-        - Compensation_AViD AmCyan_194.721484.fcs
-        - Compensation_AViD AmCyan_202.721723.fcs
-        - Compensation_AViD AmCyan_222.722173.fcs
-        - Specimen_001_A10_A10_010.722002.fcs
-        - Specimen_001_A10_A10_010.722262.fcs
-        - Specimen_001_A10_A10_050.722037.fcs
-    parse:
-      machine: bd_lsr2
-      options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
 
   # TODO this is one of the CyTOF instruments but there is no pub, we might be
   # able to assume this was a sbt_cytof1 based on the software version 1.0
@@ -863,20 +999,6 @@ test_files:
         demote_from_standard: [[TIMESTEP], []]
         time_meas_pattern: null
 
-  # LSRII (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC3585146/ and
-  # https://pmc.ncbi.nlm.nih.gov/articles/PMC3469550/)
-  - src:
-      immport_id: SDY100
-      file_names:
-        - 138085.294085.fcs
-        - 138086.294088.fcs
-        - 138087.294090.fcs
-    parse:
-      machine: bd_lsr2
-      options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
 
   # easycyte (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8026190/#sec11)
   - src:
