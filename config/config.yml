@@ -285,6 +285,22 @@ test_files:
           - [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
           - []
 
+  # easycyte
+  - src:
+      zip_url: https://zenodo.org/records/10720746/files/Co-cultures_data.zip
+      dataset_id: zenodo_easycyte
+      file_paths:
+        - Direct co-cultures/EXP007_2022-01-19_at_04-01-12pm.fcs
+        - Direct co-cultures/EXP007_2022-01-20_at_02-07-37pm.fcs
+        - Direct co-cultures/EXP007_2022-01-21_at_02-31-36pm.fcs
+    parse:
+      machine: cytek_easycyte
+      options:
+        version_override: FCS3.1
+        trim_value_whitespace: true
+        ignore_time_optical_keys: [V]
+        demote_from_standard: [[COMMENT], ["P1[0-9]V", "P[0-9]+G"]]
+
   # Sony SA3800
   - src:
       url_root: https://zenodo.org/records/7971252/files/
