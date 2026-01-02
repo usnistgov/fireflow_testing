@@ -172,7 +172,6 @@ machines:
     spectral: true
     cyt_values: [Aurora]
 
-
   cytek_dxp10:
     name: DxP10
     vendor: cytek
@@ -300,6 +299,25 @@ test_files:
         trim_value_whitespace: true
         ignore_time_optical_keys: [V]
         demote_from_standard: [[COMMENT], ["P1[0-9]V", "P[0-9]+G"]]
+
+  # Aurora
+  - src:
+      url_root: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
+      dataset_id: zenodo_Aurora
+      filemap:
+        b_d1.fcs: B_cells_donor1.fcs
+        b_d2.fcs: B_cells_donor2.fcs
+        b_d3.fcs: B_cells_donor3.fcs
+        t4_d1.fcs: Effector_memory_CD4+_T%20cells_donor1.fcs
+        t4_d2.fcs: Effector_memory_CD4+_T%20cells_donor2.fcs
+        t4_d3.fcs: Effector_memory_CD4+_T%20cells_donor3.fcs
+        t8_d1.fcs: Effector_memory_CD8+_T_cells_donor1.fcs
+        t8_d2.fcs: Effector_memory_CD8+_T_cells_donor2.fcs
+        t8_d3.fcs: Effector_memory_CD8+_T_cells_donor3.fcs
+    parse:
+      options:
+        trim_value_whitespace: true
+        version_override: FCS3.2
 
   # Sony SA3800
   - src:
