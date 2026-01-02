@@ -1,4 +1,5 @@
 vendors:
+  apo: ApogeeFlow
   at: Agilent Technologies
   bd: BD Biosciences
   bc: Beckman Coulter
@@ -13,6 +14,10 @@ vendors:
   vsh: Verity Software House
 
 machines:
+  apo_a60micro:
+    name: A60-Micro
+    vendor: apo
+  
   at_novocyte:
     name: NovoCyte
     vendor: at
@@ -253,6 +258,32 @@ test_files:
     parse:
       options:
         version_override: FCS3.1
+
+  # Apogee A60 Micro
+  - src:
+      zip_url: https://zenodo.org/records/4561815/files/Figure_2.zip
+      dataset_id: zenodo_ApogeeA60micro
+      file_paths:
+        - Figure_2/2b/02_Si_182nm_dil1E5.fcs
+        - Figure_2/2b/04_Si_315nm_dil1E5.fcs
+        - Figure_2/2b/05_Si_321nm_dil1E5.fcs
+        - Figure_2/2b/06_Si_405nm_dil1E4.fcs
+        - Figure_2/2b/07_Si_548nm_dil1E4.fcs
+    parse:
+      machine: apo_a60micro
+      options:
+        text_correction: [0, -1]
+        data_correction: [0, -1]
+        text_data_correction: [0, -1]
+        use_literal_delims: true
+        allow_empty_values: true
+        version_override: FCS3.1
+        parse_indexed_spillover: true
+        append_standard_keywords:
+          TIMESTEP: "1.0"
+        demote_from_standard:
+          - [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
+          - []
 
   # Sony SA3800
   - src:
