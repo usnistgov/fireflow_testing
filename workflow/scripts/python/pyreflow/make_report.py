@@ -1,3 +1,4 @@
+import re
 import csv
 import warnings
 import pyreflow as pf
@@ -70,6 +71,12 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
             pass
     elif machineid == "bc_fc500":
         software = core.sys
+    elif machineid in ["sbt_helios", "sbt_cytof2", "sbt_cytof1"]:
+        if (
+            core.cyt is not None
+            and re.search("[0-9]+\\.[0-9]+\\.[0-9]+", core.cyt) is not None
+        ):
+            software = core.cyt
 
     return MachineMetadata(
         repo=repo,
