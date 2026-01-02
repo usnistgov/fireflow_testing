@@ -16,6 +16,7 @@ class MachineMetadata(NamedTuple):
     cytsn: str | None
     sys: str | None
     software: str | None
+    date: str | None
 
 
 def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
@@ -80,6 +81,7 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
         vendor=vendor,
         machine=machine,
         software=software,
+        date=core.date,
     )
 
 
@@ -98,6 +100,7 @@ def main(smk: Any) -> None:
             "spectral",
             "imaging",
             "sorting",
+            "$DATE",
             "$CYT",
             "$CYTSN",
             "$SYS",
@@ -119,6 +122,7 @@ def main(smk: Any) -> None:
                     m.spectral,
                     m.imaging,
                     m.sorting,
+                    r.date,
                     r.cyt,
                     r.cytsn,
                     r.sys,
