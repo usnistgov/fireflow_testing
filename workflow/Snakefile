@@ -2,7 +2,7 @@ from pathlib import Path
 import urllib
 
 sys.path.extend(["./workflow/scripts/python"])
-from common.config import FCSConfig, ImmportSrc, FlowRepoSrc, PlainUrlSrc
+from common.config import FCSConfig, ImmportSrc, FlowRepoSrc, PlainUrlSrc, ZipUrlSrc
 
 config = FCSConfig.parse_obj(config)
 
@@ -12,6 +12,13 @@ plain_url_tests = [
     for f in config.test_files
     if isinstance(f.src, PlainUrlSrc)
     for n in f.src.filemap
+]
+
+zip_url_tests = [
+    ("zip_url", f.src.dataset_id, p.name)
+    for f in config.test_files
+    if isinstance(f.src, ZipUrlSrc)
+    for p in f.src.file_paths
 ]
 
 fr_tests = [
@@ -28,7 +35,7 @@ im_tests = [
     for n in f.src.file_names
 ]
 
-tests = [*fr_tests, *im_tests, *plain_url_tests]
+tests = [*fr_tests, *im_tests, *plain_url_tests, *zip_url_tests]
 
 tools_dir = Path("resources/tools")
 aspera_base_dir = tools_dir / "immport-data-download-tool"
@@ -66,10 +73,34 @@ rule download_plain_url:
     output:
         "resources/plain_url/{id}/{testname}",
     params:
-        url=lambda wildcards: config.get_url(wildcards.testname, wildcards.id),
+        url=lambda wildcards: config.get_plain_url(wildcards.testname, wildcards.id),
     shell:
         """
         curl -SsLqf {params.url} > {output}
+        """
+
+
+rule download_zip_url:
+    output:
+        "resources/zip_url/{id}.zip",
+    params:
+        url=lambda wildcards: config.get_zip_url(wildcards.id),
+    shell:
+        """
+        curl -SsLqf {params.url} > {output}
+        """
+
+
+rule extract_zip_url:
+    input:
+        rules.download_zip_url.output,
+    output:
+        "resources/zip_url/{id}/{testname}",
+    params:
+        target=lambda wildcards: config.get_zip_path(wildcards.testname, wildcards.id),
+    shell:
+        """
+        unzip -p {input} "{params.target}" > {output}
         """
 
 

@@ -1,3 +1,4 @@
+from pathlib import Path
 from urllib.parse import urljoin
 from enum import Enum
 from pydantic import BaseModel as BaseModel_, model_validator
@@ -13,6 +14,7 @@ VendorName = NewType("VendorName", str)
 
 class RepoType(Enum):
     PLAIN_URL = "plain_url"
+    ZIP_URL = "zip_url"
     FR = "flow_repository"
     IMMPORT = "immport"
 
@@ -29,6 +31,12 @@ class PlainUrlSrc(BaseModel):
     filemap: dict[str, str]
 
 
+class ZipUrlSrc(BaseModel):
+    zip_url: str
+    dataset_id: str
+    file_paths: list[Path]
+
+
 class FlowRepoSrc(BaseModel):
     fr_id: str
     file_names: list[str]
@@ -39,7 +47,7 @@ class ImmportSrc(BaseModel):
     file_names: list[str]
 
 
-AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc
+AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ZipUrlSrc
 
 
 class ParseConfig(BaseModel):
@@ -92,7 +100,7 @@ class FCSConfig(BaseModel):
         else:
             return None
 
-    def get_url(self, file_name: str, repo_id: str) -> str:
+    def get_plain_url(self, file_name: str, repo_id: str) -> str:
         ret = next(
             (
                 urljoin(c.src.url_root, c.src.filemap[file_name])
@@ -106,12 +114,40 @@ class FCSConfig(BaseModel):
         assert ret is not None, f"could not find URL for {file_name} and {repo_id}"
         return ret
 
+    def get_zip_url(self, repo_id: str) -> str:
+        ret = next(
+            (
+                c.src.zip_url
+                for c in self.test_files
+                if isinstance(c.src, ZipUrlSrc) and repo_id == c.src.dataset_id
+            ),
+            None,
+        )
+        assert ret is not None, f"could not find zip URL for {repo_id}"
+        return ret
+
+    def get_zip_path(self, file_name: str, repo_id: str) -> Path:
+        ret = next(
+            (
+                p
+                for c in self.test_files
+                if isinstance(c.src, ZipUrlSrc) and repo_id == c.src.dataset_id
+                for p in c.src.file_paths
+                if p.name == file_name
+            ),
+            None,
+        )
+        assert ret is not None, f"could not find zip path for {file_name} and {repo_id}"
+        return ret
+
     def find_file_options(
         self, repo_type: RepoType, file_name: str, repo_id: str
     ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
                 return (src.dataset_id, list(src.filemap.keys()))
+            elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
+                return (src.dataset_id, [p.name for p in src.file_paths])
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):

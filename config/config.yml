@@ -126,6 +126,11 @@ machines:
     name: CyAn
     vendor: bc
 
+  bc_cytoflex:
+    name: CytoFLEX
+    vendor: bc
+    cyt_values: [CytoFLEX]
+
   bc_fc500:
     name: Cytomics FC500
     vendor: bc
@@ -237,6 +242,18 @@ machines:
     vendor: vsh
 
 test_files:
+  # Cytoflex
+  - src:
+      zip_url: https://zenodo.org/records/15019428/files/Fig3A_human%20organoids_Raw%20data.zip
+      dataset_id: zenodo_CytoFlex
+      file_paths:
+        - Fig3A_human organoids_Raw data/D110_stained.fcs
+        - Fig3A_human organoids_Raw data/D110_unstained.fcs
+        - Fig3A_human organoids_Raw data/D110_unstained_new.fcs
+    parse:
+      options:
+        version_override: FCS3.1
+
   # Sony SA3800
   - src:
       url_root: https://zenodo.org/records/7971252/files/
