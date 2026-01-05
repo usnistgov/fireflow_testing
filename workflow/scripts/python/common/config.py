@@ -1,15 +1,82 @@
 from pathlib import Path
 from urllib.parse import urljoin
 from enum import Enum
-from pydantic import BaseModel as BaseModel_, model_validator
-from typing import TypeAlias, NewType, Self
+from pydantic import BaseModel as BaseModel_
+from typing import TypeAlias, NewType
 from pyreflow.pydantic import PyreflowReadStdDatasetConfig
 
-MachineId = NewType("MachineId", str)
-VendorId = NewType("VendorId", str)
-
 MachineName = NewType("MachineName", str)
-VendorName = NewType("VendorName", str)
+
+
+class MachineType(Enum):
+    CONVENTIONAL = "conventional"
+    IMAGING = "imaging"
+    SPECTRAL = "spectral"
+    SPECTRAL_IMAGING = "spectral_imaging"
+    CYTOF = "cytof"
+
+
+class VendorId(Enum):
+    APOGEE = "ApogeeFlow"
+    AGILENT = "Agilent Technologies"
+    BD = "BD Biosciences"
+    COULTER = "Beckman Coulter"
+    BIORAD = "Bio-Rad"
+    CYTEK = "Cytek Biosciences"
+    MILTENYI = "Miltenyi Biotec"
+    SONY = "Sony Biotechnology"
+    THERMO = "Thermo Fisher Scientific"
+    SBT = "Standard Biotools"
+    STRAT = "Stratedigm"
+    SYSMEX = "Sysmex-Partec"
+    VERITY = "Verity Software House"
+
+
+class MachineId(Enum):
+    APO_A60MICRO = "apo_a60micro"
+    AGILENT_NOVOCYTE = "agilent_novocyte"
+    BD_ACCURI_C6 = "bd_accuri_c6"
+    BD_DISC_A8 = "bd_disc_a8"
+    BD_DISC_S8 = "bd_disc_s8"
+    BD_ARIA = "bd_aria"
+    BD_ARIA2 = "bd_aria2"
+    BD_ARIA3 = "bd_aria3"
+    BD_CANTO = "bd_canto"
+    BD_CANTO2 = "bd_canto2"
+    BD_CELESTA = "bd_celesta"
+    BD_FACSCALIBUR = "bd_facscalibur"
+    BD_FACSCAN = "bd_facscan"
+    BD_FACSVERSE = "bd_facsverse"
+    BD_FORTESSA = "bd_fortessa"
+    BD_FORTESSA_X20 = "bd_fortessa_x20"
+    BD_INFLUX = "bd_influx"
+    BD_LSR2 = "bd_lsr2"
+    BD_LYRIC = "bd_lyric"
+    BD_SYMPH_A5 = "bd_symph_a5"
+    BC_ASTRIOS = "bc_astrios"
+    BC_CYAN = "bc_cyan"
+    BC_CYTOFLEX = "bc_cytoflex"
+    BC_FC500 = "bc_fc500"
+    BC_GALLIOS = "bc_gallios"
+    BC_NAVIOS = "bc_navios"
+    BC_SYSTEM2 = "bc_system2"
+    BC_XDP = "bc_xdp"
+    BR_ZE5 = "br_ze5"
+    CYTEK_AURORA = "cytek_aurora"
+    CYTEK_EASYCYTE = "cytek_easycyte"
+    CYTEK_IMGSTR = "cytek_imgstr"
+    SBT_CYTOF = "sbt_cytof"
+    SBT_CYTOF2 = "sbt_cytof2"
+    SBT_HELIOS = "sbt_helios"
+    MILTENYI_MQA = "miltenyi_mqa"
+    SONY_ECLIPSE = "sony_eclipse"
+    SONY_ID7000 = "sony_id7000"
+    SONY_SA3800 = "sony_sa3800"
+    PARTEC_PAS = "partec_pas"
+    STRAT_S1400 = "strat_s1400"
+    THERMO_ATTUNE = "thermo_attune"
+    THERMO_ATTUNE_NXT = "thermo_attune_nxt"
+    VERITY_GEMSTONE = "verity_gemstone"
 
 
 class RepoType(Enum):
@@ -64,40 +131,281 @@ class Machine(BaseModel):
     name: MachineName
     vendor: VendorId
     cyt_values: list[str] = []
+    machine_type: MachineType = MachineType.CONVENTIONAL
     sorting: bool = False
-    imaging: bool = False
-    spectral: bool = False
+
+
+BD_MACHINES = {
+    MachineId.BD_ACCURI_C6: Machine(
+        name=MachineName("Accuri C6"),
+        vendor=VendorId.BD,
+        cyt_values=["Accuri C6"],
+    ),
+    MachineId.BD_DISC_A8: Machine(
+        name=MachineName("FACSDiscover A8"),
+        vendor=VendorId.BD,
+        machine_type=MachineType.SPECTRAL_IMAGING,
+        cyt_values=["FACSDiscover A8"],
+    ),
+    MachineId.BD_DISC_S8: Machine(
+        name=MachineName("FACSDiscover S8"),
+        vendor=VendorId.BD,
+        machine_type=MachineType.SPECTRAL_IMAGING,
+        sorting=True,
+        cyt_values=["FACSDiscover S8"],
+    ),
+    MachineId.BD_ARIA: Machine(
+        name=MachineName("FACSAria"),
+        vendor=VendorId.BD,
+        sorting=True,
+        cyt_values=["FACSAria"],
+    ),
+    MachineId.BD_ARIA2: Machine(
+        name=MachineName("FACSAriaII"),
+        vendor=VendorId.BD,
+        sorting=True,
+        cyt_values=["FACSAriaII"],
+    ),
+    MachineId.BD_ARIA3: Machine(
+        name=MachineName("FACSAriaIII"),
+        vendor=VendorId.BD,
+        sorting=True,
+        cyt_values=["FACSAriaIII"],
+    ),
+    MachineId.BD_CANTO: Machine(
+        name=MachineName("FACSCanto"),
+        vendor=VendorId.BD,
+        cyt_values=["FACSCanto"],
+    ),
+    MachineId.BD_CANTO2: Machine(
+        name=MachineName("FACSCantoII"),
+        vendor=VendorId.BD,
+        cyt_values=["FACSCantoII"],
+    ),
+    MachineId.BD_CELESTA: Machine(
+        name=MachineName("FACSCelesta"),
+        vendor=VendorId.BD,
+        cyt_values=["FACSCelesta"],
+    ),
+    MachineId.BD_FACSCALIBUR: Machine(
+        name=MachineName("FACSCalibur"),
+        vendor=VendorId.BD,
+        sorting=True,
+        # many of these are also "Cytek DxP*" but we can't match on this because
+        # FACScan and FACSort can also have these upgrades
+        cyt_values=["FACSCalibur"],
+    ),
+    MachineId.BD_FACSCAN: Machine(
+        name=MachineName("FACScan"),
+        vendor=VendorId.BD,
+        cyt_values=["FACScan"],
+    ),
+    MachineId.BD_FACSVERSE: Machine(
+        name=MachineName("FACSVerse"),
+        vendor=VendorId.BD,
+        cyt_values=["BD FACSVerse"],
+    ),
+    MachineId.BD_FORTESSA: Machine(
+        name=MachineName("LSRFortessa"),
+        vendor=VendorId.BD,
+        cyt_values=["LSRFortessa", "SORP LSRFortessa (LSRFortessa)"],
+    ),
+    MachineId.BD_FORTESSA_X20: Machine(
+        name=MachineName("LSRFortessa X20"),
+        vendor=VendorId.BD,
+        cyt_values=["LSRFortessa X20 (LSRFortessa)"],
+    ),
+    MachineId.BD_INFLUX: Machine(
+        name=MachineName("Influx"),
+        vendor=VendorId.BD,
+        sorting=True,
+        cyt_values=["inFlux v7 Sorter"],
+    ),
+    MachineId.BD_LSR2: Machine(
+        name=MachineName("LSRII"),
+        vendor=VendorId.BD,
+        cyt_values=["LSRII", "Guinevere (LSRII)"],
+    ),
+    MachineId.BD_LYRIC: Machine(
+        name=MachineName("FACSLyric"),
+        vendor=VendorId.BD,
+        cyt_values=["BD FACSLyric"],
+    ),
+    MachineId.BD_SYMPH_A5: Machine(
+        name=MachineName("FACSymphony A5"),
+        vendor=VendorId.BD,
+    ),
+}
+
+BC_MACHINES = {
+    MachineId.BC_ASTRIOS: Machine(
+        name=MachineName("MoFlo Astrios"),
+        vendor=VendorId.COULTER,
+        sorting=True,
+        cyt_values=["MoFlo Astrios"],
+    ),
+    MachineId.BC_CYAN: Machine(
+        name=MachineName("CyAn"),
+        vendor=VendorId.COULTER,
+    ),
+    MachineId.BC_CYTOFLEX: Machine(
+        name=MachineName("CytoFLEX"),
+        vendor=VendorId.COULTER,
+        cyt_values=["CytoFLEX"],
+    ),
+    MachineId.BC_FC500: Machine(
+        name=MachineName("Cytomics FC 500"),
+        vendor=VendorId.COULTER,
+        cyt_values=["Cytomics FC 500"],
+    ),
+    MachineId.BC_GALLIOS: Machine(
+        name=MachineName("Gallios"),
+        vendor=VendorId.COULTER,
+        cyt_values=["Gallios"],
+    ),
+    MachineId.BC_NAVIOS: Machine(
+        name=MachineName("Navios"),
+        vendor=VendorId.COULTER,
+        cyt_values=["Navios"],
+    ),
+    MachineId.BC_SYSTEM2: Machine(
+        name=MachineName("System II"),
+        vendor=VendorId.COULTER,
+    ),
+    MachineId.BC_XDP: Machine(
+        name=MachineName("MoFlo XDP"),
+        vendor=VendorId.COULTER,
+        sorting=True,
+        cyt_values=["MoFlo XDP"],
+    ),
+}
+
+CYTEK_MACHINES = {
+    MachineId.CYTEK_AURORA: Machine(
+        name=MachineName("Aurora"),
+        vendor=VendorId.CYTEK,
+        machine_type=MachineType.SPECTRAL,
+        cyt_values=["Aurora"],
+    ),
+    MachineId.CYTEK_EASYCYTE: Machine(
+        name=MachineName("Guava easyCyte"),
+        vendor=VendorId.CYTEK,
+    ),
+    MachineId.CYTEK_IMGSTR: Machine(
+        name=MachineName("Image Stream"),
+        vendor=VendorId.CYTEK,
+        machine_type=MachineType.IMAGING,
+        cyt_values=["Image Stream"],
+    ),
+}
+
+# $CYT is misleading for this since it appears to be the software and version
+SBT_MACHINES = {
+    MachineId.SBT_CYTOF: Machine(
+        name=MachineName("CyTOF"),
+        vendor=VendorId.SBT,
+        machine_type=MachineType.CYTOF,
+    ),
+    MachineId.SBT_CYTOF2: Machine(
+        name=MachineName("CyTOF 2"),
+        vendor=VendorId.SBT,
+        machine_type=MachineType.CYTOF,
+        cyt_values=["cytof2"],
+    ),
+    MachineId.SBT_HELIOS: Machine(
+        name=MachineName("Helios"),
+        vendor=VendorId.SBT,
+        machine_type=MachineType.CYTOF,
+    ),
+}
+
+SONY_MACHINES = {
+    MachineId.SONY_ECLIPSE: Machine(
+        name=MachineName("Eclipse Analyzer"),
+        vendor=VendorId.SONY,
+        cyt_values=["Eclipse Analyzer"],
+    ),
+    MachineId.SONY_ID7000: Machine(
+        name=MachineName("ID7000"),
+        vendor=VendorId.SONY,
+        cyt_values=["ID7000"],
+    ),
+    MachineId.SONY_SA3800: Machine(
+        name=MachineName("SA3800"),
+        vendor=VendorId.SONY,
+        cyt_values=["SA3800"],
+    ),
+}
+
+# $CYT is misleading since it seems to reflect software and version
+THERMO_MACHINES = {
+    MachineId.THERMO_ATTUNE: Machine(
+        name=MachineName("Attune"),
+        vendor=VendorId.THERMO,
+    ),
+    MachineId.THERMO_ATTUNE_NXT: Machine(
+        name=MachineName("Attune NxT"),
+        vendor=VendorId.THERMO,
+    ),
+}
+
+MISC_MACHINES = {
+    MachineId.APO_A60MICRO: Machine(
+        name=MachineName("A60-Micro"),
+        vendor=VendorId.APOGEE,
+    ),
+    MachineId.AGILENT_NOVOCYTE: Machine(
+        name=MachineName("Novocyte"),
+        vendor=VendorId.AGILENT,
+        cyt_values=["NovoCyte"],
+    ),
+    MachineId.BR_ZE5: Machine(
+        name=MachineName("ZE5"),
+        vendor=VendorId.BIORAD,
+        cyt_values=["YETI"],
+    ),
+    MachineId.MILTENYI_MQA: Machine(
+        name=MachineName("MACSQuant Analyzer"),
+        vendor=VendorId.MILTENYI,
+    ),
+    MachineId.PARTEC_PAS: Machine(
+        name=MachineName("Partec PAS"),
+        vendor=VendorId.SYSMEX,
+        cyt_values=["partec PAS"],
+    ),
+    MachineId.STRAT_S1400: Machine(
+        name=MachineName("Stratedigm S1400"),
+        vendor=VendorId.STRAT,
+    ),
+    MachineId.VERITY_GEMSTONE: Machine(
+        name=MachineName("GemStone (software only)"),
+        vendor=VendorId.VERITY,
+    ),
+}
+
+ALL_MACHINES = {
+    **BD_MACHINES,
+    **BC_MACHINES,
+    **CYTEK_MACHINES,
+    **SBT_MACHINES,
+    **SONY_MACHINES,
+    **THERMO_MACHINES,
+    **MISC_MACHINES,
+}
+
+all_cyt_values = [c for m in ALL_MACHINES.values() for c in m.cyt_values]
+assert len(all_cyt_values) == len(set(all_cyt_values)), "not all $CYT values are unique"
 
 
 class FCSConfig(BaseModel):
-    machines: dict[MachineId, Machine]
-    vendors: dict[VendorId, VendorName]
     test_files: list[FileConfig]
 
-    # TODO test that all CYT values are unique across machines
-
-    @model_validator(mode="after")
-    def vendors_match(self) -> Self:
-        vs = set([x.vendor for x in self.machines.values()])
-        assert vs.issubset(set(self.vendors)), "some vendor IDs are not configured"
-        return self
-
-    @model_validator(mode="after")
-    def machines_match(self) -> Self:
-        ms = set(
-            [x.parse.machine for x in self.test_files if x.parse.machine is not None]
-        )
-        assert ms.issubset(set(self.machines)), "some machine IDs are not configured"
-        return self
-
-    def get_machine(
-        self, cyt: str | None, i: MachineId | None
-    ) -> tuple[MachineId, Machine] | None:
+    def get_machine(self, cyt: str | None, i: MachineId | None) -> MachineId | None:
         if i is not None:
-            return (i, self.machines[i])
+            return i
         elif cyt is not None:
             return next(
-                ((mi, m) for mi, m in self.machines.items() if cyt in m.cyt_values),
+                (mi for mi, m in ALL_MACHINES.items() if cyt in m.cyt_values),
                 None,
             )
         else:

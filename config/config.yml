@@ -1,250 +1,3 @@
-vendors:
-  apo: ApogeeFlow
-  at: Agilent Technologies
-  bd: BD Biosciences
-  bc: Beckman Coulter
-  br: Bio-Rad
-  cytek: Cytek Biosciences
-  mbt: Miltenyi Biotec
-  sony: Sony Biotechnology
-  tfs: Thermo Fisher Scientific
-  sbt: Standard Biotools
-  strat: Stratedigm
-  sysmex: Sysmex-Partec
-  vsh: Verity Software House
-
-machines:
-  apo_a60micro:
-    name: A60-Micro
-    vendor: apo
-  
-  at_novocyte:
-    name: NovoCyte
-    vendor: at
-    cyt_values: [NovoCyte]
-
-  bd_accuri_c6:
-    name: Accuri C6
-    vendor: bd
-    cyt_values: [Accuri C6]
-
-  bd_a8:
-    name: FACSDiscover A8
-    vendor: bd
-    spectral: true
-    imaging: true
-    cyt_values: [FACSDiscover A8]
-
-  bd_s8:
-    name: FACSDiscover S8
-    vendor: bd
-    spectral: true
-    imaging: true
-    sorting: true
-    cyt_values: [FACSDiscover S8]
-
-  bd_aria:
-    name: FACSAria
-    vendor: bd
-    cyt_values: [FACSAria]
-
-  bd_aria2:
-    name: FACSAria II
-    vendor: bd
-    cyt_values: [FACSAriaII]
-
-  bd_aria3:
-    name: FACSAria III
-    vendor: bd
-    cyt_values: [FACSAriaIII]
-
-  bd_canto:
-    name: FACSCanto
-    vendor: bd
-    cyt_values: [FACSCanto]
-
-  bd_canto2:
-    name: FACSCanto II
-    vendor: bd
-    cyt_values: [FACSCantoII]
-
-  bd_celesta:
-    name: FACSCelesta
-    vendor: bd
-    cyt_values: [FACSCelesta]
-
-  bd_facscalibur:
-    name: FACSCalibur
-    vendor: bd
-    cyt_values: [FACSCalibur]
-
-  bd_facscan:
-    name: FACScan
-    vendor: bd
-    cyt_values: [FACScan]
-
-  bd_facsverse:
-    name: FACSVerse
-    vendor: bd
-    cyt_values: [BD FACSVerse]
-
-  bd_fortessa:
-    name: LSRFortessa
-    vendor: bd
-    cyt_values:
-      - LSRFortessa
-      - SORP LSRFortessa (LSRFortessa)
-
-  bd_fortessa_x20:
-    name: LSRFortessa X-20
-    vendor: bd
-    cyt_values:
-      - LSRFortessa X20 (LSRFortessa)
-
-  bd_influx:
-    name: Influx
-    vendor: bd
-    sorting: true
-    cyt_values: [inFlux v7 Sorter]
-
-  bd_lsr2:
-    name: LSR II
-    vendor: bd
-    cyt_values: [LSRII, "Guinevere (LSRII)"]
-
-  bd_lyric:
-    name: FACSLyric
-    vendor: bd
-    cyt_values: [BD FACSLyric]
-
-  bd_symph_a5:
-    name: FACS Symphony A5
-    vendor: bd
-
-  bc_astrios:
-    name: MoFlo Astrios
-    vendor: bc
-    sorting: true
-    cyt_values: [MoFlo Astrios]
-
-  bc_cyan:
-    name: CyAn
-    vendor: bc
-
-  bc_cytoflex:
-    name: CytoFLEX
-    vendor: bc
-    cyt_values: [CytoFLEX]
-
-  bc_fc500:
-    name: Cytomics FC500
-    vendor: bc
-    cyt_values: [Cytomics FC 500]
-
-  bc_gallios:
-    name: Gallios
-    vendor: bc
-    cyt_values: [Gallios]
-
-  bc_navios:
-    name: Navios
-    vendor: bc
-    cyt_values: [Navios]
-
-  bc_s2:
-    name: System II
-    vendor: bc
-
-  bc_xdp:
-    name: MoFlo XDP
-    vendor: bc
-    sorting: true
-    cyt_values: [MoFlo XDP]
-
-  br_ze5:
-    name: ZE5
-    vendor: br
-    cyt_values: [YETI]
-
-  cytek_aurora:
-    name: Aurora
-    vendor: cytek
-    spectral: true
-    cyt_values: [Aurora]
-
-  cytek_dxp10:
-    name: DxP10
-    vendor: cytek
-
-  cytek_easycyte:
-    name: Guava easyCyte
-    vendor: cytek
-
-  cytek_imgstr:
-    name: Image Stream
-    vendor: cytek
-    imaging: true
-    cyt_values: [Image Stream]
-
-  cytek_xp5:
-    name: xP5
-    vendor: cytek
-
-  sbt_cytof1:
-    name: Cytof 1.0
-    vendor: sbt
-    
-  sbt_cytof2:
-    name: Cytof 2.0
-    vendor: sbt
-    cyt_values: [cytof2]
-
-  sbt_helios:
-    name: Helios
-    vendor: sbt
-
-  mbt_mqa:
-    name: MACSQuant Analyzer
-    vendor: mbt
-
-  sony_eclipse:
-    name: Eclipse Analyzer
-    vendor: sony
-    cyt_values: [Eclipse Analyzer]
-
-  sony_id7000:
-    name: ID7000
-    vendor: sony
-    spectral: true
-    cyt_values: [ID7000]
-
-  sony_sa3800:
-    name: SA3800
-    vendor: sony
-    spectral: true
-    cyt_values: [SA3800]
-
-  sysmex_pas:
-    name: PAS
-    vendor: sysmex
-    cyt_values: [partec PAS]
-
-  strat_s1400:
-    name: S1400
-    vendor: strat
-
-  tfs_attune:
-    name: Attune
-    vendor: tfs
-
-  tfs_attune_nxt:
-    name: Attune NxT
-    vendor: tfs
-
-  vsh_gemstone:
-    name: GemStone (software only)
-    vendor: vsh
-
 test_files:
   # Cytoflex
   - src:
@@ -341,7 +94,7 @@ test_files:
         rl1.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL1-A.fcs
         rl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL3-A.fcs
     parse:
-      machine: tfs_attune_nxt
+      machine: thermo_attune_nxt
       options:
         trim_trailing_whitespace: true
         ignore_time_optical_keys: [V, F, L]
@@ -657,7 +410,7 @@ test_files:
         - 081712-Mike-Study 15-2011-15028_cells_found.504109.fcs
         - 081712-Mike-Study 15-2011-15029_cells_found.504110.fcs
     parse:
-      machine: sbt_cytof1
+      machine: sbt_cytof
       options:
         append_standard_keywords:
           TIMESTEP: "1.0"
@@ -874,7 +627,7 @@ test_files:
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D7.774195.fcs
     parse:
-      machine: tfs_attune_nxt
+      machine: thermo_attune_nxt
       options:
         trim_value_whitespace: true
         allow_empty_values: true
@@ -909,7 +662,7 @@ test_files:
         append_standard_keywords:
           TIMESTEP: "1.0"
 
-  # Cytek DxP10
+  # Cytek DxP10 (actually a FACScan)
   - src:
       immport_id: SDY1944
       file_names:
@@ -921,7 +674,6 @@ test_files:
         - WBC_100uL_control_VD1_20210803.853016.fcs
         - WBC_100uL_control_VD1_20210812.853019.fcs
     parse:
-      machine: cytek_dxp10
       options:
         trim_value_whitespace: true
         allow_empty_values: true
@@ -1123,7 +875,8 @@ test_files:
       file_names:
         - 3215apc 100004.fcs
     parse:
-      machine: cytek_xp5
+      # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
+      machine: bd_facscan
       options:
         warnings_are_errors: true
         integer_byteord_override: [3,2,1]
@@ -1134,7 +887,7 @@ test_files:
       file_names:
         - Applied Biosystems - Attune.fcs
     parse:
-      machine: tfs_attune
+      machine: thermo_attune
       options:
         # warnings_are_errors: true
         trim_trailing_whitespace: true
@@ -1350,7 +1103,6 @@ test_files:
       file_names:
         - Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
   
@@ -1359,7 +1111,6 @@ test_files:
       file_names:
         - Cytek DxP10 - APC COMP BEADS011.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
   
@@ -1368,7 +1119,6 @@ test_files:
       file_names:
         - Cytek DxP10 - BLANK COMP BEADS007.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
       
@@ -1377,7 +1127,6 @@ test_files:
       file_names:
         - Cytek DxP10 - FITC COMP BEADS008.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
       
@@ -1386,7 +1135,6 @@ test_files:
       file_names:
         - Cytek DxP10 - PERCP COMP BEADS010.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
       
@@ -1395,7 +1143,6 @@ test_files:
       file_names:
         - Cytek DxP10 - PE COMP BEADS009.fcs
     parse:
-      machine: cytek_dxp10
       options:
         warnings_are_errors: true
       
@@ -1404,7 +1151,7 @@ test_files:
       file_names:
         - MVa2011-06-30_fcs30.fcs
     parse:
-      machine: mbt_mqa
+      machine: miltenyi_mqa
       options:
         date_pattern: "%Y-%b-%d"
         # time might be "HDR-T" but they also didn't provide $TIMESTEP
@@ -1417,7 +1164,7 @@ test_files:
       file_names:
         - MVa2011-06-30_fcs30c.fcs
     parse:
-      machine: mbt_mqa
+      machine: miltenyi_mqa
       options:
         warnings_are_errors: false
         date_pattern: "%Y-%b-%d"
@@ -1429,7 +1176,7 @@ test_files:
       file_names:
         - MVa2011-06-30_fcs31.fcs
     parse:
-      machine: mbt_mqa
+      machine: miltenyi_mqa
       options:
         warnings_are_errors: false
         text_correction: [0, -1]
@@ -1471,7 +1218,7 @@ test_files:
       file_names:
         - Miltenyi Biotec - MACSQuant Analyzer.fcs
     parse:
-      machine: mbt_mqa
+      machine: miltenyi_mqa
       options:
         warnings_are_errors: true
         time_meas_pattern: "HDR-TM"
@@ -1512,7 +1259,7 @@ test_files:
       file_names:
         - System II listmode with extra info in bits D10-D15.LMD
     parse:
-      machine: bc_s2
+      machine: bc_system2
       options:
         # warnings_are_errors: true
         trim_value_whitespace: true
@@ -1525,7 +1272,7 @@ test_files:
       file_names:
         - Verity Software House - GemStoneGeneratedData - 500000events.fcs
     parse:
-      machine: vsh_gemstone
+      machine: verity_gemstone
       options:
         warnings_are_errors: false
         time_meas_pattern: null

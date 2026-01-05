@@ -4,20 +4,28 @@ import warnings
 import pyreflow as pf
 from typing import Any, NamedTuple
 from pathlib import Path
-from common.config import FCSConfig, RepoType, Machine, VendorName
+from datetime import date
+from common.config import (
+    FCSConfig,
+    RepoType,
+    Machine,
+    ALL_MACHINES,
+    VendorId,
+    MachineId,
+)
 
 
 class MachineMetadata(NamedTuple):
     repo: RepoType
     repo_id: str
     file_name: str
-    vendor: VendorName
-    machine: Machine
+    vendor: str
+    machine: Machine | None
     cyt: str | None
     cytsn: str | None
     sys: str | None
     software: str | None
-    date: str | None
+    date: date | None
 
 
 def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
@@ -34,44 +42,35 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
     else:
         cytsn = core.cytsn
 
-    mres = (
-        conf.get_machine(core.cyt, parse.machine)
-        if core.cyt != ""
-        else (
-            (parse.machine, conf.machines[parse.machine])
-            if parse.machine is not None
-            else None
-        )
+    machineid: MachineId | None = (
+        conf.get_machine(core.cyt, parse.machine) if core.cyt != "" else parse.machine
     )
-    assert mres is not None, f"could not find machine for {core.cyt} for {p}"
-    machineid = mres[0]
-    machine = mres[1]
-    vendor = conf.vendors[machine.vendor]
+    vendorid = ALL_MACHINES[machineid].vendor if machineid is not None else None
 
     software = None
-    if machine.vendor in ["bd", "cytek"]:
+    if vendorid in [VendorId.BD, VendorId.CYTEK]:
         try:
             software = core.nonstandard_keywords["CREATOR"]
         except KeyError:
             pass
-    elif machine.vendor in ["at"]:
+    elif vendorid in [VendorId.AGILENT]:
         try:
             software = core.nonstandard_keywords["#NCCreator"]
         except KeyError:
             pass
-    elif machineid == "tfs_attune":
+    elif machineid is MachineId.THERMO_ATTUNE:
         software = core.cyt
-    elif machineid in ["bc_cyan", "bc_xdp", "bc_astrios"]:
+    elif machineid in [MachineId.BC_CYAN, MachineId.BC_XDP, MachineId.BC_ASTRIOS]:
         if core.sys is not None:
             software = core.sys.split(" / ")[0]
-    elif machine.vendor in ["bc"]:
+    elif vendorid in [VendorId.COULTER]:
         try:
             software = core.nonstandard_keywords["SWVER"]
         except KeyError:
             pass
-    elif machineid == "bc_fc500":
+    elif machineid is MachineId.BC_FC500:
         software = core.sys
-    elif machineid in ["sbt_helios", "sbt_cytof2", "sbt_cytof1"]:
+    elif vendorid in [VendorId.SBT]:
         if (
             core.cyt is not None
             and re.search("[0-9]+\\.[0-9]+\\.[0-9]+", core.cyt) is not None
@@ -85,8 +84,8 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
         cyt=core.cyt,
         cytsn=cytsn,
         sys=core.sys,
-        vendor=vendor,
-        machine=machine,
+        vendor=vendorid.value if vendorid is not None else "unknown",
+        machine=ALL_MACHINES[machineid] if machineid is not None else None,
         software=software,
         date=core.date,
     )
@@ -104,8 +103,7 @@ def main(smk: Any) -> None:
             "vendor",
             "machine",
             "software",
-            "spectral",
-            "imaging",
+            "machine_type",
             "sorting",
             "$DATE",
             "$CYT",
@@ -124,11 +122,10 @@ def main(smk: Any) -> None:
             w.writerow(
                 [
                     r.vendor,
-                    m.name,
+                    m.name if m is not None else "unknown",
                     r.software,
-                    m.spectral,
-                    m.imaging,
-                    m.sorting,
+                    m.machine_type.value if m is not None else "unknown",
+                    m.sorting if m is not None else "unknown",
                     r.date,
                     r.cyt,
                     r.cytsn,
