@@ -274,7 +274,7 @@ test_files:
         text_correction: [0, -1]
         data_correction: [0, -1]
         text_data_correction: [0, -1]
-        use_literal_delims: true
+        delim_escape_mode: guess_escaped
         allow_empty_values: true
         version_override: FCS3.1
         parse_indexed_spillover: true
@@ -1139,7 +1139,7 @@ test_files:
         # warnings_are_errors: true
         trim_trailing_whitespace: true
         # this TEXT has blanks
-        use_literal_delims: true
+        delim_escape_mode: guess_escaped
         allow_empty_values: true
         # voltage given for time channel
         ignore_time_optical_keys: [V]
@@ -1259,7 +1259,7 @@ test_files:
       options:
         # warnings_are_errors: true
         trim_value_whitespace: true
-        use_literal_delims: true
+        delim_escape_mode: guess_escaped
         # offsets are apparently systemically off
         text_correction: [0, -1]
         data_correction: [0, -1]
@@ -1450,7 +1450,6 @@ test_files:
       machine: cytek_easycyte
       options:
         # warnings_are_errors: true
-        text_correction: [0, 1]
         trim_value_whitespace: true
         # IDK, it looks like some of these kws are xml blobs
         allow_non_ascii_keywords: true
@@ -1485,10 +1484,9 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        use_literal_delims: true
-        allow_empty_values: true
         data_correction: [0, -1]
         integer_byteord_override: [1,2]
+        delim_escape_mode: guess_escaped
         date_pattern: "%d-%m-%Y"
         # TR missing first number
         # PnL is 0, PKN is 0

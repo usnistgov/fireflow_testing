@@ -27,7 +27,6 @@ def main(smk: Any) -> None:
     core_orig.truncate_data(True)
 
     core_std, _ = std_opts.read_std_dataset(i_std)
-    assert core_orig.mode == core_std.mode
     assert core_orig == core_std
     o.touch()
 
