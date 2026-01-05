@@ -1353,7 +1353,6 @@ test_files:
         - B04 BUV496 WLSM.fcs
     parse:
       options:
-        max_other: 0
         text_correction: [0, -1]
         demote_from_standard: [[CYTN], []]
 
