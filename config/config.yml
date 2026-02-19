@@ -28,14 +28,11 @@ test_files:
         data_correction: [0, -1]
         text_data_correction: [0, -1]
         delim_escape_mode: guess_escaped
-        allow_empty_values: true
         version_override: FCS3.1
-        parse_indexed_spillover: true
+        spillover_measurement_mode: indexed
         append_standard_keywords:
           TIMESTEP: "1.0"
-        demote_from_standard:
-          - [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
-          - []
+        demote_from_standard: [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
 
   # easycyte
   - src:
@@ -49,9 +46,10 @@ test_files:
       machine: cytek_easycyte
       options:
         version_override: FCS3.1
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         ignore_time_optical_keys: [V]
-        demote_from_standard: [[COMMENT], ["P1[0-9]V", "P[0-9]+G"]]
+        demote_from_standard: [COMMENT, "/P1[0-9]V/", "/P[0-9]+G/"]
+        disallow_over_range: silent
 
   # Aurora
   - src:
@@ -69,7 +67,7 @@ test_files:
         t8_d3.fcs: Effector_memory_CD8+_T_cells_donor3.fcs
     parse:
       options:
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         version_override: FCS3.2
 
   # Sony SA3800
@@ -96,7 +94,7 @@ test_files:
     parse:
       machine: thermo_attune_nxt
       options:
-        trim_trailing_whitespace: true
+        trim_text_end: true
         ignore_time_optical_keys: [V, F, L]
 
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
@@ -125,7 +123,7 @@ test_files:
         hd_pbmc.fcs: HD%20PBMC.fcs
     parse:
       options:
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         allow_other_feature: true
 
   # Imagestream
@@ -137,7 +135,7 @@ test_files:
         ritux.fcs: Ritux%202_5.fcs
     parse:
       options:
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         trim_intra_value_whitespace: true
         ignore_supp_text: true
         append_standard_keywords:
@@ -172,7 +170,7 @@ test_files:
     parse:
       machine: bd_symph_a5
       options:
-        ignore_time_gain: true
+        ignore_time_optical_keys: [G]
   
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
@@ -237,9 +235,8 @@ test_files:
     parse:
       machine: bd_facscan
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC3585146/ and
   # https://pmc.ncbi.nlm.nih.gov/articles/PMC3469550/)
@@ -252,9 +249,8 @@ test_files:
     parse:
       machine: bd_lsr2
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5728448/#sec4
   - src:
@@ -269,9 +265,8 @@ test_files:
     parse:
       machine: bd_lsr2
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6559862/#Sec10
   - src:
@@ -286,9 +281,8 @@ test_files:
     parse:
       machine: bd_lsr2
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII
   # TODO find pub to confirm
@@ -300,8 +294,8 @@ test_files:
         - Compensation Controls_7AAD Stained Control--0011.239826.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII (based on $CYT, pub here does not mention machine: https://pmc.ncbi.nlm.nih.gov/articles/PMC3723701/#S2)
   - src:
@@ -312,8 +306,7 @@ test_files:
         - rk012909__003.174870.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         time_meas_pattern: null
 
   # LSRII
@@ -328,9 +321,8 @@ test_files:
         - E04D01IIMMCYXXPL_090613RIc14PANELZ_1980219.616300.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -344,9 +336,8 @@ test_files:
         - D146 Ex A2 NLV_Col.624465.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -360,9 +351,8 @@ test_files:
         - 0614Tfh_ABX-Control.720930.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -377,9 +367,8 @@ test_files:
     parse:
       machine: bd_lsr2
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # FACSCantoII
 
@@ -396,9 +385,8 @@ test_files:
         - ES128229.111526.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # CyTOF (5.1.562)
   # according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6686855/#S10 this
@@ -456,8 +444,8 @@ test_files:
         - 082808amhC1_Tube_003.177412.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # FACSAria
   - src:
@@ -468,8 +456,8 @@ test_files:
         - Compensation Specimen_PE DextramerStained Control.515712.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # FACSAriaII
   - src:
@@ -480,9 +468,8 @@ test_files:
         - Specimen_001_TP0004_001.605680.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # FACSAriaIII
   - src:
@@ -493,9 +480,8 @@ test_files:
         - 090616_200-0608-K_003.627877.fcs
     parse:
       options:
-        ignore_time_gain: true
-        trim_value_whitespace: true
-        allow_empty_values: true
+        ignore_time_optical_keys: [G]
+        trim_value_whitespace: trim_blank_silent
         
   # cytof2 according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5499363/#sec8
   - src:
@@ -508,11 +494,10 @@ test_files:
       machine: sbt_cytof2
       options:
         # lots of values which are just one space
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         # one OTHER segment which is a bit too long for the file
         other_width: 20
-        truncate_offsets: true
+        truncate_offset_limit: 12
         append_standard_keywords:
           TIMESTEP: "1.0"
 
@@ -538,10 +523,10 @@ test_files:
         - Adult001_comp_24hrs_Compensation Controls_405B Stained Control_005.632043.635139.fcs
     parse:
       options: &sdy1115
-        ignore_time_gain: true
+        ignore_time_optical_keys: [G]
         # these are valid 3.1 keys but they use bogus values for the display
         # type (such as "BIEX")
-        demote_from_standard: [[], ["P[0-9]+D"]]
+        demote_from_standard: ["/P[0-9]+D/"]
         version_override: FCS3.1
 
   - src:
@@ -553,7 +538,7 @@ test_files:
       options:
         <<: *sdy1115
         # not sure what's wrong with this key, log scale with float layout
-        substitute_standard_key_values: [{}, {"P12E": [".*", "0,0", false]}]
+        substitute_standard_key_values: {"P12E": [".*", "0,0", false]}
 
   - src:
       immport_id: SDY1115
@@ -564,8 +549,7 @@ test_files:
       options:
         <<: *sdy1115
         # timestamps are a space in this one
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
 
 
   # TODO this is one of the CyTOF instruments but there is no pub, we might be
@@ -580,9 +564,8 @@ test_files:
   #       allow_nonunique: true
   #       append_standard_keywords:
   #         TIMESTEP: "1.0"
-  #       ignore_time_gain: true
-  #       trim_value_whitespace: true
-  #       allow_empty_values: true
+  #       ignore_time_optical_keys: [G]
+  #       trim_value_whitespace: trim_blank_silent
   #       version_override: FCS3.1
   #       # idk what happened here, this is weird
   #       demote_from_standard: [[CYTSN_$DATE], []]
@@ -596,10 +579,9 @@ test_files:
         - Specimen1_1-10.732949.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         version_override: FCS3.1
-        demote_from_standard: [[UNICODE], []]
+        demote_from_standard: [UNICODE]
         ignore_time_optical_keys: [L]
 
   # Aurora
@@ -615,9 +597,8 @@ test_files:
     parse:
       options:
         # lots of weird padding after TEXT
-        allow_missing_final_delim: true
-        trim_value_whitespace: true
-        allow_empty_values: true
+        allow_missing_final_delim: silent
+        trim_value_whitespace: trim_blank_silent
 
   # Attune
   - src:
@@ -629,8 +610,7 @@ test_files:
     parse:
       machine: thermo_attune_nxt
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         ignore_time_optical_keys: [V, L, F]
 
 
@@ -643,8 +623,7 @@ test_files:
         - 12-Mock-1.784754.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
 
   # helios according to https://www.science.org/doi/10.1126/science.abc6261#supplementary-materials
   # and file:///home/ndwar/Downloads/abc6261_arunachalam_sm.pdf
@@ -657,8 +636,7 @@ test_files:
     parse:
       machine: sbt_helios
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         append_standard_keywords:
           TIMESTEP: "1.0"
 
@@ -675,8 +653,7 @@ test_files:
         - WBC_100uL_control_VD1_20210812.853019.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         version_override: FCS3.1
 
   # cytof2
@@ -705,10 +682,9 @@ test_files:
         - A1 2109-AK-1  DMSO.787905.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         text_data_correction: [0, -1]
-        demote_from_standard: [[TR], []]
+        demote_from_standard: [TR]
         ignore_time_optical_keys: [V, O]
 
   # FACSCelesta
@@ -720,9 +696,8 @@ test_files:
         - DBG100_CP22.1138763.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # Fortessa X-20
   - src:
@@ -733,9 +708,8 @@ test_files:
         - APC-Cy7_C_057.807014.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # Fortessa X-20
   - src:
@@ -746,9 +720,8 @@ test_files:
         - L1-001_D11_PfRBC.807025.fcs
     parse:
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        demote_from_standard: [[TIMESTEP], []]
+        trim_value_whitespace: trim_blank_silent
+        demote_from_standard: [TIMESTEP]
         time_meas_pattern: null
 
 
@@ -765,9 +738,8 @@ test_files:
     parse:
       machine: cytek_easycyte
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
 
   # Helios (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8761119/#S10)
   - src:
@@ -779,8 +751,7 @@ test_files:
     parse:
       machine: sbt_helios
       options:
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         append_standard_keywords:
           TIMESTEP: "1.0"
 
@@ -800,7 +771,7 @@ test_files:
         version_override: FCS3.1
         data_correction: [0, -1]
         text_data_correction: [0, -1]
-        parse_indexed_spillover: true
+        spillover_measurement_mode: indexed
         # I'm assuming these are centiseconds and not 1/60th seconds since they
         # exceed 59 but never exceed 99
         time_pattern: "%H:%M:%S:%@"
@@ -815,10 +786,10 @@ test_files:
         text_correction: [0, -1]
         ignore_supp_text: true
         data_correction: [0, -1]
-        allow_header_text_offset_mismatch: true
+        allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        parse_indexed_spillover: true
+        spillover_measurement_mode: indexed
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -831,10 +802,10 @@ test_files:
         ignore_supp_text: true
         text_correction: [0, -1]
         data_correction: [0, -1]
-        allow_header_text_offset_mismatch: true
+        allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        parse_indexed_spillover: true
+        spillover_measurement_mode: indexed
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -847,10 +818,10 @@ test_files:
         ignore_supp_text: true
         text_correction: [0, -1]
         data_correction: [0, -1]
-        allow_header_text_offset_mismatch: true
+        allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        parse_indexed_spillover: true
+        spillover_measurement_mode: indexed
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -862,7 +833,7 @@ test_files:
         # second DATA offset is 0
         squish_offsets: true
         # offsets have whitespace
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         # STEXT duplicates TEXT
         ignore_supp_text: true
         # BYTEORD is should only be 2 bytes
@@ -890,10 +861,9 @@ test_files:
       machine: thermo_attune
       options:
         # warnings_are_errors: true
-        trim_trailing_whitespace: true
+        trim_text_end: true
         # this TEXT has blanks
         delim_escape_mode: guess_escaped
-        allow_empty_values: true
         # voltage given for time channel
         ignore_time_optical_keys: [V]
   
@@ -905,7 +875,7 @@ test_files:
       options:
         warnings_are_errors: false
         # analysis has -1 for end
-        allow_negative: true
+        allow_pseudoempty: true
         # This file also has $P14DISPLAY, not only which is nonstandard (the
         # right keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't
         # the correct value ("LIN" vs "Linear,0,0"). This machine sets gain to
@@ -913,8 +883,8 @@ test_files:
         # why
         ignore_time_optical_keys: [V]
         # DATATYPE is F but scales are log with non-unit gain
-        substitute_standard_key_values: [{}, {"P[0-9]+E": [".*", "0,0", false]}]
-        demote_from_standard: [[P14DISPLAY], ["P[0-9]+G"]]
+        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
+        demote_from_standard: [P14DISPLAY, "/P[0-9]+G/"]
         
   # this one seems near perfect except for the offset spacing thing, lots of
   # keys are also only whitespace so blanks need to be allowed
@@ -925,9 +895,8 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
   
     # ditto
   - src:
@@ -937,9 +906,8 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
   
     # ditto
   - src:
@@ -949,9 +917,8 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
   
     # ditto
   - src:
@@ -961,9 +928,8 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
-        ignore_time_gain: true
+        trim_value_whitespace: trim_blank_silent
+        ignore_time_optical_keys: [G]
     
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -972,13 +938,12 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
+        trim_value_whitespace: trim_blank_silent
         # this file appears to be cut in half
         data_correction: [0, -189504]
         ignore_text_data_offsets: true
         replace_standard_key_values: {TOT: "6052"}
-        ignore_time_gain: true
+        ignore_time_optical_keys: [G]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -988,20 +953,18 @@ test_files:
       machine: bc_cyan
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        other_width: 10
+        trim_value_whitespace: trim_blank_silent
         # dreaded PnE log issue
         fix_log_scale_offsets: true
         integer_byteord_override: [1,2]
         # DATA offsets in TEXT are wrong
-        allow_header_text_offset_mismatch: true
+        allow_header_text_offset_mismatch: header_silent
         # one of the OTHER segments drove off the cliff at the end of the file,
         # so just ignore them (only one, but lots of empty segments)
         max_other: 0
-        allow_empty_values: true
         ignore_time_optical_keys: [P, L, V, O]
         # all the wavelengths are 0.0 (infinite energy, nice idea)
-        demote_from_standard: [[], ["P[0-9]+L"]]
+        demote_from_standard: ["/P[0-9]+L/"]
         date_pattern: "%d %b %Y"
   
   - src:
@@ -1011,7 +974,7 @@ test_files:
     parse:
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         delim_escape_mode: guess_escaped
         # offsets are apparently systemically off
         text_correction: [0, -1]
@@ -1019,13 +982,10 @@ test_files:
         # this file has a known issue in that the CXP software uses 10 for PnB
         # when the actual width is 16
         integer_widths_from_byteord: true
-        allow_empty_values: true
         time_meas_pattern: null
         # hmm....
-        demote_from_standard:
-          - [RUNNUMBER, INSTADDRESS]
-          # this has DFC*TO* kws that point to non-existent channels
-          - ["DFC[0-9]TO5", "DFC5TO[0-9]"]
+        # this has DFC*TO* kws that point to non-existent channels
+        demote_from_standard: [RUNNUMBER, INSTADDRESS, "/DFC[0-9]TO5/", "/DFC5TO[0-9]/"]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1036,17 +996,16 @@ test_files:
         # warnings_are_errors: true
         # lots of DFCxTOy keys (which don't even match $PAR), and also $PnG
         # PnE has space in front of it
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         # trimming spaces results in lots of blank keys
-        allow_empty_values: true
         # - comp matrix has extra values which seems screwy
         # - has gain despite being 2.0 file
         # - time has voltage
         version_override: FCS3.0
-        demote_from_standard: [[RUNNUMBER], ["DFC[0-9]+TO[0-9]+"]]
+        demote_from_standard: [RUNNUMBER, "/DFC[0-9]+TO[0-9]+/"]
         ignore_time_optical_keys: [V]
-        allow_header_text_offset_mismatch: true
-        allow_missing_supp_text: true
+        allow_header_text_offset_mismatch: header_silent
+        allow_missing_supp_text: silent
         append_standard_keywords:
           TIMESTEP: "1.0"
           # hack since these are missing (also allow the offsets to mismatch)
@@ -1055,9 +1014,6 @@ test_files:
           BEGINANALYSIS: "0"
           ENDANALYSIS: "0"
         
-    # this parses fine but spews tons of warnings. Some are for dropping keys
-    # that are parsed as ints but should be floats (ie ff is wrong), will also
-    # freak out that PnB is one greater than 2^32-1
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
@@ -1096,7 +1052,7 @@ test_files:
         fix_log_scale_offsets: true
         ignore_time_optical_keys: [P, O, L, V]
         date_pattern: "%d %b %Y"
-        demote_from_standard: [[], ["P[0-9]+L"]]
+        demote_from_standard: ["/P[0-9]+L/"]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1157,7 +1113,7 @@ test_files:
         # time might be "HDR-T" but they also didn't provide $TIMESTEP
         time_meas_pattern: null
         # float layout with log scaling
-        substitute_standard_key_values: [{}, {"P[0-9]+E": [".*", "0,0", false]}]
+        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1187,7 +1143,7 @@ test_files:
         max_other: 0
         date_pattern: "%Y-%b-%d"
         # this has some negative value
-        demote_from_standard: [[LOST], []]
+        demote_from_standard: [LOST]
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1197,21 +1153,21 @@ test_files:
       machine: cytek_easycyte
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         # IDK, it looks like some of these kws are xml blobs
-        allow_non_ascii_keywords: true
-        allow_odd: true
-        allow_pseudostandard: true
-        allow_header_text_offset_mismatch: true
-        allow_missing_final_delim: true
+        allow_non_ascii_keys: silent
+        allow_odd: "silent"
+        # allow_pseudostandard: true
+        allow_header_text_offset_mismatch: header_silent
+        allow_missing_final_delim: silent
         date_pattern: "%d-%B-%Y"
         ignore_text_data_offsets: true
         ignore_text_analysis_offsets: true
         version_override: FCS3.1
-        ignore_standard_keys: [[R1I, COMMENT], []]
+        ignore_standard_keys: [R1I, COMMENT]
         # float layout with log scaling and gain
-        demote_from_standard: [[], ["P[0-9]+G"]]
-        substitute_standard_key_values: [{}, {"P[0-9]+E": [".*", "0,0", false]}]
+        demote_from_standard: ["/P[0-9]+G/"]
+        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1237,7 +1193,7 @@ test_files:
         date_pattern: "%d-%m-%Y"
         # TR missing first number
         # PnL is 0, PKN is 0
-        demote_from_standard: [[TR], ["P[0-8]L", "PKN[0-8]"]]
+        demote_from_standard: [TR, "/P[0-8]L/", "/PKN[0-8]/"]
         ignore_time_optical_keys: [P, O, T, V, F]
   
   - src:
@@ -1251,7 +1207,7 @@ test_files:
         # this is a (rare?) example of a 3.1 file that uses variable bit width;
         # ...good thing I added this to FF :) Time channel is 32 and rest are 16
         version_override: FCS3.1
-        ignore_time_gain: true
+        ignore_time_optical_keys: [G]
         time_pattern: "%H:%M:%S:%!"
       
   - src:
@@ -1262,9 +1218,8 @@ test_files:
       machine: bc_system2
       options:
         # warnings_are_errors: true
-        trim_value_whitespace: true
-        allow_empty_values: true
-        demote_from_standard: [[TIME], []] # TIMESTEP?
+        trim_value_whitespace: trim_blank_silent
+        demote_from_standard: [TIME] # TIMESTEP?
         time_meas_pattern: null
         
   - src:
@@ -1338,11 +1293,10 @@ test_files:
         - 7c B_ALL_FCV DNA  LOW EVENTS.LMD
     parse:
       options:
-        allow_empty_values: true
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
         ignore_time_optical_keys: [V]
         ignore_supp_text: true
-        demote_from_standard: [[RUNNUMBER], ["P[0-9]+G"]]
+        demote_from_standard: [RUNNUMBER, "/P[0-9]+G/"]
 
   # Sony ID7000
   - src:
@@ -1354,7 +1308,7 @@ test_files:
     parse:
       options:
         text_correction: [0, -1]
-        demote_from_standard: [[CYTN], []]
+        demote_from_standard: [CYTN]
 
   # FACSDiscover S8
   - src:
@@ -1364,7 +1318,7 @@ test_files:
     parse:
       options:
         allow_other_feature: true
-        trim_value_whitespace: true
+        trim_value_whitespace: trim_blank_silent
 
   # Partec PAS
   - src:
@@ -1381,8 +1335,6 @@ test_files:
         data_correction: [0, -1]
         date_pattern: "%d-%m-%Y"
         integer_byteord_override: [1,2]
-        demote_from_standard: [[TR], ["P[0-9]+L", "PKN[0-9]+"]]
+        demote_from_standard: [TR, "/P[0-9]+L/", "/PKN[0-9]+/"]
         dedup_measurement_names: true
         ignore_time_optical_keys: [P, O, T, F, V]
-  
-
