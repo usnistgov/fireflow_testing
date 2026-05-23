@@ -441,6 +441,8 @@ test_files:
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D3.774192.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D7.774195.fcs
+    parse:
+      machine: thermo_attune_nxt
 
 
   # FACSverse
@@ -536,6 +538,8 @@ test_files:
         - Comps2_A8_A08_068.786629.fcs
         - Comps2_A8_A08_070.786608.fcs
         - Comps2_B8_B08_070.786630.fcs
+    parse:
+      machine: cytek_easycyte
 
   # Helios (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8761119/#S10)
   - src:
@@ -578,9 +582,6 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - 1 WT_001.fcs
-        # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
-        - 3215apc 100004.fcs
-        - Applied Biosystems - Attune.fcs
         - BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
         - BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
         - BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
@@ -594,13 +595,27 @@ test_files:
         - Cytek DxP10 - FITC COMP BEADS008.fcs
         - Cytek DxP10 - PERCP COMP BEADS010.fcs
         - Cytek DxP10 - PE COMP BEADS009.fcs
-        - MVa2011-06-30_fcs31.fcs
-        - Millipore - easyCyte 6HT-2L - InCyte.fcs
         - iCyt - Eclipse.lmd
         - iCyt - Eclipse - 8 peak.lmd
         - iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
         - iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
         - iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
+
+
+  # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - 3215apc 100004.fcs
+    parse:
+      machine: bd_facscan
+
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - Applied Biosystems - Attune.fcs
+    parse:
+      machine: thermo_attune
 
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -657,6 +672,14 @@ test_files:
       machine: miltenyi_mqa
       options:
         time_meas_pattern: HDR-T
+
+
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - MVa2011-06-30_fcs31.fcs
+    parse:
+      machine: miltenyi_mqa
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -666,6 +689,13 @@ test_files:
       machine: miltenyi_mqa
       options:
         time_meas_pattern: "HDR-TM"
+
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - Millipore - easyCyte 6HT-2L - InCyte.fcs
+    parse:
+      machine: cytek_easycyte
   
   - src:
       fr_id: FR-FCM-ZZZ4
