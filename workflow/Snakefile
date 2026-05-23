@@ -109,7 +109,8 @@ rule test_read:
         "resources/{repo}/{id}/{testname}",
     output:
         flag="results/read_test/pass/{repo}/{id}/{testname}.txt",
-        fcs="results/read_test/{repo}/{id}/{testname}",
+        fcs="results/read_test/fcs/{repo}/{id}/{testname}",
+        dump="results/read_test/diagnostics/{repo}/{id}/{testname}.json",
     log:
         "results/log/read/warnings_{repo}_{id}_{testname}.log",
     conda:
