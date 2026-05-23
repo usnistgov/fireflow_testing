@@ -13,9 +13,9 @@ def main(smk: Any) -> None:
     repo = RepoType(smk.wildcards.repo)
     id = smk.wildcards.id
     testname = smk.wildcards.testname
-    opts = smk.config.find_file_options(repo, testname, id).options
+    conf = smk.config.find_file_options(repo, testname, id).merged_conf
 
-    core, _ = opts.read_std_dataset(i)
+    core, _ = conf.read_std_dataset(i)
     o.touch()
     core.write_dataset(smk.output["fcs"])
 

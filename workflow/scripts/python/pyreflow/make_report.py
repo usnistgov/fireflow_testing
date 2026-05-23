@@ -33,7 +33,7 @@ def read_file(p: Path, conf: FCSConfig) -> MachineMetadata:
     repo = RepoType(p.parent.parent.name)
     id = p.parent.name
     parse = conf.find_file_options(repo, testname, id)
-    opts = parse.options
+    opts = parse.merged_conf
 
     core, _ = opts.to_std_text_config().read_std_text(p)
 

@@ -7,9 +7,6 @@ test_files:
         - Fig3A_human organoids_Raw data/D110_stained.fcs
         - Fig3A_human organoids_Raw data/D110_unstained.fcs
         - Fig3A_human organoids_Raw data/D110_unstained_new.fcs
-    parse:
-      options:
-        version_override: FCS3.1
 
   # Apogee A60 Micro
   - src:
@@ -23,15 +20,7 @@ test_files:
         - Figure_2/2b/07_Si_548nm_dil1E4.fcs
     parse:
       machine: apo_a60micro
-      options:
-        text_correction: [0, -1]
-        data_correction: [0, -1]
-        text_data_correction: [0, -1]
-        delim_escape_mode: guess_escaped
-        version_override: FCS3.1
-        spillover_measurement_mode: guess
-        add_missing_timestep: true
-        demote_from_standard: [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
+      strategy: scalpal
 
   # easycyte
   - src:
@@ -43,12 +32,6 @@ test_files:
         - Direct co-cultures/EXP007_2022-01-21_at_02-31-36pm.fcs
     parse:
       machine: cytek_easycyte
-      options:
-        version_override: FCS3.1
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [V]
-        demote_from_standard: [COMMENT, "/P1[0-9]V/", "/P[0-9]+G/"]
-        # disallow_over_range: silent
 
   # Aurora
   - src:
@@ -64,10 +47,6 @@ test_files:
         t8_d1.fcs: Effector_memory_CD8+_T_cells_donor1.fcs
         t8_d2.fcs: Effector_memory_CD8+_T_cells_donor2.fcs
         t8_d3.fcs: Effector_memory_CD8+_T_cells_donor3.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        version_override: FCS3.2
 
   # Sony SA3800
   - src:
@@ -77,9 +56,6 @@ test_files:
         a1.fcs: A01%20Well%20-%20A01%20WLSM.fcs
         a2.fcs: A02%20Well%20-%20A02%20WLSM.fcs
         a3.fcs: A03%20Well%20-%20A03%20WLSM.fcs
-    parse:
-      options:
-        ignore_supp_text: true
 
   # Attune NxT
   - src:
@@ -92,9 +68,6 @@ test_files:
         rl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL3-A.fcs
     parse:
       machine: thermo_attune_nxt
-      options:
-        allow_odd_tokens: 'true'
-        ignore_time_optical_keys: [V, F, L]
 
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
   - src:
@@ -107,11 +80,9 @@ test_files:
     parse:
       machine: sbt_helios
       options:
+        # TODO this is a bug, pyreflow can't return a string with NULL for some reason
         text_correction: [0, -1]
-        data_correction: [0, -1]
-        text_data_correction: [0, -1]
-        add_missing_timestep: true
-
+        
   # FACSDiscover A8
   - src:
       url_root: https://zenodo.org/records/15726118/files/
@@ -121,7 +92,6 @@ test_files:
         hd_pbmc.fcs: HD%20PBMC.fcs
     parse:
       options:
-        trim_value_whitespace: trim_blank_silent
         allow_other_feature: true
 
   # Imagestream
@@ -131,12 +101,6 @@ test_files:
       filemap:
         no_ab.fcs: No%20ab%202_3.fcs
         ritux.fcs: Ritux%202_5.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        trim_intra_value_whitespace: true
-        ignore_supp_text: true
-        add_missing_timestep: true
 
   # FASCLyric
   - src:
@@ -149,8 +113,6 @@ test_files:
         scfv_t1.fcs: 20250409_DV2_SCFV_T1_400.fcs
         scfv_t2.fcs: 20250409_DV2_SCFV_T2_400.fcs
         scfv_t3.fcs: 20250409_DV2_SCFV_T3_400.fcs
-    parse:
-      options: {}
 
   # FASCSymphony A5
   - src:
@@ -166,8 +128,6 @@ test_files:
         p2_tp3.fcs: ID1_Panel2_TP3.fcs
     parse:
       machine: bd_symph_a5
-      options:
-        ignore_time_optical_keys: [G]
   
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
@@ -176,10 +136,7 @@ test_files:
         - 02054141.003.52632.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
         time_meas_pattern: null
-        fix_log_scale_offsets: true
 
   # FACSCalibur
   - src:
@@ -189,10 +146,7 @@ test_files:
         - 100R.205.414418.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
         time_meas_pattern: null
-        fix_log_scale_offsets: true
 
   # FACSCalibur
   - src:
@@ -203,10 +157,7 @@ test_files:
         - SUB120119_0041C0404A001_004.346970.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
         time_meas_pattern: null
-        fix_log_scale_offsets: true
 
   # FACSCalibur
   - src:
@@ -217,10 +168,7 @@ test_files:
         - Data.001 day 5 no antigen.393086.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
         time_meas_pattern: null
-        fix_log_scale_offsets: true
 
   # machine not mentioned in $CYT, pub says it was a FACScan (see https://pmc.ncbi.nlm.nih.gov/articles/PMC3082611)
   - src:
@@ -231,9 +179,6 @@ test_files:
         - ES481975.248774.fcs
     parse:
       machine: bd_facscan
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC3585146/ and
   # https://pmc.ncbi.nlm.nih.gov/articles/PMC3469550/)
@@ -245,9 +190,6 @@ test_files:
         - 138087.294090.fcs
     parse:
       machine: bd_lsr2
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5728448/#sec4
   - src:
@@ -261,9 +203,6 @@ test_files:
         - 1292970.652921.fcs
     parse:
       machine: bd_lsr2
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6559862/#Sec10
   - src:
@@ -277,9 +216,6 @@ test_files:
         - Specimen_001_A10_A10_050.722037.fcs
     parse:
       machine: bd_lsr2
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII
   # TODO find pub to confirm
@@ -289,10 +225,6 @@ test_files:
         - Compensation Controls_7AAD PE-Cy5 Stained Control.240026.fcs
         - Compensation Controls_7AAD Stained Control--0010.239801.fcs
         - Compensation Controls_7AAD Stained Control--0011.239826.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII (based on $CYT, pub here does not mention machine: https://pmc.ncbi.nlm.nih.gov/articles/PMC3723701/#S2)
   - src:
@@ -303,7 +235,6 @@ test_files:
         - rk012909__003.174870.fcs
     parse:
       options:
-        trim_value_whitespace: trim_blank_silent
         time_meas_pattern: null
 
   # LSRII
@@ -316,10 +247,6 @@ test_files:
         - E04D01IIMMCYXXPL_090613RFa14PANELZ_1980215.616295.fcs
         - E04D01IIMMCYXXPL_090613RFv13PANELZ_1980216.616299.fcs
         - E04D01IIMMCYXXPL_090613RIc14PANELZ_1980219.616300.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -331,10 +258,6 @@ test_files:
         - D146 Ex A2 NLV_Bld.624444.fcs
         - D146 Ex A2 NLV_BM.624461.fcs
         - D146 Ex A2 NLV_Col.624465.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -346,10 +269,6 @@ test_files:
         - 06092015-VAX002-TFH-Day7_Tfh-Control.720880.fcs
         - 0614PB_ABX-CTRL.721004.fcs
         - 0614Tfh_ABX-Control.720930.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # LSRII
   - src:
@@ -363,9 +282,6 @@ test_files:
         - PROP0510192-1_TPHE_A01.700465.fcs
     parse:
       machine: bd_lsr2
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # FACSCantoII
 
@@ -380,10 +296,6 @@ test_files:
         - ES128227.109527.fcs
         - ES128228.112011.fcs
         - ES128229.111526.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # CyTOF (5.1.562)
   # according to https://pmc.ncbi.nlm.nih.gov/articles/PMC6686855/#S10 this
@@ -396,8 +308,6 @@ test_files:
         - 081712-Mike-Study 15-2011-15029_cells_found.504110.fcs
     parse:
       machine: sbt_cytof
-      options:
-        add_missing_timestep: true
 
   # FACScan
   # TODO could not find machine in pub
@@ -412,9 +322,6 @@ test_files:
         - SUB120116_004C0104A001_008.346440.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
-        fix_log_scale_offsets: true
         time_meas_pattern: null
 
   # FACScan
@@ -426,9 +333,6 @@ test_files:
         - 10374m.137530.fcs
     parse:
       options:
-        use_encoding: guess
-        byteord_override: endian
-        fix_log_scale_offsets: true
         time_meas_pattern: null
 
   # FACSCanto
@@ -438,10 +342,6 @@ test_files:
         - 082808amhC1_Tube_001.177408.fcs
         - 082808amhC1_Tube_002.177410.fcs
         - 082808amhC1_Tube_003.177412.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # FACSAria
   - src:
@@ -450,10 +350,6 @@ test_files:
         - Compensation Specimen_APC CD8 Stained Control.515710.fcs
         - Compensation Specimen_FITC- CD107AB Stained Control.515711.fcs
         - Compensation Specimen_PE DextramerStained Control.515712.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # FACSAriaII
   - src:
@@ -462,10 +358,6 @@ test_files:
         - Specimen_001_TP0001_001.605667.fcs
         - Specimen_001_TP0003_002.605679.fcs
         - Specimen_001_TP0004_001.605680.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # FACSAriaIII
   - src:
@@ -474,10 +366,6 @@ test_files:
         - 090616_200-0104-K_001.627795.fcs
         - 090616_200-0127-K_002.627836.fcs
         - 090616_200-0608-K_003.627877.fcs
-    parse:
-      options:
-        ignore_time_optical_keys: [G]
-        trim_value_whitespace: trim_blank_silent
         
   # cytof2 according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5499363/#sec8
   - src:
@@ -489,12 +377,7 @@ test_files:
     parse:
       machine: sbt_cytof2
       options:
-        # lots of values which are just one space
-        trim_value_whitespace: trim_blank_silent
-        # one OTHER segment which is a bit too long for the file
-        other_width: 20
         truncate_offset_limit: 12
-        add_missing_timestep: true
 
   # cytof2 according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5312823/
   - src:
@@ -505,64 +388,32 @@ test_files:
         - TIN_BLD1_CD1Antibodies_Day3.627162.fcs
     parse:
       machine: sbt_cytof2
-      options:
-        data_correction: [0, -1]
-        text_data_correction: [0, -1]
-        add_missing_timestep: true
 
   # Fortessa
   - src:
       immport_id: SDY1115
       file_names:
         - Adult001_comp_24hrs_Compensation Controls_405B Stained Control_005.632043.635139.fcs
-    parse:
-      options: &sdy1115
-        ignore_time_optical_keys: [G]
-        # these are valid 3.1 keys but they use bogus values for the display
-        # type (such as "BIEX")
-        demote_from_standard: ["/P[0-9]+D/"]
-        version_override: FCS3.1
 
   - src:
       immport_id: SDY1115
       file_names:
         - Adult001_comp_24hrs_Compensation Controls_405 D 525,2f,50 Stained Control_004.632124.635137.fcs
         - Adult001_comp_24hrs_Compensation Controls_405 E 450,2f,50 Stained Control_003.632069.635138.fcs
-    parse:
-      options:
-        <<: *sdy1115
-        # not sure what's wrong with this key, log scale with float layout
-        substitute_standard_key_values: {"P12E": [".*", "0,0", false]}
 
   - src:
       immport_id: SDY1115
       file_names:
         - Adult001_HRV_24hrs.632136.635136.fcs
         - Adult001_unstim_24hrs.632137.635146.fcs
-    parse:
-      options:
-        <<: *sdy1115
-        # timestamps are a space in this one
-        trim_value_whitespace: trim_blank_silent
-
 
   # TODO this is one of the CyTOF instruments but there is no pub, we might be
   # able to assume this was a sbt_cytof1 based on the software version 1.0
-  # - src:
-  #     immport_id: SDY1396
-  #     file_names:
-  #       - Sample_172169_Day1_WBC_15July2020_01_1.808052.fcs
-  #       - Sample_172169_Month3_WBC_15July2020_01_1.808053.fcs
-  #   parse:
-  #     options:
-  #       allow_nonunique: true
-  #       append_standard_keywords:
-  #         TIMESTEP: "1.0"
-  #       ignore_time_optical_keys: [G]
-  #       trim_value_whitespace: trim_blank_silent
-  #       version_override: FCS3.1
-  #       # idk what happened here, this is weird
-  #       demote_from_standard: [[CYTSN_$DATE], []]
+  - src:
+      immport_id: SDY1396
+      file_names:
+        - Sample_172169_Day1_WBC_15July2020_01_1.808052.fcs
+        - Sample_172169_Month3_WBC_15July2020_01_1.808053.fcs
         
   # NovoCyte
   - src:
@@ -571,12 +422,6 @@ test_files:
         - Specimen1_1-10.732949.fcs
         - Specimen1_1-1.732945.fcs
         - Specimen1_1-10.732949.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        version_override: FCS3.1
-        demote_from_standard: [UNICODE]
-        ignore_time_optical_keys: [L]
 
   # Aurora
   - src:
@@ -588,11 +433,6 @@ test_files:
         - 1689 - DE Isotypes.744381.fcs
         - 1689 - FM-AF488.744376.fcs
         - 1689 - FM-APC.744377.fcs
-    parse:
-      options:
-        # lots of weird padding after TEXT
-        allow_even_delims: silent
-        trim_value_whitespace: trim_blank_silent
 
   # Attune
   - src:
@@ -601,11 +441,6 @@ test_files:
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D3.774192.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D5.774194.fcs
         - 2020-03-18_HuMyl_Drop001_Experiment_Group_D7.774195.fcs
-    parse:
-      machine: thermo_attune_nxt
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [V, L, F]
 
 
   # FACSverse
@@ -615,9 +450,6 @@ test_files:
         - 12-219-1.784751.fcs
         - 12-219-2.784753.fcs
         - 12-Mock-1.784754.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
 
   # helios according to https://www.science.org/doi/10.1126/science.abc6261#supplementary-materials
   # and file:///home/ndwar/Downloads/abc6261_arunachalam_sm.pdf
@@ -629,9 +461,6 @@ test_files:
         - c01_Batch4_1_singles_P10.858266.fcs
     parse:
       machine: sbt_helios
-      options:
-        trim_value_whitespace: trim_blank_silent
-        add_missing_timestep: true
 
   # Cytek DxP10 (actually a FACScan)
   - src:
@@ -644,10 +473,6 @@ test_files:
         - WBC_100uL_control_VD1_07312021.853011.fcs
         - WBC_100uL_control_VD1_20210803.853016.fcs
         - WBC_100uL_control_VD1_20210812.853019.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        version_override: FCS3.1
 
   # cytof2
   - src:
@@ -673,12 +498,6 @@ test_files:
         - A1 1592-AK-2  DMSO.771568.fcs
         - A1 1592-AK-2  DMSO.787875.fcs
         - A1 2109-AK-1  DMSO.787905.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        text_data_correction: [0, -1]
-        demote_from_standard: [TR]
-        ignore_time_optical_keys: [V, O]
 
   # FACSCelesta
   - src:
@@ -687,10 +506,6 @@ test_files:
         - DBG100_CP10.1137063.fcs
         - DBG100_CP16.1137913.fcs
         - DBG100_CP22.1138763.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # Fortessa X-20
   - src:
@@ -699,10 +514,6 @@ test_files:
         - Alexa_Fluor_488_C_053.807010.fcs
         - Alexa_Fluor_647_C_055.807011.fcs
         - APC-Cy7_C_057.807014.fcs
-    parse:
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # Fortessa X-20
   - src:
@@ -713,10 +524,7 @@ test_files:
         - L1-001_D11_PfRBC.807025.fcs
     parse:
       options:
-        trim_value_whitespace: trim_blank_silent
-        demote_from_standard: [TIMESTEP]
         time_meas_pattern: null
-
 
   # easycyte (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8026190/#sec11)
   - src:
@@ -728,11 +536,6 @@ test_files:
         - Comps2_A8_A08_068.786629.fcs
         - Comps2_A8_A08_070.786608.fcs
         - Comps2_B8_B08_070.786630.fcs
-    parse:
-      machine: cytek_easycyte
-      options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
 
   # Helios (according to https://pmc.ncbi.nlm.nih.gov/articles/PMC8761119/#S10)
   - src:
@@ -743,9 +546,6 @@ test_files:
         - c01_B3_singlets_null_Singlets_2049_12_24_20.1031680.fcs
     parse:
       machine: sbt_helios
-      options:
-        trim_value_whitespace: trim_blank_silent
-        add_missing_timestep: true
 
   # Each of these Accuri files has roughly the same set of problems
   # - DATA offset end is 1 too high
@@ -756,172 +556,60 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - Accuri - C6.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        ignore_supp_text: true
-        version_override: FCS3.1
-        data_correction: [0, -1]
-        text_data_correction: [0, -1]
-        spillover_measurement_mode: guess
-        # I'm assuming these are centiseconds and not 1/60th seconds since they
-        # exceed 59 but never exceed 99
-        time_pattern: "%H:%M:%S:%@"
+    # parse:
+    #   options:
+    #     # I'm assuming these are centiseconds and not 1/60th seconds since they
+    #     # exceed 59 but never exceed 99
+    #     time_pattern: "%H:%M:%S:%@"
   
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
-      - Accuri - C6 - A01 H2O.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        text_correction: [0, -1]
-        ignore_supp_text: true
-        data_correction: [0, -1]
-        allow_header_text_offset_mismatch: header_silent
-        version_override: FCS3.1
-        ignore_text_data_offsets: true
-        spillover_measurement_mode: guess
-        time_pattern: "%H:%M:%S:%@"
-  
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
+        - Accuri - C6 - A01 H2O.fcs
         - Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        ignore_supp_text: true
-        text_correction: [0, -1]
-        data_correction: [0, -1]
-        allow_header_text_offset_mismatch: header_silent
-        version_override: FCS3.1
-        ignore_text_data_offsets: true
-        spillover_measurement_mode: guess
-        time_pattern: "%H:%M:%S:%@"
-  
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
         - Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     parse:
       options:
-        # warnings_are_errors: true
+        # supp text partially overlaps (not clear why)
         ignore_supp_text: true
-        text_correction: [0, -1]
-        data_correction: [0, -1]
-        allow_header_text_offset_mismatch: header_silent
-        version_override: FCS3.1
-        ignore_text_data_offsets: true
-        spillover_measurement_mode: guess
-        time_pattern: "%H:%M:%S:%@"
+        # time_pattern: "%H:%M:%S:%@"
   
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - 1 WT_001.fcs
-    parse:
-      options:
-        # second DATA offset is 0
-        squish_offsets: true
-        # offsets have whitespace
-        trim_value_whitespace: trim_blank_silent
-        # STEXT duplicates TEXT
-        ignore_supp_text: true
-        # BYTEORD is should only be 2 bytes
-        byteord_override: endian
-        # BTIM/ETIM have milliseconds
-        time_pattern: "%H:%M:%S:%3f"
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
+        # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
         - 3215apc 100004.fcs
-    parse:
-      # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
-      machine: bd_facscan
-      options:
-        warnings_are_errors: true
-        byteord_override: endian
-      
-  # TODO fix blank warnings
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
         - Applied Biosystems - Attune.fcs
-    parse:
-      machine: thermo_attune
-      options:
-        # warnings_are_errors: true
-        allow_odd_tokens: 'true'
-        # this TEXT has blanks
-        delim_escape_mode: guess_escaped
-        # voltage given for time channel
-        ignore_time_optical_keys: [V]
-  
+        - BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
+        - BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
+        - BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
+        - BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
+        - Beckman Coulter - MoFlo Astrios - linear settings.fcs
+        - Beckman Coulter - MoFlo Astrios - log settings.fcs
+        - Beckman Coulter - MoFlo XDP.fcs
+        - Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
+        - Cytek DxP10 - APC COMP BEADS011.fcs
+        - Cytek DxP10 - BLANK COMP BEADS007.fcs
+        - Cytek DxP10 - FITC COMP BEADS008.fcs
+        - Cytek DxP10 - PERCP COMP BEADS010.fcs
+        - Cytek DxP10 - PE COMP BEADS009.fcs
+        - MVa2011-06-30_fcs31.fcs
+        - Millipore - easyCyte 6HT-2L - InCyte.fcs
+        - iCyt - Eclipse.lmd
+        - iCyt - Eclipse - 8 peak.lmd
+        - iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
+        - iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
+        - iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
+
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - BD - FACS Aria II.fcs
     parse:
       options:
-        warnings_are_errors: false
-        # analysis has -1 for end
-        allow_pseudoempty: true
-        # This file also has $P14DISPLAY, not only which is nonstandard (the
-        # right keyword is $PnD) but it's version is 3.0 not 3.1. It also isn't
-        # the correct value ("LIN" vs "Linear,0,0"). This machine sets gain to
-        # be 12.5 for time which is exactly the inverse of TIMESTEP (0.08); idk
-        # why
-        ignore_time_optical_keys: [V]
-        # DATATYPE is F but scales are log with non-unit gain
-        force_linear_scale: all
-        demote_from_standard: [P14DISPLAY, "/P[0-9]+G/"]
-        
-  # this one seems near perfect except for the offset spacing thing, lots of
-  # keys are also only whitespace so blanks need to be allowed
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
-  
-    # ditto
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
-  
-    # ditto
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
-  
-    # ditto
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [G]
+        # TODO not sure why this is necessary
+        demote_from_standard: [P14DISPLAY]
     
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -929,13 +617,9 @@ test_files:
         - BD - FACS Aria II - Compensation Controls_G710 Stained Control.fcs
     parse:
       options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
         # this file appears to be cut in half
         data_correction: [0, -189504]
-        ignore_text_data_offsets: true
         replace_standard_key_values: {TOT: "6052"}
-        ignore_time_optical_keys: [G]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -944,20 +628,8 @@ test_files:
     parse:
       machine: bc_cyan
       options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        # dreaded PnE log issue
-        fix_log_scale_offsets: true
-        byteord_override: endian
-        # DATA offsets in TEXT are wrong
-        allow_header_text_offset_mismatch: header_silent
-        # one of the OTHER segments drove off the cliff at the end of the file,
-        # so just ignore them (only one, but lots of empty segments)
+        # one of the OTHER segments drove off the cliff at the end of the file
         max_other: 0
-        ignore_time_optical_keys: [P, L, V, O]
-        # all the wavelengths are 0.0 (infinite energy, nice idea)
-        demote_from_standard: ["/P[0-9]+L/"]
-        date_pattern: "%d %b %Y"
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -965,19 +637,7 @@ test_files:
         - Beckman Coulter - Cytomics FC500.LMD
     parse:
       options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        delim_escape_mode: guess_escaped
-        # offsets are apparently systemically off
-        text_correction: [0, -1]
-        data_correction: [0, -1]
-        # this file has a known issue in that the CXP software uses 10 for PnB
-        # when the actual width is 16
-        fix_int_widths: next_byte
         time_meas_pattern: null
-        # hmm....
-        # this has DFC*TO* kws that point to non-existent channels
-        demote_from_standard: [RUNNUMBER, INSTADDRESS, "/DFC[0-9]TO5/", "/DFC5TO[0-9]/"]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -985,181 +645,18 @@ test_files:
         - Beckman Coulter - Gallios.LMD
     parse:
       options:
-        # warnings_are_errors: true
-        # lots of DFCxTOy keys (which don't even match $PAR), and also $PnG
-        # PnE has space in front of it
-        trim_value_whitespace: trim_blank_silent
-        # trimming spaces results in lots of blank keys
-        # - comp matrix has extra values which seems screwy
-        # - has gain despite being 2.0 file
-        # - time has voltage
+        # TODO not sure why this is needed
         version_override: FCS3.0
-        demote_from_standard: [RUNNUMBER, "/DFC[0-9]+TO[0-9]+/"]
-        ignore_time_optical_keys: [V]
-        allow_header_text_offset_mismatch: header_silent
-        allow_missing_supp_text: silent
-        add_missing_timestep: true
-        append_standard_keywords:
-          # hack since these are missing (also allow the offsets to mismatch)
-          BEGINDATA: "0"
-          ENDDATA: "0"
-          BEGINANALYSIS: "0"
-          ENDANALYSIS: "0"
         
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
-        - Beckman Coulter - MoFlo Astrios - linear settings.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        other_width: 14
-        ignore_time_optical_keys: [P]
-        date_pattern: "%d %b %Y"
-  
-    # ditto
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Beckman Coulter - MoFlo Astrios - log settings.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        other_width: 14
-        # the date format is wrong
-        date_pattern: "%d %b %Y"
-        # PnP for time channel
-        ignore_time_optical_keys: [P]
-  
-    # - suffers from PnE log X,0 error
-    # - lots of wavelengths are 0 or some nonsense garbage
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Beckman Coulter - MoFlo XDP.fcs
-    parse:
-      options:
-        # warnings_are_errors: true
-        other_width: 14
-        fix_log_scale_offsets: true
-        ignore_time_optical_keys: [P, O, L, V]
-        date_pattern: "%d %b %Y"
-        demote_from_standard: ["/P[0-9]+L/"]
-  
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-  
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - APC COMP BEADS011.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-  
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - BLANK COMP BEADS007.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - FITC COMP BEADS008.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - PERCP COMP BEADS010.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Cytek DxP10 - PE COMP BEADS009.fcs
-    parse:
-      options:
-        warnings_are_errors: true
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
         - MVa2011-06-30_fcs30.fcs
-    parse:
-      machine: miltenyi_mqa
-      options:
-        date_pattern: "%Y-%b-%d"
-        # time might be "HDR-T" but they also didn't provide $TIMESTEP
-        time_meas_pattern: null
-        # float layout with log scaling
-        force_linear_scale: all
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
         - MVa2011-06-30_fcs30c.fcs
     parse:
       machine: miltenyi_mqa
       options:
-        warnings_are_errors: false
-        date_pattern: "%Y-%b-%d"
-        # time might be "HDR-T" but they also didn't provide $TIMESTEP
-        time_meas_pattern: null
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - MVa2011-06-30_fcs31.fcs
-    parse:
-      machine: miltenyi_mqa
-      options:
-        warnings_are_errors: false
-        text_correction: [0, -1]
-        supp_text_correction: [0, -1]
-        data_correction: [0, -1]
-        text_data_correction: [0, -1]
-        # not sure what OTHER is doing here, it looks like STEXT
-        max_other: 0
-        date_pattern: "%Y-%b-%d"
-        # this has some negative value
-        demote_from_standard: [LOST]
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - Millipore - easyCyte 6HT-2L - InCyte.fcs
-    parse:
-      machine: cytek_easycyte
-      options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        # IDK, it looks like some of these kws are xml blobs
-        allow_non_ascii_keys: silent
-        allow_odd_tokens: "silent"
-        # allow_pseudostandard: true
-        allow_header_text_offset_mismatch: header_silent
-        allow_even_delims: silent
-        date_pattern: "%d-%B-%Y"
-        ignore_text_data_offsets: true
-        ignore_text_analysis_offsets: true
-        version_override: FCS3.1
-        ignore_standard_keys: [R1I, COMMENT]
-        # float layout with log scaling and gain
-        demote_from_standard: ["/P[0-9]+G/"]
-        force_linear_scale: all
+        time_meas_pattern: HDR-T
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1168,9 +665,7 @@ test_files:
     parse:
       machine: miltenyi_mqa
       options:
-        warnings_are_errors: true
         time_meas_pattern: "HDR-TM"
-        add_missing_timestep: true
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1178,15 +673,8 @@ test_files:
         - Partec - PAS - 8 peak beads.FCS
     parse:
       options:
-        # warnings_are_errors: true
-        data_correction: [0, -1]
-        byteord_override: endian
-        delim_escape_mode: guess_escaped
-        date_pattern: "%d-%m-%Y"
-        # TR missing first number
-        # PnL is 0, PKN is 0
-        demote_from_standard: [TR, "/P[0-8]L/", "/PKN[0-8]/"]
-        ignore_time_optical_keys: [P, O, T, V, F]
+        # TODO this shouldn't be necessary
+        demote_from_standard: ["/PKN[0-8]/"]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1194,13 +682,6 @@ test_files:
         - Stratedigm - S1400 - 8 Peaks Beads.fcs
     parse:
       machine: strat_s1400
-      options:
-        # warnings_are_errors: true
-        # this is a (rare?) example of a 3.1 file that uses variable bit width;
-        # ...good thing I added this to FF :) Time channel is 32 and rest are 16
-        version_override: FCS3.1
-        ignore_time_optical_keys: [G]
-        time_pattern: "%H:%M:%S:%!"
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1209,9 +690,6 @@ test_files:
     parse:
       machine: bc_system2
       options:
-        # warnings_are_errors: true
-        trim_value_whitespace: trim_blank_silent
-        demote_from_standard: [TIME] # TIMESTEP?
         time_meas_pattern: null
         
   - src:
@@ -1221,57 +699,8 @@ test_files:
     parse:
       machine: verity_gemstone
       options:
-        warnings_are_errors: false
+        # warnings_are_errors: false
         time_meas_pattern: null
-    
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - iCyt - Eclipse.lmd
-    parse:
-      options:
-        warnings_are_errors: true
-        version_override: FCS3.1
-        rename_standard_keys: {ETIME: ETIM}
-  
-    # ditto
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - iCyt - Eclipse - 8 peak.lmd
-    parse:
-      options:
-        warnings_are_errors: true
-        version_override: FCS3.1
-        rename_standard_keys: {ETIME: ETIM}
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
-    parse:
-      options:
-        warnings_are_errors: true
-        version_override: FCS3.1
-        rename_standard_keys: {ETIME: ETIM}
-      
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
-    parse:
-      options:
-        version_override: FCS3.1
-        rename_standard_keys: {ETIME: ETIM}
-        
-  - src:
-      fr_id: FR-FCM-ZZZ4
-      file_names:
-        - iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
-    parse:
-      options:
-        version_override: FCS3.1
-        rename_standard_keys: {ETIME: ETIM}
   
   - src:
       fr_id: FR-FCM-ZZM3
@@ -1285,10 +714,8 @@ test_files:
         - 7c B_ALL_FCV DNA  LOW EVENTS.LMD
     parse:
       options:
-        trim_value_whitespace: trim_blank_silent
-        ignore_time_optical_keys: [V]
-        ignore_supp_text: true
-        demote_from_standard: [RUNNUMBER, "/P[0-9]+G/"]
+        # TODO this shouldn't be necessary
+        demote_from_standard: ["/P[0-9]+G/"]
 
   # Sony ID7000
   - src:
@@ -1299,8 +726,8 @@ test_files:
         - B04 BUV496 WLSM.fcs
     parse:
       options:
+        # TODO NULL-in-string bug
         text_correction: [0, -1]
-        demote_from_standard: [CYTN]
 
   # FACSDiscover S8
   - src:
@@ -1310,7 +737,7 @@ test_files:
     parse:
       options:
         allow_other_feature: true
-        trim_value_whitespace: trim_blank_silent
+        # trim_value_whitespace: trim_blank_silent
 
   # Partec PAS
   - src:
@@ -1324,12 +751,8 @@ test_files:
         - Solanum_pseudocapsicum_young-leaf.FCS
     parse:
       options:
-        data_correction: [0, -1]
-        date_pattern: "%d-%m-%Y"
-        byteord_override: endian
-        demote_from_standard: [TR, "/P[0-9]+L/", "/PKN[0-9]+/"]
-        dedup_measurement_names: true
-        ignore_time_optical_keys: [P, O, T, F, V]
+        # TODO this should not be necessary
+        demote_from_standard: ["/PKN[0-9]+/"]
 
   # MoFlo XDP (with mixed byteord)
   - src:
@@ -1338,10 +761,3 @@ test_files:
         - 29C6hr_1.fcs
         - 29C6hr_2.fcs
         - 29C6hr_3.fcs
-    parse:
-      options:
-        guess_other_width: warn
-        ignore_time_optical_keys: [V,L,P,O]
-        demote_from_standard: ["/P[0-9]+L/"]
-        date_pattern: "%d %B %Y"
-        fix_log_scale_offsets: true

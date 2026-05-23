@@ -2,7 +2,7 @@ from pathlib import Path
 from urllib.parse import urljoin
 from enum import Enum
 from pydantic import BaseModel as BaseModel_
-from typing import TypeAlias, NewType
+from typing import TypeAlias, NewType, Literal
 from pyreflow.pydantic import PyreflowReadStdDatasetConfig
 
 MachineName = NewType("MachineName", str)
@@ -116,15 +116,37 @@ class ImmportSrc(BaseModel):
 
 AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ZipUrlSrc
 
+Strategy: TypeAlias = Literal["none", "scalpal", "sledgehammer"]
+
 
 class ParseConfig(BaseModel):
     machine: MachineId | None = None
-    options: PyreflowReadStdDatasetConfig
+    strategy: Strategy = "scalpal"
+    options: PyreflowReadStdDatasetConfig = PyreflowReadStdDatasetConfig()
+
+    @property
+    def merged_conf(self) -> PyreflowReadStdDatasetConfig:
+        conf = self.strat_conf
+        # only use options that were set explicitly in the config
+        for k, v in self.options.model_dump(exclude_unset=True).items():
+            setattr(conf, k, v)
+        return conf
+
+    @property
+    def strat_conf(self) -> PyreflowReadStdDatasetConfig:
+        if self.strategy == "scalpal":
+            return PyreflowReadStdDatasetConfig().new_scalpal()
+        elif self.strategy == "sledgehammer":
+            return PyreflowReadStdDatasetConfig().new_sledgehammer()
+        elif self.strategy == "none":
+            return PyreflowReadStdDatasetConfig()
+        else:
+            assert False, f"invalid strategy: {self.strategy}"
 
 
 class FileConfig(BaseModel):
     src: AnySrc
-    parse: ParseConfig
+    parse: ParseConfig = ParseConfig()
 
 
 class Machine(BaseModel):

@@ -16,6 +16,7 @@ def main(smk: Any) -> None:
     repo = RepoType(smk.wildcards.repo)
     id = smk.wildcards.id
     testname = smk.wildcards.testname
+    conf = smk.config.find_file_options(repo, testname, id).merged_conf
     opts = smk.config.find_file_options(repo, testname, id).options
 
     std_opts = PyreflowReadStdDatasetConfig(
@@ -23,7 +24,7 @@ def main(smk: Any) -> None:
         allow_other_feature=opts.allow_other_feature,
     )
 
-    core_orig, _ = opts.read_std_dataset(i_orig)
+    core_orig, _ = conf.read_std_dataset(i_orig)
 
     core_std, _ = std_opts.read_std_dataset(i_std)
     assert core_orig == core_std
