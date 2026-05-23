@@ -29,9 +29,8 @@ test_files:
         text_data_correction: [0, -1]
         delim_escape_mode: guess_escaped
         version_override: FCS3.1
-        spillover_measurement_mode: indexed
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        spillover_measurement_mode: guess
+        add_missing_timestep: true
         demote_from_standard: [P21D, P22D, P23D, P24D, P25D, P26D, NUMBITS, NUMBYTES, T, TRIGGERWIDTH, ORIGINALITY]
 
   # easycyte
@@ -111,8 +110,7 @@ test_files:
         text_correction: [0, -1]
         data_correction: [0, -1]
         text_data_correction: [0, -1]
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # FACSDiscover A8
   - src:
@@ -138,8 +136,7 @@ test_files:
         trim_value_whitespace: trim_blank_silent
         trim_intra_value_whitespace: true
         ignore_supp_text: true
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # FASCLyric
   - src:
@@ -179,8 +176,8 @@ test_files:
         - 02054141.003.52632.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -192,8 +189,8 @@ test_files:
         - 100R.205.414418.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -206,8 +203,8 @@ test_files:
         - SUB120119_0041C0404A001_004.346970.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -220,8 +217,8 @@ test_files:
         - Data.001 day 5 no antigen.393086.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -400,8 +397,7 @@ test_files:
     parse:
       machine: sbt_cytof
       options:
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # FACScan
   # TODO could not find machine in pub
@@ -416,8 +412,8 @@ test_files:
         - SUB120116_004C0104A001_008.346440.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         fix_log_scale_offsets: true
         time_meas_pattern: null
 
@@ -430,8 +426,8 @@ test_files:
         - 10374m.137530.fcs
     parse:
       options:
-        use_encoding: single
-        byteord_override: [2,1]
+        use_encoding: guess
+        byteord_override: endian
         fix_log_scale_offsets: true
         time_meas_pattern: null
 
@@ -498,8 +494,7 @@ test_files:
         # one OTHER segment which is a bit too long for the file
         other_width: 20
         truncate_offset_limit: 12
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # cytof2 according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5312823/
   - src:
@@ -513,8 +508,7 @@ test_files:
       options:
         data_correction: [0, -1]
         text_data_correction: [0, -1]
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # Fortessa
   - src:
@@ -637,8 +631,7 @@ test_files:
       machine: sbt_helios
       options:
         trim_value_whitespace: trim_blank_silent
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # Cytek DxP10 (actually a FACScan)
   - src:
@@ -752,8 +745,7 @@ test_files:
       machine: sbt_helios
       options:
         trim_value_whitespace: trim_blank_silent
-        append_standard_keywords:
-          TIMESTEP: "1.0"
+        add_missing_timestep: true
 
   # Each of these Accuri files has roughly the same set of problems
   # - DATA offset end is 1 too high
@@ -771,7 +763,7 @@ test_files:
         version_override: FCS3.1
         data_correction: [0, -1]
         text_data_correction: [0, -1]
-        spillover_measurement_mode: indexed
+        spillover_measurement_mode: guess
         # I'm assuming these are centiseconds and not 1/60th seconds since they
         # exceed 59 but never exceed 99
         time_pattern: "%H:%M:%S:%@"
@@ -789,7 +781,7 @@ test_files:
         allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        spillover_measurement_mode: indexed
+        spillover_measurement_mode: guess
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -805,7 +797,7 @@ test_files:
         allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        spillover_measurement_mode: indexed
+        spillover_measurement_mode: guess
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -821,7 +813,7 @@ test_files:
         allow_header_text_offset_mismatch: header_silent
         version_override: FCS3.1
         ignore_text_data_offsets: true
-        spillover_measurement_mode: indexed
+        spillover_measurement_mode: guess
         time_pattern: "%H:%M:%S:%@"
   
   - src:
@@ -837,7 +829,7 @@ test_files:
         # STEXT duplicates TEXT
         ignore_supp_text: true
         # BYTEORD is should only be 2 bytes
-        byteord_override: [1,2]
+        byteord_override: endian
         # BTIM/ETIM have milliseconds
         time_pattern: "%H:%M:%S:%3f"
       
@@ -850,7 +842,7 @@ test_files:
       machine: bd_facscan
       options:
         warnings_are_errors: true
-        byteord_override: [3,2,1]
+        byteord_override: endian
       
   # TODO fix blank warnings
   - src:
@@ -956,7 +948,7 @@ test_files:
         trim_value_whitespace: trim_blank_silent
         # dreaded PnE log issue
         fix_log_scale_offsets: true
-        byteord_override: [1,2]
+        byteord_override: endian
         # DATA offsets in TEXT are wrong
         allow_header_text_offset_mismatch: header_silent
         # one of the OTHER segments drove off the cliff at the end of the file,
@@ -1006,8 +998,8 @@ test_files:
         ignore_time_optical_keys: [V]
         allow_header_text_offset_mismatch: header_silent
         allow_missing_supp_text: silent
+        add_missing_timestep: true
         append_standard_keywords:
-          TIMESTEP: "1.0"
           # hack since these are missing (also allow the offsets to mismatch)
           BEGINDATA: "0"
           ENDDATA: "0"
@@ -1178,7 +1170,7 @@ test_files:
       options:
         warnings_are_errors: true
         time_meas_pattern: "HDR-TM"
-        append_standard_keywords: {TIMESTEP: "1.0"}
+        add_missing_timestep: true
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1188,7 +1180,7 @@ test_files:
       options:
         # warnings_are_errors: true
         data_correction: [0, -1]
-        byteord_override: [1,2]
+        byteord_override: endian
         delim_escape_mode: guess_escaped
         date_pattern: "%d-%m-%Y"
         # TR missing first number
@@ -1334,7 +1326,7 @@ test_files:
       options:
         data_correction: [0, -1]
         date_pattern: "%d-%m-%Y"
-        byteord_override: [1,2]
+        byteord_override: endian
         demote_from_standard: [TR, "/P[0-9]+L/", "/PKN[0-9]+/"]
         dedup_measurement_names: true
         ignore_time_optical_keys: [P, O, T, F, V]
