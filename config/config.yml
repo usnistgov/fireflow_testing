@@ -1330,3 +1330,18 @@ test_files:
         demote_from_standard: [TR, "/P[0-9]+L/", "/PKN[0-9]+/"]
         dedup_measurement_names: true
         ignore_time_optical_keys: [P, O, T, F, V]
+
+  # MoFlo XDP (with mixed byteord)
+  - src:
+      fr_id: FR-FCM-ZZY9
+      file_names:
+        - 29C6hr_1.fcs
+        - 29C6hr_2.fcs
+        - 29C6hr_3.fcs
+    parse:
+      options:
+        guess_other_width: warn
+        ignore_time_optical_keys: [V,L,P,O]
+        demote_from_standard: ["/P[0-9]+L/"]
+        date_pattern: "%d %B %Y"
+        fix_log_scale_offsets: true
