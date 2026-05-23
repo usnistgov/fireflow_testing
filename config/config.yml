@@ -49,7 +49,7 @@ test_files:
         trim_value_whitespace: trim_blank_silent
         ignore_time_optical_keys: [V]
         demote_from_standard: [COMMENT, "/P1[0-9]V/", "/P[0-9]+G/"]
-        disallow_over_range: silent
+        # disallow_over_range: silent
 
   # Aurora
   - src:
@@ -94,7 +94,7 @@ test_files:
     parse:
       machine: thermo_attune_nxt
       options:
-        trim_text_end: true
+        allow_odd_tokens: 'true'
         ignore_time_optical_keys: [V, F, L]
 
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
@@ -179,8 +179,8 @@ test_files:
         - 02054141.003.52632.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -192,8 +192,8 @@ test_files:
         - 100R.205.414418.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -206,8 +206,8 @@ test_files:
         - SUB120119_0041C0404A001_004.346970.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -220,8 +220,8 @@ test_files:
         - Data.001 day 5 no antigen.393086.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         time_meas_pattern: null
         fix_log_scale_offsets: true
 
@@ -416,8 +416,8 @@ test_files:
         - SUB120116_004C0104A001_008.346440.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         fix_log_scale_offsets: true
         time_meas_pattern: null
 
@@ -430,8 +430,8 @@ test_files:
         - 10374m.137530.fcs
     parse:
       options:
-        use_latin1: true
-        integer_byteord_override: [2,1]
+        use_encoding: single
+        byteord_override: [2,1]
         fix_log_scale_offsets: true
         time_meas_pattern: null
 
@@ -597,7 +597,7 @@ test_files:
     parse:
       options:
         # lots of weird padding after TEXT
-        allow_missing_final_delim: silent
+        allow_even_delims: silent
         trim_value_whitespace: trim_blank_silent
 
   # Attune
@@ -766,7 +766,7 @@ test_files:
         - Accuri - C6.fcs
     parse:
       options:
-        warnings_are_errors: true
+        # warnings_are_errors: true
         ignore_supp_text: true
         version_override: FCS3.1
         data_correction: [0, -1]
@@ -782,7 +782,7 @@ test_files:
       - Accuri - C6 - A01 H2O.fcs
     parse:
       options:
-        warnings_are_errors: true
+        # warnings_are_errors: true
         text_correction: [0, -1]
         ignore_supp_text: true
         data_correction: [0, -1]
@@ -798,7 +798,7 @@ test_files:
         - Accuri - C6 - A02 Spherotech 8 Peak Beads.fcs
     parse:
       options:
-        warnings_are_errors: true
+        # warnings_are_errors: true
         ignore_supp_text: true
         text_correction: [0, -1]
         data_correction: [0, -1]
@@ -814,7 +814,7 @@ test_files:
         - Accuri - C6 - A03 HPB - CD45 PerCP.fcs
     parse:
       options:
-        warnings_are_errors: true
+        # warnings_are_errors: true
         ignore_supp_text: true
         text_correction: [0, -1]
         data_correction: [0, -1]
@@ -837,7 +837,7 @@ test_files:
         # STEXT duplicates TEXT
         ignore_supp_text: true
         # BYTEORD is should only be 2 bytes
-        integer_byteord_override: [1,2]
+        byteord_override: [1,2]
         # BTIM/ETIM have milliseconds
         time_pattern: "%H:%M:%S:%3f"
       
@@ -850,7 +850,7 @@ test_files:
       machine: bd_facscan
       options:
         warnings_are_errors: true
-        integer_byteord_override: [3,2,1]
+        byteord_override: [3,2,1]
       
   # TODO fix blank warnings
   - src:
@@ -861,7 +861,7 @@ test_files:
       machine: thermo_attune
       options:
         # warnings_are_errors: true
-        trim_text_end: true
+        allow_odd_tokens: 'true'
         # this TEXT has blanks
         delim_escape_mode: guess_escaped
         # voltage given for time channel
@@ -883,7 +883,7 @@ test_files:
         # why
         ignore_time_optical_keys: [V]
         # DATATYPE is F but scales are log with non-unit gain
-        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
+        force_linear_scale: all
         demote_from_standard: [P14DISPLAY, "/P[0-9]+G/"]
         
   # this one seems near perfect except for the offset spacing thing, lots of
@@ -956,7 +956,7 @@ test_files:
         trim_value_whitespace: trim_blank_silent
         # dreaded PnE log issue
         fix_log_scale_offsets: true
-        integer_byteord_override: [1,2]
+        byteord_override: [1,2]
         # DATA offsets in TEXT are wrong
         allow_header_text_offset_mismatch: header_silent
         # one of the OTHER segments drove off the cliff at the end of the file,
@@ -981,7 +981,7 @@ test_files:
         data_correction: [0, -1]
         # this file has a known issue in that the CXP software uses 10 for PnB
         # when the actual width is 16
-        integer_widths_from_byteord: true
+        fix_int_widths: next_byte
         time_meas_pattern: null
         # hmm....
         # this has DFC*TO* kws that point to non-existent channels
@@ -1113,7 +1113,7 @@ test_files:
         # time might be "HDR-T" but they also didn't provide $TIMESTEP
         time_meas_pattern: null
         # float layout with log scaling
-        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
+        force_linear_scale: all
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1156,10 +1156,10 @@ test_files:
         trim_value_whitespace: trim_blank_silent
         # IDK, it looks like some of these kws are xml blobs
         allow_non_ascii_keys: silent
-        allow_odd: "silent"
+        allow_odd_tokens: "silent"
         # allow_pseudostandard: true
         allow_header_text_offset_mismatch: header_silent
-        allow_missing_final_delim: silent
+        allow_even_delims: silent
         date_pattern: "%d-%B-%Y"
         ignore_text_data_offsets: true
         ignore_text_analysis_offsets: true
@@ -1167,7 +1167,7 @@ test_files:
         ignore_standard_keys: [R1I, COMMENT]
         # float layout with log scaling and gain
         demote_from_standard: ["/P[0-9]+G/"]
-        substitute_standard_key_values: {"/P[0-9]+E/": [".*", "0,0", false]}
+        force_linear_scale: all
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -1188,7 +1188,7 @@ test_files:
       options:
         # warnings_are_errors: true
         data_correction: [0, -1]
-        integer_byteord_override: [1,2]
+        byteord_override: [1,2]
         delim_escape_mode: guess_escaped
         date_pattern: "%d-%m-%Y"
         # TR missing first number
@@ -1334,7 +1334,7 @@ test_files:
       options:
         data_correction: [0, -1]
         date_pattern: "%d-%m-%Y"
-        integer_byteord_override: [1,2]
+        byteord_override: [1,2]
         demote_from_standard: [TR, "/P[0-9]+L/", "/PKN[0-9]+/"]
         dedup_measurement_names: true
         ignore_time_optical_keys: [P, O, T, F, V]

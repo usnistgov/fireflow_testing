@@ -17,7 +17,7 @@ def main(smk: Any) -> None:
 
     core, _ = opts.read_std_dataset(i)
     o.touch()
-    core.write_dataset(smk.output["fcs"], skip_conversion_check=True)
+    core.write_dataset(smk.output["fcs"])
 
 
 main(snakemake)  # type: ignore
