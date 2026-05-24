@@ -161,6 +161,8 @@ rule compile_diagnostics:
     output:
         segments="results/diagnostics/segments.tsv",
         other_segments="results/diagnostics/other_segments.tsv",
+        bad_pairs="results/diagnostics/bad_pairs.tsv",
+        bad_tokens="results/diagnostics/bad_tokens.tsv",
     conda:
         "envs/pyreflow.yml"
     script:

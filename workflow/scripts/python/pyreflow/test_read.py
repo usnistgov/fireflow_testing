@@ -9,9 +9,9 @@ logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG)  # type: ign
 logging.captureWarnings(True)
 
 
-def encode_bytes(obj: Any) -> dict[str, Any]:
+def encode_bytes(obj: Any) -> str:
     if isinstance(obj, bytes):
-        return {"__bytes__": True, "data": base64.b64encode(obj).decode("ascii")}
+        return "base64:" + base64.b64encode(obj).decode("ascii")
     raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
 
 
