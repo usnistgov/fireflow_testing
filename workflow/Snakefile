@@ -149,11 +149,29 @@ rule write_report:
     script:
         "scripts/python/pyreflow/make_report.py"
 
+rule compile_diagnostics:
+    input:
+        expand(
+            rules.test_read.output.dump,
+            zip,
+            repo=[x[0] for x in tests],
+            id=[x[1] for x in tests],
+            testname=[x[2] for x in tests],
+        ),
+    output:
+        segments="results/diagnostics/segments.tsv",
+        other_segments="results/diagnostics/other_segments.tsv",
+    conda:
+        "envs/pyreflow.yml"
+    script:
+        "scripts/python/pyreflow/compile_diagnostics.py"
+
 
 rule all:
     input:
         # rules.download_immport.output,
         rules.write_report.output,
+        rules.compile_diagnostics.output,
         expand(
             rules.test_double_parse.output,
             zip,
