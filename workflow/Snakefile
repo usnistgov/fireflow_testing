@@ -163,6 +163,8 @@ rule compile_diagnostics:
         other_segments="results/diagnostics/other_segments.tsv",
         bad_pairs="results/diagnostics/bad_pairs.tsv",
         bad_tokens="results/diagnostics/bad_tokens.tsv",
+        parse="results/diagnostics/parse.tsv",
+        dropped="results/diagnostics/dropped.tsv",
     conda:
         "envs/pyreflow.yml"
     script:

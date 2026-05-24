@@ -130,6 +130,14 @@ class ParseConfig(BaseModel):
         # only use options that were set explicitly in the config
         for k, v in self.options.model_dump(exclude_unset=True).items():
             setattr(conf, k, v)
+        # override these to "drop" since this will make it easier to diagnose
+        # which keywords were bad
+        setattr(conf, "process_time_optical_keys", "drop_silent")
+        setattr(conf, "process_pseudostandard", "drop_silent")
+        setattr(conf, "process_hyper_par", "drop_silent")
+        setattr(conf, "process_other_version", "drop_silent")
+        setattr(conf, "process_extra_timestep", "drop_silent")
+        setattr(conf, "process_optional_failure", "drop_silent")
         return conf
 
     @property
