@@ -658,10 +658,6 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - Beckman Coulter - Gallios.LMD
-    parse:
-      options:
-        # TODO not sure why this is needed
-        version_override: FCS3.0
         
   - src:
       fr_id: FR-FCM-ZZZ4

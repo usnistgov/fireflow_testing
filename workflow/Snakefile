@@ -149,6 +149,7 @@ rule write_report:
     script:
         "scripts/python/pyreflow/make_report.py"
 
+
 rule compile_diagnostics:
     input:
         expand(
@@ -165,6 +166,11 @@ rule compile_diagnostics:
         bad_tokens="results/diagnostics/bad_tokens.tsv",
         parse="results/diagnostics/parse.tsv",
         dropped="results/diagnostics/dropped.tsv",
+        scores="results/diagnostics/scores.tsv",
+        trimmed="results/diagnostics/trimmed.tsv",
+        scales="results/diagnostics/scales.tsv",
+        original_names="results/diagnostics/original_names.tsv",
+        overrange="results/diagnostics/overrange.tsv",
     conda:
         "envs/pyreflow.yml"
     script:
