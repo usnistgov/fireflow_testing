@@ -3,13 +3,13 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - maturin=1.10.2
+  - maturin=1.13.3
   - pydantic=2.12.5
   - pip:
-    - git+https://github.com/njd2/fireflow.git@7446390622bad30ddf3f5e3e123411baec92937b#subdirectory=pyreflow
+    - git+https://github.com/njd2/fireflow.git@ddabeafee658016ee917ceba4c3f137640f9b9a2#subdirectory=pyreflow
 
   # dev stuff
   - ruff=0.13.2
   - snakefmt=0.11.0
-  - mypy=1.18.2
+  - mypy=1.19.1
   - ipython

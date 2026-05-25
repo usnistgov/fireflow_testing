@@ -116,7 +116,7 @@ rule test_read:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/pyreflow/test_read.py"
+        "scripts/python/fcsio/test_read.py"
 
 
 rule test_double_parse:
@@ -130,7 +130,7 @@ rule test_double_parse:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/pyreflow/test_double_parse.py"
+        "scripts/python/fcsio/test_double_parse.py"
 
 
 # read all important metadata from TEXT; this is done separately from reading
@@ -148,10 +148,22 @@ rule compile_metadata:
     output:
         file_paths="results/reports/files_paths.tsv",
         machine_table="results/reports/machines.tsv",
+        time_keywords="results/reports/time_keywords.tsv",
+        other_root_keywords="results/reports/other_root_keywords.tsv",
+        unstained_centers="results/reports/unstained_centers.tsv",
+        gated_meas="results/reports/gated_meas.tsv",
+        nonstd="results/reports/nonstd.tsv",
+        mixed_schema="results/reports/mixed_schema.tsv",
+        var_uint_schema="results/reports/var_uint_schema.tsv",
+        ascii_schema="results/reports/ascii_schema.tsv",
+        matrix_schema="results/reports/matrix_schema.tsv",
+        ranges="results/reports/ranges.tsv",
+        byteord="results/reports/byteord.tsv",
+        meas_keywords="results/reports/meas_keywords.tsv",
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/pyreflow/compile_metadata.py"
+        "scripts/python/fcsio/compile_metadata.py"
 
 
 rule compile_diagnostics:
@@ -178,7 +190,7 @@ rule compile_diagnostics:
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/pyreflow/compile_diagnostics.py"
+        "scripts/python/fcsio/compile_diagnostics.py"
 
 
 rule all:
