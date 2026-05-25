@@ -24,12 +24,18 @@ def main(smk: Any) -> None:
     testname = smk.wildcards.testname
     conf = smk.config.find_file_options(repo, testname, id).merged_conf
 
+    # read and write dataset (this will fail if pyreflow does not know how to
+    # parse this particular brand of FCS file)
     core, uncore = conf.read_std_dataset(i)
-    flag_out.touch()
     core.write_dataset(smk.output["fcs"])
 
+    # dump diagnostics to json blob for reuse alter
     with open(dump_out, "w") as f:
-        json.dump(uncore.dict, f, default=encode_bytes)
+        dump = {"path": str(i), "diag": uncore.dict}
+        json.dump(dump, f, default=encode_bytes)
+
+    # make sentinel to indicate that everything worked
+    flag_out.touch()
 
 
 main(snakemake)  # type: ignore

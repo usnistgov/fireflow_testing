@@ -133,7 +133,10 @@ rule test_double_parse:
         "scripts/python/pyreflow/test_double_parse.py"
 
 
-rule write_report:
+# read all important metadata from TEXT; this is done separately from reading
+# the datasets initially since just reading TEXT (no DATA) is cheap and allows
+# us to tweak this rule without forcing all the FCS to be reread
+rule compile_metadata:
     input:
         expand(
             "resources/{repo}/{id}/{testname}",
@@ -143,11 +146,12 @@ rule write_report:
             testname=[x[2] for x in tests],
         ),
     output:
+        file_paths="results/reports/files_paths.tsv",
         machine_table="results/reports/machines.tsv",
     conda:
         "envs/pyreflow.yml"
     script:
-        "scripts/python/pyreflow/make_report.py"
+        "scripts/python/pyreflow/compile_metadata.py"
 
 
 rule compile_diagnostics:
@@ -180,7 +184,7 @@ rule compile_diagnostics:
 rule all:
     input:
         # rules.download_immport.output,
-        rules.write_report.output,
+        rules.compile_metadata.output,
         rules.compile_diagnostics.output,
         expand(
             rules.test_double_parse.output,

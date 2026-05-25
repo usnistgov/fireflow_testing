@@ -434,10 +434,13 @@ class FCSConfig(BaseModel):
         if i is not None:
             return i
         elif cyt is not None:
-            return next(
-                (mi for mi, m in ALL_MACHINES.items() if cyt in m.cyt_values),
-                None,
-            )
+            if cyt == "":
+                return i
+            else:
+                return next(
+                    (mi for mi, m in ALL_MACHINES.items() if cyt in m.cyt_values),
+                    None,
+                )
         else:
             return None
 
