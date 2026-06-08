@@ -22,6 +22,7 @@ def main(smk: Any) -> None:
     std_opts = PyreflowReadStdDatasetConfig(
         time_meas_pattern=opts.time_meas_pattern,
         allow_other_feature=opts.allow_other_feature,
+        nonstandard_measurement_pattern=opts.nonstandard_measurement_pattern,
     )
 
     core_orig, _ = conf.read_std_dataset(i_orig)

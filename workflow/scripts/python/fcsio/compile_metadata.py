@@ -123,6 +123,7 @@ class DatasetMetadata(NamedTuple):
     gated_meas: list[pf.GatedMeasurement]
     nonstd: dict[str, str]
     meas: list[MeasMetadata]
+    spill_or_comp_present: bool
 
 
 # Get the "software version" using some messy heuristics
@@ -422,6 +423,13 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
                 nonstd=rest.nonstandard_keywords,
             )
 
+        if isinstance(core, pf.CoreTEXT2_0 | pf.CoreTEXT3_0):
+            spill_or_comp_present = core.comp is not None
+        elif isinstance(core, pf.CoreTEXT3_1 | pf.CoreTEXT3_2):
+            spill_or_comp_present = core.spillover is not None
+        else:
+            assert_never(core)
+
         meas = [
             make_meas_meta(n, s0, s1, m)
             for n, (s0, s1), m in zip(shortnames, scales, core.measurements)
@@ -474,6 +482,7 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
             unstainedcenters=maybe({}, lambda x: x, unstainedcenters),
             gated_meas=gated_meas,
             nonstd=core.nonstandard_keywords,
+            spill_or_comp_present=spill_or_comp_present,
             meas=meas,
         )
         ret.append(dm)
@@ -513,9 +522,9 @@ def dump_machine_table(out: Path, ds: list[DatasetMetadata]) -> None:
             "software",
             "machine_type",
             "sorting",
-            "$CYT",
-            "$CYTSN",
-            "$SYS",
+            "CYT",
+            "CYTSN",
+            "SYS",
         ]
 
         w.writerow(header)
@@ -544,11 +553,11 @@ def dump_time_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
         header = [
             "filepath",
             "dataset",
-            "$DATE",
-            "$BTIM",
-            "$ETIM",
-            "$BEGINDATETIME",
-            "$ENDDATETIME",
+            "DATE",
+            "BTIM",
+            "ETIM",
+            "BEGINDATETIME",
+            "ENDDATETIME",
         ]
 
         w.writerow(header)
@@ -573,34 +582,35 @@ def dump_other_root_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
         header = [
             "filepath",
             "dataset",
-            "$MODE",
-            "$LAST_MODIFIER",
-            "$LAST_MODIFIED",
-            "$ORIGINALITY",
-            "$PLATEID",
-            "$PLATENAME",
-            "$WELLID",
-            "$VOL",
-            "$CARRIERID",
-            "$CARRIERTYPE",
-            "$LOCATIONID",
-            "$UNSTAINEDINFO",
-            "$FLOWRATE",
-            "$ABRT",
-            "$COM",
-            "$CELLS",
-            "$EXP",
-            "$FIL",
-            "$INST",
-            "$LOST",
-            "$OP",
-            "$PROJ",
-            "$SMNO",
-            "$SRC",
-            "$GATING",
-            "$TIMESTEP",
-            "$TR_name",
-            "$TR_value",
+            "MODE",
+            "LAST_MODIFIER",
+            "LAST_MODIFIED",
+            "ORIGINALITY",
+            "PLATEID",
+            "PLATENAME",
+            "WELLID",
+            "VOL",
+            "CARRIERID",
+            "CARRIERTYPE",
+            "LOCATIONID",
+            "UNSTAINEDINFO",
+            "FLOWRATE",
+            "ABRT",
+            "COM",
+            "CELLS",
+            "EXP",
+            "FIL",
+            "INST",
+            "LOST",
+            "OP",
+            "PROJ",
+            "SMNO",
+            "SRC",
+            "GATING",
+            "TIMESTEP",
+            "TR_name",
+            "TR_value",
+            "spill_or_comp",
         ]
 
         w.writerow(header)
@@ -637,6 +647,7 @@ def dump_other_root_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
                     d.timestep,
                     d.trigger_name,
                     d.trigger_value,
+                    d.spill_or_comp_present,
                 ]
             )
 
@@ -661,14 +672,14 @@ def dump_gated_meas(out: Path, ds: list[DatasetMetadata]) -> None:
             "filepath",
             "dataset",
             "index",
-            "$GnE",
-            "$GnF",
-            "$GnS",
-            "$GnP",
-            "$GnR",
-            "$GnN",
-            "$GnT",
-            "$GnV",
+            "GnE",
+            "GnF",
+            "GnS",
+            "GnP",
+            "GnR",
+            "GnN",
+            "GnT",
+            "GnV",
         ]
 
         w.writerow(header)

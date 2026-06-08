@@ -104,13 +104,27 @@ rule extract_zip_url:
         """
 
 
+read_test_out = Path("results/read_test")
+read_test_diag = read_test_out / "diag" / "{repo}" / "{id}" / "{testname}"
+
+
 rule test_read:
     input:
         "resources/{repo}/{id}/{testname}",
     output:
         flag="results/read_test/pass/{repo}/{id}/{testname}.txt",
         fcs="results/read_test/fcs/{repo}/{id}/{testname}",
-        dump="results/read_test/diagnostics/{repo}/{id}/{testname}.json",
+        # diagnostic dump
+        offsets=read_test_diag / "offsets.tsv",
+        nextdata_overlap=read_test_diag / "nextdata_overlap.tsv",
+        offset_overlap=read_test_diag / "offset_overlap.tsv",
+        key_val_pairs=read_test_diag / "key_val_pairs.tsv",
+        tokens=read_test_diag / "tokens.tsv",
+        fixed_scales=read_test_diag / "fixed_scales.tsv",
+        original_names=read_test_diag / "original_names.tsv",
+        overrange=read_test_diag / "overrange.tsv",
+        version_scores=read_test_diag / "version_scores.tsv",
+        misc=read_test_diag / "misc.tsv",
     log:
         "results/log/read/warnings_{repo}_{id}_{testname}.log",
     conda:
@@ -166,38 +180,97 @@ rule compile_metadata:
         "scripts/python/fcsio/compile_metadata.py"
 
 
-rule compile_diagnostics:
+def expand_fcs(path):
+    return expand(
+        path,
+        zip,
+        repo=[x[0] for x in tests],
+        id=[x[1] for x in tests],
+        testname=[x[2] for x in tests],
+    )
+
+
+rule combine_offsets:
     input:
-        expand(
-            rules.test_read.output.dump,
-            zip,
-            repo=[x[0] for x in tests],
-            id=[x[1] for x in tests],
-            testname=[x[2] for x in tests],
-        ),
+        expand_fcs(rules.test_read.output.offsets),
     output:
-        segments="results/diagnostics/segments.tsv",
-        other_segments="results/diagnostics/other_segments.tsv",
-        bad_pairs="results/diagnostics/bad_pairs.tsv",
-        bad_tokens="results/diagnostics/bad_tokens.tsv",
-        parse="results/diagnostics/parse.tsv",
-        dropped="results/diagnostics/dropped.tsv",
-        scores="results/diagnostics/scores.tsv",
-        trimmed="results/diagnostics/trimmed.tsv",
-        scales="results/diagnostics/scales.tsv",
-        original_names="results/diagnostics/original_names.tsv",
-        overrange="results/diagnostics/overrange.tsv",
-    conda:
-        "envs/pyreflow.yml"
-    script:
-        "scripts/python/fcsio/compile_diagnostics.py"
+        "results/diagnostics/offsets.tsv",
+    run:
+        with open(output[0], "w") as fo:
+            for i in input:
+                with open(i, "r") as fi:
+                    for x in fi:
+                        fo.write(x)
+
+
+use rule combine_offsets as combine_nextdata_overlap with:
+    input:
+        expand_fcs(rules.test_read.output.nextdata_overlap),
+    output:
+        "results/diagnostics/nextdata_overlap.tsv",
+
+
+use rule combine_offsets as combine_offset_overlap with:
+    input:
+        expand_fcs(rules.test_read.output.offset_overlap),
+    output:
+        "results/diagnostics/offset_overlap.tsv",
+
+
+use rule combine_offsets as combine_key_val_pairs with:
+    input:
+        expand_fcs(rules.test_read.output.key_val_pairs),
+    output:
+        "results/diagnostics/key_val_pairs.tsv",
+
+
+use rule combine_offsets as combine_tokens with:
+    input:
+        expand_fcs(rules.test_read.output.tokens),
+    output:
+        "results/diagnostics/tokens.tsv",
+
+
+use rule combine_offsets as combine_fixed_scales with:
+    input:
+        expand_fcs(rules.test_read.output.fixed_scales),
+    output:
+        "results/diagnostics/fixed_scales.tsv",
+
+
+use rule combine_offsets as combine_original_names with:
+    input:
+        expand_fcs(rules.test_read.output.original_names),
+    output:
+        "results/diagnostics/original_names.tsv",
+
+
+use rule combine_offsets as combine_overrange with:
+    input:
+        expand_fcs(rules.test_read.output.overrange),
+    output:
+        "results/diagnostics/overrange.tsv",
+
+
+use rule combine_offsets as combine_version_scores with:
+    input:
+        expand_fcs(rules.test_read.output.version_scores),
+    output:
+        "results/diagnostics/version_scores.tsv",
+
+
+use rule combine_offsets as combine_misc with:
+    input:
+        expand_fcs(rules.test_read.output.misc),
+    output:
+        "results/diagnostics/misc.tsv",
 
 
 rule all:
     input:
         # rules.download_immport.output,
         rules.compile_metadata.output,
-        rules.compile_diagnostics.output,
+        # rules.compile_diagnostics.output,
         expand(
             rules.test_double_parse.output,
             zip,
@@ -205,3 +278,13 @@ rule all:
             id=[x[1] for x in tests],
             testname=[x[2] for x in tests],
         ),
+        rules.combine_offsets.output,
+        rules.combine_nextdata_overlap.output,
+        rules.combine_offset_overlap.output,
+        rules.combine_key_val_pairs.output,
+        rules.combine_tokens.output,
+        rules.combine_fixed_scales.output,
+        rules.combine_original_names.output,
+        rules.combine_overrange.output,
+        rules.combine_version_scores.output,
+        rules.combine_misc.output,

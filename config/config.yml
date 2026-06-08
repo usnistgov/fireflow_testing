@@ -419,9 +419,12 @@ test_files:
   - src:
       immport_id: SDY1502
       file_names:
-        - Specimen1_1-10.732949.fcs
+        - Specimen1_1-1.732826.fcs
         - Specimen1_1-1.732945.fcs
         - Specimen1_1-10.732949.fcs
+    parse:
+      options:
+        nonstandard_measurement_pattern: "#NCP%n"
 
   # Aurora
   - src:
@@ -468,7 +471,6 @@ test_files:
   - src:
       immport_id: SDY1944
       file_names:
-        - direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
         - direct_kit_baso_300uL_1_VD5_20211019.853079.fcs
         - direct_kit_baso_300uL_2_VD5_20211019.853081.fcs
         - direct_kit_baso_300uL_3_VD1_20211007.853082.fcs
