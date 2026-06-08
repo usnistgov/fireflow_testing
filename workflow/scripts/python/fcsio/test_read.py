@@ -531,6 +531,9 @@ class MiscDiagnostics(WritableDiagnostic):
             maybe("", str, self.event_width),
             maybe("", str, self.event_data_remainder),
             maybe("", str, self.tot_event_mismatch),
+            self.supp_origin_type,
+            self.data_origin_type,
+            self.analysis_origin_type,
         ]
 
     @classmethod

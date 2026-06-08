@@ -20,4 +20,10 @@ def key_maybe(xs: dict[X, Y], key: X) -> Y | None:
 
 
 def esc(s: str) -> str:
-    return s.replace("\n", "\\n").replace("\0", "\\0")
+    return (
+        s.replace("\n", "\\n")
+        .replace("\0", "\\0")
+        .replace("\r", "\\r")
+        .replace("\f", "\\f")
+        .replace("\v", "\\v")
+    )
