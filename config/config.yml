@@ -79,9 +79,6 @@ test_files:
         fd_non_jak2.fcs: FD_Non_JAK2.fcs
     parse:
       machine: sbt_helios
-      options:
-        # TODO this is a bug, pyreflow can't return a string with NULL for some reason
-        text_correction: [0, -1]
         
   # FACSDiscover A8
   - src:
@@ -752,10 +749,6 @@ test_files:
         - B02 Unstained WLSM.fcs
         - B03 BUV395 WLSM.fcs
         - B04 BUV496 WLSM.fcs
-    parse:
-      options:
-        # TODO NULL-in-string bug
-        text_correction: [0, -1]
 
   # FACSDiscover S8
   - src:
