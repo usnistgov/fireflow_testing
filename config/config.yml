@@ -620,10 +620,6 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - BD - FACS Aria II.fcs
-    parse:
-      options:
-        # TODO not sure why this is necessary
-        demote_from_standard: [P14DISPLAY]
     
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -696,10 +692,6 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - Partec - PAS - 8 peak beads.FCS
-    parse:
-      options:
-        # TODO this shouldn't be necessary
-        demote_from_standard: ["/PKN[0-8]/"]
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -737,10 +729,6 @@ test_files:
         - 5c B_ALL_FCV DNA  LOW EVENTS.LMD
         - 6c B_ALL_FCV DNA  LOW EVENTS.LMD
         - 7c B_ALL_FCV DNA  LOW EVENTS.LMD
-    parse:
-      options:
-        # TODO this shouldn't be necessary
-        demote_from_standard: ["/P[0-9]+G/"]
 
   # Sony ID7000
   - src:
@@ -770,10 +758,6 @@ test_files:
         - Solanum_pseudocapsicum_root.FCS
         - Solanum_pseudocapsicum_stem.FCS
         - Solanum_pseudocapsicum_young-leaf.FCS
-    parse:
-      options:
-        # TODO this should not be necessary
-        demote_from_standard: ["/PKN[0-9]+/"]
 
   # MoFlo XDP (with mixed byteord)
   - src:
