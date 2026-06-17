@@ -116,8 +116,8 @@ rule test_read:
         fcs="results/read_test/fcs/{repo}/{id}/{testname}",
         # diagnostic dump
         offsets=read_test_diag / "offsets.tsv",
-        nextdata_overlap=read_test_diag / "nextdata_overlap.tsv",
-        offset_overlap=read_test_diag / "offset_overlap.tsv",
+        overflow=read_test_diag / "overflow.tsv",
+        overlap=read_test_diag / "overlap.tsv",
         key_val_pairs=read_test_diag / "key_val_pairs.tsv",
         tokens=read_test_diag / "tokens.tsv",
         fixed_scales=read_test_diag / "fixed_scales.tsv",
@@ -197,24 +197,27 @@ rule combine_offsets:
         "results/diagnostics/offsets.tsv",
     run:
         with open(output[0], "w") as fo:
-            for i in input:
+            for j, i in enumerate(input):
                 with open(i, "r") as fi:
+                    # skip header if not first file being written
+                    if j > 0:
+                        next(fi, None)
                     for x in fi:
                         fo.write(x)
 
 
-use rule combine_offsets as combine_nextdata_overlap with:
+use rule combine_offsets as combine_overflow with:
     input:
-        expand_fcs(rules.test_read.output.nextdata_overlap),
+        expand_fcs(rules.test_read.output.overflow),
     output:
-        "results/diagnostics/nextdata_overlap.tsv",
+        "results/diagnostics/overflow.tsv",
 
 
-use rule combine_offsets as combine_offset_overlap with:
+use rule combine_offsets as combine_overlap with:
     input:
-        expand_fcs(rules.test_read.output.offset_overlap),
+        expand_fcs(rules.test_read.output.overlap),
     output:
-        "results/diagnostics/offset_overlap.tsv",
+        "results/diagnostics/overlap.tsv",
 
 
 use rule combine_offsets as combine_key_val_pairs with:
@@ -279,8 +282,8 @@ rule all:
             testname=[x[2] for x in tests],
         ),
         rules.combine_offsets.output,
-        rules.combine_nextdata_overlap.output,
-        rules.combine_offset_overlap.output,
+        rules.combine_overflow.output,
+        rules.combine_overlap.output,
         rules.combine_key_val_pairs.output,
         rules.combine_tokens.output,
         rules.combine_fixed_scales.output,

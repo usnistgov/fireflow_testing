@@ -1,6 +1,6 @@
 import base64
 import csv
-from dataclasses import dataclass, fields
+from dataclasses import dataclass
 from typing import Any, Self, Literal, Iterable
 from pathlib import Path
 import logging
@@ -40,12 +40,20 @@ class WritableDiagnostic:
     ) -> None:
         with open(p, "w") as f:
             w = csv.writer(f, delimiter="\t")
+            h = cls.to_header()
+            w.writerow(["fcs_path", "dataset", *h])
             for i, u in enumerate(ds):
                 for row in cls.dataset_iter(fcs_path, i, u):
-                    w.writerow([row.path, row.dataset, *row.to_row()])
+                    r = row.to_row()
+                    assert len(r) == len(h), f"{h} is not same length as {r}"
+                    w.writerow([row.path, row.dataset, *r])
 
     @classmethod
     def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+        raise NotImplementedError
+
+    @classmethod
+    def to_header(cls) -> list[str]:
         raise NotImplementedError
 
     def to_row(self) -> list[str]:
@@ -65,6 +73,10 @@ class Offset(WritableDiagnostic):
     ) -> Iterable["Offset"]:
         return chain(cls._uncorrected(p, i, u), cls._final(p, i, u))
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["name", "start", "end", "final"]
+
     def to_row(self) -> list[str]:
         return [
             self.name,
@@ -78,29 +90,34 @@ class Offset(WritableDiagnostic):
         cls, p: Path, i: int, u: pfa.StdDatasetOutput
     ) -> Iterable["Offset"]:
         def go(n: str, o: tuple[int, int]) -> Offset:
-            return cls._from_offset(p, i, n, o, False)
+            begin, end = o
+            # Make second offset mean the same thing as final offsets. Original
+            # offsets will be the final byte of the segment rather than the next
+            # byte, which is what the final offsets use (the sane choice).
+            new_end = end + 1 if begin > 0 and end > 0 else 0
+            return cls._from_offset(p, i, n, (begin, new_end), False)
 
-        h_uncorr = u.flat_diagnostics.header_supp.header.uncorrected_segments
-        hdr_text = go("primary_text", h_uncorr.text_seg)
-        hdr_analysis = go("hdr_analysis", h_uncorr.analysis_seg)
-        hdr_data = go("hdr_data", h_uncorr.data_seg)
-        hdr_other = [go(f"other-{oi}", u) for oi, u in enumerate(h_uncorr.other_segs)]
+        h_orig = u.flat_diagnostics.header_supp.header.original_offsets
+        hdr_text = go("primary_text", h_orig.text)
+        hdr_analysis = go("hdr_analysis", h_orig.analysis)
+        hdr_data = go("hdr_data", h_orig.data)
+        hdr_other = [go(f"other-{oi}", u) for oi, u in enumerate(h_orig.others)]
         empty: list[Offset] = []
         supp_text = maybe(
             empty,
             lambda o: [go("supp_text", o)],
-            u.flat_diagnostics.header_supp.supp_text.uncorrected_offsets,
+            u.flat_diagnostics.header_supp.supp_text.original_offsets,
         )
-        ds = u.dataset.dataset_segs
+        ds = u.dataset.dataset_offsets
         text_data = maybe(
             empty,
             lambda o: [go("text_data", o)],
-            ds.data_origin.uncorrected_offsets,
+            ds.data_origin.original_offsets,
         )
         text_analysis = maybe(
             empty,
             lambda o: [go("text_analysis", o)],
-            ds.analysis_origin.uncorrected_offsets,
+            ds.analysis_origin.original_offsets,
         )
         return chain(
             [hdr_text, hdr_analysis, hdr_data],
@@ -115,29 +132,29 @@ class Offset(WritableDiagnostic):
         def go(n: str, o: tuple[int, int]) -> Offset:
             return Offset._from_offset(p, i, n, o, True)
 
-        h_final = u.flat_diagnostics.header_supp.header.segments
-        hdr_text = go("primary_text", h_final.text_seg)
-        hdr_analysis = go("hdr_analysis", h_final.analysis_seg)
-        hdr_data = go("hdr_data", h_final.data_seg)
+        h_final = u.flat_diagnostics.header_supp.header.final_offsets
+        hdr_text = go("primary_text", h_final.text)
+        hdr_analysis = go("hdr_analysis", h_final.analysis)
+        hdr_data = go("hdr_data", h_final.data)
         empty: list[Offset] = []
         hdr_other = maybe(
             empty,
             lambda o: [go(f"other-{u[0]}", u[1]) for u in o[0]],
-            h_final.other_segs,
+            h_final.others,
         )
         supp_text = maybe(
             empty,
             lambda o: [go("supp_text", o)],
             u.flat_diagnostics.header_supp.supp_text.final_offsets,
         )
-        ds = u.dataset.dataset_segs
+        ds = u.dataset.dataset_offsets
         text_data = (
-            [go("text_data", ds.final_data_seg)]
+            [go("text_data", ds.final_data_offsets)]
             if ds.data_origin.origin_type in ["mismatch_text", "empty_header"]
             else empty
         )
         text_analysis = (
-            [go("text_analysis", ds.final_analysis_seg)]
+            [go("text_analysis", ds.final_analysis_offsets)]
             if ds.analysis_origin.origin_type in ["mismatch_text", "empty_header"]
             else empty
         )
@@ -157,60 +174,78 @@ class Offset(WritableDiagnostic):
 
 
 @dataclass(frozen=True)
-class NextdataOverlap(WritableDiagnostic):
+class Overflow(WritableDiagnostic):
     name: str
     start: int
     end: int
-    overlap: int
+    overflow: int
+    dataset_len: int
+    is_nextdata: bool
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["name", "start", "end", "overflow", "dataset_len", "is_nextdata"]
 
     def to_row(self) -> list[str]:
         return [
             self.name,
             str(self.start),
             str(self.end),
-            str(self.overlap),
+            str(self.overflow),
+            str(self.dataset_len),
+            str(self.is_nextdata),
         ]
 
     @classmethod
     def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
-        header_overlaps = (
-            cls._from_overlap(p, i, o)
-            for o in u.flat_diagnostics.header_nextdata_overlaps
+        header_overflows = (
+            cls._from_overflow(p, i, o) for o in u.flat_diagnostics.header_overflows
         )
         empty: list[Self] = []
-        supp_overlaps = maybe(
+        supp_overflows = maybe(
             empty,
-            lambda o: [cls._from_overlap(p, i, o)],
-            u.flat_diagnostics.header_supp.supp_text.nextdata_overlap,
+            lambda o: [cls._from_overflow(p, i, o)],
+            u.flat_diagnostics.header_supp.supp_text.overflow,
         )
-        ds = u.dataset.dataset_segs
-        data_overlaps = maybe(
+        ds = u.dataset.dataset_offsets
+        data_overflows = maybe(
             empty,
-            lambda o: [cls._from_overlap(p, i, o)],
-            ds.data_origin.nextdata_overlap,
+            lambda o: [cls._from_overflow(p, i, o)],
+            ds.data_origin.overflow,
         )
-        analysis_overlaps = maybe(
+        analysis_overflows = maybe(
             empty,
-            lambda o: [cls._from_overlap(p, i, o)],
-            ds.analysis_origin.nextdata_overlap,
+            lambda o: [cls._from_overflow(p, i, o)],
+            ds.analysis_origin.overflow,
         )
-        return chain(header_overlaps, supp_overlaps, data_overlaps, analysis_overlaps)
+        return chain(
+            header_overflows, supp_overflows, data_overflows, analysis_overflows
+        )
 
     @classmethod
-    def _from_overlap(
+    def _from_overflow(
         cls,
         path: Path,
         dataset: int,
-        overlap: pfa.TextOffsetToNextdataOverlap
-        | pfa.SuppOffsetToNextdataOverlap
-        | pfa.HeaderOffsetToNextdataOverlap,
+        overflow: pfa.TextOffsetsOverflow
+        | pfa.SuppOffsetsOverflow
+        | pfa.HeaderOffsetsOverflow,
     ) -> Self:
-        n, s, e = overlap.offsets
-        return cls(path, dataset, fmt_offset_name(n), s, e, overlap.overlap)
+        n, s, e = overflow.offsets
+        return cls(
+            path,
+            dataset,
+            fmt_offset_name(n),
+            s,
+            e,
+            overflow.overflow,
+            overflow.dataset_len,
+            overflow.bound_is_nextdata,
+        )
 
 
 @dataclass(frozen=True)
-class OffsetOverlap(WritableDiagnostic):
+class Overlap(WritableDiagnostic):
     name0: str
     start0: int
     end0: int
@@ -218,6 +253,18 @@ class OffsetOverlap(WritableDiagnostic):
     start1: int
     end1: int
     overlap: int
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return [
+            "name0",
+            "start0",
+            "end0",
+            "name1",
+            "start1",
+            "end1",
+            "overlap",
+        ]
 
     def to_row(self) -> list[str]:
         return [
@@ -235,10 +282,10 @@ class OffsetOverlap(WritableDiagnostic):
         cls,
         path: Path,
         dataset: int,
-        overlap: pfa.TextToHeaderOrSuppOffsetOverlap
-        | pfa.TextToHeaderOffsetOverlap
-        | pfa.HeaderToHeaderOffsetOverlap
-        | pfa.SuppToHeaderOffsetOverlap,
+        overlap: pfa.TextToHeaderOrSuppOffsetsOverlap
+        | pfa.TextToHeaderOffsetsOverlap
+        | pfa.HeaderToHeaderOffsetsOverlap
+        | pfa.SuppToHeaderOffsetsOverlap,
     ) -> Self:
         n0, s0, e0 = overlap.offsets0
         n1, s1, e1 = overlap.offsets1
@@ -258,15 +305,11 @@ class OffsetOverlap(WritableDiagnostic):
     def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
         hsupp = u.flat_diagnostics.header_supp
         header_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.header.overlaps)
-        supp_overlaps = (
-            cls.from_overlap(p, i, o) for o in hsupp.supp_text.offset_overlaps
-        )
-        ds = u.dataset.dataset_segs
-        data_overlaps = (
-            cls.from_overlap(p, i, o) for o in ds.data_origin.offset_overlaps
-        )
+        supp_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.supp_text.overlaps)
+        ds = u.dataset.dataset_offsets
+        data_overlaps = (cls.from_overlap(p, i, o) for o in ds.data_origin.overlaps)
         analysis_overlaps = (
-            cls.from_overlap(p, i, o) for o in ds.analysis_origin.offset_overlaps
+            cls.from_overlap(p, i, o) for o in ds.analysis_origin.overlaps
         )
         # TODO add data/analysis overlap
         return chain(header_overlaps, supp_overlaps, data_overlaps, analysis_overlaps)
@@ -277,6 +320,10 @@ class KeyValPair(WritableDiagnostic):
     pair_type: str
     key: str | bytes
     value: str | bytes
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["pair_type", "key", "value"]
 
     def to_row(self) -> list[str]:
         return [
@@ -337,6 +384,10 @@ class Token(WritableDiagnostic):
     token_type: str
     token: str | bytes
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["token_type", "token"]
+
     def to_row(self) -> list[str]:
         return [
             self.token_type,
@@ -376,6 +427,10 @@ class FixedScale(WritableDiagnostic):
     scale_value: str
     scale_fix: Literal["forced", "log", "trimmed", "trimmed_log"]
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["meas_index", "is_meas", "scale_value", "scale_fix"]
+
     def to_row(self) -> list[str]:
         return [
             str(self.meas_index),
@@ -405,6 +460,10 @@ class OriginalName(WritableDiagnostic):
     meas_index: int
     original_name: str
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["meas_index", "original_name"]
+
     def to_row(self) -> list[str]:
         return [
             str(self.meas_index),
@@ -425,6 +484,10 @@ class Overrange(WritableDiagnostic):
     meas_index: int
     first_row: int
     truncate: bool
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return ["meas_index", "first_row", "truncate"]
 
     def to_row(self) -> list[str]:
         return [
@@ -452,8 +515,28 @@ class VersionScores(WritableDiagnostic):
     missing_req: int
     missing_absent: int
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return [
+            "version",
+            "good_req",
+            "good_opt",
+            "drop",
+            "missing_opt",
+            "missing_req",
+            "missing_absent",
+        ]
+
     def to_row(self) -> list[str]:
-        return list(map(str, fields(self)))
+        return [
+            self.version,
+            str(self.good_req),
+            str(self.good_opt),
+            str(self.drop),
+            str(self.missing_opt),
+            str(self.missing_req),
+            str(self.missing_absent),
+        ]
 
     @classmethod
     def dataset_iter(
@@ -489,6 +572,7 @@ class VersionScores(WritableDiagnostic):
 class MiscDiagnostics(WritableDiagnostic):
     version: pt.FCSVersion
     nextdata: int | None
+    header_width: int
     prim_delimiter: int
     prim_escaped: bool
     prim_skipped_pairs: int
@@ -509,10 +593,38 @@ class MiscDiagnostics(WritableDiagnostic):
     data_origin_type: pt.TEXTOffsetsOriginType
     analysis_origin_type: pt.TEXTOffsetsOriginType
 
+    @classmethod
+    def to_header(self) -> list[str]:
+        return [
+            "version",
+            "nextdata",
+            "header_width",
+            "prim_delimiter",
+            "prim_escaped",
+            "prim_skipped_pairs",
+            "prim_last_odd_token",
+            "prim_has_even_delims",
+            "prim_extra_leading_delim",
+            "supp_delimiter",
+            "supp_escaped",
+            "supp_skipped_pairs",
+            "supp_last_odd_token",
+            "supp_has_even_delims",
+            "supp_extra_leading_delim",
+            "timestep_added",
+            "event_width",
+            "event_data_remainder",
+            "tot_event_mismatch",
+            "supp_origin_type",
+            "data_origin_type",
+            "analysis_origin_type",
+        ]
+
     def to_row(self) -> list[str]:
         return [
             self.version,
             str(self.nextdata),
+            str(self.header_width),
             str(self.prim_delimiter),
             str(self.prim_escaped),
             str(self.prim_skipped_pairs),
@@ -542,11 +654,17 @@ class MiscDiagnostics(WritableDiagnostic):
         primary = flat.primary_split
         supp = flat.supp_split
         event = u.dataset.events_diagnostics
+        header_width = 58 + maybe(
+            0,
+            lambda x: len(x[0]) * 2 * x[1],
+            flat.header_supp.header.final_offsets.others,
+        )
         ret = cls(
             p,
             i,
             flat.header_supp.header.version,
             flat.header_supp.nextdata,
+            header_width,
             primary.delimiter,
             primary.escaped,
             primary.skipped_pairs,
@@ -564,8 +682,8 @@ class MiscDiagnostics(WritableDiagnostic):
             event.event_data_remainder,
             event.tot_event_mismatch,
             flat.header_supp.supp_text.origin_type,
-            u.dataset.dataset_segs.data_origin.origin_type,
-            u.dataset.dataset_segs.analysis_origin.origin_type,
+            u.dataset.dataset_offsets.data_origin.origin_type,
+            u.dataset.dataset_offsets.analysis_origin.origin_type,
         )
         return (ret,)
 
@@ -589,10 +707,8 @@ def main(smk: Any) -> None:
     # dump lots of diagnostic data into neat little tables that can be concatted
     # later
     Offset.write_datasets(Path(smk.output["offsets"]), fcs_path, uncores)
-    NextdataOverlap.write_datasets(
-        Path(smk.output["nextdata_overlap"]), fcs_path, uncores
-    )
-    OffsetOverlap.write_datasets(Path(smk.output["offset_overlap"]), fcs_path, uncores)
+    Overflow.write_datasets(Path(smk.output["overflow"]), fcs_path, uncores)
+    Overlap.write_datasets(Path(smk.output["overlap"]), fcs_path, uncores)
     KeyValPair.write_datasets(Path(smk.output["key_val_pairs"]), fcs_path, uncores)
     Token.write_datasets(Path(smk.output["tokens"]), fcs_path, uncores)
     FixedScale.write_datasets(Path(smk.output["fixed_scales"]), fcs_path, uncores)

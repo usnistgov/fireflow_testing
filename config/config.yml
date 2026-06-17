@@ -374,7 +374,7 @@ test_files:
     parse:
       machine: sbt_cytof2
       options:
-        truncate_offset_limit: 12
+        dataset_overflow_limit: 12
 
   # cytof2 according to https://pmc.ncbi.nlm.nih.gov/articles/PMC5312823/
   - src:
