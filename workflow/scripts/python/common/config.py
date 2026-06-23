@@ -2,7 +2,7 @@ from pathlib import Path
 from urllib.parse import urljoin
 from enum import Enum
 from pydantic import BaseModel as BaseModel_
-from typing import TypeAlias, NewType, Literal
+from typing import TypeAlias, NewType, Literal, Any
 from pyreflow.pydantic import PyreflowReadStdDatasetConfig
 
 MachineName = NewType("MachineName", str)

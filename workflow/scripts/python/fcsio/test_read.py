@@ -577,15 +577,15 @@ class MiscDiagnostics(WritableDiagnostic):
     prim_delimiter: int
     prim_escaped: bool
     prim_skipped_pairs: int
-    prim_last_odd_token: str | bytes
     prim_has_even_delims: bool
     prim_extra_leading_delim: int
+    prim_last_odd_bytes: int
     supp_delimiter: int | None
     supp_escaped: bool | None
     supp_skipped_pairs: int | None
-    supp_last_odd_token: str | bytes | None
     supp_has_even_delims: int | None
     supp_extra_leading_delim: int | None
+    supp_last_odd_bytes: int | None
     timestep_added: bool
     event_width: int | None
     event_data_remainder: int | None
@@ -595,6 +595,11 @@ class MiscDiagnostics(WritableDiagnostic):
     analysis_origin_type: pt.TEXTOffsetsOriginType
     file_crc_value: int | None
     file_crc_offset: int | None
+    computed_crc: int | None
+    # put these last since they can sometimes be long and it is easier to see
+    # things when they are at the end
+    prim_last_odd_token: str | bytes
+    supp_last_odd_token: str | bytes | None
 
     @classmethod
     def to_header(self) -> list[str]:
@@ -606,15 +611,15 @@ class MiscDiagnostics(WritableDiagnostic):
             "prim_delimiter",
             "prim_escaped",
             "prim_skipped_pairs",
-            "prim_last_odd_token",
             "prim_has_even_delims",
             "prim_extra_leading_delim",
+            "prim_last_odd_bytes",
             "supp_delimiter",
             "supp_escaped",
             "supp_skipped_pairs",
-            "supp_last_odd_token",
             "supp_has_even_delims",
             "supp_extra_leading_delim",
+            "supp_last_odd_bytes",
             "timestep_added",
             "event_width",
             "event_data_remainder",
@@ -624,28 +629,29 @@ class MiscDiagnostics(WritableDiagnostic):
             "analysis_origin_type",
             "file_crc_value",
             "file_crc_offset",
+            "computed_crc",
+            "supp_last_odd_token",
+            "prim_last_odd_token",
         ]
 
     def to_row(self) -> list[str]:
         return [
             self.version,
-            str(self.nextdata),
             str(self.dataset_offset),
+            str(self.nextdata),
             str(self.header_width),
             str(self.prim_delimiter),
             str(self.prim_escaped),
             str(self.prim_skipped_pairs),
-            encode_or_esc(self.prim_last_odd_token),
             str(self.prim_has_even_delims),
             str(self.prim_extra_leading_delim),
+            str(self.prim_last_odd_bytes),
             maybe("", str, self.supp_delimiter),
             maybe("", str, self.supp_escaped),
             maybe("", str, self.supp_skipped_pairs),
-            ""
-            if self.supp_last_odd_token is None
-            else encode_or_esc(self.supp_last_odd_token),
             maybe("", str, self.supp_has_even_delims),
             maybe("", str, self.supp_extra_leading_delim),
+            maybe("", str, self.supp_last_odd_bytes),
             str(self.timestep_added),
             maybe("", str, self.event_width),
             maybe("", str, self.event_data_remainder),
@@ -653,8 +659,13 @@ class MiscDiagnostics(WritableDiagnostic):
             self.supp_origin_type,
             self.data_origin_type,
             self.analysis_origin_type,
-            str(self.file_crc_value),
-            str(self.file_crc_offset),
+            maybe("", str, self.file_crc_value),
+            maybe("", str, self.file_crc_offset),
+            maybe("", str, self.computed_crc),
+            encode_or_esc(self.prim_last_odd_token),
+            ""
+            if self.supp_last_odd_token is None
+            else encode_or_esc(self.supp_last_odd_token),
         ]
 
     @classmethod
@@ -679,15 +690,15 @@ class MiscDiagnostics(WritableDiagnostic):
             primary.delimiter,
             primary.escaped,
             primary.skipped_pairs,
-            encode_or_esc(primary.last_odd_token),
             primary.has_even_delims,
             primary.extra_leading_delims,
+            len(primary.last_odd_token),
             fmap_maybe(lambda x: x.delimiter, supp),
             fmap_maybe(lambda x: x.escaped, supp),
             fmap_maybe(lambda x: x.skipped_pairs, supp),
-            fmap_maybe(lambda x: x.last_odd_token, supp),
             fmap_maybe(lambda x: x.has_even_delims, supp),
             fmap_maybe(lambda x: x.extra_leading_delims, supp),
+            fmap_maybe(lambda x: len(x.last_odd_token), supp),
             u.dataset.std_diagnostics.timestep_added,
             event.event_width,
             event.event_data_remainder,
@@ -697,6 +708,9 @@ class MiscDiagnostics(WritableDiagnostic):
             u.dataset.dataset_offsets.analysis_origin.origin_type,
             crc[0] if isinstance(crc, tuple) else None,
             crc[1] if isinstance(crc, tuple) else None,
+            u.dataset.computed_crc,
+            encode_or_esc(primary.last_odd_token),
+            fmap_maybe(lambda x: encode_or_esc(x.last_odd_token), supp),
         )
         return (ret,)
 
@@ -710,9 +724,13 @@ def main(smk: Any) -> None:
     sconf: FCSConfig = smk.config
     conf = sconf.find_file_options(repo, testname, id).merged_conf
 
+    # compute the CRC so it can be checked manually
+    conf.compute_crc = "always"
+    conf.allow_mismatch_crc = "silent"
+
     # read and write dataset (this will fail if pyreflow does not know how to
     # parse this particular brand of FCS file)
-    datasets = conf.read_std_datasets(fcs_path)
+    datasets = conf.read_std_datasets(fcs_path, scan=True)
     cores = [d[0] for d in datasets]
     uncores = [d[1] for d in datasets]
     fcs_write_datasets(smk.output["fcs"], cores)
