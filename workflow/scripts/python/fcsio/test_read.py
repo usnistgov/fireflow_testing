@@ -571,6 +571,7 @@ class VersionScores(WritableDiagnostic):
 @dataclass(frozen=True)
 class MiscDiagnostics(WritableDiagnostic):
     version: pt.FCSVersion
+    dataset_offset: int
     nextdata: int | None
     header_width: int
     prim_delimiter: int
@@ -592,11 +593,14 @@ class MiscDiagnostics(WritableDiagnostic):
     supp_origin_type: pt.SuppTEXTOffsetsOriginType
     data_origin_type: pt.TEXTOffsetsOriginType
     analysis_origin_type: pt.TEXTOffsetsOriginType
+    file_crc_value: int | None
+    file_crc_offset: int | None
 
     @classmethod
     def to_header(self) -> list[str]:
         return [
             "version",
+            "dataset_offset",
             "nextdata",
             "header_width",
             "prim_delimiter",
@@ -618,12 +622,15 @@ class MiscDiagnostics(WritableDiagnostic):
             "supp_origin_type",
             "data_origin_type",
             "analysis_origin_type",
+            "file_crc_value",
+            "file_crc_offset",
         ]
 
     def to_row(self) -> list[str]:
         return [
             self.version,
             str(self.nextdata),
+            str(self.dataset_offset),
             str(self.header_width),
             str(self.prim_delimiter),
             str(self.prim_escaped),
@@ -646,6 +653,8 @@ class MiscDiagnostics(WritableDiagnostic):
             self.supp_origin_type,
             self.data_origin_type,
             self.analysis_origin_type,
+            str(self.file_crc_value),
+            str(self.file_crc_offset),
         ]
 
     @classmethod
@@ -659,10 +668,12 @@ class MiscDiagnostics(WritableDiagnostic):
             lambda x: len(x[0]) * 2 * x[1],
             flat.header_supp.header.final_offsets.others,
         )
+        crc = u.dataset.file_crc
         ret = cls(
             p,
             i,
             flat.header_supp.header.version,
+            flat.header_supp.header.dataset_offset,
             flat.header_supp.nextdata,
             header_width,
             primary.delimiter,
@@ -684,6 +695,8 @@ class MiscDiagnostics(WritableDiagnostic):
             flat.header_supp.supp_text.origin_type,
             u.dataset.dataset_offsets.data_origin.origin_type,
             u.dataset.dataset_offsets.analysis_origin.origin_type,
+            crc[0] if isinstance(crc, tuple) else None,
+            crc[1] if isinstance(crc, tuple) else None,
         )
         return (ret,)
 
