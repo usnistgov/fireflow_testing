@@ -1,0 +1,5 @@
+name: fireflow-testing-tidyverse
+channels:
+  - conda-forge
+dependencies:
+  - r-tidyverse

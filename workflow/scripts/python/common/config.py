@@ -513,3 +513,8 @@ class FCSConfig(BaseModel):
             f"could not find config for {file_name} and {repo_id} which is a {repo_type}"
         )
         return ret.parse
+
+    # hack to make rmd scripts work with this (note this will totally kill
+    # the config as it passes into an rmd script)
+    def items(self) -> Any:
+        return {}.items()

@@ -269,6 +269,20 @@ use rule combine_offsets as combine_misc with:
         "results/diagnostics/misc.tsv",
 
 
+rule compute_gaps:
+    input:
+        file_paths=rules.compile_metadata.output.file_paths,
+        offsets=rules.combine_offsets.output,
+        misc=rules.combine_misc.output,
+    output:
+        gaps="results/analysis/gaps.tsv",
+        final_offsets="results/analysis/final_offsets.tsv",
+    conda:
+        "envs/tidyverse.yml"
+    script:
+        "scripts/R/compute_gaps.R"
+
+
 rule all:
     input:
         # rules.download_immport.output,
@@ -291,3 +305,4 @@ rule all:
         rules.combine_overrange.output,
         rules.combine_version_scores.output,
         rules.combine_misc.output,
+        rules.compute_gaps.output,
