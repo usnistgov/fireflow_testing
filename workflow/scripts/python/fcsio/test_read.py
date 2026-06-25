@@ -500,7 +500,7 @@ class Overrange(WritableDiagnostic):
     def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
         return (
             cls(p, i, si, *x)
-            for si, x in enumerate(u.dataset.events_diagnostics.overrange_columns)
+            for si, x in enumerate(u.dataset.dataset_diagnostics.overrange_columns)
             if x is not None
         )
 
@@ -566,6 +566,117 @@ class VersionScores(WritableDiagnostic):
             ]
         else:
             return []
+
+
+@dataclass(frozen=True)
+class Padding(WritableDiagnostic):
+    prev_segment: str
+    next_segment: str
+    start_index: int
+    byte_char: int
+    n: int
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return [
+            "prev_segment",
+            "next_segment",
+            "start_index",
+            "byte_char",
+            "n",
+        ]
+
+    def to_row(self) -> list[str]:
+        return [
+            self.prev_segment,
+            self.next_segment,
+            str(self.start_index),
+            str(self.byte_char),
+            str(self.n),
+        ]
+
+    @classmethod
+    def dataset_iter(
+        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+    ) -> Iterable["Padding"]:
+        acc = []
+
+        header_width = 58 + maybe(
+            0,
+            lambda x: len(x[0]) * 2 * x[1],
+            u.flat_diagnostics.header_supp.header.final_offsets.others,
+        )
+        pre = u.flat_diagnostics.header_supp.header.dark_bytes
+        if isinstance(pre, tuple):
+            acc.append(cls(p, i, "HEADER", "FIRST", header_width, pre[0], pre[1]))
+
+        for d in u.dataset.dataset_diagnostics.intra_segment_dark_bytes:
+            db = d.bytes
+            if isinstance(db, tuple):
+                n0 = fmt_offset_name(d.prev)
+                n1 = fmt_offset_name(d.next)
+                acc.append(cls(p, i, n0, n1, d.start, db[0], db[1]))
+
+        dataset_len = u.dataset.dataset_diagnostics.dataset_len
+        post = u.dataset.dataset_diagnostics.post_dataset_dark_bytes
+        if isinstance(post, tuple):
+            acc.append(cls(p, i, "LAST", "END", dataset_len, post[0], post[1]))
+
+        return acc
+
+
+@dataclass(frozen=True)
+class DarkBytes(WritableDiagnostic):
+    prev_segment: str
+    next_segment: str
+    start_index: int
+    content: str
+
+    @classmethod
+    def to_header(self) -> list[str]:
+        return [
+            "prev_segment",
+            "next_segment",
+            "start_index",
+            "content",
+        ]
+
+    def to_row(self) -> list[str]:
+        return [
+            self.prev_segment,
+            self.next_segment,
+            str(self.start_index),
+            self.content,
+        ]
+
+    @classmethod
+    def dataset_iter(
+        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+    ) -> Iterable["DarkBytes"]:
+        acc = []
+
+        header_width = 58 + maybe(
+            0,
+            lambda x: len(x[0]) * 2 * x[1],
+            u.flat_diagnostics.header_supp.header.final_offsets.others,
+        )
+        pre = u.flat_diagnostics.header_supp.header.dark_bytes
+        if isinstance(pre, str | bytes):
+            acc.append(cls(p, i, "HEADER", "FIRST", header_width, encode_or_esc(pre)))
+
+        for d in u.dataset.dataset_diagnostics.intra_segment_dark_bytes:
+            db = d.bytes
+            if isinstance(db, str | bytes):
+                n0 = fmt_offset_name(d.prev)
+                n1 = fmt_offset_name(d.next)
+                acc.append(cls(p, i, n0, n1, d.start, encode_or_esc(db)))
+
+        dataset_len = u.dataset.dataset_diagnostics.dataset_len
+        post = u.dataset.dataset_diagnostics.post_dataset_dark_bytes
+        if isinstance(post, str | bytes):
+            acc.append(cls(p, i, "LAST", "END", dataset_len, encode_or_esc(post)))
+
+        return acc
 
 
 @dataclass(frozen=True)
@@ -673,13 +784,13 @@ class MiscDiagnostics(WritableDiagnostic):
         flat = u.flat_diagnostics
         primary = flat.primary_split
         supp = flat.supp_split
-        event = u.dataset.events_diagnostics
+        event = u.dataset.dataset_diagnostics
         header_width = 58 + maybe(
             0,
             lambda x: len(x[0]) * 2 * x[1],
             flat.header_supp.header.final_offsets.others,
         )
-        crc = u.dataset.file_crc
+        crc = u.dataset.dataset_diagnostics.file_crc
         ret = cls(
             p,
             i,
@@ -708,7 +819,7 @@ class MiscDiagnostics(WritableDiagnostic):
             u.dataset.dataset_offsets.analysis_origin.origin_type,
             crc[0] if isinstance(crc, tuple) else None,
             crc[1] if isinstance(crc, tuple) else None,
-            u.dataset.computed_crc,
+            u.dataset.dataset_diagnostics.computed_crc,
             encode_or_esc(primary.last_odd_token),
             fmap_maybe(lambda x: encode_or_esc(x.last_odd_token), supp),
         )
@@ -727,6 +838,8 @@ def main(smk: Any) -> None:
     # compute the CRC so it can be checked manually
     conf.compute_crc = "always"
     conf.allow_mismatch_crc = "silent"
+    conf.read_intra_segment_dark_bytes = True
+    conf.read_post_dataset_dark_bytes = True
 
     # read and write dataset (this will fail if pyreflow does not know how to
     # parse this particular brand of FCS file)
@@ -746,6 +859,8 @@ def main(smk: Any) -> None:
     OriginalName.write_datasets(Path(smk.output["original_names"]), fcs_path, uncores)
     Overrange.write_datasets(Path(smk.output["overrange"]), fcs_path, uncores)
     VersionScores.write_datasets(Path(smk.output["version_scores"]), fcs_path, uncores)
+    Padding.write_datasets(Path(smk.output["padding"]), fcs_path, uncores)
+    DarkBytes.write_datasets(Path(smk.output["dark_bytes"]), fcs_path, uncores)
     MiscDiagnostics.write_datasets(Path(smk.output["misc"]), fcs_path, uncores)
 
     # make sentinel to indicate that everything worked

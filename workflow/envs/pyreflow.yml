@@ -6,7 +6,7 @@ dependencies:
   - maturin=1.13.3
   - pydantic=2.12.5
   - pip:
-    - git+https://github.com/njd2/fireflow.git@a6a02232fef6ea23bf13ed04f1810cfcd15106de#subdirectory=pyreflow
+    - git+https://github.com/njd2/fireflow.git@3ee9938874a00bc3e6be241dc6b1d1a7c0b209c7#subdirectory=pyreflow
 
   # dev stuff
   - ruff=0.13.2
