@@ -130,6 +130,10 @@ class ParseConfig(BaseModel):
         # only use options that were set explicitly in the config
         for k, v in self.options.model_dump(exclude_unset=True).items():
             setattr(conf, k, v)
+        # TODO fix these, not clear why these will screw with the non-standard
+        # keywords dicts
+        setattr(conf, "promote_to_standard", [])
+        setattr(conf, "rename_standard_keys", {})
         # override these to "drop" since this will make it easier to diagnose
         # which keywords were bad
         setattr(conf, "process_time_optical_keys", "drop_silent")

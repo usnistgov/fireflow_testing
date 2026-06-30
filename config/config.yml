@@ -419,9 +419,9 @@ test_files:
         - Specimen1_1-1.732826.fcs
         - Specimen1_1-1.732945.fcs
         - Specimen1_1-10.732949.fcs
-    parse:
-      options:
-        nonstandard_measurement_pattern: "#NCP%n"
+    # parse:
+    #   options:
+    #     nonstandard_measurement_pattern: "#NCP%n"
 
   # Aurora
   - src:
@@ -559,11 +559,11 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - Accuri - C6.fcs
-    # parse:
-    #   options:
-    #     # I'm assuming these are centiseconds and not 1/60th seconds since they
-    #     # exceed 59 but never exceed 99
-    #     time_pattern: "%H:%M:%S:%@"
+    parse:
+      options:
+        # I'm assuming these are centiseconds and not 1/60th seconds since they
+        # exceed 59 but never exceed 99
+        time_pattern: "%H:%M:%S:%@"
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -575,19 +575,24 @@ test_files:
       options:
         # supp text partially overlaps (not clear why)
         ignore_supp_text: true
-        # time_pattern: "%H:%M:%S:%@"
-  
+        time_pattern: "%H:%M:%S:%@"
+
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - 1 WT_001.fcs
+    parse:
+      options:
+        # probably?
+        time_pattern: "%H:%M:%S:%3f"
+  
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
         - BD - FACS Aria II - Compensation Controls_B515 Stained Control.fcs
         - BD - FACS Aria II - Compensation Controls_G560 Stained Control.fcs
         - BD - FACS Aria II - Compensation Controls_G610 Stained Control.fcs
         - BD - FACS Aria II - Compensation Controls_G660 Stained Control.fcs
-        - Beckman Coulter - MoFlo Astrios - linear settings.fcs
-        - Beckman Coulter - MoFlo Astrios - log settings.fcs
-        - Beckman Coulter - MoFlo XDP.fcs
         - Cytek DxP10 - 6-peak Q&b 11-06-2012 001.fcs
         - Cytek DxP10 - APC COMP BEADS011.fcs
         - Cytek DxP10 - BLANK COMP BEADS007.fcs
@@ -599,6 +604,16 @@ test_files:
         - iCyt - Eclipse - 20100922_14h35m49s(Protocol CytoTrol, Well C7).lmd
         - iCyt - Eclipse - 20100923_12h23m41s(Protocol Cell Cycle DAPI , SampleID1 DAPI Prep-DNA, Well A1).lmd
         - iCyt - Eclipse - 20100924_08h32m40s(Protocol AlignCheck - Final Test 6Runs, Well A1).lmd
+
+  - src:
+      fr_id: FR-FCM-ZZZ4
+      file_names:
+        - Beckman Coulter - MoFlo Astrios - linear settings.fcs
+        - Beckman Coulter - MoFlo Astrios - log settings.fcs
+        - Beckman Coulter - MoFlo XDP.fcs
+    parse:
+      options:
+        date_pattern: "%d %b %Y"
 
 
   # actually a FACScan with a Cytek xP5 upgrade, "FACScan" is in the "nickname" field
@@ -640,6 +655,7 @@ test_files:
       options:
         # one of the OTHER segments drove off the cliff at the end of the file
         max_other: 0
+        date_pattern: "%d %b %Y"
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -663,14 +679,18 @@ test_files:
       machine: miltenyi_mqa
       options:
         time_meas_pattern: HDR-T
+        date_pattern: "%Y-%b-%d"
 
 
+  # TODO this also has HDR-T
   - src:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - MVa2011-06-30_fcs31.fcs
     parse:
       machine: miltenyi_mqa
+      options:
+        date_pattern: "%Y-%b-%d"
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -692,6 +712,9 @@ test_files:
       fr_id: FR-FCM-ZZZ4
       file_names:
         - Partec - PAS - 8 peak beads.FCS
+    parse:
+      options:
+        date_pattern: "%d-%m-%Y"
   
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -699,6 +722,9 @@ test_files:
         - Stratedigm - S1400 - 8 Peaks Beads.fcs
     parse:
       machine: strat_s1400
+      options:
+        # TODO not sure what this should be, all I can is that it's not standard
+        time_pattern: "%H:%M:%S:%@"
       
   - src:
       fr_id: FR-FCM-ZZZ4
@@ -744,6 +770,7 @@ test_files:
       file_names:
         - Unstained Monocytes_001.fcs
     parse:
+      # TODO this is in scalpal
       options:
         allow_other_feature: true
         # trim_value_whitespace: trim_blank_silent
@@ -758,6 +785,9 @@ test_files:
         - Solanum_pseudocapsicum_root.FCS
         - Solanum_pseudocapsicum_stem.FCS
         - Solanum_pseudocapsicum_young-leaf.FCS
+    parse:
+      options:
+        date_pattern: "%d-%m-%Y"
 
   # MoFlo XDP (with mixed byteord)
   - src:
@@ -766,3 +796,6 @@ test_files:
         - 29C6hr_1.fcs
         - 29C6hr_2.fcs
         - 29C6hr_3.fcs
+    parse:
+      options:
+        date_pattern: "%d %b %Y"

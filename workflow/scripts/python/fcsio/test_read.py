@@ -36,20 +36,25 @@ class WritableDiagnostic:
 
     @classmethod
     def write_datasets(
-        cls, p: Path, fcs_path: Path, ds: list[pfa.StdDatasetOutput]
+        cls,
+        p: Path,
+        fcs_path: Path,
+        ds: list[tuple[pt.AnyCoreDataset, pfa.StdDatasetOutput]],
     ) -> None:
         with open(p, "w") as f:
             w = csv.writer(f, delimiter="\t")
             h = cls.to_header()
             w.writerow(["fcs_path", "dataset", *h])
-            for i, u in enumerate(ds):
-                for row in cls.dataset_iter(fcs_path, i, u):
+            for i, (c, u) in enumerate(ds):
+                for row in cls.dataset_iter(fcs_path, i, c, u):
                     r = row.to_row()
                     assert len(r) == len(h), f"{h} is not same length as {r}"
                     w.writerow([row.path, row.dataset, *r])
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         raise NotImplementedError
 
     @classmethod
@@ -69,7 +74,7 @@ class Offset(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Offset"]:
         return chain(cls._uncorrected(p, i, u), cls._final(p, i, u))
 
@@ -91,11 +96,7 @@ class Offset(WritableDiagnostic):
     ) -> Iterable["Offset"]:
         def go(n: str, o: tuple[int, int]) -> Offset:
             begin, end = o
-            # Make second offset mean the same thing as final offsets. Original
-            # offsets will be the final byte of the segment rather than the next
-            # byte, which is what the final offsets use (the sane choice).
-            new_end = end + 1 if begin > 0 and end > 0 else 0
-            return cls._from_offset(p, i, n, (begin, new_end), False)
+            return cls._from_offset(p, i, n, (begin, end), False)
 
         h_orig = u.flat_diagnostics.header_supp.header.original_offsets
         hdr_text = go("primary_text", h_orig.text)
@@ -197,7 +198,9 @@ class Overflow(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         header_overflows = (
             cls._from_overflow(p, i, o) for o in u.flat_diagnostics.header_overflows
         )
@@ -302,7 +305,9 @@ class Overlap(WritableDiagnostic):
         )
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         hsupp = u.flat_diagnostics.header_supp
         header_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.header.overlaps)
         supp_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.supp_text.overlaps)
@@ -333,7 +338,9 @@ class KeyValPair(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         return chain(
             cls._bad_pairs(p, i, u),
             cls._trimmed(p, i, u),
@@ -348,7 +355,9 @@ class KeyValPair(WritableDiagnostic):
         non_unq_nonstd = (
             ("non_unique_nonstd", k, v) for k, v in fd.non_unique_std_keywords
         )
-        ignored = (("ignored_std", k, v) for k, v in fd.ignored_standard_keywords)
+        ignored = (
+            ("ignored_std", k, v) for k, v in u.dataset.repair_diagnostics.ignored
+        )
         return (
             cls(p, i, t, k, v)
             for t, k, v in chain(byte_pairs, non_unq_std, non_unq_nonstd, ignored)
@@ -396,7 +405,7 @@ class Token(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Token"]:
         def go(src: pfa.SplitTEXTDiagnostics, which: str) -> Iterable["Token"]:
             blank_values = (
@@ -440,7 +449,9 @@ class FixedScale(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         diag = u.dataset.std_diagnostics
         meas = (
             cls(p, i, si, True, s[0], s[1])
@@ -471,10 +482,12 @@ class OriginalName(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         return (
             cls(p, i, si, n)
-            for si, n in enumerate(u.dataset.std_diagnostics.original_names)
+            for si, n in enumerate(u.dataset.std_diagnostics.dedup_names)
             if n is not None
         )
 
@@ -497,7 +510,9 @@ class Overrange(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         return (
             cls(p, i, si, *x)
             for si, x in enumerate(u.dataset.dataset_diagnostics.overrange_columns)
@@ -540,7 +555,7 @@ class VersionScores(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["VersionScores"]:
         def go(v: pt.FCSVersion, src: pfa.KeywordVersionScore) -> VersionScores:
             return cls(
@@ -597,10 +612,11 @@ class Padding(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Padding"]:
         acc = []
 
+        # TODO add method to compute this on the fly
         header_width = 58 + maybe(
             0,
             lambda x: len(x[0]) * 2 * x[1],
@@ -651,7 +667,7 @@ class DarkBytes(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["DarkBytes"]:
         acc = []
 
@@ -681,7 +697,8 @@ class DarkBytes(WritableDiagnostic):
 
 @dataclass(frozen=True)
 class MiscDiagnostics(WritableDiagnostic):
-    version: pt.FCSVersion
+    file_version: pt.FCSVersion
+    real_version: pt.FCSVersion
     dataset_offset: int
     nextdata: int | None
     header_width: int
@@ -698,14 +715,22 @@ class MiscDiagnostics(WritableDiagnostic):
     supp_extra_leading_delim: int | None
     supp_last_odd_bytes: int | None
     timestep_added: bool
+    spillover_was_indexed: bool
+    btim_pattern: bool
+    etim_pattern: bool
+    date_pattern: bool
+    begindatetime_pattern: bool
+    enddatetime_pattern: bool
+    last_modified_pattern: bool
+    original_int_width: int | None
+    original_byteord: list[int] | None
     event_width: int | None
     event_data_remainder: int | None
     tot_event_mismatch: bool | None
     supp_origin_type: pt.SuppTEXTOffsetsOriginType
     data_origin_type: pt.TEXTOffsetsOriginType
     analysis_origin_type: pt.TEXTOffsetsOriginType
-    file_crc_value: int | None
-    file_crc_offset: int | None
+    file_crc: int | None
     computed_crc: int | None
     # put these last since they can sometimes be long and it is easier to see
     # things when they are at the end
@@ -715,7 +740,8 @@ class MiscDiagnostics(WritableDiagnostic):
     @classmethod
     def to_header(self) -> list[str]:
         return [
-            "version",
+            "file_version",
+            "real_version",
             "dataset_offset",
             "nextdata",
             "header_width",
@@ -732,14 +758,22 @@ class MiscDiagnostics(WritableDiagnostic):
             "supp_extra_leading_delim",
             "supp_last_odd_bytes",
             "timestep_added",
+            "spillover_was_indexed",
+            "btim_pattern",
+            "etim_pattern",
+            "date_pattern",
+            "begindatetime_pattern",
+            "enddatetime_pattern",
+            "last_modified_pattern",
+            "original_int_width",
+            "original_byteord",
             "event_width",
             "event_data_remainder",
             "tot_event_mismatch",
             "supp_origin_type",
             "data_origin_type",
             "analysis_origin_type",
-            "file_crc_value",
-            "file_crc_offset",
+            "file_crc",
             "computed_crc",
             "supp_last_odd_token",
             "prim_last_odd_token",
@@ -747,7 +781,8 @@ class MiscDiagnostics(WritableDiagnostic):
 
     def to_row(self) -> list[str]:
         return [
-            self.version,
+            self.file_version,
+            self.real_version,
             str(self.dataset_offset),
             str(self.nextdata),
             str(self.header_width),
@@ -764,14 +799,22 @@ class MiscDiagnostics(WritableDiagnostic):
             maybe("", str, self.supp_extra_leading_delim),
             maybe("", str, self.supp_last_odd_bytes),
             str(self.timestep_added),
+            str(self.spillover_was_indexed),
+            str(self.btim_pattern),
+            str(self.etim_pattern),
+            str(self.date_pattern),
+            str(self.begindatetime_pattern),
+            str(self.enddatetime_pattern),
+            str(self.last_modified_pattern),
+            maybe("", str, self.original_int_width),
+            maybe("", lambda xs: ",".join(map(str, xs)), self.original_byteord),
             maybe("", str, self.event_width),
             maybe("", str, self.event_data_remainder),
             maybe("", str, self.tot_event_mismatch),
             self.supp_origin_type,
             self.data_origin_type,
             self.analysis_origin_type,
-            maybe("", str, self.file_crc_value),
-            maybe("", str, self.file_crc_offset),
+            maybe("", str, self.file_crc),
             maybe("", str, self.computed_crc),
             encode_or_esc(self.prim_last_odd_token),
             ""
@@ -780,10 +823,14 @@ class MiscDiagnostics(WritableDiagnostic):
         ]
 
     @classmethod
-    def dataset_iter(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def dataset_iter(
+        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         flat = u.flat_diagnostics
         primary = flat.primary_split
         supp = flat.supp_split
+        std = u.dataset.std_diagnostics
+        schema = std.schema_diagnostics
         event = u.dataset.dataset_diagnostics
         header_width = 58 + maybe(
             0,
@@ -795,6 +842,7 @@ class MiscDiagnostics(WritableDiagnostic):
             p,
             i,
             flat.header_supp.header.version,
+            c.version,
             flat.header_supp.header.dataset_offset,
             flat.header_supp.nextdata,
             header_width,
@@ -810,15 +858,23 @@ class MiscDiagnostics(WritableDiagnostic):
             fmap_maybe(lambda x: x.has_even_delims, supp),
             fmap_maybe(lambda x: x.extra_leading_delims, supp),
             fmap_maybe(lambda x: len(x.last_odd_token), supp),
-            u.dataset.std_diagnostics.timestep_added,
+            std.timestep_added,
+            std.spillover_was_indexed is True,
+            isinstance(std.btim_pattern, str),
+            isinstance(std.etim_pattern, str),
+            isinstance(std.date_pattern, str),
+            isinstance(std.begindatetime_pattern, str),
+            isinstance(std.enddatetime_pattern, str),
+            isinstance(std.last_modified_pattern, str),
+            schema.original_int_width,
+            schema.original_byteord,
             event.event_width,
             event.event_data_remainder,
             event.tot_event_mismatch,
             flat.header_supp.supp_text.origin_type,
             u.dataset.dataset_offsets.data_origin.origin_type,
             u.dataset.dataset_offsets.analysis_origin.origin_type,
-            crc[0] if isinstance(crc, tuple) else None,
-            crc[1] if isinstance(crc, tuple) else None,
+            crc if isinstance(crc, int) else None,
             u.dataset.dataset_diagnostics.computed_crc,
             encode_or_esc(primary.last_odd_token),
             fmap_maybe(lambda x: encode_or_esc(x.last_odd_token), supp),
@@ -845,23 +901,23 @@ def main(smk: Any) -> None:
     # parse this particular brand of FCS file)
     datasets = conf.read_std_datasets(fcs_path, scan=True)
     cores = [d[0] for d in datasets]
-    uncores = [d[1] for d in datasets]
+    # uncores = [d[1] for d in datasets]
     fcs_write_datasets(smk.output["fcs"], cores)
 
     # dump lots of diagnostic data into neat little tables that can be concatted
     # later
-    Offset.write_datasets(Path(smk.output["offsets"]), fcs_path, uncores)
-    Overflow.write_datasets(Path(smk.output["overflow"]), fcs_path, uncores)
-    Overlap.write_datasets(Path(smk.output["overlap"]), fcs_path, uncores)
-    KeyValPair.write_datasets(Path(smk.output["key_val_pairs"]), fcs_path, uncores)
-    Token.write_datasets(Path(smk.output["tokens"]), fcs_path, uncores)
-    FixedScale.write_datasets(Path(smk.output["fixed_scales"]), fcs_path, uncores)
-    OriginalName.write_datasets(Path(smk.output["original_names"]), fcs_path, uncores)
-    Overrange.write_datasets(Path(smk.output["overrange"]), fcs_path, uncores)
-    VersionScores.write_datasets(Path(smk.output["version_scores"]), fcs_path, uncores)
-    Padding.write_datasets(Path(smk.output["padding"]), fcs_path, uncores)
-    DarkBytes.write_datasets(Path(smk.output["dark_bytes"]), fcs_path, uncores)
-    MiscDiagnostics.write_datasets(Path(smk.output["misc"]), fcs_path, uncores)
+    Offset.write_datasets(Path(smk.output["offsets"]), fcs_path, datasets)
+    Overflow.write_datasets(Path(smk.output["overflow"]), fcs_path, datasets)
+    Overlap.write_datasets(Path(smk.output["overlap"]), fcs_path, datasets)
+    KeyValPair.write_datasets(Path(smk.output["key_val_pairs"]), fcs_path, datasets)
+    Token.write_datasets(Path(smk.output["tokens"]), fcs_path, datasets)
+    FixedScale.write_datasets(Path(smk.output["fixed_scales"]), fcs_path, datasets)
+    OriginalName.write_datasets(Path(smk.output["original_names"]), fcs_path, datasets)
+    Overrange.write_datasets(Path(smk.output["overrange"]), fcs_path, datasets)
+    VersionScores.write_datasets(Path(smk.output["version_scores"]), fcs_path, datasets)
+    Padding.write_datasets(Path(smk.output["padding"]), fcs_path, datasets)
+    DarkBytes.write_datasets(Path(smk.output["dark_bytes"]), fcs_path, datasets)
+    MiscDiagnostics.write_datasets(Path(smk.output["misc"]), fcs_path, datasets)
 
     # make sentinel to indicate that everything worked
     flag_out.touch()
