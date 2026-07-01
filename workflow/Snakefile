@@ -299,6 +299,26 @@ use rule combine_offsets as combine_misc with:
 #         "scripts/R/compute_gaps.R"
 
 
+rule compile_errors:
+    input:
+        offsets=rules.combine_offsets.output,
+        overflow=rules.combine_overflow.output,
+        key_val=rules.combine_key_val_pairs.output,
+        tokens=rules.combine_tokens.output,
+        scale=rules.combine_fixed_scales.output,
+        orig_names=rules.combine_original_names.output,
+        misc=rules.combine_misc.output,
+        overrange=rules.combine_overrange.output,
+        machines=rules.compile_metadata.output.machine_table,
+    output:
+        table="results/reports/errors.tsv",
+        plot="results/reports/errors.pdf",
+    conda:
+        "envs/tidyverse.yml"
+    script:
+        "scripts/R/compile_errors.R"
+
+
 rule all:
     input:
         # rules.download_immport.output,
@@ -324,3 +344,4 @@ rule all:
         rules.combine_dark_bytes.output,
         rules.combine_misc.output,
         # rules.compute_gaps.output,
+        rules.compile_errors.output,
