@@ -7,6 +7,14 @@ test_files:
         - Fig3A_human organoids_Raw data/D110_stained.fcs
         - Fig3A_human organoids_Raw data/D110_unstained.fcs
         - Fig3A_human organoids_Raw data/D110_unstained_new.fcs
+        - Fig3A_human organoids_Raw data/D185_stained.fcs
+        - Fig3A_human organoids_Raw data/D185_unstained.fcs
+        - Fig3A_human organoids_Raw data/D197_stained.fcs
+        - Fig3A_human organoids_Raw data/D197_unstained.fcs
+        - Fig3A_human organoids_Raw data/ORG1_stained.fcs
+        - Fig3A_human organoids_Raw data/ORG1_unstained.fcs
+        - Fig3A_human organoids_Raw data/ORG2_stained.fcs
+        - Fig3A_human organoids_Raw data/ORG2_unstained.fcs
 
   # Apogee A60 Micro
   - src:
@@ -27,9 +35,28 @@ test_files:
       zip_url: https://zenodo.org/records/10720746/files/Co-cultures_data.zip
       dataset_id: zenodo_easycyte
       file_paths:
-        - Direct co-cultures/EXP007_2022-01-19_at_04-01-12pm.fcs
+        - Transwell co-cultures/2022-03-05_at_03-08-34pm.fcs
+        - Transwell co-cultures/2022-02-23_at_03-31-19pm.fcs
+        - Transwell co-cultures/2022-03-07_at_02-22-15pm.fcs
+        - Transwell co-cultures/2022-03-01_at_02-59-49pm.fcs
+        - Transwell co-cultures/2022-03-03_at_02-34-13pm.fcs
+        - Transwell co-cultures/2022-02-27_at_01-28-55pm.fcs
+        - Transwell co-cultures/2022-02-25_at_01-58-16pm.fcs
         - Direct co-cultures/EXP007_2022-01-20_at_02-07-37pm.fcs
+        - Direct co-cultures/EXP007_2022-01-22_at_02-43-13pm.fcs
+        - Direct co-cultures/EXP007_2022-02-01_at_02-27-21pm.fcs
+        - Direct co-cultures/EXP007_2022-01-24_at_02-10-15pm.fcs
+        - Direct co-cultures/EXP007_2022-02-02_at_02-02-20pm.fcs
+        - Direct co-cultures/EXP007_2022-01-31_at_02-20-53pm.fcs
+        - Direct co-cultures/EXP007_2022-01-27_at_02-24-35pm.fcs
+        - Direct co-cultures/EXP007_2022-01-29_at_02-27-56pm.fcs
+        - Direct co-cultures/EXP007_2022-01-26_at_01-52-07pm.fcs
+        - Direct co-cultures/EXP007_2022-01-23_at_02-01-01pm.fcs
+        - Direct co-cultures/EXP007_2022-01-19_at_04-01-12pm.fcs
+        - Direct co-cultures/EXP007_2022-01-25_at_02-36-56pm.fcs
+        - Direct co-cultures/EXP007_2022-01-30_at_01-49-28pm.fcs
         - Direct co-cultures/EXP007_2022-01-21_at_02-31-36pm.fcs
+        - Direct co-cultures/EXP007_2022-01-28_at_01-55-13pm.fcs
     parse:
       machine: cytek_easycyte
 
@@ -38,34 +65,190 @@ test_files:
       url_root: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
       dataset_id: zenodo_Aurora
       filemap:
-        b_d1.fcs: B_cells_donor1.fcs
-        b_d2.fcs: B_cells_donor2.fcs
-        b_d3.fcs: B_cells_donor3.fcs
-        t4_d1.fcs: Effector_memory_CD4+_T%20cells_donor1.fcs
-        t4_d2.fcs: Effector_memory_CD4+_T%20cells_donor2.fcs
-        t4_d3.fcs: Effector_memory_CD4+_T%20cells_donor3.fcs
-        t8_d1.fcs: Effector_memory_CD8+_T_cells_donor1.fcs
-        t8_d2.fcs: Effector_memory_CD8+_T_cells_donor2.fcs
-        t8_d3.fcs: Effector_memory_CD8+_T_cells_donor3.fcs
+        - B_cells_donor1.fcs
+        - B_cells_donor2.fcs
+        - B_cells_donor3.fcs
+        - B_cells_donor4.fcs
+        - B_cells_donor5.fcs
+        - B_cells_donor6.fcs
+        - B_cells_donor7.fcs
+        - Effector_memory_CD4+_T%20cells_donor1.fcs
+        - Effector_memory_CD4+_T%20cells_donor2.fcs
+        - Effector_memory_CD4+_T%20cells_donor3.fcs
+        - Effector_memory_CD4+_T%20cells_donor4.fcs
+        - Effector_memory_CD4+_T%20cells_donor5.fcs
+        - Effector_memory_CD4+_T%20cells_donor6.fcs
+        - Effector_memory_CD4+_T%20cells_donor7.fcs
+        - Effector_memory_CD8+_T_cells_donor1.fcs
+        - Effector_memory_CD8+_T_cells_donor2.fcs
+        - Effector_memory_CD8+_T_cells_donor3.fcs
+        - Effector_memory_CD8+_T_cells_donor4.fcs
+        - Effector_memory_CD8+_T_cells_donor5.fcs
+        - Effector_memory_CD8+_T_cells_donor6.fcs
+        - Effector_memory_CD8+_T_cells_donor7.fcs
+        - Naïve_CD4+_T_cells_donor1.fcs
+        - Naïve_CD4+_T_cells_donor2.fcs
+        - Naïve_CD4+_T_cells_donor3.fcs
+        - Naïve_CD4+_T_cells_donor4.fcs
+        - Naïve_CD4+_T_cells_donor5.fcs
+        - Naïve_CD4+_T_cells_donor6.fcs
+        - Naïve_CD4+_T_cells_donor7.fcs
+        - Naïve_CD8+_T_cells_donor1.fcs
+        - Naïve_CD8+_T_cells_donor2.fcs
+        - Naïve_CD8+_T_cells_donor3.fcs
+        - Naïve_CD8+_T_cells_donor4.fcs
+        - Naïve_CD8+_T_cells_donor5.fcs
+        - Naïve_CD8+_T_cells_donor6.fcs
+        - Naïve_CD8+_T_cells_donor7.fcs
+        - NK_cells_donor1.fcs
+        - NK_cells_donor2.fcs
+        - NK_cells_donor3.fcs
+        - NK_cells_donor4.fcs
+        - NK_cells_donor5.fcs
+        - NK_cells_donor6.fcs
+        - NK_cells_donor7.fcs
+        - TEMRA_CD4+_T_cells_donor1.fcs
+        - TEMRA_CD4+_T_cells_donor2.fcs
+        - TEMRA_CD4+_T_cells_donor3.fcs
+        - TEMRA_CD4+_T_cells_donor4.fcs
+        - TEMRA_CD4+_T_cells_donor5.fcs
+        - TEMRA_CD4+_T_cells_donor6.fcs
+        - TEMRA_CD4+_T_cells_donor7.fcs
+        - TEMRA_CD8+_T_cells_donor1.fcs
+        - TEMRA_CD8+_T_cells_donor2.fcs
+        - TEMRA_CD8+_T_cells_donor3.fcs
+        - TEMRA_CD8+_T_cells_donor4.fcs
+        - TEMRA_CD8+_T_cells_donor5.fcs
+        - TEMRA_CD8+_T_cells_donor6.fcs
+        - TEMRA_CD8+_T_cells_donor7.fcs 
 
   # Sony SA3800
   - src:
       url_root: https://zenodo.org/records/7971252/files/
       dataset_id: zenodo_SonySA3800
       filemap:
-        a1.fcs: A01%20Well%20-%20A01%20WLSM.fcs
-        a2.fcs: A02%20Well%20-%20A02%20WLSM.fcs
-        a3.fcs: A03%20Well%20-%20A03%20WLSM.fcs
+        - A01%20Well%20-%20A01%20WLSM.fcs
+        - A02%20Well%20-%20A02%20WLSM.fcs
+        - A03%20Well%20-%20A03%20WLSM.fcs
+        - A04%20Well%20-%20A04%20WLSM.fcs
+        - A05%20Well%20-%20A05%20WLSM.fcs
+        - A06%20Well%20-%20A06%20WLSM.fcs
+        - A07%20Well%20-%20A07%20WLSM.fcs
+        - A08%20Well%20-%20A08%20WLSM.fcs
+        - A09%20Well%20-%20A09%20WLSM.fcs
+        - A10%20Well%20-%20A10%20WLSM.fcs
+        - A11%20Well%20-%20A11%20WLSM.fcs
+        - A12%20Well%20-%20A12%20WLSM.fcs
+        - B01%20Well%20-%20B01%20WLSM.fcs
+        - B02%20Well%20-%20B02%20WLSM.fcs
+        - B03%20Well%20-%20B03%20WLSM.fcs
+        - B04%20Well%20-%20B04%20WLSM.fcs
+        - B05%20Well%20-%20B05%20WLSM.fcs
+        - B06%20Well%20-%20B06%20WLSM.fcs
+        - B07%20Well%20-%20B07%20WLSM.fcs
+        - B08%20Well%20-%20B08%20WLSM.fcs
+        - B09%20Well%20-%20B09%20WLSM.fcs
+        - B10%20Well%20-%20B10%20WLSM.fcs
+        - B11%20Well%20-%20B11%20WLSM.fcs
+        - B12%20Well%20-%20B12%20WLSM.fcs
+        - C01%20Well%20-%20C01%20WLSM.fcs
+        - C02%20Well%20-%20C02%20WLSM.fcs
+        - C03%20Well%20-%20C03%20WLSM.fcs
+        - C04%20Well%20-%20C04%20WLSM.fcs
+        - C05%20Well%20-%20C05%20WLSM.fcs
+        - C06%20Well%20-%20C06%20WLSM.fcs
+        - C07%20Well%20-%20C07%20WLSM.fcs
+        - C08%20Well%20-%20C08%20WLSM.fcs
+        - C09%20Well%20-%20C09%20WLSM.fcs
+        - C10%20Well%20-%20C10%20WLSM.fcs
+        - C11%20Well%20-%20C11%20WLSM.fcs
+        - C12%20Well%20-%20C12%20WLSM.fcs
+        - D01%20Well%20-%20D01%20WLSM.fcs
+        - D02%20Well%20-%20D02%20WLSM.fcs
+        - D03%20Well%20-%20D03%20WLSM.fcs
+        - D04%20Well%20-%20D04%20WLSM.fcs
+        - D05%20Well%20-%20D05%20WLSM.fcs
+        - D06%20Well%20-%20D06%20WLSM.fcs
+        - D07%20Well%20-%20D07%20WLSM.fcs
+        - D08%20Well%20-%20D08%20WLSM.fcs
+        - D09%20Well%20-%20D09%20WLSM.fcs
+        - D10%20Well%20-%20D10%20WLSM.fcs
+        - D11%20Well%20-%20D11%20WLSM.fcs
+        - D12%20Well%20-%20D12%20WLSM.fcs
+        - E01%20Well%20-%20E01%20WLSM.fcs
+        - E02%20Well%20-%20E02%20WLSM.fcs
+        - E03%20Well%20-%20E03%20WLSM.fcs
+        - E04%20Well%20-%20E04%20WLSM.fcs
+        - E05%20Well%20-%20E05%20WLSM.fcs
+        - E06%20Well%20-%20E06%20WLSM.fcs
+        - E07%20Well%20-%20E07%20WLSM.fcs
+        - E08%20Well%20-%20E08%20WLSM.fcs
+        - E09%20Well%20-%20E09%20WLSM.fcs
+        - E10%20Well%20-%20E10%20WLSM.fcs
+        - E11%20Well%20-%20E11%20WLSM.fcs
+        - E12%20Well%20-%20E12%20WLSM.fcs
+        - F01%20Well%20-%20F01%20WLSM.fcs
+        - F02%20Well%20-%20F02%20WLSM.fcs
+        - F03%20Well%20-%20F03%20WLSM.fcs
+        - F04%20Well%20-%20F04%20WLSM.fcs
+        - F05%20Well%20-%20F05%20WLSM.fcs
+        - F06%20Well%20-%20F06%20WLSM.fcs
+        - F07%20Well%20-%20F07%20WLSM.fcs
+        - F08%20Well%20-%20F08%20WLSM.fcs
+        - F09%20Well%20-%20F09%20WLSM.fcs
+        - F10%20Well%20-%20F10%20WLSM.fcs
+        - F11%20Well%20-%20F11%20WLSM.fcs
+        - F12%20Well%20-%20F12%20WLSM.fcs
+        - G01%20Well%20-%20G01%20WLSM.fcs
+        - G02%20Well%20-%20G02%20WLSM.fcs
+        - G03%20Well%20-%20G03%20WLSM.fcs
+        - G04%20Well%20-%20G04%20WLSM.fcs
+        - G05%20Well%20-%20G05%20WLSM.fcs
+        - G06%20Well%20-%20G06%20WLSM.fcs
+        - G07%20Well%20-%20G07%20WLSM.fcs
+        - G08%20Well%20-%20G08%20WLSM.fcs
+        - G09%20Well%20-%20G09%20WLSM.fcs
+        - G10%20Well%20-%20G10%20WLSM.fcs
+        - G11%20Well%20-%20G11%20WLSM.fcs
+        - G12%20Well%20-%20G12%20WLSM.fcs
+        - H01%20Well%20-%20H01%20WLSM.fcs
+        - H02%20Well%20-%20H02%20WLSM.fcs
+        - H03%20Well%20-%20H03%20WLSM.fcs
+        - H04%20Well%20-%20H04%20WLSM.fcs
+        - H05%20Well%20-%20H05%20WLSM.fcs
+        - H06%20Well%20-%20H06%20WLSM.fcs
+        - H07%20Well%20-%20H07%20WLSM.fcs
+        - H08%20Well%20-%20H08%20WLSM.fcs
+        - H09%20Well%20-%20H09%20WLSM.fcs
+        - H10%20Well%20-%20H10%20WLSM.fcs
+        - H11%20Well%20-%20H11%20WLSM.fcs
+        - H12%20Well%20-%20H12%20WLSM.fcs
 
   # Attune NxT
   - src:
       url_root: https://zenodo.org/records/7352402/files/
       dataset_id: zenodo_AttuneNxt
       filemap:
-        bl1.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL1-A.fcs
-        bl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL3-A.fcs
-        rl1.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL1-A.fcs
-        rl3.fcs: Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL3-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL1-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_BL3-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL1-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_RL3-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_UC.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_VL1-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_VL3-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_VL4-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_YL1-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Compensation_YL4-A.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Controls_C1.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Controls_C2.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Controls_C3.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Controls_C4.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Controls_C5.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Experimental_E1.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Experimental_E2.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Experimental_E4.fcs
+        - Tmem119%20x%20IAB%20AAV%20NJG%201.6.22_Experimental_E5.fcs
+
     parse:
       machine: thermo_attune_nxt
 
@@ -74,9 +257,17 @@ test_files:
       url_root: https://zenodo.org/records/7982165/files/
       dataset_id: zenodo_Helios
       filemap:
-        am_non_jak2.fcs: AM_Non_JAK2.fcs
-        cj_jakj2.fcs: CJ_JAK2.fcs
-        fd_non_jak2.fcs: FD_Non_JAK2.fcs
+        - AM_Non_JAK2.fcs
+        - CJ_JAK2.fcs
+        - FD_Non_JAK2.fcs
+        - JB_Non_JAK2.fcs
+        - JY_JAK2.fcs
+        - KA_JAK2.fcs
+        - LC_Non_JAK2.fcs
+        - LDD_Non_JAK2.fcs
+        - PC_JAK2.fcs
+        - SBB_JAK2.fcs
+        - YE_Non_JAK2.fcs
     parse:
       machine: sbt_helios
         
@@ -85,8 +276,9 @@ test_files:
       url_root: https://zenodo.org/records/15726118/files/
       dataset_id: zenodo_FACSDiscoverA8
       filemap:
-        hd20_bm.fcs: HD%20BM%201.fcs
-        hd_pbmc.fcs: HD%20PBMC.fcs
+        # TODO include all files for this dataset, these are the small ones
+        - HD%20BM%201.fcs
+        - HD%20PBMC.fcs
     parse:
       options:
         allow_other_feature: true
@@ -96,33 +288,81 @@ test_files:
       url_root: https://zenodo.org/records/15726118/files/
       dataset_id: zenodo_Imagestream
       filemap:
-        no_ab.fcs: No%20ab%202_3.fcs
-        ritux.fcs: Ritux%202_5.fcs
+        # TODO include all files for this dataset, these are the small ones
+        - No%20ab%202_3.fcs
+        - Ritux%202_5.fcs
 
   # FASCLyric
   - src:
       url_root: https://zenodo.org/records/17222100/files/
       dataset_id: zenodo_FACSLyric
       filemap:
-        4g2_t1.fcs: 20250409_DV2_4G2_T1_340.fcs
-        4g2_t2.fcs: 20250409_DV2_4G2_T2_340_001.fcs
-        4g2_t3.fcs: 20250409_DV2_4G2_T3_340.fcs
-        scfv_t1.fcs: 20250409_DV2_SCFV_T1_400.fcs
-        scfv_t2.fcs: 20250409_DV2_SCFV_T2_400.fcs
-        scfv_t3.fcs: 20250409_DV2_SCFV_T3_400.fcs
+        - 20250409_DV2_4G2_T1_340.fcs
+        - 20250409_DV2_4G2_T2_340_001.fcs
+        - 20250409_DV2_4G2_T3_340.fcs
+        - 20250409_DV2_SCFV_T1_400.fcs
+        - 20250409_DV2_SCFV_T2_400.fcs
+        - 20250409_DV2_SCFV_T3_400.fcs
+        - 20250409_Mock_4G2_340.fcs
+        - 20250409_Mock_4G2_T1_340.fcs
+        - 20250409_Mock_4G2_T2_340.fcs
+        - 20250409_Mock_SCFV_400.fcs
+        - 20250409_Mock_SCFV_T1_400.fcs
+        - 20250409_Mock_SCFV_T2_400.fcs
 
   # FASCSymphony A5
   - src:
       url_root: https://zenodo.org/records/13928969/files/
       dataset_id: zenodo_FACSSymphonyA5
       filemap:
-        p1_tp1.fcs: ID1_Panel1_TP1.fcs
-        p1_tp2.fcs: ID1_Panel1_TP2.fcs
-        p1_tp3.fcs: ID1_Panel1_TP3.fcs
-        # $CYT for this file says its from a Fortessa (shrug emoji)
-        # p2_tp1.fcs: ID1_Panel2_TP1.fcs
-        p2_tp2.fcs: ID1_Panel2_TP2.fcs
-        p2_tp3.fcs: ID1_Panel2_TP3.fcs
+        - ID1_Panel1_TP1.fcs
+        - ID1_Panel1_TP2.fcs
+        - ID1_Panel1_TP3.fcs
+        - ID1_Panel2_TP1.fcs
+        - ID1_Panel2_TP2.fcs
+        - ID1_Panel2_TP3.fcs
+        - ID2_Panel1_TP1.fcs
+        - ID2_Panel1_TP2.fcs
+        - ID2_Panel1_TP3.fcs
+        - ID2_Panel2_TP1.fcs
+        - ID2_Panel2_TP2.fcs
+        - ID2_Panel2_TP3.fcs
+        - ID3_Panel1_TP1.fcs
+        - ID3_Panel1_TP2.fcs
+        - ID3_Panel1_TP3.fcs
+        - ID3_Panel2_TP1.fcs
+        - ID3_Panel2_TP2.fcs
+        - ID3_Panel2_TP3.fcs
+        - ID4_Panel1_TP1.fcs
+        - ID4_Panel1_TP2.fcs
+        - ID4_Panel1_TP3.fcs
+        - ID4_Panel2_TP1.fcs
+        - ID4_Panel2_TP2.fcs
+        - ID4_Panel2_TP3.fcs
+        - ID5_Panel1_TP1.fcs
+        - ID5_Panel1_TP2.fcs
+        - ID5_Panel1_TP3.fcs
+        - ID5_Panel2_TP1.fcs
+        - ID5_Panel2_TP2.fcs
+        - ID5_Panel2_TP3.fcs
+        - ID6_Panel1_TP1.fcs
+        - ID6_Panel1_TP2.fcs
+        - ID6_Panel1_TP3.fcs
+        - ID6_Panel2_TP1.fcs
+        - ID6_Panel2_TP2.fcs
+        - ID6_Panel2_TP3.fcs
+        - ID7_Panel1_TP1.fcs
+        - ID7_Panel1_TP2.fcs
+        - ID7_Panel1_TP3.fcs
+        - ID7_Panel2_TP1.fcs
+        - ID7_Panel2_TP2.fcs
+        - ID7_Panel2_TP3.fcs
+        - ID8_Panel1_TP1.fcs
+        - ID8_Panel1_TP2.fcs
+        - ID8_Panel1_TP3.fcs
+        - ID8_Panel2_TP1.fcs
+        - ID8_Panel2_TP2.fcs
+        - ID8_Panel2_TP3.fcs
     parse:
       machine: bd_symph_a5
   

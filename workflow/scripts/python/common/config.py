@@ -95,7 +95,7 @@ class BaseModel(BaseModel_):
 class PlainUrlSrc(BaseModel):
     url_root: str
     dataset_id: str
-    filemap: dict[str, str]
+    filemap: list[str]
 
 
 class ZipUrlSrc(BaseModel):
@@ -451,7 +451,7 @@ class FCSConfig(BaseModel):
     def get_plain_url(self, file_name: str, repo_id: str) -> str:
         ret = next(
             (
-                urljoin(c.src.url_root, c.src.filemap[file_name])
+                urljoin(c.src.url_root, file_name)
                 for c in self.test_files
                 if isinstance(c.src, PlainUrlSrc)
                 and repo_id == c.src.dataset_id
@@ -493,7 +493,7 @@ class FCSConfig(BaseModel):
     ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
-                return (src.dataset_id, list(src.filemap.keys()))
+                return (src.dataset_id, list(src.filemap))
             elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
                 return (src.dataset_id, [p.name for p in src.file_paths])
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
