@@ -319,6 +319,33 @@ rule compile_errors:
         "scripts/R/compile_errors.R"
 
 
+rule compile_features:
+    input:
+        **rules.compile_metadata.output,
+        offsets=rules.combine_offsets.output,
+        dark=rules.combine_dark_bytes.output,
+        misc=rules.combine_misc.output,
+    output:
+        # tables
+        kw_usage="results/features/kw_usage.tsv",
+        schema="results/features/schema.tsv",
+        # plots
+        plot_datasets="results/features/datasets.pdf",
+        plot_supp_text="results/features/supp_text.pdf",
+        plot_analysis="results/features/analysis.pdf",
+        plot_other_seg="results/features/other_seg.pdf",
+        plot_crc="results/features/crc.pdf",
+        plot_dark="results/features/dark.pdf",
+        plot_scaling="results/features/scaling.pdf",
+        plot_byteord="results/features/byteord.pdf",
+        plot_schema="results/features/schema.pdf",
+        plot_kw_usage="results/features/kw_usage.pdf",
+    conda:
+        "envs/tidyverse.yml"
+    script:
+        "scripts/R/compile_features.R"
+
+
 rule all:
     input:
         # rules.download_immport.output,
@@ -345,3 +372,4 @@ rule all:
         rules.combine_misc.output,
         # rules.compute_gaps.output,
         rules.compile_errors.output,
+        rules.compile_features.output,

@@ -58,7 +58,6 @@ class MeasMetadata(NamedTuple):
     tag: str | None
     meas_type: str | None
     detector_name: str | None
-    nonstd: dict[str, str]
 
 
 class DatasetMetadata(NamedTuple):
@@ -330,7 +329,9 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
             scale_offset: float | None,
             rest: pft.AnyOptical | pft.AnyTemporal,
         ) -> MeasMetadata:
-            is_optical = isinstance(rest, pft.AnyOptical)
+            is_optical = isinstance(
+                rest, pf.Optical2_0 | pf.Optical3_0 | pf.Optical3_1 | pf.Optical3_2
+            )
 
             if isinstance(rest, pf.Optical2_0 | pf.Optical3_0):
                 wavelengths = [] if rest.wavelength is None else [rest.wavelength]
@@ -361,7 +362,9 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
                     rest.percent_emitted,
                     rest.detector_voltage,
                 )
-                if isinstance(rest, pft.AnyOptical)
+                if isinstance(
+                    rest, pf.Optical2_0 | pf.Optical3_0 | pf.Optical3_1 | pf.Optical3_2
+                )
                 else (None, None, None, None, None)
             )
 
@@ -420,7 +423,6 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
                 meas_type=meas_type,
                 tag=tag,
                 detector_name=det_name,
-                nonstd=rest.nonstandard_keywords,
             )
 
         if isinstance(core, pf.CoreTEXT2_0 | pf.CoreTEXT3_0):
@@ -705,15 +707,12 @@ def dump_nonstd(out: Path, ds: list[DatasetMetadata]) -> None:
     with open(out, "w") as f:
         w = csv.writer(f, delimiter="\t")
 
-        header = ["filepath", "dataset", "meas_index", "key", "value"]
+        header = ["filepath", "dataset", "key", "value"]
 
         w.writerow(header)
         for d in ds:
             for k, v in d.nonstd.items():
-                w.writerow([d.filepath, d.dataset_index, "root", esc(k), esc(v)])
-            for i, m in enumerate(d.meas):
-                for k, v in m.nonstd.items():
-                    w.writerow([d.filepath, d.dataset_index, i, esc(k), esc(v)])
+                w.writerow([d.filepath, d.dataset_index, esc(k), esc(v)])
 
 
 def dump_mixed_schema(out: Path, ds: list[DatasetMetadata]) -> None:
@@ -816,7 +815,12 @@ def dump_byteord(out: Path, ds: list[DatasetMetadata]) -> None:
                 s,
                 MatrixSchemaMetadata,
             ):
-                w.writerow([d.filepath, d.dataset_index, s.byteord])
+                b = (
+                    ",".join(map(str, s.byteord))
+                    if isinstance(s.byteord, list)
+                    else s.byteord
+                )
+                w.writerow([d.filepath, d.dataset_index, b])
             else:
                 assert_never(s)
 
