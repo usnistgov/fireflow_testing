@@ -100,7 +100,7 @@ rule extract_zip_url:
         target=lambda wildcards: config.get_zip_path(wildcards.testname, wildcards.id),
     shell:
         """
-        unzip -p {input} "{params.target}" > {output}
+        unzip -p {input} "{params.target}" > "{output}"
         """
 
 

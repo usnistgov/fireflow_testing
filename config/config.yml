@@ -1,6 +1,7 @@
 test_files:
   # Cytoflex
   - src:
+      # TODO get all zips from here
       zip_url: https://zenodo.org/records/15019428/files/Fig3A_human%20organoids_Raw%20data.zip
       dataset_id: zenodo_CytoFlex
       file_paths:
@@ -15,6 +16,322 @@ test_files:
         - Fig3A_human organoids_Raw data/ORG1_unstained.fcs
         - Fig3A_human organoids_Raw data/ORG2_stained.fcs
         - Fig3A_human organoids_Raw data/ORG2_unstained.fcs
+
+  # Helios
+  - src:
+      zip_url: https://zenodo.org/records/4719468/files/fcs_data.zip
+      dataset_id: zenodo_Helios
+      file_paths:
+        - fcs_data/BMT01_D30_clean.fcs
+        - fcs_data/BMT01_D90_clean.fcs
+        - fcs_data/BMT02_D30_clean.fcs
+        - fcs_data/BMT02_D90_clean.fcs
+        - fcs_data/BMT08_D30_clean.fcs
+        - fcs_data/BMT09_D30_clean.fcs
+        - fcs_data/BMT13_D30_clean.fcs
+        - fcs_data/BMT13_D90_clean.fcs
+        - fcs_data/BMT14_D30_clean.fcs
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/10499157/files/Flow_cytometry_data_for_Yang_and_Hill_ORFIUS_complex_manuscript.zip
+      dataset_id: zenodo_Fortessa
+      file_paths:
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_23 1-10-23 OV8 siControl_015.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_24 1-10-23 OV8 siBRD1-1_016.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_25 1-10-23 OV8 siBRD1-2_017.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-20-23/SM 01-20-2023 OV8_Specimen_001_1 OV8 siControl_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-20-23/SM 01-20-2023 OV8_Specimen_001_2 OV8 siBRD1-1_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-20-23/SM 01-20-2023 OV8_Specimen_001_3 OV8 siBRD1-2_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-7-23/SM 01-10-2023 OV8_Specimen_001_17 1-7-23 OV8 siControl_009.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-7-23/SM 01-10-2023 OV8_Specimen_001_18 1-7-23 OV8 siBRD1-1_010.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-7-23/SM 01-10-2023 OV8_Specimen_001_19 1-7-23 OV8 siBRD1-2_011.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-10-23/SM 01-10-2023 OV8_Specimen_001_26 1-10-23 OV8 siControl_018.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-10-23/SM 01-10-2023 OV8_Specimen_001_27 1-10-23 OV8 siKAT7-1_019.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-10-23/SM 01-10-2023 OV8_Specimen_001_28 1-10-23 OV8 siKAT7-2_020.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-25-23/SM 01-25-2023 OV8_Specimen_001_10 1-25-23 OV8 siKAT7-2_010.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-25-23/SM 01-25-2023 OV8_Specimen_001_6 1-25-23 OV8 siControl_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-25-23/SM 01-25-2023 OV8_Specimen_001_9 1-25-23 OV8 siKAT7-1_009.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-7-23/SM 01-10-2023 OV8_Specimen_001_20 1-7-23 OV8 siControl_012.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-7-23/SM 01-10-2023 OV8_Specimen_001_21 1-7-23 OV8 siKAT7-1_013.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siHBO1/1-7-23/SM 01-10-2023 OV8_Specimen_001_22 1-7-23 OV8 siKAT7-2_014.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-10-23/SM 01-10-2023 FT194_Specimen_001_5 1-2-23 FT194 siControi_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-10-23/SM 01-10-2023 FT194_Specimen_001_6 1-2-23 FT194 siB1-6_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-10-23/SM 01-10-2023 FT194_Specimen_001_7 1-2-23 FT194 siB1-GUU_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/12-18-22/SM 12-28-2022 FT194_Specimen_001_41 FT194 siControl_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/12-18-22/SM 12-28-2022 FT194_Specimen_001_42 FT194 siB1-6_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/12-18-22/SM 12-28-2022 FT194_Specimen_001_43 FT194 siB1-GUU_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-23-23/SM 01-25-2023 FT194_Specimen_001_11 Set 1 FT194 siControl_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-23-23/SM 01-25-2023 FT194_Specimen_001_12 Set 1 FT194 siB1-6_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 6G FT194 siBRCA1 cell cycle flow/1-23-23/SM 01-25-2023 FT194_Specimen_001_13 Set 1 FT194 siB1-GUU_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-17-23/Specimen_001_19 FT194 siControl.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-17-23/Specimen_001_20 FT194 siATM-27.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-17-23/Specimen_001_21 FT194 siATM-29.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-29-23/Specimen_001_1 06-29-23 FT194 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-29-23/Specimen_001_2 06-29-23 FT194 siATM-27.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/6-29-23/Specimen_001_3 06-29-23 FT194 siATM-29.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/7-8-23/Specimen_001_4 07-08-23 FT194 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/7-8-23/Specimen_001_5 07-08-23 FT194 siATM-27.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S10C FT194 siATM cell cycle flow/7-8-23/Specimen_001_6 07-08-23 FT194 siATM-29.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-1-23/SM 02-03-2023 CaOV3_Specimen_001_17 02-01-23 CaOV3 DMSO_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-1-23/SM 02-03-2023 CaOV3_Specimen_001_18 02-01-23 CaOV3 Olap_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-1-23/SM 02-03-2023 CaOV3_Specimen_001_19 02-01-23 CaOV3 XL413_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-1-23/SM 02-03-2023 CaOV3_Specimen_001_20 02-01-23 CaOV3 AZD_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-2-23/SM 02-03-2023 CaOV3_Specimen_001_21 02-02-23 CaOV3 DMSO_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-2-23/SM 02-03-2023 CaOV3_Specimen_001_22 02-02-23 CaOV3 Olap_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-2-23/SM 02-03-2023 CaOV3_Specimen_001_23 02-02-23 CaOV3 XL413_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-2-23/SM 02-03-2023 CaOV3_Specimen_001_24 02-02-23 CaOV3 AZD_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-7-23 set b/SM 02-03-2023 CaOV3_Specimen_001_13 caov3 dmso b_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-7-23 set b/SM 02-03-2023 CaOV3_Specimen_001_14 caov3 6738 b_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-7-23 set b/SM 02-03-2023 CaOV3_Specimen_001_15 caov3 413 b_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/CaOV3/2-7-23 set b/SM 02-03-2023 CaOV3_Specimen_001_16 caov3 olap b_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-2-23/SM 02-03-2023 OV8_Specimen_001_13 02-02-23 OV8 DMSO_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-2-23/SM 02-03-2023 OV8_Specimen_001_14 02-02-23 OV8 Olap_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-2-23/SM 02-03-2023 OV8_Specimen_001_15 02-02-23 OV8 XL413_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-2-23/SM 02-03-2023 OV8_Specimen_001_16 02-02-23 OV8 AZD_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set a/SM 02-07-2023 OV8_Specimen_001_1 ov8 dmso a_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set a/SM 02-07-2023 OV8_Specimen_001_2 ov8 6738 a_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set a/SM 02-07-2023 OV8_Specimen_001_3 ov8 413 a_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set a/SM 02-07-2023 OV8_Specimen_001_4 ov8 olap a_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set b/SM 02-07-2023 OV8_Specimen_001_5 ov8 dmso b_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set b/SM 02-07-2023 OV8_Specimen_001_6 ov8 6738  b_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set b/SM 02-07-2023 OV8_Specimen_001_7 ov8 413 b_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/OV8/2-7-23 set b/SM 02-07-2023 OV8_Specimen_001_8 ov8 olap b_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-1-23/SM 02-01-2023 SKOV3_Specimen_001_1 02-01-23 SKOV3 DMSO_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-1-23/SM 02-01-2023 SKOV3_Specimen_001_2 02-01-23 SKOV3 Olap_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-1-23/SM 02-01-2023 SKOV3_Specimen_001_3 02-01-23 SKOV3 XL413_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-1-23/SM 02-01-2023 SKOV3_Specimen_001_4 02-01-23 SKOV3 AZD_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set a/SM 02-01-2023 SKOV3_Specimen_001_17 skov3 dmso a_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set a/SM 02-01-2023 SKOV3_Specimen_001_18 skov3 6738 a_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set a/SM 02-01-2023 SKOV3_Specimen_001_19 skov3 413 a_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set a/SM 02-01-2023 SKOV3_Specimen_001_20 skov3 olap a_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set b/SM 02-01-2023 SKOV3_Specimen_001_21 skov3 dmso b_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set b/SM 02-01-2023 SKOV3_Specimen_001_22 skov3 6738 b_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set b/SM 02-01-2023 SKOV3_Specimen_001_23 skov3 413 b_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/SKOV3/2-7-23 set b/SM 02-01-2023 SKOV3_Specimen_001_24 skov3 olap b_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 1/SM 02-03-2023 UWB Parent_Specimen_001_25 02-02-23 Set1 UWB Parent DMSO_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 1/SM 02-03-2023 UWB Parent_Specimen_001_26 02-02-23 Set1 UWB Parent Olap_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 1/SM 02-03-2023 UWB Parent_Specimen_001_27 02-02-23 Set1 UWB Parent XL413_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 1/SM 02-03-2023 UWB Parent_Specimen_001_28 02-02-23 Set1 UWB Parent AZD_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 2/SM 02-03-2023 UWB Parent_Specimen_001_29 02-02-23 Set2 UWB Parent DMSO_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 2/SM 02-03-2023 UWB Parent_Specimen_001_30 02-02-23 Set2 UWB Parent Olap_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 2/SM 02-03-2023 UWB Parent_Specimen_001_31 02-02-23 Set2 UWB Parent XL413_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-2-23 set 2/SM 02-03-2023 UWB Parent_Specimen_001_32 02-02-23 Set2 UWB Parent AZD_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-7-23 set a/SM 02-03-2023 UWB Parent_Specimen_001_25 uwb par dmso a_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-7-23 set a/SM 02-03-2023 UWB Parent_Specimen_001_26 uwb par 6738 b_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-7-23 set a/SM 02-03-2023 UWB Parent_Specimen_001_27 uwb par 413 a_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB parent/2-7-23 set a/SM 02-03-2023 UWB Parent_Specimen_001_28 uwb par olap a_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 1/SM 02-03-2023 UWB-B1_Specimen_001_33 02-02-23 Set1 UWB-B1 DMSO_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 1/SM 02-03-2023 UWB-B1_Specimen_001_34 02-02-23 Set1 UWB-B1 Olap_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 1/SM 02-03-2023 UWB-B1_Specimen_001_35 02-02-23 Set1 UWB-B1 XL413_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 1/SM 02-03-2023 UWB-B1_Specimen_001_36 02-02-23 Set1 UWB-B1 AZD_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 2/SM 02-03-2023 UWB-B1_Specimen_001_37 02-02-23 Set2 UWB-B1 DMSO_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 2/SM 02-03-2023 UWB-B1_Specimen_001_38 02-02-23 Set2 UWB-B1 Olap_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 2/SM 02-03-2023 UWB-B1_Specimen_001_39 02-02-23 Set2 UWB-B1 XL413_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-2-23 set 2/SM 02-03-2023 UWB-B1_Specimen_001_40 02-02-23 Set2 UWB-B1 AZD_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-7-23 set a/SM 02-07-2023 UWB-B1_Specimen_001_33 uwb b1 dmso a 33+41_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-7-23 set a/SM 02-07-2023 UWB-B1_Specimen_001_34 uwb b1 6738 a 34+42_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-7-23 set a/SM 02-07-2023 UWB-B1_Specimen_001_35 uwb b1 413 a 35+43_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S12B cell line multidrug treatment cell cycle flow/UWB+BRCA1/2-7-23 set a/SM 02-07-2023 UWB-B1_Specimen_001_36 uwb b1 olap a 36+44_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_19 9-2-22 OV8 siCON_015.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_20 9-2-22 OV8 siBrd1-1_TUBE RUN 1_018.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_21 9-2-22 OV8 siBrd1-2_TUBE RUN 1_021.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-4-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_24 9-6_046.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-4-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_25 9-6_047.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-4-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_26 9-6_048.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_37 9-7-22 OV8 SI CON TUBE RUN 1_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_38 9-7-22 OV8 SI BRD1-1 TUBE RUN 1_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siBRD1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_39 9-7-22 OV8 SI BRD1-2 TUBE RUN 1_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/8-22-22/Sarah PI BRDU 8-22-22_Specimen_001_1 ov8 sicon_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/8-22-22/Sarah PI BRDU 8-22-22_Specimen_001_4 ov8 kat7-1_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/8-22-22/Sarah PI BRDU 8-22-22_Specimen_001_5 ov8 kat7-2_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_19 9-2-22 OV8 siCON_tube run 2_016.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_22 9-2-22 OV8 siKAT7-1 TUBE RUN 1_024.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-2-22/Sarah PI BRDU 8-14-22 OV8 1-30--9-3-22 ov8 and uwb 1-14 and 19-28_Specimen_001_23 9-2-22 OV8 siKAT7-2 TUBE RUN 1_027.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_37 9-7-22 OV8 SI CON TUBE RUN 2_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_40 9-7-22 OV8 SI KAT7-1 TUBE RUN 1_010.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S3A siOV8 cell cycle flow/OV8 siHBO1/9-7-22/Sarah PI BRDU 9-8-22 OV8 ISHIKAWA_Specimen_001_41 9-7-22 OV8 SI KAT7-2 TUBE RUN 1_013.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-29-23/Specimen_001_15 11-2923 OV8 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-29-23/Specimen_001_16 11-2923 OV8 siBRPF3-1.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-29-23/Specimen_001_17 11-2923 OV8 siBRPF3-17.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-30-23/Specimen_001_18 11-30-23 OV8 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-30-23/Specimen_001_19 11-30-23 OV8 siBRPF3-1.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/11-30-23/Specimen_001_20 11-30-23 OV8 siBRPF3-17.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/12-1-23/Specimen_001_21 12-01-23 OV8 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/12-1-23/Specimen_001_22 12-01-23 OV8 siBRPF3-1.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S4C OV8 siBRPF3 cell cycle flow/12-1-23/Specimen_001_23 12-01-23 OV8 siBRPF3-17.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_1 08-17-23 96h shCon + Vec - Dox_001.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_10 08-17-23 96h shBRD1-5134 + Vec + Dox_010.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_11 08-17-23 96h shBRD1-5134 + BRD1 - Dox_011.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_12 08-17-23 96h shBRD1-5134 + BRD1 + Dox_012.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_2 08-17-23 96h shCon + Vec + Dox_002.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_3 08-17-23 96h shCon + BRD1 - Dox_003.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_4 08-17-23 96h shCon + BRD1 + Dox_004.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_5 08-17-23 96h shBRD1-6372 + Vec -  Dox_005.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_6 08-17-23 96h shBRD1-6372 + Vec + Dox_006.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_7 08-17-23 96h shBRD1-6372 + BRD1 -  Dox_007.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_8 08-17-23 96h shBRD1-6372 + BRD1 + Dox_008.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-17-23/Specimen_001_9 08-17-23 96h shBRD1-5134 + Vec - Dox_009.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_19 08-18-23 OV8 shCon + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_20 08-18-23 OV8 shCon + BRD1 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_21 08-18-23 OV8 shBRD1-6372 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_22 08-18-23 OV8 shBRD1-6372 + BRD1 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_23 08-18-23 OV8 shBRD1-5134 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_24 08-18-23 OV8 shBRD1-5134 + BRD1- Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_25 08-18-23 OV8 shCon + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_26 08-18-23 OV8 shCon + BRD1 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_27 08-18-23 OV8 shBRD1-6372 + Vec+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_28 08-18-23 OV8 shBRD1-6372 + BRD1+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_29 08-18-23 OV8 shBRD1-5134 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-18-23/Specimen_001_30 08-18-23 OV8 shBRD1-5134 + BRD1 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_31 08-19-23 OV8 shCon + Vec -  Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_32 08-19-23 OV8 shCon + BRD1-  Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_33 08-19-23 OV8 shBRD1-6372 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_34 08-19-23 OV8 shBRD1-6372 + BRD1 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_35 08-19-23 OV8 shBRD1-5134 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_36 08-19-23 OV8 shBRD1-5134 + BRD1- Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_37 08-19-23 OV8 shCon + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_38 08-19-23 OV8 shCon + BRD1 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_39 08-19-23 OV8 shBRD1-6372 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_40 08-19-23 OV8 shBRD1-6372 + BRD1 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_41 08-19-23 OV8 shBRD1-5134 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5B shBRD1 cell cycle flow/8-19-23/Specimen_001_42 08-19-23 OV8 shBRD1-5134 + BRD1 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_16 08-19-23 OV8 shCon + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_17 08-19-23 OV8 shCon + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_19 08-19-23 OV8 shKAT7-3860 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_20 08-19-23 OV8 shKAT7-3860 + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_22 08-19-23 OV8 shKAT7-5054 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_23 08-19-23 OV8 shKAT7-5054 + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_25 08-19-23 OV8 shCon+ Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_26 08-19-23 OV8 shCon+ WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_28 08-19-23 OV8 shKAT7-3860+ Vec+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_29 08-19-23 OV8 shKAT7-3860+ WT KAT7+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_31 08-19-23 OV8 shKAT7-5054+ Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-19-23/Specimen_003_32 08-19-23 OV8 shKAT7-5054+ WT KAT7+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_34 08-20-23 OV8 shCon + Vec- Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_35 08-20-23 OV8 shCon + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_37 08-20-23 OV8 shKAT7-3860+ Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_38 08-20-23 OV8 shKAT7-3860+ WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_40 08-20-23 OV8 shKAT7-5054+ Vec- Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_41 08-20-23 OV8 shKAT7-5054 + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_43 08-20-23 OV8 shCon + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_44 08-20-23 OV8 shCon + WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_46 08-20-23 OV8 shKAT7-3860 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_47 08-20-23 OV8 shKAT7-3860 + WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_49 08-20-23 OV8 shKAT7-5054 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-20-23/Specimen_003_50 08-20-23 OV8 shKAT7-5054 + WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_1 08-24-23 OV8 shCon + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_10 08-24-23 OV8 shCon + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_11 08-24-23 OV8 shCon + WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_13 08-24-23 OV8 shKAT7-3860 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_14 08-24-23 OV8 shKAT7-3860 + WT KAT7 + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_16 08-24-23 OV8 shKAT7-5054 + Vec + Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_17 08-24-23 OV8 shKAT7-5054 + WT KAT7+ Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_2 08-24-23 OV8 shCon + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_4 08-24-23 OV8 shKAT7-3860 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_5 08-24-23 OV8 shKAT7-3860 + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_7 08-24-23 OV8 shKAT7-5054 + Vec - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S5F shHBO1 cell cycle flow/8-24-23/Specimen_001_8 08-24-23 OV8 shKAT7-5054 + WT KAT7 - Dox.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8C UWB-ChIP cell cycle flow/6-21-23/Specimen_001_22 UWB Par.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8C UWB-ChIP cell cycle flow/6-21-23/Specimen_001_24 UWB B1.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8C UWB-ChIP cell cycle flow/7-10-23/Specimen_001_19 UWB Par N2.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8C UWB-ChIP cell cycle flow/7-10-23/Specimen_001_21 UWB B1 N2.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-14-23/Specimen_002_10 UWB B1 08-14-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-14-23/Specimen_002_9 UWB Par 08-14-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-18-23/Specimen_002_14 UWB Par 08-18-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-18-23/Specimen_002_15 UWB B1 08-18-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-7-23/Specimen_002_4 UWB Par 08-07-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8D UWB-fiber cell cycle flow/8-7-23/Specimen_002_5 UWB B1 08-07-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-14-23/Specimen_001_6 FT194 siCon 08-14-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-14-23/Specimen_001_7 FT194 siB1-6 08-14-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-14-23/Specimen_001_8 FT194 siB1-GUU 08-14-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-18-23/Specimen_001_11 FT194 siCon 08-18-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-18-23/Specimen_001_12 FT194 siB1-6 08-18-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-18-23/Specimen_001_13 FT194 siB1-GUU 08-18-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-7-23/Specimen_001_1 FT194 siCon 08-07-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-7-23/Specimen_001_2 FT194 siB1-6 08-07-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S8E FT194  siBRCA1-fiber cell cycle flow/8-7-23/Specimen_001_3 FT194 siB1-GUU 08-07-23.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/6-28-23/Specimen_001_7 06-28-23 FT194 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/6-28-23/Specimen_001_8 06-28-23 FT194 siRad51-5.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/6-28-23/Specimen_001_9 06-28-23 FT194 siRad51-7.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-2-23/Specimen_001_10 07-02-23 FT194 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-2-23/Specimen_001_11 07-02-23 FT194 siRad51-5.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-2-23/Specimen_001_12 07-02-23 FT194 siRad51-7.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_13 07-05-23 FT194 siCon.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_14 07-05-23 FT194 siRad51-5.fcs
+        - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_15 07-05-23 FT194 siRad51-7.fcs
+
+  # Fortessa
+  - src:
+      # TODO include everything, this dataset has ~6 zip files in it, this just
+      # happens to be one of the smaller ones
+      zip_url: https://zenodo.org/records/17160682/files/5ss_stem_HA.zip
+      dataset_id: zenodo_Fortessa2
+      file_paths:
+        - 5ss_stem_HA/5ss_stem_HA_bin01.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin02.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin03.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin04.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin05.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin06.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin07.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin08.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin09.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin10.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin11.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin12.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin13.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin14.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin15.fcs
+        - 5ss_stem_HA/5ss_stem_HA_bin16.fcs
+        - 5ss_stem_HA/5ss_stem_HA_neg_1.fcs
+        - 5ss_stem_HA/5ss_stem_HA_neg_2.fcs
+        - 5ss_stem_HA/5ss_stem_HA_neg_3.fcs
+        - 5ss_stem_HA/5ss_stem_HA_neg_4.fcs
+        - 5ss_stem_HA/5ss_stem_HA_pos_1.fcs
+        - 5ss_stem_HA/5ss_stem_HA_pos_2.fcs
+        - 5ss_stem_HA/5ss_stem_HA_pos_3.fcs
+        - 5ss_stem_HA/5ss_stem_HA_pos_4.fcs
+
+  # FortessaX20
+  - src:
+      # TODO include everything, this dataset has ~6 zip files in it, this just
+      # happens to be one of the smaller ones
+      zip_url: https://zenodo.org/records/5498282/files/Figure2_part1.zip
+      dataset_id: zenodo_FortessaX20
+      file_paths:
+        - "Figure2_part1/B-T_B220.fcs"
+        - "Figure2_part1/B-T_BM #1.fcs"
+        - "Figure2_part1/B-T_BM #10.fcs"
+        - "Figure2_part1/B-T_BM #2.fcs"
+        - "Figure2_part1/B-T_BM #3.fcs"
+        - "Figure2_part1/B-T_BM #4.fcs"
+        - "Figure2_part1/B-T_BM #5.fcs"
+        - "Figure2_part1/B-T_BM #7.fcs"
+        - "Figure2_part1/B-T_BM #8.fcs"
+        - "Figure2_part1/B-T_BM #9.fcs"
+        - "Figure2_part1/B-T_CD4.fcs"
+        - "Figure2_part1/B-T_CD8.fcs"
+        - "Figure2_part1/B-T_eflu780.fcs"
+        - "Figure2_part1/B-T_no stain.fcs"
+        - "Figure2_part1/B-T_PB#1.fcs"
+        - "Figure2_part1/B-T_PB#10.fcs"
+        - "Figure2_part1/B-T_PB#2.fcs"
+        - "Figure2_part1/B-T_PB#3.fcs"
+        - "Figure2_part1/B-T_PB#4.fcs"
+        - "Figure2_part1/B-T_PB#5.fcs"
+        - "Figure2_part1/B-T_PB#7.fcs"
+        - "Figure2_part1/B-T_PB#8.fcs"
+        - "Figure2_part1/B-T_PB#9.fcs"
+        - "Figure2_part1/B-T_SP#1.fcs"
+        - "Figure2_part1/B-T_SP#10.fcs"
+        - "Figure2_part1/B-T_SP#2.fcs"
+        - "Figure2_part1/B-T_SP#3.fcs"
+        - "Figure2_part1/B-T_SP#4.fcs"
+        - "Figure2_part1/B-T_SP#5.fcs"
+        - "Figure2_part1/B-T_SP#7.fcs"
+        - "Figure2_part1/B-T_SP#8.fcs"
+        - "Figure2_part1/B-T_SP#9.fcs"
 
   # Apogee A60 Micro
   - src:
