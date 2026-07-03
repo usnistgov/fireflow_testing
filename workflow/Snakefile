@@ -2,39 +2,9 @@ from pathlib import Path
 import urllib
 
 sys.path.extend(["./workflow/scripts/python"])
-from common.config import FCSConfig, ImmportSrc, FlowRepoSrc, PlainUrlSrc, ZipUrlSrc
+from common.config import FCSConfig, FlowRepoSrc, PlainUrlSrc, ZipUrlSrc
 
 config = FCSConfig.parse_obj(config)
-
-plain_url_tests = [
-    ("plain_url", f.src.dataset_id, n)
-    for f in config.test_files
-    if isinstance(f.src, PlainUrlSrc)
-    for n in f.src.file_names
-]
-
-zip_url_tests = [
-    ("zip_url", f.src.dataset_id, p.name)
-    for f in config.test_files
-    if isinstance(f.src, ZipUrlSrc)
-    for p in f.src.file_paths
-]
-
-fr_tests = [
-    ("flow_repository", f.src.fr_id, n)
-    for f in config.test_files
-    if isinstance(f.src, FlowRepoSrc)
-    for n in f.src.file_names
-]
-
-im_tests = [
-    ("immport", f.src.immport_id, n)
-    for f in config.test_files
-    if isinstance(f.src, ImmportSrc)
-    for n in f.src.file_names
-]
-
-tests = [*fr_tests, *im_tests, *plain_url_tests, *zip_url_tests]
 
 tools_dir = Path("resources/tools")
 aspera_base_dir = tools_dir / "immport-data-download-tool"
