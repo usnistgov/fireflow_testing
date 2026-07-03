@@ -940,18 +940,18 @@ def test_file(r: RunConfig) -> RunOutput:
     # dump lots of diagnostic data into neat little tables that can be concatted
     # later
     out = RunOutput(
-        Offset.dataset_iter_top(r.output_path, datasets),
-        Overflow.dataset_iter_top(r.output_path, datasets),
-        Overlap.dataset_iter_top(r.output_path, datasets),
-        KeyValPair.dataset_iter_top(r.output_path, datasets),
-        Token.dataset_iter_top(r.output_path, datasets),
-        FixedScale.dataset_iter_top(r.output_path, datasets),
-        OriginalName.dataset_iter_top(r.output_path, datasets),
-        Overrange.dataset_iter_top(r.output_path, datasets),
-        VersionScores.dataset_iter_top(r.output_path, datasets),
-        Padding.dataset_iter_top(r.output_path, datasets),
-        DarkBytes.dataset_iter_top(r.output_path, datasets),
-        MiscDiagnostics.dataset_iter_top(r.output_path, datasets),
+        Offset.dataset_iter_top(r.input_path, datasets),
+        Overflow.dataset_iter_top(r.input_path, datasets),
+        Overlap.dataset_iter_top(r.input_path, datasets),
+        KeyValPair.dataset_iter_top(r.input_path, datasets),
+        Token.dataset_iter_top(r.input_path, datasets),
+        FixedScale.dataset_iter_top(r.input_path, datasets),
+        OriginalName.dataset_iter_top(r.input_path, datasets),
+        Overrange.dataset_iter_top(r.input_path, datasets),
+        VersionScores.dataset_iter_top(r.input_path, datasets),
+        Padding.dataset_iter_top(r.input_path, datasets),
+        DarkBytes.dataset_iter_top(r.input_path, datasets),
+        MiscDiagnostics.dataset_iter_top(r.input_path, datasets),
     )
 
     return out

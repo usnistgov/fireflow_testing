@@ -1,20 +1,53 @@
-library(tidyverse)
+suppressMessages(library(tidyverse))
 
 # TODO
 # - how to assess overrange columns? this should be done for ints above their bitmask
 # - get missing nextdata
 # - report files with corrected offsets (right this only accounts for auto-corrected offsets)
 
-df_misc <- read_tsv(snakemake@input[["misc"]])
-df_scale <- read_tsv(snakemake@input[["fixed_scales"]])
-df_key_val <- read_tsv(snakemake@input[["key_val_pairs"]])
-df_orig_names <- read_tsv(snakemake@input[["original_names"]])
-df_overflow <- read_tsv(snakemake@input[["overflow"]])
-df_tokens <- read_tsv(snakemake@input[["tokens"]])
-df_offsets <- read_tsv(snakemake@input[["offsets"]])
-df_overrange <- read_tsv(snakemake@input[["overrange"]])
+df_misc <- read_tsv(
+  snakemake@input[["misc"]],
+  col_types = cols(
+    fcs_path = "c",
+    file_version = "c",
+    real_version = "c",
+    prim_escaped = "l",
+    prim_has_even_delims = "l",
+    prim_extra_leading_delim = "l",
+    supp_escaped = "l",
+    supp_has_even_delims = "l",
+    supp_extra_leading_delim = "l",
+    timestep_added = "l",
+    spillover_was_indexed = "l",
+    btim_pattern = "l",
+    etim_pattern = "l",
+    date_pattern = "l",
+    begindatetime_pattern = "l",
+    enddatetime_pattern = "l",
+    last_modified_pattern = "l",
+    original_byteord = "c",
+    tot_event_mismatch = "l",
+    supp_origin_type = "c",
+    data_origin_type = "c",
+    analysis_origin_type = "c",
+    supp_last_odd_token = "c",
+    prim_last_odd_token = "c",
+    .default = "i",
+  )
+)
 
-df_machines <- read_tsv(snakemake@input[["machines"]], col_types = "ci-ccccc---") %>%
+df_scale <- read_tsv(snakemake@input[["fixed_scales"]], col_types = "ciilcc")
+df_key_val <- read_tsv(snakemake@input[["key_val_pairs"]], col_types = "cicc")
+df_orig_names <- read_tsv(snakemake@input[["original_names"]], col_types = "ciic")
+df_overflow <- read_tsv(snakemake@input[["overflow"]], col_types = "ciciiiil")
+df_tokens <- read_tsv(snakemake@input[["tokens"]], col_types = "cicc")
+df_offsets <- read_tsv(snakemake@input[["offsets"]], col_types = "ciciil")
+df_overrange <- read_tsv(snakemake@input[["overrange"]], col_types = "ciiil")
+
+df_machines <- read_tsv(
+  snakemake@input[["machines"]],
+  col_types = "ci-ccccc---"
+) %>%
   filter(dataset == 0) %>%
   rename(fcs_path = filepath) %>%
   select(-dataset) %>%
@@ -279,7 +312,8 @@ df_all_errors %>%
   mutate(machine = sprintf("%s_%s", machine, software)) %>%
   group_by(vendor, machine) %>%
   summarize(
-    across(starts_with("nc_"), mean)
+    across(starts_with("nc_"), mean),
+    .groups = "drop",
   ) %>%
   pivot_longer(cols = starts_with("nc_")) %>%
   mutate(
@@ -304,7 +338,7 @@ df_all_errors %>%
     space = "free"
   ) +
   scale_color_gradient2(low = "white", high = "red") +
-  labs(x = NULL, y = NULL, fill = "Fraction\nwith errors") +
+  labs(x = NULL, y = NULL, color = "Fraction\nwith errors") +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),

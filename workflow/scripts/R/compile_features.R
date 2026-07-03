@@ -1,4 +1,4 @@
-library(tidyverse)
+suppressMessages(library(tidyverse))
 
 ## import data
 
@@ -512,7 +512,7 @@ df_all_kw %>%
     space = "free"
   ) +
   scale_color_gradient2(low = "white", high = "red") +
-  labs(x = NULL, y = NULL, fill = "Fraction\nkey usage") +
+  labs(x = NULL, y = NULL, color = "Fraction\nkey usage") +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
