@@ -15,6 +15,7 @@ from common.config import (
     ALL_MACHINES,
     VendorId,
     MachineId,
+    ParseConfig,
 )
 
 SaneDatatype: TypeAlias = Literal["uint", "float", "ascii"]
@@ -25,6 +26,7 @@ class FileMetadata(NamedTuple):
     repo: RepoType
     repo_id: str
     file_name: str
+    conf: ParseConfig
 
 
 class MatrixSchemaMetadata(NamedTuple):
@@ -152,6 +154,9 @@ def get_software_string(
     # their software in "SWVER"
     elif vendorid in [VendorId.COULTER]:
         return key_maybe(core.nonstandard_keywords, "SWVER")
+    # Stratedigm stores software in $SOFTWARE (makes sense)
+    elif vendorid is VendorId.STRAT:
+        return key_maybe(core.nonstandard_keywords, "SOFTWARE")
     # Cytof machines store their software in $CYT...sometimes
     elif vendorid in [VendorId.SBT]:
         if (
@@ -166,7 +171,7 @@ def get_software_string(
 
 
 def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
-    parse = fcs_conf.find_options(m.repo, m.file_name, m.repo_id)
+    parse = m.conf
     conf = parse.merged_conf
 
     conf.allow_missing_time = "silent"
@@ -892,6 +897,7 @@ def main(smk: Any) -> None:
                 repo=(out := fcs_conf.find_file_options(p))[1],
                 repo_id=out[2],
                 file_name=out[3],
+                conf=out[0],
             )
             for fcs_path in f
         ]

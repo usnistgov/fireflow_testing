@@ -1,4 +1,1949 @@
 test_files:
+  # S1400EX (https://datadryad.org/dataset/doi:10.5061/dryad.70rxwdbt3#usage)
+  - src:
+      file_id: 671784
+      dataset_id: dryad_671784_StratedigmS1400EX
+      file_paths:
+        - Fig1_S1_S2/data/doubledel/plate1_Tube 01_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 002_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 003_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 004_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 005_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 006_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 007_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 008_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 009_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 010_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 011_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 012_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 013_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 014_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 015_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 016_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 017_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 018_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 019_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 020_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 021_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 022_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 023_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 024_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 025_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 026_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 027_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 028_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 029_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 030_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 031_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 032_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 033_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 034_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 035_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 036_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 037_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 038_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 039_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 040_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 041_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 042_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 043_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 044_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 045_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 046_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 047_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 048_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 049_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 050_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 051_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 052_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 053_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 054_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 055_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 056_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 057_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 058_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 059_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 060_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 061_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 062_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 063_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 064_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 065_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 066_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 067_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 068_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 069_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 070_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 071_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 072_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 073_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 074_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 075_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 076_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 077_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 078_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 079_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 080_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 081_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 082_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 083_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 084_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 085_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 086_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 087_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 088_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 089_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 090_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 091_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 092_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 093_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 094_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 095_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate1_Well 096_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Tube 01_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 002_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 003_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 004_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 005_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 006_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 007_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 008_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 009_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 010_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 011_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 012_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 013_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 014_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 015_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 016_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 017_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 018_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 019_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 020_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 021_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 022_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 023_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 024_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 025_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 026_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 027_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 028_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 029_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 030_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 031_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 032_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 033_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 034_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 035_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 036_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 037_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 038_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 039_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 040_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 041_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 042_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 043_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 044_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 045_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 046_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 047_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 048_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 049_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 050_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 051_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 052_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 053_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 054_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 055_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 056_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 057_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 058_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 059_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 060_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 061_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 062_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 063_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 064_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 065_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 066_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 067_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 068_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 069_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 070_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 071_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 072_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 073_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 074_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 075_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 076_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 077_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 078_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 079_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 080_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 081_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 082_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 083_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 084_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 085_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 086_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 087_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 088_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 089_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 090_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 091_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 092_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 093_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 094_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 095_1_9_2019.fcs
+        - Fig1_S1_S2/data/doubledel/plate2_Well 096_1_9_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Tube 01_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 002_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 003_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 004_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 005_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 006_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 007_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 008_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 009_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 010_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 011_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 012_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 013_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 014_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 015_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 016_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 017_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 018_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 019_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 020_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 021_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 022_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 023_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 024_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 025_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 026_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 027_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 028_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 029_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 030_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 031_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 032_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 033_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 034_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 035_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 036_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 037_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 038_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 039_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 040_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 041_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 042_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 043_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 044_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 045_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 046_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 047_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 048_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 049_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 050_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 051_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 052_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 053_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 054_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 055_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 056_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 057_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 058_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 059_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 060_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 061_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 062_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 063_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 064_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 065_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 066_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 067_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 068_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 069_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 070_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 071_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 072_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 073_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 074_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 075_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 076_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 077_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 078_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 079_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 080_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 081_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 082_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 083_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 084_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 085_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 086_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 087_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 088_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 089_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 090_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 091_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 092_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 093_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 094_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 095_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate1_Well 096_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Tube 01_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 002_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 003_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 004_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 005_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 006_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 007_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 008_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 009_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 010_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 011_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 012_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 013_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 014_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 015_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 016_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 017_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 018_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 019_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 020_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 021_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 022_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 023_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 024_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 025_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 026_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 027_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 028_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 029_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 030_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 031_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 032_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 033_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 034_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 035_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 036_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 037_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 038_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 039_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 040_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 041_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 042_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 043_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 044_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 045_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 046_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 047_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 048_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 049_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 050_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 051_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 052_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 053_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 054_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 055_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 056_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 057_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 058_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 059_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 060_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 061_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 062_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 063_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 064_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 065_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 066_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 067_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 068_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 069_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 070_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 071_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 072_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 073_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 074_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 075_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 076_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 077_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 078_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 079_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 080_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 081_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 082_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 083_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 084_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 085_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 086_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 087_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 088_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 089_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 090_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 091_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 092_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 093_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 094_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 095_1_10_2019.fcs
+        - Fig1_S1_S2/data/gal80del/plate2_Well 096_1_10_2019.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Tube 01_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 002_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 003_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 004_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 005_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 006_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 007_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 008_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 009_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 010_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 011_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 012_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 013_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 014_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 015_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 016_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 017_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 018_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 019_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 020_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 021_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 022_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 023_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 024_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 025_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 026_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 027_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 028_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 029_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 030_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 031_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 032_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 033_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 034_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 035_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 036_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 037_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 038_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 039_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 040_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 041_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 042_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 043_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 044_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 045_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 046_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 047_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 048_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 049_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 050_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 051_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 052_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 053_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 054_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 055_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 056_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 057_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 058_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 059_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 060_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 061_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 062_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 063_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 064_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 065_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 066_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 067_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 068_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 069_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 070_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 071_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 072_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 073_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 074_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 075_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 076_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 077_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 078_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 079_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 080_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 081_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 082_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 083_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 084_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 085_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 086_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 087_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 088_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 089_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 090_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 091_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 092_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 093_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 094_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 095_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate4_Well 096_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Tube 01_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 002_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 003_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 004_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 005_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 006_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 007_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 008_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 009_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 010_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 011_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 012_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 013_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 014_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 015_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 016_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 017_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 018_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 019_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 020_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 021_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 022_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 023_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 024_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 025_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 026_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 027_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 028_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 029_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 030_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 031_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 032_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 033_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 034_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 035_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 036_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 037_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 038_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 039_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 040_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 041_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 042_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 043_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 044_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 045_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 046_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 047_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 048_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 049_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 050_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 051_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 052_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 053_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 054_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 055_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 056_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 057_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 058_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 059_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 060_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 061_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 062_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 063_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 064_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 065_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 066_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 067_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 068_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 069_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 070_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 071_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 072_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 073_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 074_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 075_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 076_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 077_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 078_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 079_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 080_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 081_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 082_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 083_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 084_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 085_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 086_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 087_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 088_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 089_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 090_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 091_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 092_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 093_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 094_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 095_7_8_2018.fcs
+        - Fig1_S1_S2/data/mig1del/plate6_Well 096_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Tube 01_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 002_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 003_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 004_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 005_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 006_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 007_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 008_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 009_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 010_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 011_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 012_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 013_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 014_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 015_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 016_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 017_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 018_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 019_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 020_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 021_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 022_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 023_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 024_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 025_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 026_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 027_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 028_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 029_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 030_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 031_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 032_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 033_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 034_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 035_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 036_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 037_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 038_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 039_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 040_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 041_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 042_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 043_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 044_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 045_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 046_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 047_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 048_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 049_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 050_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 051_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 052_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 053_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 054_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 055_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 056_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 057_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 058_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 059_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 060_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 061_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 062_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 063_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 064_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 065_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 066_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 067_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 068_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 069_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 070_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 071_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 072_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 073_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 074_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 075_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 076_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 077_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 078_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 079_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 080_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 081_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 082_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 083_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 084_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 085_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 086_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 087_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 088_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 089_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 090_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 091_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 092_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 093_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 094_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 095_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate2_Well 096_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Tube 01_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 002_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 003_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 004_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 005_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 006_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 007_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 008_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 009_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 010_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 011_7_7_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 012_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 013_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 014_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 015_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 016_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 017_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 018_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 019_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 020_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 021_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 022_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 023_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 024_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 025_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 026_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 027_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 028_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 029_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 030_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 031_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 032_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 033_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 034_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 035_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 036_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 037_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 038_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 039_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 040_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 041_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 042_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 043_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 044_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 045_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 046_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 047_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 048_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 049_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 050_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 051_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 052_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 053_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 054_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 055_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 056_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 057_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 058_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 059_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 060_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 061_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 062_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 063_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 064_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 065_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 066_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 067_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 068_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 069_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 070_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 071_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 072_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 073_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 074_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 075_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 076_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 077_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 078_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 079_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 080_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 081_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 082_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 083_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 084_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 085_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 086_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 087_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 088_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 089_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 090_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 091_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 092_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 093_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 094_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 095_7_8_2018.fcs
+        - Fig1_S1_S2/data/wt/plate3_Well 096_7_8_2018.fcs
+
+  # S1400EX (ditto)
+  - src:
+      file_id: 671785
+      dataset_id: dryad_671785_StratedigmS1400EX
+      file_paths:
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Tube 01_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 002_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 003_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 007_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 008_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 013_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 014_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 015_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 019_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 020_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 037_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 038_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 039_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 040_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 041_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 043_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 044_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 045_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 046_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Well 047_12_18_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Tube 01_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 002_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 003_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 007_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 008_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 013_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 014_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 015_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 019_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 020_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 031_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 032_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 033_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 034_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 035_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 036_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 037_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 038_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 039_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 040_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 041_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 042_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 043_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 044_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 045_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 046_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 047_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 048_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 049_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181219 Day 2/plate2_Well 050_12_19_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181221 Day 3/plate3_Tube 01_12_21_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 025_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 026_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 027_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 028_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 029_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 031_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 032_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 033_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 034_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181223 Day 4/plate1_Well 035_12_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 025_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 026_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 027_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 028_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 029_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 031_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 032_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 033_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 034_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L108_data/20181225 Day 5/plate2_Well 035_12_25_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Tube 01_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 002_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 003_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 004_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 005_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 007_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 008_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 009_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 010_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 011_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 013_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 014_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 015_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 016_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 017_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 019_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 020_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 021_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 022_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 023_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 025_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 026_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 027_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 028_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 029_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 031_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 032_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 033_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 034_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 035_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 037_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 038_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 039_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 040_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 041_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 043_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 044_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 045_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 046_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 1/plate1_Well 047_10_8_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Tube 01_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 002_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 003_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 004_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 005_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 007_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 008_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 009_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 010_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 011_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 013_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 014_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 015_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 016_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 017_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 019_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 020_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 021_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 022_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 023_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 025_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 026_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 027_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 028_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 029_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 031_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 032_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 033_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 034_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 035_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 037_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 038_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 039_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 040_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 041_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 043_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 044_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 045_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 046_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_data/Rep 2/plate1_Well 047_10_9_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Tube 01_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 002_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 003_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 004_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 005_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 006_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 007_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 008_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 009_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 010_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 011_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 012_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 013_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 014_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 015_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 016_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 017_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 018_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 019_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 020_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 021_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 022_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 023_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate1_Well 024_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Tube 01_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 002_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 003_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 004_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 005_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 006_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 007_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 008_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 009_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 010_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 011_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 012_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 013_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 014_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 015_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 016_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 017_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 018_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 019_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 020_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 021_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 022_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 023_10_23_2018.fcs
+        - Fig2a_FigS4dehijk/Flow data/L93_TetMig1_data/plate2_Well 024_10_23_2018.fcs
+
+  # S1400EX (ditto)
+  - src:
+      file_id: 671783
+      dataset_id: dryad_671783_StratedigmS1400EX
+      file_paths:
+        - FigS3/data/data_21hr/plate1_Tube 01_001.fcs
+        - FigS3/data/data_21hr/plate1_Well 002_002.fcs
+        - FigS3/data/data_21hr/plate1_Well 003_003.fcs
+        - FigS3/data/data_21hr/plate1_Well 004_004.fcs
+        - FigS3/data/data_21hr/plate1_Well 005_005.fcs
+        - FigS3/data/data_21hr/plate1_Well 006_006.fcs
+        - FigS3/data/data_21hr/plate1_Well 007_007.fcs
+        - FigS3/data/data_21hr/plate1_Well 008_008.fcs
+        - FigS3/data/data_21hr/plate1_Well 009_009.fcs
+        - FigS3/data/data_21hr/plate1_Well 010_010.fcs
+        - FigS3/data/data_21hr/plate1_Well 011_011.fcs
+        - FigS3/data/data_21hr/plate1_Well 012_012.fcs
+        - FigS3/data/data_21hr/plate1_Well 013_013.fcs
+        - FigS3/data/data_21hr/plate1_Well 014_014.fcs
+        - FigS3/data/data_21hr/plate1_Well 015_015.fcs
+        - FigS3/data/data_21hr/plate1_Well 016_016.fcs
+        - FigS3/data/data_21hr/plate1_Well 017_017.fcs
+        - FigS3/data/data_21hr/plate1_Well 018_018.fcs
+        - FigS3/data/data_21hr/plate1_Well 019_019.fcs
+        - FigS3/data/data_21hr/plate1_Well 020_020.fcs
+        - FigS3/data/data_21hr/plate1_Well 021_021.fcs
+        - FigS3/data/data_21hr/plate1_Well 022_022.fcs
+        - FigS3/data/data_21hr/plate1_Well 023_023.fcs
+        - FigS3/data/data_21hr/plate1_Well 024_024.fcs
+        - FigS3/data/data_21hr/plate1_Well 025_025.fcs
+        - FigS3/data/data_21hr/plate1_Well 026_026.fcs
+        - FigS3/data/data_21hr/plate1_Well 027_027.fcs
+        - FigS3/data/data_21hr/plate1_Well 028_028.fcs
+        - FigS3/data/data_21hr/plate1_Well 029_029.fcs
+        - FigS3/data/data_21hr/plate1_Well 030_030.fcs
+        - FigS3/data/data_21hr/plate1_Well 031_031.fcs
+        - FigS3/data/data_21hr/plate1_Well 032_032.fcs
+        - FigS3/data/data_21hr/plate1_Well 033_033.fcs
+        - FigS3/data/data_21hr/plate1_Well 034_034.fcs
+        - FigS3/data/data_21hr/plate1_Well 035_035.fcs
+        - FigS3/data/data_21hr/plate1_Well 036_036.fcs
+        - FigS3/data/data_21hr/plate1_Well 037_037.fcs
+        - FigS3/data/data_21hr/plate1_Well 038_038.fcs
+        - FigS3/data/data_21hr/plate1_Well 039_039.fcs
+        - FigS3/data/data_21hr/plate1_Well 040_040.fcs
+        - FigS3/data/data_21hr/plate1_Well 041_041.fcs
+        - FigS3/data/data_21hr/plate1_Well 042_042.fcs
+        - FigS3/data/data_21hr/plate1_Well 043_043.fcs
+        - FigS3/data/data_21hr/plate1_Well 044_044.fcs
+        - FigS3/data/data_21hr/plate1_Well 045_045.fcs
+        - FigS3/data/data_21hr/plate1_Well 046_046.fcs
+        - FigS3/data/data_21hr/plate1_Well 047_047.fcs
+        - FigS3/data/data_21hr/plate1_Well 048_048.fcs
+        - FigS3/data/data_21hr/plate1_Well 049_049.fcs
+        - FigS3/data/data_21hr/plate1_Well 050_050.fcs
+        - FigS3/data/data_21hr/plate1_Well 051_051.fcs
+        - FigS3/data/data_21hr/plate1_Well 052_052.fcs
+        - FigS3/data/data_21hr/plate1_Well 053_053.fcs
+        - FigS3/data/data_21hr/plate1_Well 054_054.fcs
+        - FigS3/data/data_21hr/plate1_Well 055_055.fcs
+        - FigS3/data/data_21hr/plate1_Well 056_056.fcs
+        - FigS3/data/data_21hr/plate1_Well 057_057.fcs
+        - FigS3/data/data_21hr/plate1_Well 058_058.fcs
+        - FigS3/data/data_21hr/plate1_Well 059_059.fcs
+        - FigS3/data/data_21hr/plate1_Well 060_060.fcs
+        - FigS3/data/data_21hr/plate1_Well 061_061.fcs
+        - FigS3/data/data_21hr/plate1_Well 062_062.fcs
+        - FigS3/data/data_21hr/plate1_Well 063_063.fcs
+        - FigS3/data/data_21hr/plate1_Well 064_064.fcs
+        - FigS3/data/data_21hr/plate1_Well 065_065.fcs
+        - FigS3/data/data_21hr/plate1_Well 066_066.fcs
+        - FigS3/data/data_21hr/plate1_Well 067_067.fcs
+        - FigS3/data/data_21hr/plate1_Well 068_068.fcs
+        - FigS3/data/data_21hr/plate1_Well 069_069.fcs
+        - FigS3/data/data_21hr/plate1_Well 070_070.fcs
+        - FigS3/data/data_21hr/plate1_Well 071_071.fcs
+        - FigS3/data/data_21hr/plate1_Well 072_072.fcs
+        - FigS3/data/data_21hr/plate1_Well 073_073.fcs
+        - FigS3/data/data_21hr/plate1_Well 074_074.fcs
+        - FigS3/data/data_21hr/plate1_Well 075_075.fcs
+        - FigS3/data/data_21hr/plate1_Well 076_076.fcs
+        - FigS3/data/data_21hr/plate1_Well 077_077.fcs
+        - FigS3/data/data_21hr/plate1_Well 078_078.fcs
+        - FigS3/data/data_21hr/plate1_Well 079_079.fcs
+        - FigS3/data/data_21hr/plate1_Well 080_080.fcs
+        - FigS3/data/data_21hr/plate1_Well 081_081.fcs
+        - FigS3/data/data_21hr/plate1_Well 082_082.fcs
+        - FigS3/data/data_21hr/plate1_Well 083_083.fcs
+        - FigS3/data/data_21hr/plate1_Well 084_084.fcs
+        - FigS3/data/data_21hr/plate1_Well 085_085.fcs
+        - FigS3/data/data_21hr/plate1_Well 086_086.fcs
+        - FigS3/data/data_21hr/plate1_Well 087_087.fcs
+        - FigS3/data/data_21hr/plate1_Well 088_088.fcs
+        - FigS3/data/data_21hr/plate1_Well 089_089.fcs
+        - FigS3/data/data_21hr/plate1_Well 090_090.fcs
+        - FigS3/data/data_21hr/plate1_Well 091_091.fcs
+        - FigS3/data/data_21hr/plate1_Well 092_092.fcs
+        - FigS3/data/data_21hr/plate1_Well 093_093.fcs
+        - FigS3/data/data_21hr/plate1_Well 094_094.fcs
+        - FigS3/data/data_21hr/plate1_Well 095_095.fcs
+        - FigS3/data/data_21hr/plate1_Well 096_096.fcs
+        - FigS3/data/data_21hr/plate2_Tube 01_097.fcs
+        - FigS3/data/data_21hr/plate2_Well 002_098.fcs
+        - FigS3/data/data_21hr/plate2_Well 003_099.fcs
+        - FigS3/data/data_21hr/plate2_Well 004_100.fcs
+        - FigS3/data/data_21hr/plate2_Well 005_101.fcs
+        - FigS3/data/data_21hr/plate2_Well 006_102.fcs
+        - FigS3/data/data_21hr/plate2_Well 007_103.fcs
+        - FigS3/data/data_21hr/plate2_Well 008_104.fcs
+        - FigS3/data/data_21hr/plate2_Well 009_105.fcs
+        - FigS3/data/data_21hr/plate2_Well 010_106.fcs
+        - FigS3/data/data_21hr/plate2_Well 011_107.fcs
+        - FigS3/data/data_21hr/plate2_Well 012_108.fcs
+        - FigS3/data/data_21hr/plate2_Well 013_109.fcs
+        - FigS3/data/data_21hr/plate2_Well 014_110.fcs
+        - FigS3/data/data_21hr/plate2_Well 015_111.fcs
+        - FigS3/data/data_21hr/plate2_Well 016_112.fcs
+        - FigS3/data/data_21hr/plate2_Well 017_113.fcs
+        - FigS3/data/data_21hr/plate2_Well 018_114.fcs
+        - FigS3/data/data_21hr/plate2_Well 019_115.fcs
+        - FigS3/data/data_21hr/plate2_Well 020_116.fcs
+        - FigS3/data/data_21hr/plate2_Well 021_117.fcs
+        - FigS3/data/data_21hr/plate2_Well 022_118.fcs
+        - FigS3/data/data_21hr/plate2_Well 023_119.fcs
+        - FigS3/data/data_21hr/plate2_Well 024_120.fcs
+        - FigS3/data/data_21hr/plate2_Well 025_121.fcs
+        - FigS3/data/data_21hr/plate2_Well 026_122.fcs
+        - FigS3/data/data_21hr/plate2_Well 027_123.fcs
+        - FigS3/data/data_21hr/plate2_Well 028_124.fcs
+        - FigS3/data/data_21hr/plate2_Well 029_125.fcs
+        - FigS3/data/data_21hr/plate2_Well 030_126.fcs
+        - FigS3/data/data_21hr/plate2_Well 031_127.fcs
+        - FigS3/data/data_21hr/plate2_Well 032_128.fcs
+        - FigS3/data/data_21hr/plate2_Well 033_129.fcs
+        - FigS3/data/data_21hr/plate2_Well 034_130.fcs
+        - FigS3/data/data_21hr/plate2_Well 035_131.fcs
+        - FigS3/data/data_21hr/plate2_Well 036_132.fcs
+        - FigS3/data/data_21hr/plate2_Well 037_133.fcs
+        - FigS3/data/data_21hr/plate2_Well 038_134.fcs
+        - FigS3/data/data_21hr/plate2_Well 039_135.fcs
+        - FigS3/data/data_21hr/plate2_Well 040_136.fcs
+        - FigS3/data/data_21hr/plate2_Well 041_137.fcs
+        - FigS3/data/data_21hr/plate2_Well 042_138.fcs
+        - FigS3/data/data_21hr/plate2_Well 043_139.fcs
+        - FigS3/data/data_21hr/plate2_Well 044_140.fcs
+        - FigS3/data/data_21hr/plate2_Well 045_141.fcs
+        - FigS3/data/data_21hr/plate2_Well 046_142.fcs
+        - FigS3/data/data_21hr/plate2_Well 047_143.fcs
+        - FigS3/data/data_21hr/plate2_Well 048_144.fcs
+        - FigS3/data/data_21hr/plate2_Well 049_145.fcs
+        - FigS3/data/data_21hr/plate2_Well 050_146.fcs
+        - FigS3/data/data_21hr/plate2_Well 051_147.fcs
+        - FigS3/data/data_21hr/plate2_Well 052_148.fcs
+        - FigS3/data/data_21hr/plate2_Well 053_149.fcs
+        - FigS3/data/data_21hr/plate2_Well 054_150.fcs
+        - FigS3/data/data_21hr/plate2_Well 055_151.fcs
+        - FigS3/data/data_21hr/plate2_Well 056_152.fcs
+        - FigS3/data/data_21hr/plate2_Well 057_153.fcs
+        - FigS3/data/data_21hr/plate2_Well 058_154.fcs
+        - FigS3/data/data_21hr/plate2_Well 059_155.fcs
+        - FigS3/data/data_21hr/plate2_Well 060_156.fcs
+        - FigS3/data/data_21hr/plate2_Well 061_157.fcs
+        - FigS3/data/data_21hr/plate2_Well 062_158.fcs
+        - FigS3/data/data_21hr/plate2_Well 063_159.fcs
+        - FigS3/data/data_21hr/plate2_Well 064_160.fcs
+        - FigS3/data/data_21hr/plate2_Well 065_161.fcs
+        - FigS3/data/data_21hr/plate2_Well 066_162.fcs
+        - FigS3/data/data_21hr/plate2_Well 067_163.fcs
+        - FigS3/data/data_21hr/plate2_Well 068_164.fcs
+        - FigS3/data/data_21hr/plate2_Well 069_165.fcs
+        - FigS3/data/data_21hr/plate2_Well 070_166.fcs
+        - FigS3/data/data_21hr/plate2_Well 071_167.fcs
+        - FigS3/data/data_21hr/plate2_Well 072_168.fcs
+        - FigS3/data/data_21hr/plate2_Well 073_169.fcs
+        - FigS3/data/data_21hr/plate2_Well 074_170.fcs
+        - FigS3/data/data_21hr/plate2_Well 075_171.fcs
+        - FigS3/data/data_21hr/plate2_Well 076_172.fcs
+        - FigS3/data/data_21hr/plate2_Well 077_173.fcs
+        - FigS3/data/data_21hr/plate2_Well 078_174.fcs
+        - FigS3/data/data_21hr/plate2_Well 079_175.fcs
+        - FigS3/data/data_21hr/plate2_Well 080_176.fcs
+        - FigS3/data/data_21hr/plate2_Well 081_177.fcs
+        - FigS3/data/data_21hr/plate2_Well 082_178.fcs
+        - FigS3/data/data_21hr/plate2_Well 083_179.fcs
+        - FigS3/data/data_21hr/plate2_Well 084_180.fcs
+        - FigS3/data/data_21hr/plate2_Well 085_181.fcs
+        - FigS3/data/data_21hr/plate2_Well 086_182.fcs
+        - FigS3/data/data_21hr/plate2_Well 087_183.fcs
+        - FigS3/data/data_21hr/plate2_Well 088_184.fcs
+        - FigS3/data/data_21hr/plate2_Well 089_185.fcs
+        - FigS3/data/data_21hr/plate2_Well 090_186.fcs
+        - FigS3/data/data_21hr/plate2_Well 091_187.fcs
+        - FigS3/data/data_21hr/plate2_Well 092_188.fcs
+        - FigS3/data/data_21hr/plate2_Well 093_189.fcs
+        - FigS3/data/data_21hr/plate2_Well 094_190.fcs
+        - FigS3/data/data_21hr/plate2_Well 095_191.fcs
+        - FigS3/data/data_21hr/plate2_Well 096_192.fcs
+        - FigS3/data/data_21hr/plate3_Tube 01_193.fcs
+        - FigS3/data/data_21hr/plate3_Well 002_194.fcs
+        - FigS3/data/data_21hr/plate3_Well 003_195.fcs
+        - FigS3/data/data_21hr/plate3_Well 004_196.fcs
+        - FigS3/data/data_21hr/plate3_Well 005_197.fcs
+        - FigS3/data/data_21hr/plate3_Well 006_198.fcs
+        - FigS3/data/data_21hr/plate3_Well 007_199.fcs
+        - FigS3/data/data_21hr/plate3_Well 008_200.fcs
+        - FigS3/data/data_21hr/plate3_Well 009_201.fcs
+        - FigS3/data/data_21hr/plate3_Well 010_202.fcs
+        - FigS3/data/data_21hr/plate3_Well 011_203.fcs
+        - FigS3/data/data_21hr/plate3_Well 012_204.fcs
+        - FigS3/data/data_21hr/plate3_Well 013_205.fcs
+        - FigS3/data/data_21hr/plate3_Well 014_206.fcs
+        - FigS3/data/data_21hr/plate3_Well 015_207.fcs
+        - FigS3/data/data_21hr/plate3_Well 016_208.fcs
+        - FigS3/data/data_21hr/plate3_Well 017_209.fcs
+        - FigS3/data/data_21hr/plate3_Well 018_210.fcs
+        - FigS3/data/data_21hr/plate3_Well 019_211.fcs
+        - FigS3/data/data_21hr/plate3_Well 020_212.fcs
+        - FigS3/data/data_21hr/plate3_Well 021_213.fcs
+        - FigS3/data/data_21hr/plate3_Well 022_214.fcs
+        - FigS3/data/data_21hr/plate3_Well 023_215.fcs
+        - FigS3/data/data_21hr/plate3_Well 024_216.fcs
+        - FigS3/data/data_21hr/plate3_Well 025_217.fcs
+        - FigS3/data/data_21hr/plate3_Well 026_218.fcs
+        - FigS3/data/data_21hr/plate3_Well 027_219.fcs
+        - FigS3/data/data_21hr/plate3_Well 028_220.fcs
+        - FigS3/data/data_21hr/plate3_Well 029_221.fcs
+        - FigS3/data/data_21hr/plate3_Well 030_222.fcs
+        - FigS3/data/data_21hr/plate3_Well 031_223.fcs
+        - FigS3/data/data_21hr/plate3_Well 032_224.fcs
+        - FigS3/data/data_21hr/plate3_Well 033_225.fcs
+        - FigS3/data/data_21hr/plate3_Well 034_226.fcs
+        - FigS3/data/data_21hr/plate3_Well 035_227.fcs
+        - FigS3/data/data_21hr/plate3_Well 036_228.fcs
+        - FigS3/data/data_21hr/plate3_Well 037_229.fcs
+        - FigS3/data/data_21hr/plate3_Well 038_230.fcs
+        - FigS3/data/data_21hr/plate3_Well 039_231.fcs
+        - FigS3/data/data_21hr/plate3_Well 040_232.fcs
+        - FigS3/data/data_21hr/plate3_Well 041_233.fcs
+        - FigS3/data/data_21hr/plate3_Well 042_234.fcs
+        - FigS3/data/data_21hr/plate3_Well 043_235.fcs
+        - FigS3/data/data_21hr/plate3_Well 044_236.fcs
+        - FigS3/data/data_21hr/plate3_Well 045_237.fcs
+        - FigS3/data/data_21hr/plate3_Well 046_238.fcs
+        - FigS3/data/data_21hr/plate3_Well 047_239.fcs
+        - FigS3/data/data_21hr/plate3_Well 048_240.fcs
+        - FigS3/data/data_21hr/plate3_Well 049_241.fcs
+        - FigS3/data/data_21hr/plate3_Well 050_242.fcs
+        - FigS3/data/data_21hr/plate3_Well 051_243.fcs
+        - FigS3/data/data_21hr/plate3_Well 052_244.fcs
+        - FigS3/data/data_21hr/plate3_Well 053_245.fcs
+        - FigS3/data/data_21hr/plate3_Well 054_246.fcs
+        - FigS3/data/data_21hr/plate3_Well 055_247.fcs
+        - FigS3/data/data_21hr/plate3_Well 056_248.fcs
+        - FigS3/data/data_21hr/plate3_Well 057_249.fcs
+        - FigS3/data/data_21hr/plate3_Well 058_250.fcs
+        - FigS3/data/data_21hr/plate3_Well 059_251.fcs
+        - FigS3/data/data_21hr/plate3_Well 060_252.fcs
+        - FigS3/data/data_21hr/plate3_Well 061_253.fcs
+        - FigS3/data/data_21hr/plate3_Well 062_254.fcs
+        - FigS3/data/data_21hr/plate3_Well 063_255.fcs
+        - FigS3/data/data_21hr/plate3_Well 064_256.fcs
+        - FigS3/data/data_21hr/plate3_Well 065_257.fcs
+        - FigS3/data/data_21hr/plate3_Well 066_258.fcs
+        - FigS3/data/data_21hr/plate3_Well 067_259.fcs
+        - FigS3/data/data_21hr/plate3_Well 068_260.fcs
+        - FigS3/data/data_21hr/plate3_Well 069_261.fcs
+        - FigS3/data/data_21hr/plate3_Well 070_262.fcs
+        - FigS3/data/data_21hr/plate3_Well 071_263.fcs
+        - FigS3/data/data_21hr/plate3_Well 072_264.fcs
+        - FigS3/data/data_21hr/plate3_Well 073_265.fcs
+        - FigS3/data/data_21hr/plate3_Well 074_266.fcs
+        - FigS3/data/data_21hr/plate3_Well 075_267.fcs
+        - FigS3/data/data_21hr/plate3_Well 076_268.fcs
+        - FigS3/data/data_21hr/plate3_Well 077_269.fcs
+        - FigS3/data/data_21hr/plate3_Well 078_270.fcs
+        - FigS3/data/data_21hr/plate3_Well 079_271.fcs
+        - FigS3/data/data_21hr/plate3_Well 080_272.fcs
+        - FigS3/data/data_21hr/plate3_Well 081_273.fcs
+        - FigS3/data/data_21hr/plate3_Well 082_274.fcs
+        - FigS3/data/data_21hr/plate3_Well 083_275.fcs
+        - FigS3/data/data_21hr/plate3_Well 084_276.fcs
+        - FigS3/data/data_21hr/plate3_Well 085_277.fcs
+        - FigS3/data/data_21hr/plate3_Well 086_278.fcs
+        - FigS3/data/data_21hr/plate3_Well 087_279.fcs
+        - FigS3/data/data_21hr/plate3_Well 088_280.fcs
+        - FigS3/data/data_21hr/plate3_Well 089_281.fcs
+        - FigS3/data/data_21hr/plate3_Well 090_282.fcs
+        - FigS3/data/data_21hr/plate3_Well 091_283.fcs
+        - FigS3/data/data_21hr/plate3_Well 092_284.fcs
+        - FigS3/data/data_21hr/plate3_Well 093_285.fcs
+        - FigS3/data/data_21hr/plate3_Well 094_286.fcs
+        - FigS3/data/data_21hr/plate3_Well 095_287.fcs
+        - FigS3/data/data_21hr/plate3_Well 096_288.fcs
+        - FigS3/data/data_21hr/plate4_Tube 01_289.fcs
+        - FigS3/data/data_21hr/plate4_Well 002_290.fcs
+        - FigS3/data/data_21hr/plate4_Well 003_291.fcs
+        - FigS3/data/data_21hr/plate4_Well 004_292.fcs
+        - FigS3/data/data_21hr/plate4_Well 005_293.fcs
+        - FigS3/data/data_21hr/plate4_Well 006_294.fcs
+        - FigS3/data/data_21hr/plate4_Well 007_295.fcs
+        - FigS3/data/data_21hr/plate4_Well 008_296.fcs
+        - FigS3/data/data_21hr/plate4_Well 009_297.fcs
+        - FigS3/data/data_21hr/plate4_Well 010_298.fcs
+        - FigS3/data/data_21hr/plate4_Well 011_299.fcs
+        - FigS3/data/data_21hr/plate4_Well 012_300.fcs
+        - FigS3/data/data_21hr/plate4_Well 013_301.fcs
+        - FigS3/data/data_21hr/plate4_Well 014_302.fcs
+        - FigS3/data/data_21hr/plate4_Well 015_303.fcs
+        - FigS3/data/data_21hr/plate4_Well 016_304.fcs
+        - FigS3/data/data_21hr/plate4_Well 017_305.fcs
+        - FigS3/data/data_21hr/plate4_Well 018_306.fcs
+        - FigS3/data/data_21hr/plate4_Well 019_307.fcs
+        - FigS3/data/data_21hr/plate4_Well 020_308.fcs
+        - FigS3/data/data_21hr/plate4_Well 021_309.fcs
+        - FigS3/data/data_21hr/plate4_Well 022_310.fcs
+        - FigS3/data/data_21hr/plate4_Well 023_311.fcs
+        - FigS3/data/data_21hr/plate4_Well 024_312.fcs
+        - FigS3/data/data_21hr/plate4_Well 025_313.fcs
+        - FigS3/data/data_21hr/plate4_Well 026_314.fcs
+        - FigS3/data/data_21hr/plate4_Well 027_315.fcs
+        - FigS3/data/data_21hr/plate4_Well 028_316.fcs
+        - FigS3/data/data_21hr/plate4_Well 029_317.fcs
+        - FigS3/data/data_21hr/plate4_Well 030_318.fcs
+        - FigS3/data/data_21hr/plate4_Well 031_319.fcs
+        - FigS3/data/data_21hr/plate4_Well 032_320.fcs
+        - FigS3/data/data_21hr/plate4_Well 033_321.fcs
+        - FigS3/data/data_21hr/plate4_Well 034_322.fcs
+        - FigS3/data/data_21hr/plate4_Well 035_323.fcs
+        - FigS3/data/data_21hr/plate4_Well 036_324.fcs
+        - FigS3/data/data_21hr/plate4_Well 037_325.fcs
+        - FigS3/data/data_21hr/plate4_Well 038_326.fcs
+        - FigS3/data/data_21hr/plate4_Well 039_327.fcs
+        - FigS3/data/data_21hr/plate4_Well 040_328.fcs
+        - FigS3/data/data_21hr/plate4_Well 041_329.fcs
+        - FigS3/data/data_21hr/plate4_Well 042_330.fcs
+        - FigS3/data/data_21hr/plate4_Well 043_331.fcs
+        - FigS3/data/data_21hr/plate4_Well 044_332.fcs
+        - FigS3/data/data_21hr/plate4_Well 045_333.fcs
+        - FigS3/data/data_21hr/plate4_Well 046_334.fcs
+        - FigS3/data/data_21hr/plate4_Well 047_335.fcs
+        - FigS3/data/data_21hr/plate4_Well 048_336.fcs
+        - FigS3/data/data_21hr/plate4_Well 049_337.fcs
+        - FigS3/data/data_21hr/plate4_Well 050_338.fcs
+        - FigS3/data/data_21hr/plate4_Well 051_339.fcs
+        - FigS3/data/data_21hr/plate4_Well 052_340.fcs
+        - FigS3/data/data_21hr/plate4_Well 053_341.fcs
+        - FigS3/data/data_21hr/plate4_Well 054_342.fcs
+        - FigS3/data/data_21hr/plate4_Well 055_343.fcs
+        - FigS3/data/data_21hr/plate4_Well 056_344.fcs
+        - FigS3/data/data_21hr/plate4_Well 057_345.fcs
+        - FigS3/data/data_21hr/plate4_Well 058_346.fcs
+        - FigS3/data/data_21hr/plate4_Well 059_347.fcs
+        - FigS3/data/data_21hr/plate4_Well 060_348.fcs
+        - FigS3/data/data_21hr/plate4_Well 061_349.fcs
+        - FigS3/data/data_21hr/plate4_Well 062_350.fcs
+        - FigS3/data/data_21hr/plate4_Well 063_351.fcs
+        - FigS3/data/data_21hr/plate4_Well 064_352.fcs
+        - FigS3/data/data_21hr/plate4_Well 065_353.fcs
+        - FigS3/data/data_21hr/plate4_Well 066_354.fcs
+        - FigS3/data/data_21hr/plate4_Well 067_355.fcs
+        - FigS3/data/data_21hr/plate4_Well 068_356.fcs
+        - FigS3/data/data_21hr/plate4_Well 069_357.fcs
+        - FigS3/data/data_21hr/plate4_Well 070_358.fcs
+        - FigS3/data/data_21hr/plate4_Well 071_359.fcs
+        - FigS3/data/data_21hr/plate4_Well 072_360.fcs
+        - FigS3/data/data_21hr/plate4_Well 073_361.fcs
+        - FigS3/data/data_21hr/plate4_Well 074_362.fcs
+        - FigS3/data/data_21hr/plate4_Well 075_363.fcs
+        - FigS3/data/data_21hr/plate4_Well 076_364.fcs
+        - FigS3/data/data_21hr/plate4_Well 077_365.fcs
+        - FigS3/data/data_21hr/plate4_Well 078_366.fcs
+        - FigS3/data/data_21hr/plate4_Well 079_367.fcs
+        - FigS3/data/data_21hr/plate4_Well 080_368.fcs
+        - FigS3/data/data_21hr/plate4_Well 081_369.fcs
+        - FigS3/data/data_21hr/plate4_Well 082_370.fcs
+        - FigS3/data/data_21hr/plate4_Well 083_371.fcs
+        - FigS3/data/data_21hr/plate4_Well 084_372.fcs
+        - FigS3/data/data_21hr/plate4_Well 085_373.fcs
+        - FigS3/data/data_21hr/plate4_Well 086_374.fcs
+        - FigS3/data/data_21hr/plate4_Well 087_375.fcs
+        - FigS3/data/data_21hr/plate4_Well 088_376.fcs
+        - FigS3/data/data_21hr/plate4_Well 089_377.fcs
+        - FigS3/data/data_21hr/plate4_Well 090_378.fcs
+        - FigS3/data/data_21hr/plate4_Well 091_379.fcs
+        - FigS3/data/data_21hr/plate4_Well 092_380.fcs
+        - FigS3/data/data_21hr/plate4_Well 093_381.fcs
+        - FigS3/data/data_21hr/plate4_Well 094_382.fcs
+        - FigS3/data/data_21hr/plate4_Well 095_383.fcs
+        - FigS3/data/data_21hr/plate4_Well 096_384.fcs
+        - FigS3/data/data_33hr/plate2_Tube 01_001.fcs
+        - FigS3/data/data_33hr/plate2_Well 002_002.fcs
+        - FigS3/data/data_33hr/plate2_Well 003_003.fcs
+        - FigS3/data/data_33hr/plate2_Well 004_004.fcs
+        - FigS3/data/data_33hr/plate2_Well 005_005.fcs
+        - FigS3/data/data_33hr/plate2_Well 006_006.fcs
+        - FigS3/data/data_33hr/plate2_Well 007_007.fcs
+        - FigS3/data/data_33hr/plate2_Well 008_008.fcs
+        - FigS3/data/data_33hr/plate2_Well 009_009.fcs
+        - FigS3/data/data_33hr/plate2_Well 010_010.fcs
+        - FigS3/data/data_33hr/plate2_Well 011_011.fcs
+        - FigS3/data/data_33hr/plate2_Well 012_012.fcs
+        - FigS3/data/data_33hr/plate2_Well 013_013.fcs
+        - FigS3/data/data_33hr/plate2_Well 014_014.fcs
+        - FigS3/data/data_33hr/plate2_Well 015_015.fcs
+        - FigS3/data/data_33hr/plate2_Well 016_016.fcs
+        - FigS3/data/data_33hr/plate2_Well 017_017.fcs
+        - FigS3/data/data_33hr/plate2_Well 018_018.fcs
+        - FigS3/data/data_33hr/plate2_Well 019_019.fcs
+        - FigS3/data/data_33hr/plate2_Well 020_020.fcs
+        - FigS3/data/data_33hr/plate2_Well 021_021.fcs
+        - FigS3/data/data_33hr/plate2_Well 022_022.fcs
+        - FigS3/data/data_33hr/plate2_Well 023_023.fcs
+        - FigS3/data/data_33hr/plate2_Well 024_024.fcs
+        - FigS3/data/data_33hr/plate2_Well 025_025.fcs
+        - FigS3/data/data_33hr/plate2_Well 026_026.fcs
+        - FigS3/data/data_33hr/plate2_Well 027_027.fcs
+        - FigS3/data/data_33hr/plate2_Well 028_028.fcs
+        - FigS3/data/data_33hr/plate2_Well 029_029.fcs
+        - FigS3/data/data_33hr/plate2_Well 030_030.fcs
+        - FigS3/data/data_33hr/plate2_Well 031_031.fcs
+        - FigS3/data/data_33hr/plate2_Well 032_032.fcs
+        - FigS3/data/data_33hr/plate2_Well 033_033.fcs
+        - FigS3/data/data_33hr/plate2_Well 034_034.fcs
+        - FigS3/data/data_33hr/plate2_Well 035_035.fcs
+        - FigS3/data/data_33hr/plate2_Well 036_036.fcs
+        - FigS3/data/data_33hr/plate2_Well 037_037.fcs
+        - FigS3/data/data_33hr/plate2_Well 038_038.fcs
+        - FigS3/data/data_33hr/plate2_Well 039_039.fcs
+        - FigS3/data/data_33hr/plate2_Well 040_040.fcs
+        - FigS3/data/data_33hr/plate2_Well 041_041.fcs
+        - FigS3/data/data_33hr/plate2_Well 042_042.fcs
+        - FigS3/data/data_33hr/plate2_Well 043_043.fcs
+        - FigS3/data/data_33hr/plate2_Well 044_044.fcs
+        - FigS3/data/data_33hr/plate2_Well 045_045.fcs
+        - FigS3/data/data_33hr/plate2_Well 046_046.fcs
+        - FigS3/data/data_33hr/plate2_Well 047_047.fcs
+        - FigS3/data/data_33hr/plate2_Well 048_048.fcs
+        - FigS3/data/data_33hr/plate2_Well 049_049.fcs
+        - FigS3/data/data_33hr/plate2_Well 050_050.fcs
+        - FigS3/data/data_33hr/plate2_Well 051_051.fcs
+        - FigS3/data/data_33hr/plate2_Well 052_052.fcs
+        - FigS3/data/data_33hr/plate2_Well 053_053.fcs
+        - FigS3/data/data_33hr/plate2_Well 054_054.fcs
+        - FigS3/data/data_33hr/plate2_Well 055_055.fcs
+        - FigS3/data/data_33hr/plate2_Well 056_056.fcs
+        - FigS3/data/data_33hr/plate2_Well 057_057.fcs
+        - FigS3/data/data_33hr/plate2_Well 058_058.fcs
+        - FigS3/data/data_33hr/plate2_Well 059_059.fcs
+        - FigS3/data/data_33hr/plate2_Well 060_060.fcs
+        - FigS3/data/data_33hr/plate2_Well 061_061.fcs
+        - FigS3/data/data_33hr/plate2_Well 062_062.fcs
+        - FigS3/data/data_33hr/plate2_Well 063_063.fcs
+        - FigS3/data/data_33hr/plate2_Well 064_064.fcs
+        - FigS3/data/data_33hr/plate2_Well 065_065.fcs
+        - FigS3/data/data_33hr/plate2_Well 066_066.fcs
+        - FigS3/data/data_33hr/plate2_Well 067_067.fcs
+        - FigS3/data/data_33hr/plate2_Well 068_068.fcs
+        - FigS3/data/data_33hr/plate2_Well 069_069.fcs
+        - FigS3/data/data_33hr/plate2_Well 070_070.fcs
+        - FigS3/data/data_33hr/plate2_Well 071_071.fcs
+        - FigS3/data/data_33hr/plate2_Well 072_072.fcs
+        - FigS3/data/data_33hr/plate2_Well 073_073.fcs
+        - FigS3/data/data_33hr/plate2_Well 074_074.fcs
+        - FigS3/data/data_33hr/plate2_Well 075_075.fcs
+        - FigS3/data/data_33hr/plate2_Well 076_076.fcs
+        - FigS3/data/data_33hr/plate2_Well 077_077.fcs
+        - FigS3/data/data_33hr/plate2_Well 078_078.fcs
+        - FigS3/data/data_33hr/plate2_Well 079_079.fcs
+        - FigS3/data/data_33hr/plate2_Well 080_080.fcs
+        - FigS3/data/data_33hr/plate2_Well 081_081.fcs
+        - FigS3/data/data_33hr/plate2_Well 082_082.fcs
+        - FigS3/data/data_33hr/plate2_Well 083_083.fcs
+        - FigS3/data/data_33hr/plate2_Well 084_084.fcs
+        - FigS3/data/data_33hr/plate2_Well 085_085.fcs
+        - FigS3/data/data_33hr/plate2_Well 086_086.fcs
+        - FigS3/data/data_33hr/plate2_Well 087_087.fcs
+        - FigS3/data/data_33hr/plate2_Well 088_088.fcs
+        - FigS3/data/data_33hr/plate2_Well 089_089.fcs
+        - FigS3/data/data_33hr/plate2_Well 090_090.fcs
+        - FigS3/data/data_33hr/plate2_Well 091_091.fcs
+        - FigS3/data/data_33hr/plate2_Well 092_092.fcs
+        - FigS3/data/data_33hr/plate2_Well 093_093.fcs
+        - FigS3/data/data_33hr/plate2_Well 094_094.fcs
+        - FigS3/data/data_33hr/plate2_Well 095_095.fcs
+        - FigS3/data/data_33hr/plate2_Well 096_096.fcs
+        - FigS3/data/data_46hr/plate2_Tube 01_001.fcs
+        - FigS3/data/data_46hr/plate2_Well 002_002.fcs
+        - FigS3/data/data_46hr/plate2_Well 003_003.fcs
+        - FigS3/data/data_46hr/plate2_Well 004_004.fcs
+        - FigS3/data/data_46hr/plate2_Well 005_005.fcs
+        - FigS3/data/data_46hr/plate2_Well 006_006.fcs
+        - FigS3/data/data_46hr/plate2_Well 007_007.fcs
+        - FigS3/data/data_46hr/plate2_Well 008_008.fcs
+        - FigS3/data/data_46hr/plate2_Well 009_009.fcs
+        - FigS3/data/data_46hr/plate2_Well 010_010.fcs
+        - FigS3/data/data_46hr/plate2_Well 011_011.fcs
+        - FigS3/data/data_46hr/plate2_Well 012_012.fcs
+        - FigS3/data/data_46hr/plate2_Well 013_013.fcs
+        - FigS3/data/data_46hr/plate2_Well 014_014.fcs
+        - FigS3/data/data_46hr/plate2_Well 015_015.fcs
+        - FigS3/data/data_46hr/plate2_Well 016_016.fcs
+        - FigS3/data/data_46hr/plate2_Well 017_017.fcs
+        - FigS3/data/data_46hr/plate2_Well 018_018.fcs
+        - FigS3/data/data_46hr/plate2_Well 019_019.fcs
+        - FigS3/data/data_46hr/plate2_Well 020_020.fcs
+        - FigS3/data/data_46hr/plate2_Well 021_021.fcs
+        - FigS3/data/data_46hr/plate2_Well 022_022.fcs
+        - FigS3/data/data_46hr/plate2_Well 023_023.fcs
+        - FigS3/data/data_46hr/plate2_Well 024_024.fcs
+        - FigS3/data/data_46hr/plate2_Well 025_025.fcs
+        - FigS3/data/data_46hr/plate2_Well 026_026.fcs
+        - FigS3/data/data_46hr/plate2_Well 027_027.fcs
+        - FigS3/data/data_46hr/plate2_Well 028_028.fcs
+        - FigS3/data/data_46hr/plate2_Well 029_029.fcs
+        - FigS3/data/data_46hr/plate2_Well 030_030.fcs
+        - FigS3/data/data_46hr/plate2_Well 031_031.fcs
+        - FigS3/data/data_46hr/plate2_Well 032_032.fcs
+        - FigS3/data/data_46hr/plate2_Well 033_033.fcs
+        - FigS3/data/data_46hr/plate2_Well 034_034.fcs
+        - FigS3/data/data_46hr/plate2_Well 035_035.fcs
+        - FigS3/data/data_46hr/plate2_Well 036_036.fcs
+        - FigS3/data/data_46hr/plate2_Well 037_037.fcs
+        - FigS3/data/data_46hr/plate2_Well 038_038.fcs
+        - FigS3/data/data_46hr/plate2_Well 039_039.fcs
+        - FigS3/data/data_46hr/plate2_Well 040_040.fcs
+        - FigS3/data/data_46hr/plate2_Well 041_041.fcs
+        - FigS3/data/data_46hr/plate2_Well 042_042.fcs
+        - FigS3/data/data_46hr/plate2_Well 043_043.fcs
+        - FigS3/data/data_46hr/plate2_Well 044_044.fcs
+        - FigS3/data/data_46hr/plate2_Well 045_045.fcs
+        - FigS3/data/data_46hr/plate2_Well 046_046.fcs
+        - FigS3/data/data_46hr/plate2_Well 047_047.fcs
+        - FigS3/data/data_46hr/plate2_Well 048_048.fcs
+        - FigS3/data/data_46hr/plate2_Well 049_049.fcs
+        - FigS3/data/data_46hr/plate2_Well 050_050.fcs
+        - FigS3/data/data_46hr/plate2_Well 051_051.fcs
+        - FigS3/data/data_46hr/plate2_Well 052_052.fcs
+        - FigS3/data/data_46hr/plate2_Well 053_053.fcs
+        - FigS3/data/data_46hr/plate2_Well 054_054.fcs
+        - FigS3/data/data_46hr/plate2_Well 055_055.fcs
+        - FigS3/data/data_46hr/plate2_Well 056_056.fcs
+        - FigS3/data/data_46hr/plate2_Well 057_057.fcs
+        - FigS3/data/data_46hr/plate2_Well 058_058.fcs
+        - FigS3/data/data_46hr/plate2_Well 059_059.fcs
+        - FigS3/data/data_46hr/plate2_Well 060_060.fcs
+        - FigS3/data/data_46hr/plate2_Well 061_061.fcs
+        - FigS3/data/data_46hr/plate2_Well 062_062.fcs
+        - FigS3/data/data_46hr/plate2_Well 063_063.fcs
+        - FigS3/data/data_46hr/plate2_Well 064_064.fcs
+        - FigS3/data/data_46hr/plate2_Well 065_065.fcs
+        - FigS3/data/data_46hr/plate2_Well 066_066.fcs
+        - FigS3/data/data_46hr/plate2_Well 067_067.fcs
+        - FigS3/data/data_46hr/plate2_Well 068_068.fcs
+        - FigS3/data/data_46hr/plate2_Well 069_069.fcs
+        - FigS3/data/data_46hr/plate2_Well 070_070.fcs
+        - FigS3/data/data_46hr/plate2_Well 071_071.fcs
+        - FigS3/data/data_46hr/plate2_Well 072_072.fcs
+        - FigS3/data/data_46hr/plate2_Well 073_073.fcs
+        - FigS3/data/data_46hr/plate2_Well 074_074.fcs
+        - FigS3/data/data_46hr/plate2_Well 075_075.fcs
+        - FigS3/data/data_46hr/plate2_Well 076_076.fcs
+        - FigS3/data/data_46hr/plate2_Well 077_077.fcs
+        - FigS3/data/data_46hr/plate2_Well 078_078.fcs
+        - FigS3/data/data_46hr/plate2_Well 079_079.fcs
+        - FigS3/data/data_46hr/plate2_Well 080_080.fcs
+        - FigS3/data/data_46hr/plate2_Well 081_081.fcs
+        - FigS3/data/data_46hr/plate2_Well 082_082.fcs
+        - FigS3/data/data_46hr/plate2_Well 083_083.fcs
+        - FigS3/data/data_46hr/plate2_Well 084_084.fcs
+        - FigS3/data/data_46hr/plate2_Well 085_085.fcs
+        - FigS3/data/data_46hr/plate2_Well 086_086.fcs
+        - FigS3/data/data_46hr/plate2_Well 087_087.fcs
+        - FigS3/data/data_46hr/plate2_Well 088_088.fcs
+        - FigS3/data/data_46hr/plate2_Well 089_089.fcs
+        - FigS3/data/data_46hr/plate2_Well 090_090.fcs
+        - FigS3/data/data_46hr/plate2_Well 091_091.fcs
+        - FigS3/data/data_46hr/plate2_Well 092_092.fcs
+        - FigS3/data/data_46hr/plate2_Well 093_093.fcs
+        - FigS3/data/data_46hr/plate2_Well 094_094.fcs
+        - FigS3/data/data_46hr/plate2_Well 095_095.fcs
+        - FigS3/data/data_46hr/plate2_Well 096_096.fcs
+        - FigS3/data/data_8hr/plate1_Tube 01_001.fcs
+        - FigS3/data/data_8hr/plate1_Well 002_002.fcs
+        - FigS3/data/data_8hr/plate1_Well 003_003.fcs
+        - FigS3/data/data_8hr/plate1_Well 004_004.fcs
+        - FigS3/data/data_8hr/plate1_Well 005_005.fcs
+        - FigS3/data/data_8hr/plate1_Well 006_006.fcs
+        - FigS3/data/data_8hr/plate1_Well 007_007.fcs
+        - FigS3/data/data_8hr/plate1_Well 008_008.fcs
+        - FigS3/data/data_8hr/plate1_Well 009_009.fcs
+        - FigS3/data/data_8hr/plate1_Well 010_010.fcs
+        - FigS3/data/data_8hr/plate1_Well 011_011.fcs
+        - FigS3/data/data_8hr/plate1_Well 012_012.fcs
+        - FigS3/data/data_8hr/plate1_Well 013_013.fcs
+        - FigS3/data/data_8hr/plate1_Well 014_014.fcs
+        - FigS3/data/data_8hr/plate1_Well 015_015.fcs
+        - FigS3/data/data_8hr/plate1_Well 016_016.fcs
+        - FigS3/data/data_8hr/plate1_Well 017_017.fcs
+        - FigS3/data/data_8hr/plate1_Well 018_018.fcs
+        - FigS3/data/data_8hr/plate1_Well 019_019.fcs
+        - FigS3/data/data_8hr/plate1_Well 020_020.fcs
+        - FigS3/data/data_8hr/plate1_Well 021_021.fcs
+        - FigS3/data/data_8hr/plate1_Well 022_022.fcs
+        - FigS3/data/data_8hr/plate1_Well 023_023.fcs
+        - FigS3/data/data_8hr/plate1_Well 024_024.fcs
+        - FigS3/data/data_8hr/plate1_Well 025_025.fcs
+        - FigS3/data/data_8hr/plate1_Well 026_026.fcs
+        - FigS3/data/data_8hr/plate1_Well 027_027.fcs
+        - FigS3/data/data_8hr/plate1_Well 028_028.fcs
+        - FigS3/data/data_8hr/plate1_Well 029_029.fcs
+        - FigS3/data/data_8hr/plate1_Well 030_030.fcs
+        - FigS3/data/data_8hr/plate1_Well 031_031.fcs
+        - FigS3/data/data_8hr/plate1_Well 032_032.fcs
+        - FigS3/data/data_8hr/plate1_Well 033_033.fcs
+        - FigS3/data/data_8hr/plate1_Well 034_034.fcs
+        - FigS3/data/data_8hr/plate1_Well 035_035.fcs
+        - FigS3/data/data_8hr/plate1_Well 036_036.fcs
+        - FigS3/data/data_8hr/plate1_Well 037_037.fcs
+        - FigS3/data/data_8hr/plate1_Well 038_038.fcs
+        - FigS3/data/data_8hr/plate1_Well 039_039.fcs
+        - FigS3/data/data_8hr/plate1_Well 040_040.fcs
+        - FigS3/data/data_8hr/plate1_Well 041_041.fcs
+        - FigS3/data/data_8hr/plate1_Well 042_042.fcs
+        - FigS3/data/data_8hr/plate1_Well 043_043.fcs
+        - FigS3/data/data_8hr/plate1_Well 044_044.fcs
+        - FigS3/data/data_8hr/plate1_Well 045_045.fcs
+        - FigS3/data/data_8hr/plate1_Well 046_046.fcs
+        - FigS3/data/data_8hr/plate1_Well 047_047.fcs
+        - FigS3/data/data_8hr/plate1_Well 048_048.fcs
+        - FigS3/data/data_8hr/plate1_Well 049_049.fcs
+        - FigS3/data/data_8hr/plate1_Well 050_050.fcs
+        - FigS3/data/data_8hr/plate1_Well 051_051.fcs
+        - FigS3/data/data_8hr/plate1_Well 052_052.fcs
+        - FigS3/data/data_8hr/plate1_Well 053_053.fcs
+        - FigS3/data/data_8hr/plate1_Well 054_054.fcs
+        - FigS3/data/data_8hr/plate1_Well 055_055.fcs
+        - FigS3/data/data_8hr/plate1_Well 056_056.fcs
+        - FigS3/data/data_8hr/plate1_Well 057_057.fcs
+        - FigS3/data/data_8hr/plate1_Well 058_058.fcs
+        - FigS3/data/data_8hr/plate1_Well 059_059.fcs
+        - FigS3/data/data_8hr/plate1_Well 060_060.fcs
+        - FigS3/data/data_8hr/plate1_Well 061_061.fcs
+        - FigS3/data/data_8hr/plate1_Well 062_062.fcs
+        - FigS3/data/data_8hr/plate1_Well 063_063.fcs
+        - FigS3/data/data_8hr/plate1_Well 064_064.fcs
+        - FigS3/data/data_8hr/plate1_Well 065_065.fcs
+        - FigS3/data/data_8hr/plate1_Well 066_066.fcs
+        - FigS3/data/data_8hr/plate1_Well 067_067.fcs
+        - FigS3/data/data_8hr/plate1_Well 068_068.fcs
+        - FigS3/data/data_8hr/plate1_Well 069_069.fcs
+        - FigS3/data/data_8hr/plate1_Well 070_070.fcs
+        - FigS3/data/data_8hr/plate1_Well 071_071.fcs
+        - FigS3/data/data_8hr/plate1_Well 072_072.fcs
+        - FigS3/data/data_8hr/plate1_Well 073_073.fcs
+        - FigS3/data/data_8hr/plate1_Well 074_074.fcs
+        - FigS3/data/data_8hr/plate1_Well 075_075.fcs
+        - FigS3/data/data_8hr/plate1_Well 076_076.fcs
+        - FigS3/data/data_8hr/plate1_Well 077_077.fcs
+        - FigS3/data/data_8hr/plate1_Well 078_078.fcs
+        - FigS3/data/data_8hr/plate1_Well 079_079.fcs
+        - FigS3/data/data_8hr/plate1_Well 080_080.fcs
+        - FigS3/data/data_8hr/plate1_Well 081_081.fcs
+        - FigS3/data/data_8hr/plate1_Well 082_082.fcs
+        - FigS3/data/data_8hr/plate1_Well 083_083.fcs
+        - FigS3/data/data_8hr/plate1_Well 084_084.fcs
+        - FigS3/data/data_8hr/plate1_Well 085_085.fcs
+        - FigS3/data/data_8hr/plate1_Well 086_086.fcs
+        - FigS3/data/data_8hr/plate1_Well 087_087.fcs
+        - FigS3/data/data_8hr/plate1_Well 088_088.fcs
+        - FigS3/data/data_8hr/plate1_Well 089_089.fcs
+        - FigS3/data/data_8hr/plate1_Well 090_090.fcs
+        - FigS3/data/data_8hr/plate1_Well 091_091.fcs
+        - FigS3/data/data_8hr/plate1_Well 092_092.fcs
+        - FigS3/data/data_8hr/plate1_Well 093_093.fcs
+        - FigS3/data/data_8hr/plate1_Well 094_094.fcs
+        - FigS3/data/data_8hr/plate1_Well 095_095.fcs
+        - FigS3/data/data_8hr/plate1_Well 096_096.fcs
+        - FigS3/data/data_8hr/plate2_Tube 01_097.fcs
+        - FigS3/data/data_8hr/plate2_Well 002_098.fcs
+        - FigS3/data/data_8hr/plate2_Well 003_099.fcs
+        - FigS3/data/data_8hr/plate2_Well 004_100.fcs
+        - FigS3/data/data_8hr/plate2_Well 005_101.fcs
+        - FigS3/data/data_8hr/plate2_Well 006_102.fcs
+        - FigS3/data/data_8hr/plate2_Well 007_103.fcs
+        - FigS3/data/data_8hr/plate2_Well 008_104.fcs
+        - FigS3/data/data_8hr/plate2_Well 009_105.fcs
+        - FigS3/data/data_8hr/plate2_Well 010_106.fcs
+        - FigS3/data/data_8hr/plate2_Well 011_107.fcs
+        - FigS3/data/data_8hr/plate2_Well 012_108.fcs
+        - FigS3/data/data_8hr/plate2_Well 013_109.fcs
+        - FigS3/data/data_8hr/plate2_Well 014_110.fcs
+        - FigS3/data/data_8hr/plate2_Well 015_111.fcs
+        - FigS3/data/data_8hr/plate2_Well 016_112.fcs
+        - FigS3/data/data_8hr/plate2_Well 017_113.fcs
+        - FigS3/data/data_8hr/plate2_Well 018_114.fcs
+        - FigS3/data/data_8hr/plate2_Well 019_115.fcs
+        - FigS3/data/data_8hr/plate2_Well 020_116.fcs
+        - FigS3/data/data_8hr/plate2_Well 021_117.fcs
+        - FigS3/data/data_8hr/plate2_Well 022_118.fcs
+        - FigS3/data/data_8hr/plate2_Well 023_119.fcs
+        - FigS3/data/data_8hr/plate2_Well 024_120.fcs
+        - FigS3/data/data_8hr/plate2_Well 025_121.fcs
+        - FigS3/data/data_8hr/plate2_Well 026_122.fcs
+        - FigS3/data/data_8hr/plate2_Well 027_123.fcs
+        - FigS3/data/data_8hr/plate2_Well 028_124.fcs
+        - FigS3/data/data_8hr/plate2_Well 029_125.fcs
+        - FigS3/data/data_8hr/plate2_Well 030_126.fcs
+        - FigS3/data/data_8hr/plate2_Well 031_127.fcs
+        - FigS3/data/data_8hr/plate2_Well 032_128.fcs
+        - FigS3/data/data_8hr/plate2_Well 033_129.fcs
+        - FigS3/data/data_8hr/plate2_Well 034_130.fcs
+        - FigS3/data/data_8hr/plate2_Well 035_131.fcs
+        - FigS3/data/data_8hr/plate2_Well 036_132.fcs
+        - FigS3/data/data_8hr/plate2_Well 037_133.fcs
+        - FigS3/data/data_8hr/plate2_Well 038_134.fcs
+        - FigS3/data/data_8hr/plate2_Well 039_135.fcs
+        - FigS3/data/data_8hr/plate2_Well 040_136.fcs
+        - FigS3/data/data_8hr/plate2_Well 041_137.fcs
+        - FigS3/data/data_8hr/plate2_Well 042_138.fcs
+        - FigS3/data/data_8hr/plate2_Well 043_139.fcs
+        - FigS3/data/data_8hr/plate2_Well 044_140.fcs
+        - FigS3/data/data_8hr/plate2_Well 045_141.fcs
+        - FigS3/data/data_8hr/plate2_Well 046_142.fcs
+        - FigS3/data/data_8hr/plate2_Well 047_143.fcs
+        - FigS3/data/data_8hr/plate2_Well 048_144.fcs
+        - FigS3/data/data_8hr/plate2_Well 049_145.fcs
+        - FigS3/data/data_8hr/plate2_Well 050_146.fcs
+        - FigS3/data/data_8hr/plate2_Well 051_147.fcs
+        - FigS3/data/data_8hr/plate2_Well 052_148.fcs
+        - FigS3/data/data_8hr/plate2_Well 053_149.fcs
+        - FigS3/data/data_8hr/plate2_Well 054_150.fcs
+        - FigS3/data/data_8hr/plate2_Well 055_151.fcs
+        - FigS3/data/data_8hr/plate2_Well 056_152.fcs
+        - FigS3/data/data_8hr/plate2_Well 057_153.fcs
+        - FigS3/data/data_8hr/plate2_Well 058_154.fcs
+        - FigS3/data/data_8hr/plate2_Well 059_155.fcs
+        - FigS3/data/data_8hr/plate2_Well 060_156.fcs
+        - FigS3/data/data_8hr/plate2_Well 061_157.fcs
+        - FigS3/data/data_8hr/plate2_Well 062_158.fcs
+        - FigS3/data/data_8hr/plate2_Well 063_159.fcs
+        - FigS3/data/data_8hr/plate2_Well 064_160.fcs
+        - FigS3/data/data_8hr/plate2_Well 065_161.fcs
+        - FigS3/data/data_8hr/plate2_Well 066_162.fcs
+        - FigS3/data/data_8hr/plate2_Well 067_163.fcs
+        - FigS3/data/data_8hr/plate2_Well 068_164.fcs
+        - FigS3/data/data_8hr/plate2_Well 069_165.fcs
+        - FigS3/data/data_8hr/plate2_Well 070_166.fcs
+        - FigS3/data/data_8hr/plate2_Well 071_167.fcs
+        - FigS3/data/data_8hr/plate2_Well 072_168.fcs
+        - FigS3/data/data_8hr/plate2_Well 073_169.fcs
+        - FigS3/data/data_8hr/plate2_Well 074_170.fcs
+        - FigS3/data/data_8hr/plate2_Well 075_171.fcs
+        - FigS3/data/data_8hr/plate2_Well 076_172.fcs
+        - FigS3/data/data_8hr/plate2_Well 077_173.fcs
+        - FigS3/data/data_8hr/plate2_Well 078_174.fcs
+        - FigS3/data/data_8hr/plate2_Well 079_175.fcs
+        - FigS3/data/data_8hr/plate2_Well 080_176.fcs
+        - FigS3/data/data_8hr/plate2_Well 081_177.fcs
+        - FigS3/data/data_8hr/plate2_Well 082_178.fcs
+        - FigS3/data/data_8hr/plate2_Well 083_179.fcs
+        - FigS3/data/data_8hr/plate2_Well 084_180.fcs
+        - FigS3/data/data_8hr/plate2_Well 085_181.fcs
+        - FigS3/data/data_8hr/plate2_Well 086_182.fcs
+        - FigS3/data/data_8hr/plate2_Well 087_183.fcs
+        - FigS3/data/data_8hr/plate2_Well 088_184.fcs
+        - FigS3/data/data_8hr/plate2_Well 089_185.fcs
+        - FigS3/data/data_8hr/plate2_Well 090_186.fcs
+        - FigS3/data/data_8hr/plate2_Well 091_187.fcs
+        - FigS3/data/data_8hr/plate2_Well 092_188.fcs
+        - FigS3/data/data_8hr/plate2_Well 093_189.fcs
+        - FigS3/data/data_8hr/plate2_Well 094_190.fcs
+        - FigS3/data/data_8hr/plate2_Well 095_191.fcs
+        - FigS3/data/data_8hr/plate2_Well 096_192.fcs
+        - FigS3/data/data_8hr/plate3_Tube 01_193.fcs
+        - FigS3/data/data_8hr/plate3_Well 002_194.fcs
+        - FigS3/data/data_8hr/plate3_Well 003_195.fcs
+        - FigS3/data/data_8hr/plate3_Well 004_196.fcs
+        - FigS3/data/data_8hr/plate3_Well 005_197.fcs
+        - FigS3/data/data_8hr/plate3_Well 006_198.fcs
+        - FigS3/data/data_8hr/plate3_Well 007_199.fcs
+        - FigS3/data/data_8hr/plate3_Well 008_200.fcs
+        - FigS3/data/data_8hr/plate3_Well 009_201.fcs
+        - FigS3/data/data_8hr/plate3_Well 010_202.fcs
+        - FigS3/data/data_8hr/plate3_Well 011_203.fcs
+        - FigS3/data/data_8hr/plate3_Well 012_204.fcs
+        - FigS3/data/data_8hr/plate3_Well 013_205.fcs
+        - FigS3/data/data_8hr/plate3_Well 014_206.fcs
+        - FigS3/data/data_8hr/plate3_Well 015_207.fcs
+        - FigS3/data/data_8hr/plate3_Well 016_208.fcs
+        - FigS3/data/data_8hr/plate3_Well 017_209.fcs
+        - FigS3/data/data_8hr/plate3_Well 018_210.fcs
+        - FigS3/data/data_8hr/plate3_Well 019_211.fcs
+        - FigS3/data/data_8hr/plate3_Well 020_212.fcs
+        - FigS3/data/data_8hr/plate3_Well 021_213.fcs
+        - FigS3/data/data_8hr/plate3_Well 022_214.fcs
+        - FigS3/data/data_8hr/plate3_Well 023_215.fcs
+        - FigS3/data/data_8hr/plate3_Well 024_216.fcs
+        - FigS3/data/data_8hr/plate3_Well 025_217.fcs
+        - FigS3/data/data_8hr/plate3_Well 026_218.fcs
+        - FigS3/data/data_8hr/plate3_Well 027_219.fcs
+        - FigS3/data/data_8hr/plate3_Well 028_220.fcs
+        - FigS3/data/data_8hr/plate3_Well 029_221.fcs
+        - FigS3/data/data_8hr/plate3_Well 030_222.fcs
+        - FigS3/data/data_8hr/plate3_Well 031_223.fcs
+        - FigS3/data/data_8hr/plate3_Well 032_224.fcs
+        - FigS3/data/data_8hr/plate3_Well 033_225.fcs
+        - FigS3/data/data_8hr/plate3_Well 034_226.fcs
+        - FigS3/data/data_8hr/plate3_Well 035_227.fcs
+        - FigS3/data/data_8hr/plate3_Well 036_228.fcs
+        - FigS3/data/data_8hr/plate3_Well 037_229.fcs
+        - FigS3/data/data_8hr/plate3_Well 038_230.fcs
+        - FigS3/data/data_8hr/plate3_Well 039_231.fcs
+        - FigS3/data/data_8hr/plate3_Well 040_232.fcs
+        - FigS3/data/data_8hr/plate3_Well 041_233.fcs
+        - FigS3/data/data_8hr/plate3_Well 042_234.fcs
+        - FigS3/data/data_8hr/plate3_Well 043_235.fcs
+        - FigS3/data/data_8hr/plate3_Well 044_236.fcs
+        - FigS3/data/data_8hr/plate3_Well 045_237.fcs
+        - FigS3/data/data_8hr/plate3_Well 046_238.fcs
+        - FigS3/data/data_8hr/plate3_Well 047_239.fcs
+        - FigS3/data/data_8hr/plate3_Well 048_240.fcs
+        - FigS3/data/data_8hr/plate3_Well 049_241.fcs
+        - FigS3/data/data_8hr/plate3_Well 050_242.fcs
+        - FigS3/data/data_8hr/plate3_Well 051_243.fcs
+        - FigS3/data/data_8hr/plate3_Well 052_244.fcs
+        - FigS3/data/data_8hr/plate3_Well 053_245.fcs
+        - FigS3/data/data_8hr/plate3_Well 054_246.fcs
+        - FigS3/data/data_8hr/plate3_Well 055_247.fcs
+        - FigS3/data/data_8hr/plate3_Well 056_248.fcs
+        - FigS3/data/data_8hr/plate3_Well 057_249.fcs
+        - FigS3/data/data_8hr/plate3_Well 058_250.fcs
+        - FigS3/data/data_8hr/plate3_Well 059_251.fcs
+        - FigS3/data/data_8hr/plate3_Well 060_252.fcs
+        - FigS3/data/data_8hr/plate3_Well 061_253.fcs
+        - FigS3/data/data_8hr/plate3_Well 062_254.fcs
+        - FigS3/data/data_8hr/plate3_Well 063_255.fcs
+        - FigS3/data/data_8hr/plate3_Well 064_256.fcs
+        - FigS3/data/data_8hr/plate3_Well 065_257.fcs
+        - FigS3/data/data_8hr/plate3_Well 066_258.fcs
+        - FigS3/data/data_8hr/plate3_Well 067_259.fcs
+        - FigS3/data/data_8hr/plate3_Well 068_260.fcs
+        - FigS3/data/data_8hr/plate3_Well 069_261.fcs
+        - FigS3/data/data_8hr/plate3_Well 070_262.fcs
+        - FigS3/data/data_8hr/plate3_Well 071_263.fcs
+        - FigS3/data/data_8hr/plate3_Well 072_264.fcs
+        - FigS3/data/data_8hr/plate3_Well 073_265.fcs
+        - FigS3/data/data_8hr/plate3_Well 074_266.fcs
+        - FigS3/data/data_8hr/plate3_Well 075_267.fcs
+        - FigS3/data/data_8hr/plate3_Well 076_268.fcs
+        - FigS3/data/data_8hr/plate3_Well 077_269.fcs
+        - FigS3/data/data_8hr/plate3_Well 078_270.fcs
+        - FigS3/data/data_8hr/plate3_Well 079_271.fcs
+        - FigS3/data/data_8hr/plate3_Well 080_272.fcs
+        - FigS3/data/data_8hr/plate3_Well 081_273.fcs
+        - FigS3/data/data_8hr/plate3_Well 082_274.fcs
+        - FigS3/data/data_8hr/plate3_Well 083_275.fcs
+        - FigS3/data/data_8hr/plate3_Well 084_276.fcs
+        - FigS3/data/data_8hr/plate3_Well 085_277.fcs
+        - FigS3/data/data_8hr/plate3_Well 086_278.fcs
+        - FigS3/data/data_8hr/plate3_Well 087_279.fcs
+        - FigS3/data/data_8hr/plate3_Well 088_280.fcs
+        - FigS3/data/data_8hr/plate3_Well 089_281.fcs
+        - FigS3/data/data_8hr/plate3_Well 090_282.fcs
+        - FigS3/data/data_8hr/plate3_Well 091_283.fcs
+        - FigS3/data/data_8hr/plate3_Well 092_284.fcs
+        - FigS3/data/data_8hr/plate3_Well 093_285.fcs
+        - FigS3/data/data_8hr/plate3_Well 094_286.fcs
+        - FigS3/data/data_8hr/plate3_Well 095_287.fcs
+        - FigS3/data/data_8hr/plate3_Well 096_288.fcs
+        - FigS3/data/data_8hr/plate4_Tube 01_289.fcs
+        - FigS3/data/data_8hr/plate4_Well 002_290.fcs
+        - FigS3/data/data_8hr/plate4_Well 003_291.fcs
+        - FigS3/data/data_8hr/plate4_Well 004_292.fcs
+        - FigS3/data/data_8hr/plate4_Well 005_293.fcs
+        - FigS3/data/data_8hr/plate4_Well 006_294.fcs
+        - FigS3/data/data_8hr/plate4_Well 007_295.fcs
+        - FigS3/data/data_8hr/plate4_Well 008_296.fcs
+        - FigS3/data/data_8hr/plate4_Well 009_297.fcs
+        - FigS3/data/data_8hr/plate4_Well 010_298.fcs
+        - FigS3/data/data_8hr/plate4_Well 011_299.fcs
+        - FigS3/data/data_8hr/plate4_Well 012_300.fcs
+        - FigS3/data/data_8hr/plate4_Well 013_301.fcs
+        - FigS3/data/data_8hr/plate4_Well 014_302.fcs
+        - FigS3/data/data_8hr/plate4_Well 015_303.fcs
+        - FigS3/data/data_8hr/plate4_Well 016_304.fcs
+        - FigS3/data/data_8hr/plate4_Well 017_305.fcs
+        - FigS3/data/data_8hr/plate4_Well 018_306.fcs
+        - FigS3/data/data_8hr/plate4_Well 019_307.fcs
+        - FigS3/data/data_8hr/plate4_Well 020_308.fcs
+        - FigS3/data/data_8hr/plate4_Well 021_309.fcs
+        - FigS3/data/data_8hr/plate4_Well 022_310.fcs
+        - FigS3/data/data_8hr/plate4_Well 023_311.fcs
+        - FigS3/data/data_8hr/plate4_Well 024_312.fcs
+        - FigS3/data/data_8hr/plate4_Well 025_313.fcs
+        - FigS3/data/data_8hr/plate4_Well 026_314.fcs
+        - FigS3/data/data_8hr/plate4_Well 027_315.fcs
+        - FigS3/data/data_8hr/plate4_Well 028_316.fcs
+        - FigS3/data/data_8hr/plate4_Well 029_317.fcs
+        - FigS3/data/data_8hr/plate4_Well 030_318.fcs
+        - FigS3/data/data_8hr/plate4_Well 031_319.fcs
+        - FigS3/data/data_8hr/plate4_Well 032_320.fcs
+        - FigS3/data/data_8hr/plate4_Well 033_321.fcs
+        - FigS3/data/data_8hr/plate4_Well 034_322.fcs
+        - FigS3/data/data_8hr/plate4_Well 035_323.fcs
+        - FigS3/data/data_8hr/plate4_Well 036_324.fcs
+        - FigS3/data/data_8hr/plate4_Well 037_325.fcs
+        - FigS3/data/data_8hr/plate4_Well 038_326.fcs
+        - FigS3/data/data_8hr/plate4_Well 039_327.fcs
+        - FigS3/data/data_8hr/plate4_Well 040_328.fcs
+        - FigS3/data/data_8hr/plate4_Well 041_329.fcs
+        - FigS3/data/data_8hr/plate4_Well 042_330.fcs
+        - FigS3/data/data_8hr/plate4_Well 043_331.fcs
+        - FigS3/data/data_8hr/plate4_Well 044_332.fcs
+        - FigS3/data/data_8hr/plate4_Well 045_333.fcs
+        - FigS3/data/data_8hr/plate4_Well 046_334.fcs
+        - FigS3/data/data_8hr/plate4_Well 047_335.fcs
+        - FigS3/data/data_8hr/plate4_Well 048_336.fcs
+        - FigS3/data/data_8hr/plate4_Well 049_337.fcs
+        - FigS3/data/data_8hr/plate4_Well 050_338.fcs
+        - FigS3/data/data_8hr/plate4_Well 051_339.fcs
+        - FigS3/data/data_8hr/plate4_Well 052_340.fcs
+        - FigS3/data/data_8hr/plate4_Well 053_341.fcs
+        - FigS3/data/data_8hr/plate4_Well 054_342.fcs
+        - FigS3/data/data_8hr/plate4_Well 055_343.fcs
+        - FigS3/data/data_8hr/plate4_Well 056_344.fcs
+        - FigS3/data/data_8hr/plate4_Well 057_345.fcs
+        - FigS3/data/data_8hr/plate4_Well 058_346.fcs
+        - FigS3/data/data_8hr/plate4_Well 059_347.fcs
+        - FigS3/data/data_8hr/plate4_Well 060_348.fcs
+        - FigS3/data/data_8hr/plate4_Well 061_349.fcs
+        - FigS3/data/data_8hr/plate4_Well 062_350.fcs
+        - FigS3/data/data_8hr/plate4_Well 063_351.fcs
+        - FigS3/data/data_8hr/plate4_Well 064_352.fcs
+        - FigS3/data/data_8hr/plate4_Well 065_353.fcs
+        - FigS3/data/data_8hr/plate4_Well 066_354.fcs
+        - FigS3/data/data_8hr/plate4_Well 067_355.fcs
+        - FigS3/data/data_8hr/plate4_Well 068_356.fcs
+        - FigS3/data/data_8hr/plate4_Well 069_357.fcs
+        - FigS3/data/data_8hr/plate4_Well 070_358.fcs
+        - FigS3/data/data_8hr/plate4_Well 071_359.fcs
+        - FigS3/data/data_8hr/plate4_Well 072_360.fcs
+        - FigS3/data/data_8hr/plate4_Well 073_361.fcs
+        - FigS3/data/data_8hr/plate4_Well 074_362.fcs
+        - FigS3/data/data_8hr/plate4_Well 075_363.fcs
+        - FigS3/data/data_8hr/plate4_Well 076_364.fcs
+        - FigS3/data/data_8hr/plate4_Well 077_365.fcs
+        - FigS3/data/data_8hr/plate4_Well 078_366.fcs
+        - FigS3/data/data_8hr/plate4_Well 079_367.fcs
+        - FigS3/data/data_8hr/plate4_Well 080_368.fcs
+        - FigS3/data/data_8hr/plate4_Well 081_369.fcs
+        - FigS3/data/data_8hr/plate4_Well 082_370.fcs
+        - FigS3/data/data_8hr/plate4_Well 083_371.fcs
+        - FigS3/data/data_8hr/plate4_Well 084_372.fcs
+        - FigS3/data/data_8hr/plate4_Well 085_373.fcs
+        - FigS3/data/data_8hr/plate4_Well 086_374.fcs
+        - FigS3/data/data_8hr/plate4_Well 087_375.fcs
+        - FigS3/data/data_8hr/plate4_Well 088_376.fcs
+        - FigS3/data/data_8hr/plate4_Well 089_377.fcs
+        - FigS3/data/data_8hr/plate4_Well 090_378.fcs
+        - FigS3/data/data_8hr/plate4_Well 091_379.fcs
+        - FigS3/data/data_8hr/plate4_Well 092_380.fcs
+        - FigS3/data/data_8hr/plate4_Well 093_381.fcs
+        - FigS3/data/data_8hr/plate4_Well 094_382.fcs
+        - FigS3/data/data_8hr/plate4_Well 095_383.fcs
+        - FigS3/data/data_8hr/plate4_Well 096_384.fcs
+
   # Cytoflex
   - src:
       zip_url: https://zenodo.org/records/15019428/files/Fig3A_human organoids_Raw data.zip

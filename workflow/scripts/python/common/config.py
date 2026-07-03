@@ -1,4 +1,4 @@
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from itertools import dropwhile
 from enum import Enum
 from pydantic import BaseModel as BaseModel_
@@ -74,6 +74,7 @@ class MachineId(Enum):
     SONY_SA3800 = "sony_sa3800"
     PARTEC_PAS = "partec_pas"
     STRAT_S1400 = "strat_s1400"
+    STRAT_S1400EX = "strat_s1400ex"
     THERMO_ATTUNE = "thermo_attune"
     THERMO_ATTUNE_NXT = "thermo_attune_nxt"
     VERITY_GEMSTONE = "verity_gemstone"
@@ -82,6 +83,7 @@ class MachineId(Enum):
 class RepoType(Enum):
     PLAIN_URL = "plain_url"
     ZIP_URL = "zip_url"
+    ZIP_DRYAD = "dryad_zip_url"
     FR = "flow_repository"
     IMMPORT = "immport"
 
@@ -104,6 +106,12 @@ class ZipUrlSrc(BaseModel):
     file_paths: list[Path]
 
 
+class DryadZipUrlSrc(BaseModel):
+    file_id: int
+    dataset_id: str
+    file_paths: list[Path]
+
+
 class FlowRepoSrc(BaseModel):
     fr_id: str
     file_names: list[str]
@@ -114,7 +122,7 @@ class ImmportSrc(BaseModel):
     file_names: list[str]
 
 
-AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ZipUrlSrc
+AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ZipUrlSrc | DryadZipUrlSrc
 
 Strategy: TypeAlias = Literal["none", "scalpal", "sledgehammer"]
 
@@ -403,13 +411,18 @@ MISC_MACHINES = {
         vendor=VendorId.MILTENYI,
     ),
     MachineId.PARTEC_PAS: Machine(
-        name=MachineName("Partec PAS"),
+        name=MachineName("PAS"),
         vendor=VendorId.SYSMEX,
         cyt_values=["partec PAS"],
     ),
     MachineId.STRAT_S1400: Machine(
-        name=MachineName("Stratedigm S1400"),
+        name=MachineName("S1400"),
         vendor=VendorId.STRAT,
+    ),
+    MachineId.STRAT_S1400EX: Machine(
+        name=MachineName("S1400EX"),
+        vendor=VendorId.STRAT,
+        cyt_values=["S1400EX"],
     ),
     MachineId.VERITY_GEMSTONE: Machine(
         name=MachineName("GemStone (software only)"),
@@ -496,6 +509,30 @@ class FCSConfig(BaseModel):
         assert id_entry is not None, f"could not find paths for {repo_id}"
         return id_entry.file_paths
 
+    def get_dryad_id(self, repo_id: str) -> int:
+        ret = next(
+            (
+                c.src.file_id
+                for c in self.test_files
+                if isinstance(c.src, DryadZipUrlSrc) and repo_id == c.src.dataset_id
+            ),
+            None,
+        )
+        assert ret is not None, f"could not find dryad id for {repo_id}"
+        return ret
+
+    def get_dryad_paths(self, repo_id: str) -> list[Path]:
+        id_entry = next(
+            (
+                c.src
+                for c in self.test_files
+                if isinstance(c.src, DryadZipUrlSrc) and repo_id == c.src.dataset_id
+            ),
+            None,
+        )
+        assert id_entry is not None, f"could not find paths for {repo_id}"
+        return id_entry.file_paths
+
     def find_file_options(self, path: Path) -> tuple[ParseConfig, RepoType, str, str]:
         ps = dropwhile(lambda n: n != "resources", path.parts)
         next(ps)
@@ -503,7 +540,7 @@ class FCSConfig(BaseModel):
         repo_id = next(ps)
         file_name = "/".join(ps)
         return (
-            self.find_options(repo_type, file_name, repo_id),
+            self.find_options(repo_type, repo_id, file_name),
             repo_type,
             repo_id,
             file_name,
@@ -520,6 +557,8 @@ class FCSConfig(BaseModel):
                 return (src.dataset_id, list(src.file_names))
             elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
                 return (src.dataset_id, [str(p) for p in src.file_paths])
+            elif repo_type is RepoType.ZIP_DRYAD and isinstance(src, DryadZipUrlSrc):
+                return (src.dataset_id, list(map(str, src.file_paths)))
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):
