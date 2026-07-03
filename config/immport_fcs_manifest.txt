@@ -1,5 +1,3 @@
-SDY1/ResultFiles/02054141.001.52628.fcs
-SDY1/ResultFiles/02054141.002.52630.fcs
 SDY1/ResultFiles/Flow_cytometry_result/02054141.003.52632.fcs
 SDY1/ResultFiles/Flow_cytometry_result/02054141.004.52634.fcs
 SDY1/ResultFiles/Flow_cytometry_result/02054141.005.52636.fcs

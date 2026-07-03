@@ -1,5 +1,6 @@
 import re
 import csv
+from io import TextIOWrapper
 import warnings
 import pyreflow as pf
 import pyreflow.typing as pft
@@ -164,25 +165,23 @@ def get_software_string(
         return None
 
 
-def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
-    parse = conf.find_file_options(m.repo, m.file_name, m.repo_id)
-    opts = parse.merged_conf
+def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
+    parse = fcs_conf.find_options(m.repo, m.file_name, m.repo_id)
+    conf = parse.merged_conf
+
+    conf.allow_missing_time = "silent"
 
     ret = []
 
-    for i, (core, _) in enumerate(opts.to_std_text_config().read_std_texts(m.filepath)):
-        if isinstance(core, pf.CoreTEXT2_0):
-            version = "FCS2.0"
-        elif isinstance(core, pf.CoreTEXT3_0):
-            version = "FCS3.0"
-        elif isinstance(core, pf.CoreTEXT3_1):
-            version = "FCS3.1"
-        elif isinstance(core, pf.CoreTEXT3_2):
-            version = "FCS3.2"
-        else:
-            assert_never(core)
+    try:
+        out = conf.to_std_text_config().read_std_texts(m.filepath)
+    except Exception as e:
+        msg = f"error for input '{m.filepath}'"
+        raise ExceptionGroup(msg, [e])
 
-        machineid: MachineId | None = conf.get_machine(core.cyt, parse.machine)
+    for i, (core, _) in enumerate(out):
+        version = core.version
+        machineid: MachineId | None = fcs_conf.get_machine(core.cyt, parse.machine)
         vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
         software = get_software_string(core, vendorid, machineid)
 
@@ -492,29 +491,26 @@ def read_file(m: FileMetadata, conf: FCSConfig) -> list[DatasetMetadata]:
     return ret
 
 
-def dump_file_meta(out: Path, fs: list[FileMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_file_meta(f: TextIOWrapper, fs: FileMetadata | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if fs is None:
         header = ["filepath", "repo_type", "repo_id", "file_name", "file_size"]
         w.writerow(header)
+    else:
+        w.writerow(
+            [
+                fs.filepath,
+                fs.repo.value,
+                fs.repo_id,
+                fs.file_name,
+                fs.filepath.stat().st_size,
+            ]
+        )
 
-        for m in fs:
-            w.writerow(
-                [
-                    m.filepath,
-                    m.repo.value,
-                    m.repo_id,
-                    m.file_name,
-                    m.filepath.stat().st_size,
-                ]
-            )
 
-
-def dump_machine_table(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = [
             "filepath",
             "dataset",
@@ -528,8 +524,8 @@ def dump_machine_table(out: Path, ds: list[DatasetMetadata]) -> None:
             "CYTSN",
             "SYS",
         ]
-
         w.writerow(header)
+    else:
         for d in ds:
             w.writerow(
                 [
@@ -548,10 +544,9 @@ def dump_machine_table(out: Path, ds: list[DatasetMetadata]) -> None:
             )
 
 
-def dump_time_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_time_keywords(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = [
             "filepath",
             "dataset",
@@ -561,8 +556,8 @@ def dump_time_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
             "BEGINDATETIME",
             "ENDDATETIME",
         ]
-
         w.writerow(header)
+    else:
         for d in ds:
             w.writerow(
                 [
@@ -577,10 +572,11 @@ def dump_time_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
             )
 
 
-def dump_other_root_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_other_root_keywords(
+    f: TextIOWrapper, ds: list[DatasetMetadata] | None
+) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = [
             "filepath",
             "dataset",
@@ -614,8 +610,8 @@ def dump_other_root_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
             "TR_value",
             "spill_or_comp",
         ]
-
         w.writerow(header)
+    else:
         for d in ds:
             w.writerow(
                 [
@@ -654,22 +650,20 @@ def dump_other_root_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
             )
 
 
-def dump_unstained_centers(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_unstained_centers(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "key", "value"]
-
         w.writerow(header)
+    else:
         for d in ds:
             for k, v in d.unstainedcenters.items():
                 w.writerow([d.filepath, d.dataset_index, k, v])
 
 
-def dump_gated_meas(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_gated_meas(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = [
             "filepath",
             "dataset",
@@ -683,8 +677,8 @@ def dump_gated_meas(out: Path, ds: list[DatasetMetadata]) -> None:
             "GnT",
             "GnV",
         ]
-
         w.writerow(header)
+    else:
         for d in ds:
             for i, m in enumerate(d.gated_meas):
                 w.writerow(
@@ -703,51 +697,47 @@ def dump_gated_meas(out: Path, ds: list[DatasetMetadata]) -> None:
                 )
 
 
-def dump_nonstd(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_nonstd(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "key", "value"]
-
         w.writerow(header)
+    else:
         for d in ds:
             for k, v in d.nonstd.items():
                 w.writerow([d.filepath, d.dataset_index, esc(k), esc(v)])
 
 
-def dump_mixed_schema(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_mixed_schema(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "meas_index", "datatype"]
         w.writerow(header)
-
+    else:
         for d in ds:
             if isinstance(d.schema, pf.MixedDataSchema):
                 for i, (t, _) in enumerate(d.schema.typed_ranges):
                     w.writerow([d.filepath, d.dataset_index, i, t])
 
 
-def dump_var_uint_schema(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_var_uint_schema(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "meas_index", "datatype"]
         w.writerow(header)
-
+    else:
         for d in ds:
             if isinstance(d.schema, pf.VariableUintDataSchema):
                 for i, (t, _) in enumerate(d.schema.ranges):
                     w.writerow([d.filepath, d.dataset_index, i, t])
 
 
-def dump_ascii_schema(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_ascii_schema(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "is_delim"]
         w.writerow(header)
-
+    else:
         for d in ds:
             s = d.schema
             if isinstance(s, pf.FixedAsciiDataSchema):
@@ -756,26 +746,24 @@ def dump_ascii_schema(out: Path, ds: list[DatasetMetadata]) -> None:
                 w.writerow([d.filepath, d.dataset_index, True])
 
 
-def dump_matrix_schema(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_matrix_schema(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "datatype", "byte_width"]
         w.writerow(header)
-
+    else:
         for d in ds:
             s = d.schema
             if isinstance(s, MatrixSchemaMetadata):
                 w.writerow([d.filepath, d.dataset_index, s.datatype, s.byte_width])
 
 
-def dump_ranges(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_ranges(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "meas_index", "range"]
         w.writerow(header)
-
+    else:
         for d in ds:
             s = d.schema
             if isinstance(s, pf.MixedDataSchema):
@@ -796,13 +784,12 @@ def dump_ranges(out: Path, ds: list[DatasetMetadata]) -> None:
                 assert_never(s)
 
 
-def dump_byteord(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_byteord(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = ["filepath", "dataset", "byteord"]
         w.writerow(header)
-
+    else:
         for d in ds:
             s = d.schema
             if isinstance(s, pf.MixedDataSchema):
@@ -825,10 +812,9 @@ def dump_byteord(out: Path, ds: list[DatasetMetadata]) -> None:
                 assert_never(s)
 
 
-def dump_meas_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
-    with open(out, "w") as f:
-        w = csv.writer(f, delimiter="\t")
-
+def dump_meas_keywords(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> None:
+    w = csv.writer(f, delimiter="\t")
+    if ds is None:
         header = [
             "filepath",
             "dataset",
@@ -859,7 +845,7 @@ def dump_meas_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
             "PnDET",
         ]
         w.writerow(header)
-
+    else:
         for d in ds:
             for i, m in enumerate(d.meas):
                 w.writerow(
@@ -898,32 +884,65 @@ def dump_meas_keywords(out: Path, ds: list[DatasetMetadata]) -> None:
 def main(smk: Any) -> None:
     warnings.simplefilter("ignore")
 
-    file_meta = [
-        FileMetadata(
-            filepath=(p := Path(fcs_path)),
-            file_name=p.name,
-            repo=RepoType(p.parent.parent.name),
-            repo_id=p.parent.name,
-        )
-        for fcs_path in smk.input
-    ]
+    with open(smk.input[0], "r") as f:
+        src_paths = [
+            FileMetadata(
+                filepath=(p := Path(fcs_path.rstrip())),
+                file_name=p.name,
+                repo=RepoType(p.parent.parent.name),
+                repo_id=p.parent.name,
+            )
+            for fcs_path in f
+        ]
 
-    dataset_meta = [mm for fm in file_meta for mm in read_file(fm, smk.config)]
+    with (
+        open(smk.output["file_paths"], "w") as file_paths,
+        open(smk.output["machine_table"], "w") as machine_table,
+        open(smk.output["time_keywords"], "w") as time_keywords,
+        open(smk.output["other_root_keywords"], "w") as other_root_keywords,
+        open(smk.output["unstained_centers"], "w") as unstained_centers,
+        open(smk.output["gated_meas"], "w") as gated_meas,
+        open(smk.output["nonstd"], "w") as nonstd,
+        open(smk.output["mixed_schema"], "w") as mixed_schema,
+        open(smk.output["var_uint_schema"], "w") as var_uint_schema,
+        open(smk.output["ascii_schema"], "w") as ascii_schema,
+        open(smk.output["matrix_schema"], "w") as matrix_schema,
+        open(smk.output["ranges"], "w") as ranges,
+        open(smk.output["byteord"], "w") as byteord,
+        open(smk.output["meas_keywords"], "w") as meas_keywords,
+    ):
+        # write header first
+        dump_file_meta(file_paths, None)
+        dump_machine_table(machine_table, None)
+        dump_time_keywords(time_keywords, None)
+        dump_other_root_keywords(other_root_keywords, None)
+        dump_unstained_centers(unstained_centers, None)
+        dump_gated_meas(gated_meas, None)
+        dump_nonstd(nonstd, None)
+        dump_mixed_schema(mixed_schema, None)
+        dump_var_uint_schema(var_uint_schema, None)
+        dump_ascii_schema(ascii_schema, None)
+        dump_matrix_schema(matrix_schema, None)
+        dump_ranges(ranges, None)
+        dump_byteord(byteord, None)
+        dump_meas_keywords(meas_keywords, None)
 
-    dump_file_meta(smk.output["file_paths"], file_meta)
-    dump_machine_table(smk.output["machine_table"], dataset_meta)
-    dump_time_keywords(smk.output["time_keywords"], dataset_meta)
-    dump_other_root_keywords(smk.output["other_root_keywords"], dataset_meta)
-    dump_unstained_centers(smk.output["unstained_centers"], dataset_meta)
-    dump_gated_meas(smk.output["gated_meas"], dataset_meta)
-    dump_nonstd(smk.output["nonstd"], dataset_meta)
-    dump_mixed_schema(smk.output["mixed_schema"], dataset_meta)
-    dump_var_uint_schema(smk.output["var_uint_schema"], dataset_meta)
-    dump_ascii_schema(smk.output["ascii_schema"], dataset_meta)
-    dump_matrix_schema(smk.output["matrix_schema"], dataset_meta)
-    dump_ranges(smk.output["ranges"], dataset_meta)
-    dump_byteord(smk.output["byteord"], dataset_meta)
-    dump_meas_keywords(smk.output["meas_keywords"], dataset_meta)
+        for file_meta in src_paths:
+            dataset_meta = read_file(file_meta, smk.config)
+            dump_file_meta(file_paths, file_meta)
+            dump_machine_table(machine_table, dataset_meta)
+            dump_time_keywords(time_keywords, dataset_meta)
+            dump_other_root_keywords(other_root_keywords, dataset_meta)
+            dump_unstained_centers(unstained_centers, dataset_meta)
+            dump_gated_meas(gated_meas, dataset_meta)
+            dump_nonstd(nonstd, dataset_meta)
+            dump_mixed_schema(mixed_schema, dataset_meta)
+            dump_var_uint_schema(var_uint_schema, dataset_meta)
+            dump_ascii_schema(ascii_schema, dataset_meta)
+            dump_matrix_schema(matrix_schema, dataset_meta)
+            dump_ranges(ranges, dataset_meta)
+            dump_byteord(byteord, dataset_meta)
+            dump_meas_keywords(meas_keywords, dataset_meta)
 
 
 main(snakemake)  # type: ignore

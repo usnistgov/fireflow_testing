@@ -1,14 +1,16 @@
 import base64
 import csv
 from dataclasses import dataclass
-from typing import Any, Self, Literal, Iterable
+from typing import Any, Self, Literal, Iterable, NamedTuple
+from multiprocessing import Pool
 from pathlib import Path
 import logging
+from pyreflow.pydantic import PyreflowReadStdDatasetConfig
 import pyreflow.api as pfa
 import pyreflow.typing as pt
 from itertools import chain
 from pyreflow.api import fcs_write_datasets
-from common.config import RepoType, FCSConfig
+from common.config import FCSConfig
 from common.functional import maybe, esc, fmap_maybe
 
 logging.basicConfig(filename=snakemake.log[0], level=logging.DEBUG)  # type: ignore
@@ -35,21 +37,27 @@ class WritableDiagnostic:
     dataset: int
 
     @classmethod
-    def write_datasets(
-        cls,
-        p: Path,
-        fcs_path: Path,
-        ds: list[tuple[pt.AnyCoreDataset, pfa.StdDatasetOutput]],
-    ) -> None:
+    def write_all(cls, p: Path, ds: Iterable[Self]) -> None:
         with open(p, "w") as f:
             w = csv.writer(f, delimiter="\t")
             h = cls.to_header()
             w.writerow(["fcs_path", "dataset", *h])
-            for i, (c, u) in enumerate(ds):
-                for row in cls.dataset_iter(fcs_path, i, c, u):
-                    r = row.to_row()
-                    assert len(r) == len(h), f"{h} is not same length as {r}"
-                    w.writerow([row.path, row.dataset, *r])
+            for i, row in enumerate(ds):
+                r = row.to_row()
+                assert len(r) == len(h), f"{h} is not same length as {r}"
+                w.writerow([row.path, row.dataset, *r])
+
+    @classmethod
+    def dataset_iter_top(
+        cls,
+        fcs_path: Path,
+        ds: list[tuple[pt.AnyCoreDataset, pfa.StdDatasetOutput]],
+    ) -> list[Self]:
+        return [
+            row
+            for i, (c, u) in enumerate(ds)
+            for row in cls.dataset_iter(fcs_path, i, c, u)
+        ]
 
     @classmethod
     def dataset_iter(
@@ -882,14 +890,34 @@ class MiscDiagnostics(WritableDiagnostic):
         return (ret,)
 
 
-def main(smk: Any) -> None:
-    fcs_path = Path(smk.input[0])
-    flag_out = Path(smk.output["flag"])
-    repo = RepoType(smk.wildcards.repo)
-    id = smk.wildcards.id
-    testname = smk.wildcards.testname
-    sconf: FCSConfig = smk.config
-    conf = sconf.find_file_options(repo, testname, id).merged_conf
+class RunConfig(NamedTuple):
+    conf: PyreflowReadStdDatasetConfig
+    input_path: Path
+    output_path: Path
+
+
+class RunOutput(NamedTuple):
+    offsets: list[Offset]
+    overflow: list[Overflow]
+    overlap: list[Overlap]
+    keyval: list[KeyValPair]
+    token: list[Token]
+    scale: list[FixedScale]
+    oname: list[OriginalName]
+    overrange: list[Overrange]
+    scores: list[VersionScores]
+    padding: list[Padding]
+    dark: list[DarkBytes]
+    misc: list[MiscDiagnostics]
+
+
+def test_file(r: RunConfig) -> RunOutput:
+    conf = r.conf
+
+    # Time channel will sometimes be missing, flag these later. In some
+    # cases this will be due to the time being not named TIME or Time, but
+    # these are also easy to find later
+    conf.allow_missing_time = "silent"
 
     # compute the CRC so it can be checked manually
     conf.compute_crc = "always"
@@ -899,28 +927,110 @@ def main(smk: Any) -> None:
 
     # read and write dataset (this will fail if pyreflow does not know how to
     # parse this particular brand of FCS file)
-    datasets = conf.read_std_datasets(fcs_path, scan=True)
-    cores = [d[0] for d in datasets]
-    # uncores = [d[1] for d in datasets]
-    fcs_write_datasets(smk.output["fcs"], cores)
+    try:
+        datasets = conf.read_std_datasets(r.input_path, scan=True)
+        cores = [d[0] for d in datasets]
+
+        r.output_path.parent.mkdir(parents=True, exist_ok=True)
+        fcs_write_datasets(r.output_path, cores)
+    except Exception as e:
+        msg = f"error for input '{r.input_path}' and output '{r.output_path}'"
+        raise ExceptionGroup(msg, [e])
 
     # dump lots of diagnostic data into neat little tables that can be concatted
     # later
-    Offset.write_datasets(Path(smk.output["offsets"]), fcs_path, datasets)
-    Overflow.write_datasets(Path(smk.output["overflow"]), fcs_path, datasets)
-    Overlap.write_datasets(Path(smk.output["overlap"]), fcs_path, datasets)
-    KeyValPair.write_datasets(Path(smk.output["key_val_pairs"]), fcs_path, datasets)
-    Token.write_datasets(Path(smk.output["tokens"]), fcs_path, datasets)
-    FixedScale.write_datasets(Path(smk.output["fixed_scales"]), fcs_path, datasets)
-    OriginalName.write_datasets(Path(smk.output["original_names"]), fcs_path, datasets)
-    Overrange.write_datasets(Path(smk.output["overrange"]), fcs_path, datasets)
-    VersionScores.write_datasets(Path(smk.output["version_scores"]), fcs_path, datasets)
-    Padding.write_datasets(Path(smk.output["padding"]), fcs_path, datasets)
-    DarkBytes.write_datasets(Path(smk.output["dark_bytes"]), fcs_path, datasets)
-    MiscDiagnostics.write_datasets(Path(smk.output["misc"]), fcs_path, datasets)
+    out = RunOutput(
+        Offset.dataset_iter_top(r.output_path, datasets),
+        Overflow.dataset_iter_top(r.output_path, datasets),
+        Overlap.dataset_iter_top(r.output_path, datasets),
+        KeyValPair.dataset_iter_top(r.output_path, datasets),
+        Token.dataset_iter_top(r.output_path, datasets),
+        FixedScale.dataset_iter_top(r.output_path, datasets),
+        OriginalName.dataset_iter_top(r.output_path, datasets),
+        Overrange.dataset_iter_top(r.output_path, datasets),
+        VersionScores.dataset_iter_top(r.output_path, datasets),
+        Padding.dataset_iter_top(r.output_path, datasets),
+        DarkBytes.dataset_iter_top(r.output_path, datasets),
+        MiscDiagnostics.dataset_iter_top(r.output_path, datasets),
+    )
 
-    # make sentinel to indicate that everything worked
-    flag_out.touch()
+    return out
+
+
+def main(smk: Any) -> None:
+    fcs_paths = Path(smk.input[0])
+    fcs_out = Path(smk.output["fcs"])
+    sconf: FCSConfig = smk.config
+
+    fcs_out_base = fcs_out.parent
+
+    with open(fcs_paths, "r") as f:
+        runs = [
+            RunConfig(
+                (opts := sconf.find_file_options(fcs_path := Path(p.rstrip())))[
+                    0
+                ].merged_conf,
+                fcs_path,
+                fcs_out_base / opts[1].value / opts[2] / opts[3],
+            )
+            for p in f
+        ]
+
+    with Pool(smk.threads) as p:
+        test_out = p.map(test_file, runs)
+
+    # dump lots of diagnostic data into neat little tables that can be concatted
+    # later
+    Offset.write_all(
+        Path(smk.output["offsets"]), (y for x in test_out for y in x.offsets)
+    )
+
+    Overflow.write_all(
+        Path(smk.output["overflow"]), (y for x in test_out for y in x.overflow)
+    )
+
+    Overlap.write_all(
+        Path(smk.output["overlap"]), (y for x in test_out for y in x.overlap)
+    )
+
+    KeyValPair.write_all(
+        Path(smk.output["key_val_pairs"]), (y for x in test_out for y in x.keyval)
+    )
+
+    Token.write_all(Path(smk.output["tokens"]), (y for x in test_out for y in x.token))
+
+    FixedScale.write_all(
+        Path(smk.output["fixed_scales"]), (y for x in test_out for y in x.scale)
+    )
+
+    OriginalName.write_all(
+        Path(smk.output["original_names"]), (y for x in test_out for y in x.oname)
+    )
+
+    Overrange.write_all(
+        Path(smk.output["overrange"]), (y for x in test_out for y in x.overrange)
+    )
+
+    VersionScores.write_all(
+        Path(smk.output["version_scores"]), (y for x in test_out for y in x.scores)
+    )
+
+    Padding.write_all(
+        Path(smk.output["padding"]), (y for x in test_out for y in x.padding)
+    )
+
+    DarkBytes.write_all(
+        Path(smk.output["dark_bytes"]), (y for x in test_out for y in x.dark)
+    )
+
+    MiscDiagnostics.write_all(
+        Path(smk.output["misc"]), (y for x in test_out for y in x.misc)
+    )
+
+    # dump list of output files, which should all be "clean"
+    with open(fcs_out, "w") as f:
+        for r in runs:
+            f.write(str(r.output_path) + "\n")
 
 
 main(snakemake)  # type: ignore

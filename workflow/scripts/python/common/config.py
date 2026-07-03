@@ -1,5 +1,4 @@
 from pathlib import Path
-from urllib.parse import urljoin
 from enum import Enum
 from pydantic import BaseModel as BaseModel_
 from typing import TypeAlias, NewType, Literal, Any
@@ -95,7 +94,7 @@ class BaseModel(BaseModel_):
 class PlainUrlSrc(BaseModel):
     url_root: str
     dataset_id: str
-    filemap: list[str]
+    file_names: list[str]
 
 
 class ZipUrlSrc(BaseModel):
@@ -448,18 +447,28 @@ class FCSConfig(BaseModel):
         else:
             return None
 
-    def get_plain_url(self, file_name: str, repo_id: str) -> str:
+    def get_immport_src(self, repo_id: str) -> ImmportSrc:
         ret = next(
             (
-                urljoin(c.src.url_root, file_name)
+                c.src
                 for c in self.test_files
-                if isinstance(c.src, PlainUrlSrc)
-                and repo_id == c.src.dataset_id
-                and file_name in c.src.filemap
+                if isinstance(c.src, ImmportSrc) and repo_id == c.src.immport_id
             ),
             None,
         )
-        assert ret is not None, f"could not find URL for {file_name} and {repo_id}"
+        assert ret is not None, f"could not find immport src for {repo_id}"
+        return ret
+
+    def get_plain_url_src(self, repo_id: str) -> PlainUrlSrc:
+        ret = next(
+            (
+                c.src
+                for c in self.test_files
+                if isinstance(c.src, PlainUrlSrc) and repo_id == c.src.dataset_id
+            ),
+            None,
+        )
+        assert ret is not None, f"could not find root URL for {repo_id}"
         return ret
 
     def get_zip_url(self, repo_id: str) -> str:
@@ -474,26 +483,35 @@ class FCSConfig(BaseModel):
         assert ret is not None, f"could not find zip URL for {repo_id}"
         return ret
 
-    def get_zip_path(self, file_name: str, repo_id: str) -> Path:
-        ret = next(
+    def get_zip_paths(self, repo_id: str) -> list[Path]:
+        id_entry = next(
             (
-                p
+                c.src
                 for c in self.test_files
                 if isinstance(c.src, ZipUrlSrc) and repo_id == c.src.dataset_id
-                for p in c.src.file_paths
-                if p.name == file_name
             ),
             None,
         )
-        assert ret is not None, f"could not find zip path for {file_name} and {repo_id}"
-        return ret
+        assert id_entry is not None, f"could not find paths for {repo_id}"
+        return id_entry.file_paths
 
-    def find_file_options(
+    def find_file_options(self, path: Path) -> tuple[ParseConfig, RepoType, str, str]:
+        file_name = path.name
+        repo_id = path.parent.name
+        repo_type = RepoType(path.parent.parent.name)
+        return (
+            self.find_options(repo_type, file_name, repo_id),
+            repo_type,
+            repo_id,
+            file_name,
+        )
+
+    def find_options(
         self, repo_type: RepoType, file_name: str, repo_id: str
     ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
-                return (src.dataset_id, list(src.filemap))
+                return (src.dataset_id, list(src.file_names))
             elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
                 return (src.dataset_id, [p.name for p in src.file_paths])
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
@@ -509,7 +527,7 @@ class FCSConfig(BaseModel):
                 for c in self.test_files
                 if (res := file_names_and_id(c.src)) is not None
                 and repo_id == res[0]
-                and file_name in res[1]
+                and any(map(lambda x: x.endswith(file_name), res[1]))
             ),
             None,
         )

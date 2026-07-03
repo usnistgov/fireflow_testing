@@ -101,7 +101,7 @@ df_misc <- read_tsv(
   rename(filepath = fcs_path)
 
 df_dark <- read_tsv(
-  snakemake@input[["dark"]],
+  snakemake@input[["dark_bytes"]],
   col_types = cols(fcs_path = "c", dataset = "i", .default = "-")
 ) %>%
   rename(filepath = fcs_path)

@@ -3,9 +3,9 @@ import os
 import platform
 import subprocess as sp
 import tempfile
-from itertools import groupby
 from pathlib import Path
-from typing import Any, Iterator, Generator, TypeAlias, Iterable
+from typing import Any, TypeAlias, Iterable
+from common.config import ImmportSrc
 
 IMMPORT_URL = "https://www.immport.org"
 IMMPORT_TOKEN_URL = f"{IMMPORT_URL}/auth/token"
@@ -41,38 +41,6 @@ def get_aspera_token(immport_token: str, paths: list[Path]) -> str:
     assert results.status_code == 200, f"API Status Code: {results.status_code}"
     res = results.json()
     return str(res["token"])
-
-
-def filter_src_paths(ps: list[Path]) -> list[Path]:
-    """Return three files for each study for cytof, controls, and other samples."""
-    # ASSUME list is already sorted by study
-    CTRL = "Flow_cytometry_compensation_or_control"
-    CYTOF = "CyTOF_result"
-    SAMPLE = "Flow_cytometry_result"
-
-    def go(xs: Iterator[Path]) -> Generator[Path]:
-        nsample = 0
-        ncytof = 0
-        nctrl = 0
-        for x in xs:
-            category = x.parts[2]
-            if category == CTRL:
-                if nctrl < 3:
-                    nctrl = nctrl + 1
-                    yield x
-            elif category == CYTOF:
-                if ncytof < 3:
-                    ncytof = ncytof + 1
-                    yield x
-            elif category == SAMPLE:
-                if nsample < 3:
-                    nsample = nsample + 1
-                    yield x
-            elif nsample < 3:
-                nsample = nsample + 1
-                yield x
-
-    return [x for _, g in groupby(ps, key=lambda p: p.parts[0]) for x in go(g)]
 
 
 def download_file(
@@ -141,7 +109,7 @@ def download_file(
             args += [f"--file-pair-list={tf.name}"]
             # specify destination (must be last)
             args += [str(out_dir)]
-            sp.run(args)
+            sp.run(args, check=True)
 
     for xs in split_pairs(pairs):
         run_ascp(xs)
@@ -154,7 +122,7 @@ def main(smk: Any) -> None:
 
     # this is actually the license path, so adjust to point to ascp binary
     aspera_path = Path(smk.input["aspera"])
-    manifest_path = Path(smk.input["manifest"])
+    # manifest_paths = smk.input["manifest"]
     fcs_list_path = Path(smk.output[0])
 
     aspera_cli = aspera_path.parent.parent / "bin" / ostype / "ascp"
@@ -165,15 +133,12 @@ def main(smk: Any) -> None:
 
     assert len(immport_token) > 0, "IMMPORT_TOKEN is not specified"
 
-    src_paths: list[Path] = []
-
-    with open(manifest_path, "r") as f:
-        for x in f:
-            s = x.rstrip()
-            if s.endswith(".fcs") and not s.startswith("#"):
-                src_paths.append(Path(s))
-
-    src_paths = filter_src_paths(src_paths)
+    src_paths = [
+        Path(n)
+        for f in smk.config.test_files
+        if isinstance(f.src, ImmportSrc)
+        for n in f.src.file_names
+    ]
 
     fcs_list_dir.mkdir(exist_ok=True, parents=True)
 

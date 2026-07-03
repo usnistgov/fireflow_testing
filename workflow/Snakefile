@@ -6,12 +6,11 @@ from common.config import FCSConfig, ImmportSrc, FlowRepoSrc, PlainUrlSrc, ZipUr
 
 config = FCSConfig.parse_obj(config)
 
-
 plain_url_tests = [
     ("plain_url", f.src.dataset_id, n)
     for f in config.test_files
     if isinstance(f.src, PlainUrlSrc)
-    for n in f.src.filemap
+    for n in f.src.file_names
 ]
 
 zip_url_tests = [
@@ -58,62 +57,128 @@ rule download_aspera:
 rule download_immport:
     input:
         aspera=rules.download_aspera.output[0],
-        manifest="config/immport_fcs_manifest.txt",
     output:
         "resources/immport/downloaded.txt",
     log:
         "results/log/immport",
-    conda:
-        "envs/immport.yml"
     script:
         "scripts/python/immport/download_immport.py"
 
 
 rule download_plain_url:
     output:
-        "resources/plain_url/{id}/{testname}",
+        "resources/plain_url/{id}/.downloaded.txt",
     params:
-        url=lambda wildcards: config.get_plain_url(wildcards.testname, wildcards.id),
-    shell:
-        """
-        curl -SsLqf {params.url} > {output}
-        """
+        url_root=lambda wildcards: config.get_plain_url_src(wildcards.id).url_root,
+        targets=lambda wildcards: config.get_plain_url_src(wildcards.id).file_names,
+    run:
+        from urllib.request import urlopen
+        from urllib.parse import urljoin, quote
+        from pathlib import Path
+
+        size = 8192
+        out = Path(output[0])
+
+        with open(out, "w") as fo:
+            for target in params.targets:
+                target_path = out.parent / target
+                full_url = urljoin(params.url_root, quote(target))
+                # curl url to file
+                try:
+                    with urlopen(full_url) as resp, open(target_path, "wb") as ft:
+                        while True:
+                            chunk = resp.read(size)
+                            if not chunk:
+                                break
+                            ft.write(chunk)
+                            # record the new file path in
+                except Exception as e:
+                    print("error for: " + target)
+                    raise e
+                fo.write(str(target_path) + "\n")
 
 
 rule download_zip_url:
     output:
-        "resources/zip_url/{id}.zip",
+        "resources/zip_url/{id}/.downloaded.txt",
     params:
         url=lambda wildcards: config.get_zip_url(wildcards.id),
+        # quote strings to preserve spaces and allow direct shell expand
+        targets=lambda wildcards: [f'"{f}"' for f in config.get_zip_paths(wildcards.id)],
+        out_base=lambda wildcards, output: Path(output[0]).parent,
     shell:
         """
-        curl -SsLqf {params.url} > {output}
+        zip_file={params.out_base}/downloaded.zip
+        curl -SsLqf "{params.url}" > "$zip_file"
+        rm -rf {output}
+
+        for i in {params.targets}; do
+            file_out={params.out_base}/$(basename "$i")
+            unzip -p "$zip_file" "$i" > "$file_out"
+            echo "$file_out" >> {output}
+        done
+
+        rm -rf "$zip_file"
         """
 
 
-rule extract_zip_url:
-    input:
-        rules.download_zip_url.output,
+# these can't be downloaded automatically, so the user will need to extract them
+# into the paths listed here manually
+rule list_flow_repo_files:
     output:
-        "resources/zip_url/{id}/{testname}",
+        "resources/flow_repository/downloaded.txt",
     params:
-        target=lambda wildcards: config.get_zip_path(wildcards.testname, wildcards.id),
+        targets=lambda wildcards, output: [
+            str(Path(output[0]).parent / f.src.fr_id / n)
+            for f in config.test_files
+            if isinstance(f.src, FlowRepoSrc)
+            for n in f.src.file_names
+        ],
+    run:
+        from pathlib import Path
+
+        with open(output[0], "w") as f:
+            for t in params.targets:
+                f.write(t + "\n")
+
+
+rule list_all_fcs_files:
+    input:
+        zip_url=expand(
+            rules.download_zip_url.output,
+            id=[
+                f.src.dataset_id
+                for f in config.test_files
+                if isinstance(f.src, ZipUrlSrc)
+            ],
+        ),
+        plain_url=expand(
+            rules.download_plain_url.output,
+            id=[
+                f.src.dataset_id
+                for f in config.test_files
+                if isinstance(f.src, PlainUrlSrc)
+            ],
+        ),
+        immport=rules.download_immport.output,
+        fr=rules.list_flow_repo_files.output,
+    output:
+        "resources/all_fcs_files.txt",
     shell:
         """
-        unzip -p {input} "{params.target}" > "{output}"
+        cat {input.zip_url} {input.plain_url} {input.immport} {input.fr} > {output}
         """
 
 
-read_test_out = Path("results/read_test")
-read_test_diag = read_test_out / "diag" / "{repo}" / "{id}" / "{testname}"
+read_test_out = Path("results/test_read")
+read_test_diag = Path("results") / "diagnostics"
 
 
 rule test_read:
     input:
-        "resources/{repo}/{id}/{testname}",
+        rules.list_all_fcs_files.output,
     output:
-        flag="results/read_test/pass/{repo}/{id}/{testname}.txt",
-        fcs="results/read_test/fcs/{repo}/{id}/{testname}",
+        fcs=read_test_out / "fcs" / "tested.txt",
         # diagnostic dump
         offsets=read_test_diag / "offsets.tsv",
         overflow=read_test_diag / "overflow.tsv",
@@ -128,23 +193,21 @@ rule test_read:
         dark_bytes=read_test_diag / "dark_bytes.tsv",
         misc=read_test_diag / "misc.tsv",
     log:
-        "results/log/read/warnings_{repo}_{id}_{testname}.log",
-    conda:
-        "envs/pyreflow.yml"
+        "results/log/test_read.log",
+    threads: 20
     script:
         "scripts/python/fcsio/test_read.py"
 
 
 rule test_double_parse:
     input:
-        original="resources/{repo}/{id}/{testname}",
+        original=rules.list_all_fcs_files.output[0],
         std=rules.test_read.output.fcs,
     output:
-        "results/double_parse/pass/{repo}/{id}/{testname}.txt",
+        "results/double_parse/pass.txt",
     log:
-        "results/log/double_parse/warnings_{repo}_{id}_{testname}.log",
-    conda:
-        "envs/pyreflow.yml"
+        "results/log/double_parse.log",
+    threads: 20
     script:
         "scripts/python/fcsio/test_double_parse.py"
 
@@ -154,13 +217,7 @@ rule test_double_parse:
 # us to tweak this rule without forcing all the FCS to be reread
 rule compile_metadata:
     input:
-        expand(
-            "resources/{repo}/{id}/{testname}",
-            zip,
-            repo=[x[0] for x in tests],
-            id=[x[1] for x in tests],
-            testname=[x[2] for x in tests],
-        ),
+        rules.list_all_fcs_files.output[0],
     output:
         file_paths="results/reports/files_paths.tsv",
         machine_table="results/reports/machines.tsv",
@@ -176,139 +233,14 @@ rule compile_metadata:
         ranges="results/reports/ranges.tsv",
         byteord="results/reports/byteord.tsv",
         meas_keywords="results/reports/meas_keywords.tsv",
-    conda:
-        "envs/pyreflow.yml"
+    threads: 20
     script:
         "scripts/python/fcsio/compile_metadata.py"
 
 
-def expand_fcs(path):
-    return expand(
-        path,
-        zip,
-        repo=[x[0] for x in tests],
-        id=[x[1] for x in tests],
-        testname=[x[2] for x in tests],
-    )
-
-
-rule combine_offsets:
-    input:
-        expand_fcs(rules.test_read.output.offsets),
-    output:
-        "results/diagnostics/offsets.tsv",
-    run:
-        with open(output[0], "w") as fo:
-            for j, i in enumerate(input):
-                with open(i, "r") as fi:
-                    # skip header if not first file being written
-                    if j > 0:
-                        next(fi, None)
-                    for x in fi:
-                        fo.write(x)
-
-
-use rule combine_offsets as combine_overflow with:
-    input:
-        expand_fcs(rules.test_read.output.overflow),
-    output:
-        "results/diagnostics/overflow.tsv",
-
-
-use rule combine_offsets as combine_overlap with:
-    input:
-        expand_fcs(rules.test_read.output.overlap),
-    output:
-        "results/diagnostics/overlap.tsv",
-
-
-use rule combine_offsets as combine_key_val_pairs with:
-    input:
-        expand_fcs(rules.test_read.output.key_val_pairs),
-    output:
-        "results/diagnostics/key_val_pairs.tsv",
-
-
-use rule combine_offsets as combine_tokens with:
-    input:
-        expand_fcs(rules.test_read.output.tokens),
-    output:
-        "results/diagnostics/tokens.tsv",
-
-
-use rule combine_offsets as combine_fixed_scales with:
-    input:
-        expand_fcs(rules.test_read.output.fixed_scales),
-    output:
-        "results/diagnostics/fixed_scales.tsv",
-
-
-use rule combine_offsets as combine_original_names with:
-    input:
-        expand_fcs(rules.test_read.output.original_names),
-    output:
-        "results/diagnostics/original_names.tsv",
-
-
-use rule combine_offsets as combine_overrange with:
-    input:
-        expand_fcs(rules.test_read.output.overrange),
-    output:
-        "results/diagnostics/overrange.tsv",
-
-
-use rule combine_offsets as combine_version_scores with:
-    input:
-        expand_fcs(rules.test_read.output.version_scores),
-    output:
-        "results/diagnostics/version_scores.tsv",
-
-
-use rule combine_offsets as combine_padding with:
-    input:
-        expand_fcs(rules.test_read.output.padding),
-    output:
-        "results/diagnostics/padding.tsv",
-
-
-use rule combine_offsets as combine_dark_bytes with:
-    input:
-        expand_fcs(rules.test_read.output.dark_bytes),
-    output:
-        "results/diagnostics/dark_bytes.tsv",
-
-
-use rule combine_offsets as combine_misc with:
-    input:
-        expand_fcs(rules.test_read.output.misc),
-    output:
-        "results/diagnostics/misc.tsv",
-
-
-# rule compute_gaps:
-#     input:
-#         file_paths=rules.compile_metadata.output.file_paths,
-#         offsets=rules.combine_offsets.output,
-#         misc=rules.combine_misc.output,
-#     output:
-#         gaps="results/analysis/gaps.tsv",
-#         final_offsets="results/analysis/final_offsets.tsv",
-#     conda:
-#         "envs/tidyverse.yml"
-#     script:
-#         "scripts/R/compute_gaps.R"
-
-
 rule compile_errors:
     input:
-        offsets=rules.combine_offsets.output,
-        overflow=rules.combine_overflow.output,
-        key_val=rules.combine_key_val_pairs.output,
-        tokens=rules.combine_tokens.output,
-        scale=rules.combine_fixed_scales.output,
-        orig_names=rules.combine_original_names.output,
-        misc=rules.combine_misc.output,
-        overrange=rules.combine_overrange.output,
+        **rules.test_read.output,
         machines=rules.compile_metadata.output.machine_table,
     output:
         table="results/reports/errors.tsv",
@@ -322,9 +254,7 @@ rule compile_errors:
 rule compile_features:
     input:
         **rules.compile_metadata.output,
-        offsets=rules.combine_offsets.output,
-        dark=rules.combine_dark_bytes.output,
-        misc=rules.combine_misc.output,
+        **rules.test_read.output,
     output:
         # tables
         kw_usage="results/features/kw_usage.tsv",
@@ -348,28 +278,8 @@ rule compile_features:
 
 rule all:
     input:
-        # rules.download_immport.output,
+        rules.test_read.output,
+        rules.test_double_parse.output,
         rules.compile_metadata.output,
-        # rules.compile_diagnostics.output,
-        expand(
-            rules.test_double_parse.output,
-            zip,
-            repo=[x[0] for x in tests],
-            id=[x[1] for x in tests],
-            testname=[x[2] for x in tests],
-        ),
-        rules.combine_offsets.output,
-        rules.combine_overflow.output,
-        rules.combine_overlap.output,
-        rules.combine_key_val_pairs.output,
-        rules.combine_tokens.output,
-        rules.combine_fixed_scales.output,
-        rules.combine_original_names.output,
-        rules.combine_overrange.output,
-        rules.combine_version_scores.output,
-        rules.combine_padding.output,
-        rules.combine_dark_bytes.output,
-        rules.combine_misc.output,
-        # rules.compute_gaps.output,
         rules.compile_errors.output,
         rules.compile_features.output,
