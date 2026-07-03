@@ -181,7 +181,7 @@ BD_MACHINES = {
     MachineId.BD_ACCURI_C6: Machine(
         name=MachineName("Accuri C6"),
         vendor=VendorId.BD,
-        cyt_values=["Accuri C6"],
+        cyt_values=["Accuri C6", "BD Accuri C6"],
     ),
     MachineId.BD_DISC_A8: Machine(
         name=MachineName("FACSDiscover A8"),
