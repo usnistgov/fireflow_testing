@@ -1944,6 +1944,61 @@ test_files:
         - FigS3/data/data_8hr/plate4_Well 095_383.fcs
         - FigS3/data/data_8hr/plate4_Well 096_384.fcs
 
+
+  # Cytoflex
+  - src:
+      zip_url: https://zenodo.org/records/14018551/files/sytox_exp1.zip
+      dataset_id: zenodo_15019428_CytoFlex0
+      file_paths:
+        - sytox_exp1/syt_1_cdc15_Rho+_25.fcs
+        - sytox_exp1/syt_1_cdc15_Rho+_37.fcs
+        - sytox_exp1/syt_1_cdc15_Rho0_25.fcs
+        - sytox_exp1/syt_1_cdc15_Rho0_37.fcs
+        - sytox_exp1/syt_1_cdc4_Rho+_25.fcs
+        - sytox_exp1/syt_1_cdc4_Rho+_37.fcs
+        - sytox_exp1/syt_1_cdc4_Rho0_25.fcs
+        - sytox_exp1/syt_1_cdc4_Rho0_37.fcs
+        - sytox_exp1/syt_1_wt_Rho+_25.fcs
+        - sytox_exp1/syt_1_wt_Rho+_37.fcs
+        - sytox_exp1/syt_1_wt_Rho0_25.fcs
+        - sytox_exp1/syt_1_wt_Rho0_37.fcs
+
+  # Cytoflex
+  - src:
+      zip_url: https://zenodo.org/records/14018551/files/sytox_exp2.zip
+      dataset_id: zenodo_15019428_CytoFlex1
+      file_paths:
+        - sytox_exp2/syt_2_cdc15_Rho+_25.fcs
+        - sytox_exp2/syt_2_cdc15_Rho+_37.fcs
+        - sytox_exp2/syt_2_cdc15_Rho0_25.fcs
+        - sytox_exp2/syt_2_cdc15_Rho0_37.fcs
+        - sytox_exp2/syt_2_cdc4_Rho+_25.fcs
+        - sytox_exp2/syt_2_cdc4_Rho+_37.fcs
+        - sytox_exp2/syt_2_cdc4_Rho0_25.fcs
+        - sytox_exp2/syt_2_cdc4_Rho0_37.fcs
+        - sytox_exp2/syt_2_wt_Rho+_25.fcs
+        - sytox_exp2/syt_2_wt_Rho+_37.fcs
+        - sytox_exp2/syt_2_wt_Rho0_25.fcs
+        - sytox_exp2/syt_2_wt_Rho0_37.fcs
+
+  # Cytoflex
+  - src:
+      zip_url: https://zenodo.org/records/14018551/files/sytox_exp3.zip
+      dataset_id: zenodo_15019428_CytoFlex2
+      file_paths:
+        - sytox_exp3/syt_3_cdc15_Rho+_25.fcs
+        - sytox_exp3/syt_3_cdc15_Rho+_37.fcs
+        - sytox_exp3/syt_3_cdc15_Rho0_25.fcs
+        - sytox_exp3/syt_3_cdc15_Rho0_37.fcs
+        - sytox_exp3/syt_3_cdc4_Rho+_25.fcs
+        - sytox_exp3/syt_3_cdc4_Rho+_37.fcs
+        - sytox_exp3/syt_3_cdc4_Rho0_25.fcs
+        - sytox_exp3/syt_3_cdc4_Rho0_37.fcs
+        - sytox_exp3/syt_3_wt_Rho+_25.fcs
+        - sytox_exp3/syt_3_wt_Rho+_37.fcs
+        - sytox_exp3/syt_3_wt_Rho0_25.fcs
+        - sytox_exp3/syt_3_wt_Rho0_37.fcs
+
   # Cytoflex
   - src:
       zip_url: https://zenodo.org/records/15019428/files/Fig3A_human organoids_Raw data.zip
@@ -2955,6 +3010,47 @@ test_files:
         - ID8_Panel2_TP3.fcs
     parse:
       machine: bd_symph_a5
+
+  # Gallios
+  - src:
+      url_root: https://zenodo.org/records/17197319/files/
+      dataset_id: zenodo_17197319_Gallios
+      file_names:
+        - sample_10mem 009.LMD
+        - sample_11mem 010.LMD
+        - sample_12mem 011.LMD
+        - sample_13 001.LMD
+        - sample_14 002.LMD
+        - sample_15 003.LMD
+        - sample_17 005.LMD
+        - sample_18 006.LMD
+        - sample_19 007.LMD
+        - sample_1mem 001.LMD
+        - sample_20 008.LMD
+        - sample_21 009.LMD
+        - sample_22 010.LMD
+        - sample_23 011.LMD
+        - sample_24 012.LMD
+        - sample_25 013.LMD
+        - sample_26 014.LMD
+        - sample_27 015.LMD
+        - sample_28 016.LMD
+        - sample_29 017.LMD
+        - sample_2mem 001.LMD
+        - sample_30 018.LMD
+        - sample_31 019.LMD
+        - sample_32 020.LMD
+        - sample_33 021.LMD
+        - sample_34 022.LMD
+        - sample_35 023.LMD
+        - sample_36 024.LMD
+        - sample_3mem 002.LMD
+        - sample_4mem 003.LMD
+        - sample_5mem 004.LMD
+        - sample_6mem 005.LMD
+        - sample_7mem 006.LMD
+        - sample_8mem 007.LMD
+        - sample_9mem 008.LMD
   
   # FACSCalibur (https://www.sciencedirect.com/science/article/pii/S0091674907010299?via%3Dihub)
   - src:
