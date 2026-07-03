@@ -883,14 +883,15 @@ def dump_meas_keywords(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
 
 def main(smk: Any) -> None:
     warnings.simplefilter("ignore")
+    fcs_conf: FCSConfig = smk.config
 
     with open(smk.input[0], "r") as f:
         src_paths = [
             FileMetadata(
                 filepath=(p := Path(fcs_path.rstrip())),
-                file_name=p.name,
-                repo=RepoType(p.parent.parent.name),
-                repo_id=p.parent.name,
+                repo=(out := fcs_conf.find_file_options(p))[1],
+                repo_id=out[2],
+                file_name=out[3],
             )
             for fcs_path in f
         ]

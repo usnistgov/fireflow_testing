@@ -1,9 +1,8 @@
 test_files:
   # Cytoflex
   - src:
-      # TODO get all zips from here
-      zip_url: https://zenodo.org/records/15019428/files/Fig3A_human%20organoids_Raw%20data.zip
-      dataset_id: zenodo_CytoFlex0
+      zip_url: https://zenodo.org/records/15019428/files/Fig3A_human organoids_Raw data.zip
+      dataset_id: zenodo_15019428_CytoFlex
       file_paths:
         - Fig3A_human organoids_Raw data/D110_stained.fcs
         - Fig3A_human organoids_Raw data/D110_unstained.fcs
@@ -17,10 +16,10 @@ test_files:
         - Fig3A_human organoids_Raw data/ORG2_stained.fcs
         - Fig3A_human organoids_Raw data/ORG2_unstained.fcs
 
-  # Cytoflex
+  # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/15019428/files/Fig3B_CD14%20monos_Raw%20data.zip
-      dataset_id: zenodo_CytoFlex1
+      zip_url: https://zenodo.org/records/15019428/files/Fig3B_CD14 monos_Raw data.zip
+      dataset_id: zenodo_15019428_Fortessa0
       file_paths:
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 1_stained.fcs
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 1_unstained.fcs
@@ -30,11 +29,88 @@ test_files:
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 3_unstained.fcs
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 4_stained.fcs
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 4_unstained.fcs
+    parse:
+      machine: bd_fortessa
 
-  # Helios
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/15019428/files/SupplFig4A_U937_Raw data.zip
+      dataset_id: zenodo_15019428_Fortessa1
+      file_paths:
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_ctrl unstained.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_ctrl.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_EtOH.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_VD3+TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_VD3.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_ctrl unstained.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_ctrl.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_EtOH.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_VD3+TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp2/U937 2_VD3.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/steup_comp AF700 CD14.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/steup_comp PE CD89.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/steup_comp PE-Cy7 CD11b.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_ctrl unstained.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_ctrl.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_EtOH.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_VD3+TGFb.fcs
+        - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp3/U937 3_VD3.fcs
+    parse:
+      machine: bd_fortessa
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/15019428/files/SupplFig6A_BMDCs mouse_Raw data.zip
+      dataset_id: zenodo_15019428_Fortessa2
+      file_paths:
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_1_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_2_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_3_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_4_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_5_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_6_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/steup_AF700.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/steup_comp 7AAD.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/steup_PE.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/steup_PECy7.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_1_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_2_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_3_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_4_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_5_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/WT mice +7AAD_6_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/CD89 mice +7AAD_001_1_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/CD89 mice +7AAD_001_2_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/CD89 mice +7AAD_001_3_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/CD89 mice +7AAD_001_4_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/CD89 mice +7AAD_001_5_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/WT mice +7AAD_1_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/WT mice +7AAD_2_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/WT mice +7AAD_3_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/WT mice +7AAD_4_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp2_BMDCs CD89+7aad/WT mice +7AAD_5_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/CD89 mice +7AAD_001_1_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/CD89 mice +7AAD_001_2_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/CD89 mice +7AAD_001_3_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/CD89 mice +7AAD_001_4_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/WT mice +7AAD_WT10_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/WT mice +7AAD_WT11_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/WT mice +7AAD_WT12_001.fcs
+      - SupplFig6A_BMDCs mouse_Raw data/Exp3_BMDCs CD89+7aad/WT mice +7AAD_WT17_001.fcs
+
+  # Cytof2
+  #
+  # This includes FR-FCM-Z244 (the next entry) and the pub linked there says
+  # this dataset is a cytof2 (https://pmc.ncbi.nlm.nih.gov/articles/PMC6656694/)
+  #
+  # also, $CYTSN says "cytof2", which isn't a serial number but is also isn't
+  # "Helios"
   - src:
       zip_url: https://zenodo.org/records/4719468/files/fcs_data.zip
-      dataset_id: zenodo_Helios
+      dataset_id: zenodo_4719468_Cytof2_0
       file_paths:
         - fcs_data/BMT01_D30_clean.fcs
         - fcs_data/BMT01_D90_clean.fcs
@@ -45,11 +121,49 @@ test_files:
         - fcs_data/BMT13_D30_clean.fcs
         - fcs_data/BMT13_D90_clean.fcs
         - fcs_data/BMT14_D30_clean.fcs
+    parse:
+      machine: sbt_cytof2
+
+  # Cytof2 (see above)
+  - src:
+      zip_url: https://zenodo.org/records/4719468/files/FR-FCM-Z244_gated.zip
+      dataset_id: zenodo_4719468_Cytof2_1
+      file_paths:
+        - FR-FCM-Z244_gated/BMT01_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT01_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT02_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT02_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT03_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT03_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT04_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT04_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT05_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT05_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT06_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT06_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT07_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT07_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT08_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT09_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT09_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT10_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT11_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT11_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT12_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT12_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT13_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT13_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT14_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT14_D90_clean.fcs
+        - FR-FCM-Z244_gated/BMT15_D30_clean.fcs
+        - FR-FCM-Z244_gated/BMT15_D90_clean.fcs
+    parse:
+      machine: sbt_cytof2
 
   # Fortessa
   - src:
       zip_url: https://zenodo.org/records/10499157/files/Flow_cytometry_data_for_Yang_and_Hill_ORFIUS_complex_manuscript.zip
-      dataset_id: zenodo_Fortessa
+      dataset_id: zenodo_10499157_Fortessa
       file_paths:
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_23 1-10-23 OV8 siControl_015.fcs
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_24 1-10-23 OV8 siBRD1-1_016.fcs
@@ -274,13 +388,69 @@ test_files:
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_13 07-05-23 FT194 siCon.fcs
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_14 07-05-23 FT194 siRad51-5.fcs
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure S9C FT194 siRAD51 cell cycle flow/7-5-23/Specimen_001_15 07-05-23 FT194 siRad51-7.fcs
+    parse:
+      machine: bd_fortessa
 
   # Fortessa
   - src:
-      # TODO include everything, this dataset has ~6 zip files in it, this just
-      # happens to be one of the smaller ones
+      zip_url: https://zenodo.org/records/17160682/files/3ss_bs_stem.zip
+      dataset_id: zenodo_17160682_Fortessa0
+      file_paths:
+        - 3ss_bs_stem/3ss_bs_stem_bin01.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin02.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin03.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin04.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin05.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin06.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin07.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin08.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin09.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin10.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin11.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin12.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin13.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin14.fcs
+        - 3ss_bs_stem/3ss_bs_stem_bin15.fcs
+        - 3ss_bs_stem/3ss_bs_stem_lib.fcs
+        - 3ss_bs_stem/3ss_bs_stem_neg_1.fcs
+        - 3ss_bs_stem/3ss_bs_stem_neg_2.fcs
+        - 3ss_bs_stem/3ss_bs_stem_neg_3.fcs
+        - 3ss_bs_stem/3ss_bs_stem_pos_1.fcs
+        - 3ss_bs_stem/3ss_bs_stem_pos_2.fcs
+        - 3ss_bs_stem/3ss_bs_stem_pos_3.fcs
+        - 3ss_bs_stem/3ss_stem_lib.fcs
+        - 3ss_bs_stem/bs_stem_lib.fcs
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/17160682/files/5ss_stem.zip
+      dataset_id: zenodo_17160682_Fortessa1
+      file_paths:
+        - 5ss_stem/5ss_stem_bin01.fcs
+        - 5ss_stem/5ss_stem_bin02.fcs
+        - 5ss_stem/5ss_stem_bin03.fcs
+        - 5ss_stem/5ss_stem_bin04.fcs
+        - 5ss_stem/5ss_stem_bin05.fcs
+        - 5ss_stem/5ss_stem_bin06.fcs
+        - 5ss_stem/5ss_stem_bin07.fcs
+        - 5ss_stem/5ss_stem_bin08.fcs
+        - 5ss_stem/5ss_stem_bin09.fcs
+        - 5ss_stem/5ss_stem_bin10.fcs
+        - 5ss_stem/5ss_stem_bin11.fcs
+        - 5ss_stem/5ss_stem_bin12.fcs
+        - 5ss_stem/5ss_stem_bin13.fcs
+        - 5ss_stem/5ss_stem_bin14.fcs
+        - 5ss_stem/5ss_stem_bin15.fcs
+        - 5ss_stem/5ss_stem_bin16.fcs
+        - 5ss_stem/5ss_stem_neg_1.fcs
+        - 5ss_stem/5ss_stem_neg_2.fcs
+        - 5ss_stem/5ss_stem_pos_1.fcs
+        - 5ss_stem/5ss_stem_pos_2.fcs
+
+  # Fortessa
+  - src:
       zip_url: https://zenodo.org/records/17160682/files/5ss_stem_HA.zip
-      dataset_id: zenodo_Fortessa2
+      dataset_id: zenodo_17160682_Fortessa2
       file_paths:
         - 5ss_stem_HA/5ss_stem_HA_bin01.fcs
         - 5ss_stem_HA/5ss_stem_HA_bin02.fcs
@@ -307,12 +477,144 @@ test_files:
         - 5ss_stem_HA/5ss_stem_HA_pos_3.fcs
         - 5ss_stem_HA/5ss_stem_HA_pos_4.fcs
 
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/17160682/files/5ss_stem_MYC.zip
+      dataset_id: zenodo_17160682_Fortessa3
+      file_paths:
+      - 5ss_stem_MYC/5ss_stem_MYC_bin01.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin02.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin03.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin04.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin05.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin06.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin07.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_bin08.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_neg_1.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_neg_2.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_pos_1.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_pos_2.fcs
+      - 5ss_stem_MYC/5ss_stem_MYC_pos_3.fcs
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/17160682/files/mammalian.zip
+      dataset_id: zenodo_17160682_Fortessa4
+      file_paths:
+        - mammalian/HeLa_rep1_1.fcs
+        - mammalian/HeLa_rep1_2.fcs
+        - mammalian/HeLa_rep1_3.fcs
+        - mammalian/HeLa_rep1_4.fcs
+        - mammalian/HeLa_rep1_5.fcs
+        - mammalian/HeLa_rep1_Neon_DEL.fcs
+        - mammalian/HeLa_rep1_Scar_DEL.fcs
+        - mammalian/HeLa_rep1_wt.fcs
+        - mammalian/HeLa_rep2_1.fcs
+        - mammalian/HeLa_rep2_2.fcs
+        - mammalian/HeLa_rep2_3.fcs
+        - mammalian/HeLa_rep2_4.fcs
+        - mammalian/HeLa_rep2_5.fcs
+        - mammalian/HeLa_rep2_Neon_DEL.fcs
+        - mammalian/HeLa_rep2_Scar_DEL.fcs
+        - mammalian/HeLa_rep2_wt.fcs
+        - mammalian/HeLa_rep3_1.fcs
+        - mammalian/HeLa_rep3_2.fcs
+        - mammalian/HeLa_rep3_3.fcs
+        - mammalian/HeLa_rep3_4.fcs
+        - mammalian/HeLa_rep3_5.fcs
+        - mammalian/HeLa_rep3_Neon_DEL.fcs
+        - mammalian/HeLa_rep3_Scar_DEL.fcs
+        - mammalian/HeLa_rep3_wt.fcs
+        - mammalian/N2a_rep1_1.fcs
+        - mammalian/N2a_rep1_2.fcs
+        - mammalian/N2a_rep1_3.fcs
+        - mammalian/N2a_rep1_4.fcs
+        - mammalian/N2a_rep1_5.fcs
+        - mammalian/N2a_rep1_Neon_DEL.fcs
+        - mammalian/N2a_rep1_Scarlet_DEL.fcs
+        - mammalian/N2a_rep1_wt.fcs
+        - mammalian/N2a_rep2_1.fcs
+        - mammalian/N2a_rep2_2.fcs
+        - mammalian/N2a_rep2_3.fcs
+        - mammalian/N2a_rep2_4.fcs
+        - mammalian/N2a_rep2_5.fcs
+        - mammalian/N2a_rep2_Neon_DEL.fcs
+        - mammalian/N2a_rep2_Scar_DEL.fcs
+        - mammalian/N2a_rep2_wt.fcs
+        - mammalian/N2a_rep3_1.fcs
+        - mammalian/N2a_rep3_2.fcs
+        - mammalian/N2a_rep3_3.fcs
+        - mammalian/N2a_rep3_4.fcs
+        - mammalian/N2a_rep3_5.fcs
+        - mammalian/N2a_rep3_Neon_DEL.fcs
+        - mammalian/N2a_rep3_Scar_DEL.fcs
+        - mammalian/N2a_rep3_wt.fcs
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/17160682/files/random.zip
+      dataset_id: zenodo_17160682_Fortessa5
+      file_paths:
+        - random/random_bin01.fcs
+        - random/random_bin02.fcs
+        - random/random_bin03.fcs
+        - random/random_bin04.fcs
+        - random/random_bin05.fcs
+        - random/random_bin06.fcs
+        - random/random_bin07.fcs
+        - random/random_bin08.fcs
+        - random/random_bin09.fcs
+        - random/random_bin10.fcs
+        - random/random_bin11.fcs
+        - random/random_bin12.fcs
+        - random/random_bin13.fcs
+        - random/random_bin14.fcs
+        - random/random_bin15.fcs
+        - random/random_bin16.fcs
+        - random/random_lib_1.fcs
+        - random/random_lib_2.fcs
+        - random/random_wt_neg_1.fcs
+        - random/random_wt_neg_2.fcs
+        - random/random_wt_neg_3.fcs
+        - random/random_wt_neg_bin15_bin16.fcs
+        - random/random_wt_pos_1.fcs
+        - random/random_wt_pos_2.fcs
+        - random/random_wt_pos_3.fcs
+        - random/random_wt_pos_bin15_bin16.fcs
+
+  # Fortessa
+  - src:
+      zip_url: https://zenodo.org/records/17160682/files/walking_stem.zip
+      dataset_id: zenodo_17160682_Fortessa6
+      file_paths:
+        - walking_stem/walking_stem_bin01.fcs
+        - walking_stem/walking_stem_bin02.fcs
+        - walking_stem/walking_stem_bin03.fcs
+        - walking_stem/walking_stem_bin04.fcs
+        - walking_stem/walking_stem_bin05.fcs
+        - walking_stem/walking_stem_bin06.fcs
+        - walking_stem/walking_stem_bin07.fcs
+        - walking_stem/walking_stem_bin08.fcs
+        - walking_stem/walking_stem_bin09.fcs
+        - walking_stem/walking_stem_bin10.fcs
+        - walking_stem/walking_stem_bin11.fcs
+        - walking_stem/walking_stem_bin12.fcs
+        - walking_stem/walking_stem_bin13.fcs
+        - walking_stem/walking_stem_bin14.fcs
+        - walking_stem/walking_stem_bin15.fcs
+        - walking_stem/walking_stem_bin16.fcs
+        - walking_stem/walking_stem_neg_1.fcs
+        - walking_stem/walking_stem_neg_2.fcs
+        - walking_stem/walking_stem_neg_3.fcs
+        - walking_stem/walking_stem_pos_1.fcs
+        - walking_stem/walking_stem_pos_2.fcs
+        - walking_stem/walking_stem_pos_3.fcs
+
   # FortessaX20
   - src:
-      # TODO include everything, this dataset has ~6 zip files in it, this just
-      # happens to be one of the smaller ones
+      # TODO this has manyyyyyyy more zips in it, and supposedly a Fusion
       zip_url: https://zenodo.org/records/5498282/files/Figure2_part1.zip
-      dataset_id: zenodo_FortessaX20
+      dataset_id: zenodo_5498282_FortessaX20
       file_paths:
         - "Figure2_part1/B-T_B220.fcs"
         - "Figure2_part1/B-T_BM #1.fcs"
@@ -350,7 +652,7 @@ test_files:
   # Apogee A60 Micro
   - src:
       zip_url: https://zenodo.org/records/4561815/files/Figure_2.zip
-      dataset_id: zenodo_ApogeeA60micro
+      dataset_id: zenodo_4561815_ApogeeA60micro0
       file_paths:
         - Figure_2/2b/02_Si_182nm_dil1E5.fcs
         - Figure_2/2b/04_Si_315nm_dil1E5.fcs
@@ -359,12 +661,21 @@ test_files:
         - Figure_2/2b/07_Si_548nm_dil1E4.fcs
     parse:
       machine: apo_a60micro
-      strategy: scalpal
+
+  # Apogee A60 Micro
+  - src:
+      zip_url: https://zenodo.org/records/4561815/files/Figure_3_calibration.zip
+      dataset_id: zenodo_4561815_ApogeeA60micro1
+      file_paths:
+        - Figure_3_calibration/01A 40x CD61-APC CD62p-PE_A1_0_PSD_settings_1_PSD_settings_2_Flow-SR_medium_PBS_MESF_PSD_1.fcs
+        - Figure_3_calibration/d03_20180819AG_Exo beads_3_01_F3_0.fcs
+    parse:
+      machine: apo_a60micro
 
   # easycyte
   - src:
       zip_url: https://zenodo.org/records/10720746/files/Co-cultures_data.zip
-      dataset_id: zenodo_easycyte
+      dataset_id: zenodo_10720746_easycyte
       file_paths:
         - Transwell co-cultures/2022-03-05_at_03-08-34pm.fcs
         - Transwell co-cultures/2022-02-23_at_03-31-19pm.fcs
@@ -394,7 +705,7 @@ test_files:
   # Aurora
   - src:
       url_root: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
-      dataset_id: zenodo_Aurora
+      dataset_id: zenodo_15723074_Aurora
       file_names:
         - B_cells_donor1.fcs
         - B_cells_donor2.fcs
@@ -456,7 +767,7 @@ test_files:
   # Sony SA3800
   - src:
       url_root: https://zenodo.org/records/7971252/files/
-      dataset_id: zenodo_SonySA3800
+      dataset_id: zenodo_7971252_SonySA3800
       file_names:
         - A01 Well - A01 WLSM.fcs
         - A02 Well - A02 WLSM.fcs
@@ -558,7 +869,7 @@ test_files:
   # Attune NxT
   - src:
       url_root: https://zenodo.org/records/7352402/files/
-      dataset_id: zenodo_AttuneNxt
+      dataset_id: zenodo_7352402_AttuneNxt
       file_names:
         - Tmem119 x IAB AAV NJG 1.6.22_Compensation_BL1-A.fcs
         - Tmem119 x IAB AAV NJG 1.6.22_Compensation_BL3-A.fcs
@@ -586,7 +897,7 @@ test_files:
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
   - src:
       url_root: https://zenodo.org/records/7982165/files/
-      dataset_id: zenodo_Helios
+      dataset_id: zenodo_7982165_Helios
       file_names:
         - AM_Non_JAK2.fcs
         - CJ_JAK2.fcs
@@ -605,28 +916,31 @@ test_files:
   # FACSDiscover A8
   - src:
       url_root: https://zenodo.org/records/15726118/files/
-      dataset_id: zenodo_FACSDiscoverA8
+      dataset_id: zenodo_15726118_FACSDiscoverA8
       file_names:
-        # TODO include all files for this dataset, these are the small ones
+        # - AML BM 1.fcs
+        # - AML BM 2.fcs
+        # - AML BM 3.fcs
+        # - AML BM 4.fcs
         - HD BM 1.fcs
+        # - HD BM 2.fcs
         - HD PBMC.fcs
     parse:
       options:
         allow_other_feature: true
 
-  # Imagestream
+  # Imagestream (this is actually the same dataset as the previous)
   - src:
       url_root: https://zenodo.org/records/15726118/files/
-      dataset_id: zenodo_Imagestream
+      dataset_id: zenodo_15726118_Imagestream
       file_names:
-        # TODO include all files for this dataset, these are the small ones
         - No ab 2_3.fcs
         - Ritux 2_5.fcs
 
   # FASCLyric
   - src:
       url_root: https://zenodo.org/records/17222100/files/
-      dataset_id: zenodo_FACSLyric
+      dataset_id: zenodo_17222100_FACSLyric
       file_names:
         - 20250409_DV2_4G2_T1_340.fcs
         - 20250409_DV2_4G2_T2_340_001.fcs
@@ -644,7 +958,7 @@ test_files:
   # FASCSymphony A5
   - src:
       url_root: https://zenodo.org/records/13928969/files/
-      dataset_id: zenodo_FACSSymphonyA5
+      dataset_id: zenodo_13928969_FACSSymphonyA5
       file_names:
         - ID1_Panel1_TP1.fcs
         - ID1_Panel1_TP2.fcs

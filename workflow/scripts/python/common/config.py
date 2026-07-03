@@ -1,4 +1,5 @@
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+from itertools import dropwhile
 from enum import Enum
 from pydantic import BaseModel as BaseModel_
 from typing import TypeAlias, NewType, Literal, Any
@@ -496,9 +497,11 @@ class FCSConfig(BaseModel):
         return id_entry.file_paths
 
     def find_file_options(self, path: Path) -> tuple[ParseConfig, RepoType, str, str]:
-        file_name = path.name
-        repo_id = path.parent.name
-        repo_type = RepoType(path.parent.parent.name)
+        ps = dropwhile(lambda n: n != "resources", path.parts)
+        next(ps)
+        repo_type = RepoType(next(ps))
+        repo_id = next(ps)
+        file_name = "/".join(ps)
         return (
             self.find_options(repo_type, file_name, repo_id),
             repo_type,
@@ -507,13 +510,16 @@ class FCSConfig(BaseModel):
         )
 
     def find_options(
-        self, repo_type: RepoType, file_name: str, repo_id: str
+        self,
+        repo_type: RepoType,
+        repo_id: str,
+        file_name: str,
     ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
                 return (src.dataset_id, list(src.file_names))
             elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
-                return (src.dataset_id, [p.name for p in src.file_paths])
+                return (src.dataset_id, [str(p) for p in src.file_paths])
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):
