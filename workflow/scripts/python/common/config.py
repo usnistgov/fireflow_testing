@@ -41,6 +41,7 @@ class MachineId(Enum):
     BD_ARIA = "bd_aria"
     BD_ARIA2 = "bd_aria2"
     BD_ARIA3 = "bd_aria3"
+    BD_FUSION = "bd_fusion"
     BD_CANTO = "bd_canto"
     BD_CANTO2 = "bd_canto2"
     BD_CELESTA = "bd_celesta"
@@ -214,6 +215,12 @@ BD_MACHINES = {
         sorting=True,
         cyt_values=["FACSAriaIII"],
     ),
+    MachineId.BD_FUSION: Machine(
+        name=MachineName("FACSAria Fusion"),
+        vendor=VendorId.BD,
+        sorting=True,
+        cyt_values=["FACSAriaIII Fusion (FACSAriaIII)"],
+    ),
     MachineId.BD_CANTO: Machine(
         name=MachineName("FACSCanto"),
         vendor=VendorId.BD,
@@ -261,7 +268,7 @@ BD_MACHINES = {
         name=MachineName("Influx"),
         vendor=VendorId.BD,
         sorting=True,
-        cyt_values=["inFlux v7 Sorter"],
+        cyt_values=["inFlux v7 Sorter", "BD Influx System (USB)"],
     ),
     MachineId.BD_LSR2: Machine(
         name=MachineName("LSRII"),
@@ -303,7 +310,7 @@ BC_MACHINES = {
     MachineId.BC_GALLIOS: Machine(
         name=MachineName("Gallios"),
         vendor=VendorId.COULTER,
-        cyt_values=["Gallios"],
+        cyt_values=["Gallios", "Gallios (Kaluza)"],
     ),
     MachineId.BC_NAVIOS: Machine(
         name=MachineName("Navios"),

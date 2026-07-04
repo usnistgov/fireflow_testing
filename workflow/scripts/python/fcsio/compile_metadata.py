@@ -153,7 +153,11 @@ def get_software_string(
     # Beckman (with the exception of other machines above) generally stores
     # their software in "SWVER"
     elif vendorid in [VendorId.COULTER]:
-        return key_maybe(core.nonstandard_keywords, "SWVER")
+        # except the gallios sometimes uses @ACQSOFTWARE
+        if machineid is MachineId.BC_GALLIOS:
+            return key_maybe(core.nonstandard_keywords, "@ACQSOFTWARE")
+        else:
+            return key_maybe(core.nonstandard_keywords, "SWVER")
     # Stratedigm stores software in $SOFTWARE (makes sense)
     elif vendorid is VendorId.STRAT:
         return key_maybe(core.nonstandard_keywords, "SOFTWARE")

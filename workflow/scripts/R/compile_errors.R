@@ -75,7 +75,7 @@ df_misc_errors <- df_misc %>%
     # timestep should not be missing
     nc_key_val_timestep = timestep_added,
     # DATA should not have a remainder (usually an off-by-one error)
-    nc_offsets_data_len = event_data_remainder > 0,
+    nc_offsets_data_len = replace_na(event_data_remainder > 0, FALSE),
     # $TOT should match the number of events in DATA
     nc_tot = tot_event_mismatch,
     # CRC should be present in 3.0+ file
@@ -253,6 +253,7 @@ df_pseudoempty <- df_offsets %>%
   filter(!final) %>%
   filter(start == end + 1) %>%
   select(fcs_path, dataset) %>%
+  unique() %>%
   add_column(nc_offsets_pseudoempty = TRUE) %>%
   right_join(df_all, by = c("fcs_path", "dataset")) %>%
   replace_na(
@@ -317,6 +318,15 @@ df_all_errors %>%
   ) %>%
   pivot_longer(cols = starts_with("nc_")) %>%
   mutate(
+    value = case_when(
+      value == 1.0 ~ "all",
+      value == 0.0 ~ "none",
+      value < 0.1 ~ "<10%",
+      value < 0.9 ~ "10-90%",
+      TRUE ~ ">90%"
+    )
+  ) %>%
+  mutate(
     category = case_when(
       str_detect(name, "nc_offsets") ~ "offsets",
       str_detect(name, "nc_parse") ~ "keyword value",
@@ -329,7 +339,13 @@ df_all_errors %>%
   mutate(
     category = fct_relevel(category, "offsets", "TEXT layout", "keyword value",
                            "extra", "misc")) %>%
-  ggplot(aes(name, fct_rev(machine), color = value)) +
+  ggplot(
+    aes(
+      name,
+      fct_rev(machine),
+      color = fct_relevel(value, "all", ">90%", "10-90%", "<10%", "none")
+    )
+  ) +
   geom_point() +
   facet_grid(
     vendor ~ category,
@@ -337,13 +353,21 @@ df_all_errors %>%
     switch = "y",
     space = "free"
   ) +
-  scale_color_gradient2(low = "white", high = "red") +
+  scale_color_manual(
+    values = c(
+      "none" = "white",
+      "<10%" = "#ffbbbb",
+      "10-90%" ="#ff8888",
+      ">90%" = "#ff5555",
+      "all" = "#ff0000"
+    )
+  )  +
   labs(x = NULL, y = NULL, color = "Fraction\nwith errors") +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot"]], width = 11, height = 10)
+ggsave(snakemake@output[["plot"]], width = 11, height = 11)
 
 df_all_errors %>%
   write_tsv(snakemake@output[["table"]])

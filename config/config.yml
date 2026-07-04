@@ -1945,6 +1945,7 @@ test_files:
         - FigS3/data/data_8hr/plate4_Well 096_384.fcs
 
   # Accuri C6 (same as FR-FCM-ZZNA)
+  # https://datadryad.org/dataset/doi:10.5061/dryad.m1c04
   - src:
       file_id: 3339
       dataset_id: dryad_3339_AccuriC6
@@ -2409,6 +2410,501 @@ test_files:
         - FlowRepository_FR-FCM-ZZNA_files/CYCLUS2_BEKKEN_-7_B_SYBR_PRECYCLE_rep2.fcs
         - FlowRepository_FR-FCM-ZZNA_files/CYCLUS2_BEKKEN_-7_B_SYBR_PRECYCLE_rep3.fcs
 
+  # Gallios (https://datadryad.org/dataset/doi:10.5061/dryad.62fv1#usage)
+  - src:
+      file_id: 5950
+      dataset_id: dryad_5950_Gallios
+      file_paths:
+        - A2-1-2015-03-19-113136-4.fcs
+        - A2-1-2015-03-19-132128-4.fcs
+        - A2-1-2015-03-19-154622-4.fcs
+        - A2-2-2015-03-19-113502-5.fcs
+        - A2-2-2015-03-19-132510-5.fcs
+        - A2-2-2015-03-19-155026-5.fcs
+        - A2-3-2015-03-19-113712-6.fcs
+        - A2-3-2015-03-19-132805-6.fcs
+        - A2-3-2015-03-19-155341-6.fcs
+        - A2-K-2015-03-19-125929-20.fcs
+        - A2-K-2015-03-19-150737-20.fcs
+        - A3-1-2015-03-19-114024-7.fcs
+        - A3-1-2015-03-19-133156-7.fcs
+        - A3-1-2015-03-19-155807-7.fcs
+        - A3-2-2015-03-19-114338-8.fcs
+        - A3-2-2015-03-19-133553-8.fcs
+        - A3-2-2015-03-19-160241-8.fcs
+        - A3-3-2015-03-19-114732-9.fcs
+        - A3-3-2015-03-19-134042-9.fcs
+        - A3-3-2015-03-19-160803-9.fcs
+        - A3-K-2015-03-19-130514-21.fcs
+        - A3-K-2015-03-19-151828-21.fcs
+        - A4-1-2015-03-19-114943-10.fcs
+        - A4-1-2015-03-19-134311-10.fcs
+        - A4-1-2015-03-19-161056-10.fcs
+        - A4-2-2015-03-19-120202-11.fcs
+        - A4-2-2015-03-19-135354-11.fcs
+        - A4-2-2015-03-19-162138-11.fcs
+        - A4-3-2015-03-19-120646-12.fcs
+        - A4-3-2015-03-19-140031-12.fcs
+        - A4-3-2015-03-19-162918-12.fcs
+        - A4-K-2015-03-19-130657-22.fcs
+        - A4-K-2015-03-19-152919-22.fcs
+        - A5-1-2015-03-19-121135-13.fcs
+        - A5-1-2015-03-19-140839-13.fcs
+        - A5-1-2015-03-19-163920-13.fcs
+        - A5-2-2015-03-19-121823-14.fcs
+        - A5-2-2015-03-19-141910-14.fcs
+        - A5-2-2015-03-19-165011-14.fcs
+        - A5-3-2015-03-19-122559-15.fcs
+        - A5-3-2015-03-19-143002-15.fcs
+        - A5-3-2015-03-19-170103-15.fcs
+        - A5-K-2015-03-19-130849-23.fcs
+        - A5-K-2015-03-19-153345-23.fcs
+        - A6-1-2015-03-19-122948-16.fcs
+        - A6-1-2015-03-19-143554-16.fcs
+        - A6-1-2015-03-19-170426-16.fcs
+        - A6-2-2015-03-19-123322-17.fcs
+        - A6-2-2015-03-19-144035-17.fcs
+        - A6-2-2015-03-19-170613-17.fcs
+        - A6-3-2015-03-19-124057-18.fcs
+        - A6-3-2015-03-19-145100-18.fcs
+        - A6-3-2015-03-19-170932-18.fcs
+        - A6-K-2015-03-19-131017-24.fcs
+        - A6-K-2015-03-19-153501-24.fcs
+        - A1-1-2015-03-19-112826-1.fcs
+        - A1-1-2015-03-19-131616-1.fcs
+        - A1-1-2015-03-19-154032-1.fcs
+        - A1-2-2015-03-19-112909-2.fcs
+        - A1-2-2015-03-19-131739-2.fcs
+        - A1-2-2015-03-19-154157-2.fcs
+        - A1-3-2015-03-19-113006-3.fcs
+        - A1-3-2015-03-19-131948-3.fcs
+        - A1-3-2015-03-19-154440-3.fcs
+
+  # Influx (https://datadryad.org/dataset/doi:10.5061/dryad.f4qrfj71n#citations)
+  - src:
+      file_id: 2382110
+      dataset_id: dryad_2382110_Influx
+      file_paths:
+        - Flow cytometry2/fcs data files/76.fcs
+        - Flow cytometry2/fcs data files/77.fcs
+        - Flow cytometry2/fcs data files/78.fcs
+        - Flow cytometry2/fcs data files/79.fcs
+        - Flow cytometry2/fcs data files/80.fcs
+        - Flow cytometry2/fcs data files/81.fcs
+        - Flow cytometry2/fcs data files/82.fcs
+        - Flow cytometry2/fcs data files/83.fcs
+        - Flow cytometry2/fcs data files/84.fcs
+        - Flow cytometry2/fcs data files/85.fcs
+        - Flow cytometry2/fcs data files/86.fcs
+        - Flow cytometry2/fcs data files/87.fcs
+        - Flow cytometry2/fcs data files/88.fcs
+        - Flow cytometry2/fcs data files/89.fcs
+        - Flow cytometry2/fcs data files/90.fcs
+        - Flow cytometry2/fcs data files/91.fcs
+        - Flow cytometry2/fcs data files/92.fcs
+        - Flow cytometry2/fcs data files/93.fcs
+        - Flow cytometry2/fcs data files/94.fcs
+        - Flow cytometry2/fcs data files/95.fcs
+        - Flow cytometry2/fcs data files/96.fcs
+        - Flow cytometry2/fcs data files/97.fcs
+        - Flow cytometry2/fcs data files/98.fcs
+        - Flow cytometry2/fcs data files/99.fcs
+        - Flow cytometry2/fcs data files/100.fcs
+        - Flow cytometry2/fcs data files/101.fcs
+        - Flow cytometry2/fcs data files/102.fcs
+        - Flow cytometry2/fcs data files/103.fcs
+        - Flow cytometry2/fcs data files/104.fcs
+        - Flow cytometry2/fcs data files/105.fcs
+        - Flow cytometry2/fcs data files/106.fcs
+        - Flow cytometry2/fcs data files/107.fcs
+        - Flow cytometry2/fcs data files/108.fcs
+        - Flow cytometry2/fcs data files/109.fcs
+        - Flow cytometry2/fcs data files/110.fcs
+        - Flow cytometry2/fcs data files/111.fcs
+        - Flow cytometry2/fcs data files/112.fcs
+        - Flow cytometry2/fcs data files/113.fcs
+        - Flow cytometry2/fcs data files/114.fcs
+        - Flow cytometry2/fcs data files/115.fcs
+        - Flow cytometry2/fcs data files/116.fcs
+        - Flow cytometry2/fcs data files/117.fcs
+        - Flow cytometry2/fcs data files/118.fcs
+        - Flow cytometry2/fcs data files/119.fcs
+        - Flow cytometry2/fcs data files/120.fcs
+        - Flow cytometry2/fcs data files/121.fcs
+        - Flow cytometry2/fcs data files/122.fcs
+        - Flow cytometry2/fcs data files/123.fcs
+        - Flow cytometry2/fcs data files/124.fcs
+        - Flow cytometry2/fcs data files/125.fcs
+        - Flow cytometry2/fcs data files/126.fcs
+        - Flow cytometry2/fcs data files/127.fcs
+        - Flow cytometry2/fcs data files/128.fcs
+        - Flow cytometry2/fcs data files/129.fcs
+        - Flow cytometry2/fcs data files/130.fcs
+        - Flow cytometry2/fcs data files/131.fcs
+        - Flow cytometry2/fcs data files/132.fcs
+        - Flow cytometry2/fcs data files/133.fcs
+        - Flow cytometry2/fcs data files/134.fcs
+        - Flow cytometry2/fcs data files/135.fcs
+        - Flow cytometry2/fcs data files/136.fcs
+        - Flow cytometry2/fcs data files/137.fcs
+        - Flow cytometry2/fcs data files/138.fcs
+        - Flow cytometry2/fcs data files/139.fcs
+        - Flow cytometry2/fcs data files/141.fcs
+        - Flow cytometry2/fcs data files/142.fcs
+        - Flow cytometry2/fcs data files/143.fcs
+        - Flow cytometry2/fcs data files/144.fcs
+        - Flow cytometry2/fcs data files/145.fcs
+        - Flow cytometry2/fcs data files/146.fcs
+        - Flow cytometry2/fcs data files/147.fcs
+        - Flow cytometry2/fcs data files/148.fcs
+        - Flow cytometry2/fcs data files/149.fcs
+        - Flow cytometry2/fcs data files/150.fcs
+        - Flow cytometry2/fcs data files/151.fcs
+        - Flow cytometry2/fcs data files/152.fcs
+        - Flow cytometry2/fcs data files/153.fcs
+        - Flow cytometry2/fcs data files/154.fcs
+        - Flow cytometry2/fcs data files/155.fcs
+        - Flow cytometry2/fcs data files/156.fcs
+        - Flow cytometry2/fcs data files/157.fcs
+        - Flow cytometry2/fcs data files/158.fcs
+        - Flow cytometry2/fcs data files/160.fcs
+        - Flow cytometry2/fcs data files/161.fcs
+        - Flow cytometry2/fcs data files/162.fcs
+        - Flow cytometry2/fcs data files/163.fcs
+        - Flow cytometry2/fcs data files/164.fcs
+        - Flow cytometry2/fcs data files/165.fcs
+        - Flow cytometry2/fcs data files/166.fcs
+        - Flow cytometry2/fcs data files/167.fcs
+        - Flow cytometry2/fcs data files/168.fcs
+        - Flow cytometry2/fcs data files/169.fcs
+        - Flow cytometry2/fcs data files/170.fcs
+        - Flow cytometry2/fcs data files/171.fcs
+        - Flow cytometry2/fcs data files/172.fcs
+        - Flow cytometry2/fcs data files/173.fcs
+        - Flow cytometry2/fcs data files/174.fcs
+        - Flow cytometry2/fcs data files/175.fcs
+        - Flow cytometry2/fcs data files/176.fcs
+        - Flow cytometry2/fcs data files/177.fcs
+        - Flow cytometry2/fcs data files/178.fcs
+        - Flow cytometry2/fcs data files/179.fcs
+        - Flow cytometry2/fcs data files/180.fcs
+        - Flow cytometry2/fcs data files/181.fcs
+        - Flow cytometry2/fcs data files/182.fcs
+        - Flow cytometry2/fcs data files/183.fcs
+        - Flow cytometry2/fcs data files/184.fcs
+        - Flow cytometry2/fcs data files/185.fcs
+        - Flow cytometry2/fcs data files/186.fcs
+        - Flow cytometry2/fcs data files/187.fcs
+        - Flow cytometry2/fcs data files/188.fcs
+        - Flow cytometry2/fcs data files/189.fcs
+        - Flow cytometry2/fcs data files/190.fcs
+        - Flow cytometry2/fcs data files/191.fcs
+        - Flow cytometry2/fcs data files/192.fcs
+        - Flow cytometry2/fcs data files/193.fcs
+        - Flow cytometry2/fcs data files/194.fcs
+        - Flow cytometry2/fcs data files/195.fcs
+        - Flow cytometry2/fcs data files/196.fcs
+        - Flow cytometry2/fcs data files/197.fcs
+        - Flow cytometry2/fcs data files/198.fcs
+        - Flow cytometry2/fcs data files/199.fcs
+        - Flow cytometry2/fcs data files/200.fcs
+        - Flow cytometry2/fcs data files/201.fcs
+        - Flow cytometry2/fcs data files/202.fcs
+        - Flow cytometry2/fcs data files/203.fcs
+        - Flow cytometry2/fcs data files/204.fcs
+        - Flow cytometry2/fcs data files/205.fcs
+        - Flow cytometry2/fcs data files/206.fcs
+        - Flow cytometry2/fcs data files/208.fcs
+        - Flow cytometry2/fcs data files/209.fcs
+        - Flow cytometry2/fcs data files/210.fcs
+        - Flow cytometry2/fcs data files/211.fcs
+        - Flow cytometry2/fcs data files/3 um Beads.fcs
+        - Flow cytometry2/fcs data files/3 um Beads 2019-06-12.fcs
+        - Flow cytometry2/fcs data files/3 SY264 amyE-Phag-Ypet.fcs
+        - Flow cytometry2/fcs data files/18 SY295 amyE-Pcsn-Ypet.fcs
+        - Flow cytometry2/fcs data files/4 SY265 amyE-PtapA-Ypet.fcs
+        - Flow cytometry2/fcs data files/5 SY266 amyE-PsdpA-Ypet.fcs
+        - Flow cytometry2/fcs data files/6 SY267 amyE-PsspB-Ypet.fcs
+        - Flow cytometry2/fcs data files/9 SY270 amyE-PpksC-Ypet.fcs
+        - Flow cytometry2/fcs data files/10 SY271 amyE-PdhbA-Ypet.fcs
+        - Flow cytometry2/fcs data files/11 SY272 amyE-PbacA-Ypet.fcs
+        - Flow cytometry2/fcs data files/12 SY273 amyE-PppsA-Ypet.fcs
+        - Flow cytometry2/fcs data files/14 SY275 amyE-PsboA-Ypet.fcs
+        - Flow cytometry2/fcs data files/15 SY276 amyE-PsunA-Ypet.fcs
+        - Flow cytometry2/fcs data files/17 SY294 amyE-PxynA-Ypet.fcs
+        - Flow cytometry2/fcs data files/20 SY297 amyE-PskfA-Ypet.fcs
+        - Flow cytometry2/fcs data files/21 SY298 amyE-PaprE-Ypet.fcs
+        - Flow cytometry2/fcs data files/29 SY252 lacA Phag-mTurq.fcs
+        - Flow cytometry2/fcs data files/8 SY269 amyE-PdegSU-Ypet.fcs
+        - Flow cytometry2/fcs data files/No Fl Control 2019-12-19.fcs
+        - Flow cytometry2/fcs data files/No Fl Control 2019-12-20.fcs
+        - Flow cytometry2/fcs data files/16 SY277 amyE-PcomQX-Ypet.fcs
+        - Flow cytometry2/fcs data files/19 SY296 amyE-PxynDC-Ypet.fcs
+        - Flow cytometry2/fcs data files/23 SY231 lacA-PdhbA-mTurq.fcs
+        - Flow cytometry2/fcs data files/25 SY252 lacA-PsspB-mTurq.fcs
+        - Flow cytometry2/fcs data files/26 SY256 lacA-PsdpA-mTurq.fcs
+        - Flow cytometry2/fcs data files/3 um Beads_001 2019-05-23.fcs
+        - Flow cytometry2/fcs data files/30 SY232 lacA  Peps-mTurq.fcs
+        - Flow cytometry2/fcs data files/41 SY310 lacA  Pcsn-mTurq.fcs
+        - Flow cytometry2/fcs data files/7 SY268 amyE7-PcomGA-Ypet.fcs
+        - Flow cytometry2/fcs data files/24 SY249 lacA-PxynDC-mTurq.fcs
+        - Flow cytometry2/fcs data files/27 SY302 lacA-PcomGA-mTurq.fcs
+        - Flow cytometry2/fcs data files/28 SY303 lacA-PcomQX-mTurq.fcs
+        - Flow cytometry2/fcs data files/31 SY249 lacA  PsboA-mTurq.fcs
+        - Flow cytometry2/fcs data files/32 SY255 lacA  PtapA-mTurq.fcs
+        - Flow cytometry2/fcs data files/33 SY257 lacA  PsrfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/34 SY250 lacA  PppsA-mTurq.fcs
+        - Flow cytometry2/fcs data files/35 SY302 lacA  PbacA-mTurq.fcs
+        - Flow cytometry2/fcs data files/36 SY303 lacA  PpksC-mTurq.fcs
+        - Flow cytometry2/fcs data files/37 SY304 lacA  PxynA-mTurq.fcs
+        - Flow cytometry2/fcs data files/39 SY308 lacA  PskfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/40 SY309 lacA  PaprE-mTurq.fcs
+        - Flow cytometry2/fcs data files/38 SY307 lacA  PxynDC-mTurq.fcs
+        - Flow cytometry2/fcs data files/13 SY274 amyE-PsrfAA-Ypet_001.fcs
+        - Flow cytometry2/fcs data files/42 SY235 lacA  PsunA-mTurq very bright.fcs
+        - Flow cytometry2/fcs data files/43 SY311 amyE  PtapA-Ypet; lacA  Phag-mTurq.fcs
+        - Flow cytometry2/fcs data files/49 SY318 amyE  PtapA-Ypet;lacA  PbacA-mTurq.fcs
+        - Flow cytometry2/fcs data files/56 SY325 amyE  PtapA-Ypet; lacA  Pcsn-mTurq.fcs
+        - Flow cytometry2/fcs data files/60 SY329 amyE  PsspB-Ypet; lacA  Phag-mTurq.fcs
+        - Flow cytometry2/fcs data files/44 SY317 amyE  PtapA-Ypet; lacA  PpksC-mTurq.fcs
+        - Flow cytometry2/fcs data files/46 SY313 amyE  PtapA-Ypet; lacA  PsdpA-mTurq.fcs
+        - Flow cytometry2/fcs data files/47 SY314 amyE  PtapA-Ypet; lacA  PsspB-mTurq.fcs
+        - Flow cytometry2/fcs data files/50 SY319 amyE  PtapA-Ypet; lacA  PppsA-mTurq.fcs
+        - Flow cytometry2/fcs data files/51 SY320 amyE  PtapA-Ypet; lacA  PsrfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/52 SY321 amyE  PtapA-Ypet; lacA  PsboA-mTurq.fcs
+        - Flow cytometry2/fcs data files/53 SY322 amyE  PtapA-Ypet; lacA  PsunA-mTurq.fcs
+        - Flow cytometry2/fcs data files/55 SY324 amyE  PtapA-Ypet; lacA  PxynA-mTurq.fcs
+        - Flow cytometry2/fcs data files/58 SY327 amyE  PtapA-Ypet; lacA  PskfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/59 SY328 amyE  PtapA-Ypet; lacA  PaprE-mTurq.fcs
+        - Flow cytometry2/fcs data files/72 SY342 amyE   PsspB-Ypet; lacA  Pcsn-mTurq.fcs
+        - Flow cytometry2/fcs data files/48 SY315 amyE  PtapA-Ypet; lacA  PcomGA-mTurq.fcs
+        - Flow cytometry2/fcs data files/54 SY323 amyE  PtapA-Ypet; lacA  PcomQX-mTurq.fcs
+        - Flow cytometry2/fcs data files/57 SY326 amyE  PtapA-Ypet; lacA  PxynDC-mTurq.fcs
+        - Flow cytometry2/fcs data files/63 SY333 amyE   PsspB-Ypet; lacA  PpksC-mTurq.fcs
+        - Flow cytometry2/fcs data files/64 SY334 amyE   PsspB-Ypet; lacA  PdhbA-mTurq.fcs
+        - Flow cytometry2/fcs data files/65 SY335 amyE   PsspB-Ypet; lacA  PbacA-mTurq.fcs
+        - Flow cytometry2/fcs data files/66 SY336 amyE   PsspB-Ypet; lacA  PppsA-mTurq.fcs
+        - Flow cytometry2/fcs data files/67 SY337 amyE   PsspB-Ypet; lacA  PsrfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/68 SY338 amyE   PsspB-Ypet; lacA  PsboA-mTurq.fcs
+        - Flow cytometry2/fcs data files/69 SY339 amyE   PsspB-Ypet; lacA  PsunA-mTurq.fcs
+        - Flow cytometry2/fcs data files/71 SY341 amyE   PsspB-Ypet; lacA  PxynA-mTurq.fcs
+        - Flow cytometry2/fcs data files/74 SY344 amyE   PsspB-Ypet; lacA  PskfA-mTurq.fcs
+        - Flow cytometry2/fcs data files/75 SY345 amyE   PsspB-Ypet; lacA  PaprE-mTurq.fcs
+        - Flow cytometry2/fcs data files/62 SY331 amyE   PsspB-Ypet; lacA  PcomGA-mTurq.fcs
+        - Flow cytometry2/fcs data files/70 SY340 amyE   PsspB-Ypet; lacA  PcomQX-mTurq.fcs
+        - Flow cytometry2/fcs data files/73 SY343 amyE   PsspB-Ypet; lacA  PxynDC-mTurq.fcs
+        - Flow cytometry2/fcs data files/45 SY312 amyE  PtapA-Ypet; lacA  PdhbA-mTurq_001.fcs
+        - Flow cytometry2/fcs data files/1 SY1 wild type non-fluorescent control 2019-05-23.fcs
+        - Flow cytometry2/fcs data files/1 SY1 wild type non-fluorescent control 2019-06-12.fcs
+        - Flow cytometry2/fcs data files/2 SY279 amyE-PspacC-Ypet constituitive Ypet reporter.fcs
+        - Flow cytometry2/fcs data files/22 SY26 amyE-PspacC-mTurq constituitive mTurquoise reporter.fcs
+
+  # Novocyte (https://datadryad.org/dataset/doi:10.5061/dryad.f4qrfj71n#citations)
+  - src:
+      file_id: 2017562
+      dataset_id: dryad_2017562_Novocyte
+      file_paths:
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D5_Rep_1.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D5_Rep_2.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D5_Rep_3.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D5_Rep_4.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D6_Rep_5.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D6_Rep_6.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D6_Rep_7.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D6_Rep_8.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D7_Rep_10.fcs
+        - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D7_Rep_9.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_1.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_10.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_2.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_3.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_4.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_5.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_6.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_7.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_8.fcs
+        - Environmental spike experiment/Positive (with spike)/FCS files/Rep_9.fcs
+
+  # Novocyte (ditto)
+  - src:
+      file_id: 2017563
+      dataset_id: dryad_2017563_Novocyte
+      file_paths:
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D10_Rep 8.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D11_Rep 9.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D12_Rep 10.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D3_Rep 1.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D4_Rep 2.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D5_Rep 3.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D6_Rep 4.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D7_Rep 5.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D8_Rep 6.fcs
+        - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D9_Rep 7.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D10_Rep 8.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D11_Rep 9.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D12_Rep 10.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D5_Rep 3.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D6_Rep 4.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D7_Rep 5.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D8_Rep 6.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/1x_Mixed_reps_D9_Rep 7.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/Mixed_reps_D3_Rep 1.fcs
+        - Mixed-target experiment/1x dilution/FCS files (raw data)/Mixed_reps_D4_Rep 2.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D10_Rep 8.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D11_Rep 9.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D12_Rep 10.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D3_Rep 1.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D4_Rep 2.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D5_Rep 3.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D6_Rep 4.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D7_Rep 5.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D8_Rep 6.fcs
+        - Mixed-target experiment/2x dilution/FCS files (raw data)/2x_Mixed_reps_D9_Rep 7.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D10_Rep 8.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D11_Rep 9.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D12_Rep 10.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D3_Rep 1.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D4_Rep 2.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D5_Rep 3.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D6_Rep 4.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D7_Rep 5.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D8_Rep 6.fcs
+        - Mixed-target experiment/4x dilution/FCS files (raw data)/4x_Mixed_reps_D9_Rep 7.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D10_Rep 8.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D11_Rep 9.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D12_Rep 10.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D3_Rep 1.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D4_Rep 2.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D5_Rep 3.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D6_Rep 4.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D7_Rep 5.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D8_Rep 6.fcs
+        - Mixed-target experiment/8x dilution/FCS files (raw data)/8x_Mixed_reps_D9_Rep 7.fcs
+
+  # Novocyte (ditto)
+  - src:
+      file_id: 2017564
+      dataset_id: dryad_2017564_Novocyte
+      file_paths:
+        - T4 optimization/Replicate 1/Run 1 (Run Number 9)/Run 1 (Run Number 9)_D1_S.fcs
+        - T4 optimization/Replicate 1/Run 10 (Run Number 4)/Run 10 (Run Number 4)_D3_S.fcs
+        - T4 optimization/Replicate 1/Run 10 (Run Number 4)/Run 10 (Run Number 4)_D4_US.fcs
+        - T4 optimization/Replicate 1/Run 11 (Run Number 5)/Run 11 (Run Number 5)_D1_S.fcs
+        - T4 optimization/Replicate 1/Run 12 (Run Number 12)/Run 12 (Run Number 12)_D7_S.fcs
+        - T4 optimization/Replicate 1/Run 12 (Run Number 12)/Run 12 (Run Number 12)_D8_US.fcs
+        - T4 optimization/Replicate 1/Run 13 (Run Number 2)/Run 13 (Run Number 2)_D1_S.fcs
+        - T4 optimization/Replicate 1/Run 13 (Run Number 2)/Run 13 (Run Number 2)_D2_US.fcs
+        - T4 optimization/Replicate 1/Run 14 (Run Number 14)/Run 14 (Run Number 14)_D3_S.fcs
+        - T4 optimization/Replicate 1/Run 14 (Run Number 14)/Run 14 (Run Number 14)_D4_US.fcs
+        - T4 optimization/Replicate 1/Run 15 (Run Number 8)/Run 15 (Run Number 8)_D5_S.fcs
+        - T4 optimization/Replicate 1/Run 15 (Run Number 8)/Run 15 (Run Number 8)_D6_US.fcs
+        - T4 optimization/Replicate 1/Run 16 (Run Number 11)/Run 16 (Run Number 11)_D7_S.fcs
+        - T4 optimization/Replicate 1/Run 2 (Run Number 13)/Run 2 (Run Number 13)_D3_S.fcs
+        - T4 optimization/Replicate 1/Run 3 (Run Number 15)/Run 3 (Run Number 15)_D5_S.fcs
+        - T4 optimization/Replicate 1/Run 3 (Run Number 15)/Run 3 (Run Number 15)_D6_US.fcs
+        - T4 optimization/Replicate 1/Run 4 (Run Number 6)/Run 4 (Run Number 6)_D7_S.fcs
+        - T4 optimization/Replicate 1/Run 4 (Run Number 6)/Run 4 (Run Number 6)_D8_US.fcs
+        - T4 optimization/Replicate 1/Run 5 (Run Number 7)/Run 5 (Run Number 7)_D3_S.fcs
+        - T4 optimization/Replicate 1/Run 6 (Run Number 10)/Run 6 (Run Number 10)_D3_S.fcs
+        - T4 optimization/Replicate 1/Run 6 (Run Number 10)/Run 6 (Run Number 10)_D4_US.fcs
+        - T4 optimization/Replicate 1/Run 7 (Run Number 3)/Run 7 (Run Number 3)_D5_S.fcs
+        - T4 optimization/Replicate 1/Run 8 (Run Number 1)/Run 8 (Run Number 1)_D7_S.fcs
+        - T4 optimization/Replicate 1/Run 9 (Run Number 16)/Run 9 (Run Number 16)_D1_S.fcs
+        - T4 optimization/Replicate 1/Run 9 (Run Number 16)/Run 9 (Run Number 16)_D2_US.fcs
+        - T4 optimization/Replicate 2/Run 1 (Run Number 5)/Run 1 (Run Number 5)_D1_S.fcs
+        - T4 optimization/Replicate 2/Run 1 (Run Number 5)/Run 1 (Run Number 5)_D2_US.fcs
+        - T4 optimization/Replicate 2/Run 10 (Run Number 2)/Run 10 (Run Number 2)_D7_S.fcs
+        - T4 optimization/Replicate 2/Run 10 (Run Number 2)/Run 10 (Run Number 2)_D8_US.fcs
+        - T4 optimization/Replicate 2/Run 11 (Run Number 12)/Run 11 (Run Number 12)_D1_S.fcs
+        - T4 optimization/Replicate 2/Run 11 (Run Number 12)/Run 11 (Run Number 12)_D2_US.fcs
+        - T4 optimization/Replicate 2/Run 12 (Run Number 7)/Run 12 (Run Number 7)_D3_S.fcs
+        - T4 optimization/Replicate 2/Run 13 (Run Number 15)/Run 13 (Run Number 15)_D5_S.fcs
+        - T4 optimization/Replicate 2/Run 14 (Run Number 6)/Run 14 (Run Number 6)_D7_S.fcs
+        - T4 optimization/Replicate 2/Run 14 (Run Number 6)/Run 14 (Run Number 6)_D8_US.fcs
+        - T4 optimization/Replicate 2/Run 15 (Run Number 14)/Run 15 (Run Number 14)_D10_US.fcs
+        - T4 optimization/Replicate 2/Run 15 (Run Number 14)/Run 15 (Run Number 14)_D9_S.fcs
+        - T4 optimization/Replicate 2/Run 16 (Run Number 11)/Run 16 (Run Number 11)_D11_S.fcs
+        - T4 optimization/Replicate 2/Run 2 (Run Number 16)/Run 2 (Run Number 16)_D3_S.fcs
+        - T4 optimization/Replicate 2/Run 2 (Run Number 16)/Run 2 (Run Number 16)_D4_US.fcs
+        - T4 optimization/Replicate 2/Run 3 (Run Number 1)/Run 3 (Run Number 1)_D5_S.fcs
+        - T4 optimization/Replicate 2/Run 4 (Run Number 3)/Run 4 (Run Number 3)_D7_S.fcs
+        - T4 optimization/Replicate 2/Run 4 (Run Number 3)/Run 4 (Run Number 3)_D8_US.fcs
+        - T4 optimization/Replicate 2/Run 5 (Run Number 9)/Run 5 (Run Number 9)_D10_US.fcs
+        - T4 optimization/Replicate 2/Run 5 (Run Number 9)/Run 5 (Run Number 9)_D9_S.fcs
+        - T4 optimization/Replicate 2/Run 6 (Run Number 13)/Run 6 (Run Number 13)_D11_S.fcs
+        - T4 optimization/Replicate 2/Run 7 (Run Number 8)/Run 7 (Run Number 8)_D1_S.fcs
+        - T4 optimization/Replicate 2/Run 7 (Run Number 8)/Run 7 (Run Number 8)_D2_US.fcs
+        - T4 optimization/Replicate 2/Run 8 (Run Number 10)/Run 8 (Run Number 10)_D3_S.fcs
+        - T4 optimization/Replicate 2/Run 8 (Run Number 10)/Run 8 (Run Number 10)_D4_US.fcs
+        - T4 optimization/Replicate 2/Run 9 (Run Number 4)/Run 9 (Run Number 4)_D5_S.fcs
+        - T4 optimization/Replicate 2/Run 9 (Run Number 4)/Run 9 (Run Number 4)_D6_US.fcs
+        - T4 optimization/Replicate 3/Run 1 (Run Number 11)/Run 1 (Run Number 11)_D1_S.fcs
+        - T4 optimization/Replicate 3/Run 10 (Run Number 16)/Run 10 (Run Number 16)_D7_S.fcs
+        - T4 optimization/Replicate 3/Run 10 (Run Number 16)/Run 10 (Run Number 16)_D8_US.fcs
+        - T4 optimization/Replicate 3/Run 11 (Run Number 5)/Run 11 (Run Number 5)_D10_US.fcs
+        - T4 optimization/Replicate 3/Run 11 (Run Number 5)/Run 11 (Run Number 5)_D9_S.fcs
+        - T4 optimization/Replicate 3/Run 12 (Run Number 14)/Run 12 (Run Number 14)_D11_S.fcs
+        - T4 optimization/Replicate 3/Run 12 (Run Number 14)/Run 12 (Run Number 14)_D12_US.fcs
+        - T4 optimization/Replicate 3/Run 13 (Run Number 8)/Run 13 (Run Number 8)_D1_S.fcs
+        - T4 optimization/Replicate 3/Run 13 (Run Number 8)/Run 13 (Run Number 8)_D2_US.fcs
+        - T4 optimization/Replicate 3/Run 14 (Run Number 13)/Run 14 (Run Number 13)_D3_S.fcs
+        - T4 optimization/Replicate 3/Run 14 (Run Number 13)/Run 14 (Run Number 13)_D4_US.fcs
+        - T4 optimization/Replicate 3/Run 15 (Run Number 7)/Run 15 (Run Number 7)_D5_S.fcs
+        - T4 optimization/Replicate 3/Run 16 (Run Number 4)/Run 16 (Run Number 4)_D7_S.fcs
+        - T4 optimization/Replicate 3/Run 16 (Run Number 4)/Run 16 (Run Number 4)_D8_US.fcs
+        - T4 optimization/Replicate 3/Run 2 (Run Number 6)/Run 2 (Run Number 6)_D3_S.fcs
+        - T4 optimization/Replicate 3/Run 2 (Run Number 6)/Run 2 (Run Number 6)_D4_US.fcs
+        - T4 optimization/Replicate 3/Run 3 (Run Number 9)/Run 3 (Run Number 9)_D5_S.fcs
+        - T4 optimization/Replicate 3/Run 3 (Run Number 9)/Run 3 (Run Number 9)_D6_US.fcs
+        - T4 optimization/Replicate 3/Run 4 (Run Number 1)/Run 4 (Run Number 1)_D7_S.fcs
+        - T4 optimization/Replicate 3/Run 5 (Run Number 10)/Run 5 (Run Number 10)_D10_US.fcs
+        - T4 optimization/Replicate 3/Run 5 (Run Number 10)/Run 5 (Run Number 10)_D9_S.fcs
+        - T4 optimization/Replicate 3/Run 6 (Run Number 3)/Run 6 (Run Number 3)_D11_S.fcs
+        - T4 optimization/Replicate 3/Run 6 (Run Number 3)/Run 6 (Run Number 3)_D12_US.fcs
+        - T4 optimization/Replicate 3/Run 7 (Run Number 15)/Run 7 (Run Number 15)_D1_S.fcs
+        - T4 optimization/Replicate 3/Run 7 (Run Number 15)/Run 7 (Run Number 15)_D2_US.fcs
+        - T4 optimization/Replicate 3/Run 8 (Run Number 2)/Run 8 (Run Number 2)_D3_S.fcs
+        - T4 optimization/Replicate 3/Run 8 (Run Number 2)/Run 8 (Run Number 2)_D4_US.fcs
+        - T4 optimization/Replicate 3/Run 9 (Run Number 12)/Run 9 (Run Number 12)_D5_S.fcs
+        - T4 optimization/Replicate 3/Run 9 (Run Number 12)/Run 9 (Run Number 12)_D6_US.fcs
+        - T4 optimization/Replicate 4/Run 1 (Run Number 6)/Run 1 (Run Number 6)_D1_S.fcs
+        - T4 optimization/Replicate 4/Run 1 (Run Number 6)/Run 1 (Run Number 6)_D2_US.fcs
+        - T4 optimization/Replicate 4/Run 10 (Run Number 7)/Run 10 (Run Number 7)_D7_S.fcs
+        - T4 optimization/Replicate 4/Run 11 (Run Number 2)/Run 11 (Run Number 2)_D10_US.fcs
+        - T4 optimization/Replicate 4/Run 11 (Run Number 2)/Run 11 (Run Number 2)_D9_S.fcs
+        - T4 optimization/Replicate 4/Run 12 (Run Number 10)/Run 12 (Run Number 10)_D11_S.fcs
+        - T4 optimization/Replicate 4/Run 12 (Run Number 10)/Run 12 (Run Number 10)_D12_US.fcs
+        - T4 optimization/Replicate 4/Run 13 (Run Number 3)/Run 13 (Run Number 3)_D1_S.fcs
+        - T4 optimization/Replicate 4/Run 13 (Run Number 3)/Run 13 (Run Number 3)_D2_US.fcs
+        - T4 optimization/Replicate 4/Run 14 (Run Number 9)/Run 14 (Run Number 9)_D3_S.fcs
+        - T4 optimization/Replicate 4/Run 14 (Run Number 9)/Run 14 (Run Number 9)_D4_US.fcs
+        - T4 optimization/Replicate 4/Run 15 (Run Number 8)/Run 15 (Run Number 8)_D5_S.fcs
+        - T4 optimization/Replicate 4/Run 15 (Run Number 8)/Run 15 (Run Number 8)_D6_US.fcs
+        - T4 optimization/Replicate 4/Run 16 (Run Number 11)/Run 16 (Run Number 11)_D1_S.fcs
+        - T4 optimization/Replicate 4/Run 2 (Run Number 1)/Run 2 (Run Number 1)_D3_S.fcs
+        - T4 optimization/Replicate 4/Run 3 (Run Number 5)/Run 3 (Run Number 5)_D5_S.fcs
+        - T4 optimization/Replicate 4/Run 3 (Run Number 5)/Run 3 (Run Number 5)_D6_US.fcs
+        - T4 optimization/Replicate 4/Run 4 (Run Number 16)/Run 4 (Run Number 16)_D7_S.fcs
+        - T4 optimization/Replicate 4/Run 4 (Run Number 16)/Run 4 (Run Number 16)_D8_US.fcs
+        - T4 optimization/Replicate 4/Run 5 (Run Number 15)/Run 5 (Run Number 15)_D10_US.fcs
+        - T4 optimization/Replicate 4/Run 5 (Run Number 15)/Run 5 (Run Number 15)_D9_S.fcs
+        - T4 optimization/Replicate 4/Run 6 (Run Number 13)/Run 6 (Run Number 13)_D11_S.fcs
+        - T4 optimization/Replicate 4/Run 7 (Run Number 14)/Run 7 (Run Number 14)_D1_S.fcs
+        - T4 optimization/Replicate 4/Run 7 (Run Number 14)/Run 7 (Run Number 14)_D2_US.fcs
+        - T4 optimization/Replicate 4/Run 8 (Run Number 12)/Run 8 (Run Number 12)_D3_S.fcs
+        - T4 optimization/Replicate 4/Run 8 (Run Number 12)/Run 8 (Run Number 12)_D4_US.fcs
+        - T4 optimization/Replicate 4/Run 9 (Run Number 4)/Run 9 (Run Number 4)_D5_S.fcs
+        - T4 optimization/Replicate 4/Run 9 (Run Number 4)/Run 9 (Run Number 4)_D6_US.fcs
+
+  # Fusion (https://datadryad.org/dataset/doi:10.5061/dryad.cvdncjtcx#readme)
+  - src:
+      file_id: 3554085
+      dataset_id: dryad_3554085_Fusion
+      file_paths:
+       - Hayatigolkhatmi043024FucciEdu_-_Kasumi1 Edu Fucci_001.fcs
+       - Hayatigolkhatmi043024FucciEdu_-_Kasumi1 NEG_002.fcs
+       - Hayatigolkhatmi043024FucciEdu_-_MDA-MB-231 Edu Fucci_003.fcs
+       - Hayatigolkhatmi043024FucciEdu_-_MDA-MB-231 NEG_004.fcs
 
   # Cytoflex
   - src:
