@@ -82,9 +82,14 @@ class MachineId(Enum):
 
 
 class RepoType(Enum):
-    MISC = "misc_repos"
+    MISC = "misc_repo"
     FR = "flow_repository"
     IMMPORT = "immport"
+
+
+class ArchiveType(Enum):
+    ZIP = "zip"
+    TAR = "tar"
 
 
 class BaseModel(BaseModel_):
@@ -118,6 +123,7 @@ class ArchiveSrc(BaseModel):
     archive_url: PlainUrl | DryadUrl
     dataset_id: str
     file_paths: list[Path]
+    archive_type: ArchiveType = ArchiveType.ZIP
 
 
 class FlowRepoSrc(BaseModel):
@@ -545,7 +551,7 @@ class FCSConfig(BaseModel):
             elif repo_type is RepoType.MISC and isinstance(src, MultiUrlSrc):
                 return (src.dataset_id, list(src.file_names))
             elif repo_type is RepoType.MISC and isinstance(src, SingleUrlSrc):
-                return (src.dataset_id, list(str(src.output_path)))
+                return (src.dataset_id, [str(src.output_path)])
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):

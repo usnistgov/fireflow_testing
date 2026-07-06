@@ -13,6 +13,7 @@ from common.config import (
     ArchiveSrc,
     MultiUrlSrc,
     SingleUrlSrc,
+    ArchiveType,
 )
 
 
@@ -54,7 +55,6 @@ def download_single(smk: Any, src: SingleUrlSrc, downloaded_list: Path) -> None:
                     assert not found_file, "multiple FCS fils in this archive"
                     member_f = tar_f.extractfile(member)
                     assert member_f is not None
-                    print(member_f)
                     with open(target, "wb") as f:
                         copyfileobj(member_f, f)
                     found_file = True
@@ -69,7 +69,7 @@ def download_single(smk: Any, src: SingleUrlSrc, downloaded_list: Path) -> None:
 
     # write target to list
     with open(downloaded_list, "w") as f:
-        f.write(str(src.output_path) + "\n")
+        f.write(str(target) + "\n")
 
 
 def download_multi(smk: Any, src: MultiUrlSrc, downloaded_list: Path) -> None:
@@ -118,14 +118,25 @@ def download_archive(smk: Any, src: ArchiveSrc, downloaded_list: Path) -> None:
     # pull all targets out of the archive
     target_pairs = [(target, downloaded_dir / target) for target in src.file_paths]
 
-    with zipfile.ZipFile(archive_dst, "r") as archive_f:
-        for target_src, target_dst in target_pairs:
-            target_dst.parent.mkdir(parents=True, exist_ok=True)
-            with (
-                archive_f.open(str(target_src), "r") as target_src_f,
-                open(target_dst, "wb") as target_dst_f,
-            ):
-                copyfileobj(target_src_f, target_dst_f)
+    if src.archive_type is ArchiveType.ZIP:
+        with zipfile.ZipFile(archive_dst, "r") as archive_f:
+            for target_src, target_dst in target_pairs:
+                target_dst.parent.mkdir(parents=True, exist_ok=True)
+                with (
+                    archive_f.open(str(target_src), "r") as target_src_f,
+                    open(target_dst, "wb") as target_dst_f,
+                ):
+                    copyfileobj(target_src_f, target_dst_f)
+    elif src.archive_type is ArchiveType.TAR:
+        with tarfile.open(archive_dst, "r:*") as archive_f:
+            for target_src, target_dst in target_pairs:
+                target_dst.parent.mkdir(parents=True, exist_ok=True)
+                member_f = archive_f.extractfile(str(target_src))
+                assert member_f is not None, f"could not find {target_src} in archive"
+                with open(target_dst, "wb") as target_dst_f:
+                    copyfileobj(member_f, target_dst_f)
+    else:
+        assert_never(src.archive_type)
 
     # write targets to list
     with open(downloaded_list, "w") as f:
