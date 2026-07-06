@@ -14,9 +14,11 @@ df_misc <- read_tsv(
     prim_escaped = "l",
     prim_has_even_delims = "l",
     prim_extra_leading_delim = "l",
+    prim_multibyte = "l",
     supp_escaped = "l",
     supp_has_even_delims = "l",
     supp_extra_leading_delim = "l",
+    supp_multibyte = "l",
     timestep_added = "l",
     spillover_was_indexed = "l",
     btim_pattern = "l",
@@ -36,13 +38,13 @@ df_misc <- read_tsv(
   )
 )
 
-df_scale <- read_tsv(snakemake@input[["fixed_scales"]], col_types = "ciilcc")
-df_key_val <- read_tsv(snakemake@input[["key_val_pairs"]], col_types = "cicc")
-df_orig_names <- read_tsv(snakemake@input[["original_names"]], col_types = "ciic")
-df_overflow <- read_tsv(snakemake@input[["overflow"]], col_types = "ciciiiil")
-df_tokens <- read_tsv(snakemake@input[["tokens"]], col_types = "cicc")
-df_offsets <- read_tsv(snakemake@input[["offsets"]], col_types = "ciciil")
-df_overrange <- read_tsv(snakemake@input[["overrange"]], col_types = "ciiil")
+df_scale <- read_tsv(snakemake@input[["fixed_scales"]], col_types = "iciilcc")
+df_key_val <- read_tsv(snakemake@input[["key_val_pairs"]], col_types = "icicc")
+df_orig_names <- read_tsv(snakemake@input[["original_names"]], col_types = "iciic")
+df_overflow <- read_tsv(snakemake@input[["overflow"]], col_types = "iciciiiil")
+df_tokens <- read_tsv(snakemake@input[["tokens"]], col_types = "icicc")
+df_offsets <- read_tsv(snakemake@input[["offsets"]], col_types = "iciciil")
+df_overrange <- read_tsv(snakemake@input[["overrange"]], col_types = "iciiil")
 
 df_machines <- read_tsv(
   snakemake@input[["machines"]],
@@ -72,6 +74,8 @@ df_misc_errors <- df_misc %>%
     # both TEXT segments should have even number of tokens
     nc_text_token_number = prim_last_odd_bytes > 0 |
       replace_na(supp_last_odd_bytes > 0, FALSE),
+    # both TEXT segments should be multibyte encoded (UTF-8)
+    nc_text_utf8 = !prim_multibyte | replace_na(!supp_multibyte, FALSE),
     # timestep should not be missing
     nc_key_val_timestep = timestep_added,
     # DATA should not have a remainder (usually an off-by-one error)

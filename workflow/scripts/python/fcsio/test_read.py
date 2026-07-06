@@ -41,11 +41,11 @@ class WritableDiagnostic:
         with open(p, "w") as f:
             w = csv.writer(f, delimiter="\t")
             h = cls.to_header()
-            w.writerow(["fcs_path", "dataset", *h])
+            w.writerow(["index", "fcs_path", "dataset", *h])
             for i, row in enumerate(ds):
                 r = row.to_row()
                 assert len(r) == len(h), f"{h} is not same length as {r}"
-                w.writerow([row.path, row.dataset, *r])
+                w.writerow([str(i), row.path, row.dataset, *r])
 
     @classmethod
     def dataset_iter_top(
@@ -61,7 +61,7 @@ class WritableDiagnostic:
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         raise NotImplementedError
 
@@ -82,9 +82,11 @@ class Offset(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Offset"]:
-        return chain(cls._uncorrected(p, i, u), cls._final(p, i, u))
+        return chain(
+            cls._uncorrected(p, dataset_index, u), cls._final(p, dataset_index, u)
+        )
 
     @classmethod
     def to_header(self) -> list[str]:
@@ -100,11 +102,11 @@ class Offset(WritableDiagnostic):
 
     @classmethod
     def _uncorrected(
-        cls, p: Path, i: int, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, u: pfa.StdDatasetOutput
     ) -> Iterable["Offset"]:
         def go(n: str, o: tuple[int, int]) -> Offset:
             begin, end = o
-            return cls._from_offset(p, i, n, (begin, end), False)
+            return cls._from_offset(p, dataset_index, n, (begin, end), False)
 
         h_orig = u.flat_diagnostics.header_supp.header.original_offsets
         hdr_text = go("primary_text", h_orig.text)
@@ -137,9 +139,11 @@ class Offset(WritableDiagnostic):
         )
 
     @classmethod
-    def _final(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable["Offset"]:
+    def _final(
+        cls, p: Path, dataset_index: int, u: pfa.StdDatasetOutput
+    ) -> Iterable["Offset"]:
         def go(n: str, o: tuple[int, int]) -> Offset:
-            return Offset._from_offset(p, i, n, o, True)
+            return Offset._from_offset(p, dataset_index, n, o, True)
 
         h_final = u.flat_diagnostics.header_supp.header.final_offsets
         hdr_text = go("primary_text", h_final.text)
@@ -207,26 +211,27 @@ class Overflow(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         header_overflows = (
-            cls._from_overflow(p, i, o) for o in u.flat_diagnostics.header_overflows
+            cls._from_overflow(p, dataset_index, o)
+            for o in u.flat_diagnostics.header_overflows
         )
         empty: list[Self] = []
         supp_overflows = maybe(
             empty,
-            lambda o: [cls._from_overflow(p, i, o)],
+            lambda o: [cls._from_overflow(p, dataset_index, o)],
             u.flat_diagnostics.header_supp.supp_text.overflow,
         )
         ds = u.dataset.dataset_offsets
         data_overflows = maybe(
             empty,
-            lambda o: [cls._from_overflow(p, i, o)],
+            lambda o: [cls._from_overflow(p, dataset_index, o)],
             ds.data_origin.overflow,
         )
         analysis_overflows = maybe(
             empty,
-            lambda o: [cls._from_overflow(p, i, o)],
+            lambda o: [cls._from_overflow(p, dataset_index, o)],
             ds.analysis_origin.overflow,
         )
         return chain(
@@ -314,15 +319,21 @@ class Overlap(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         hsupp = u.flat_diagnostics.header_supp
-        header_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.header.overlaps)
-        supp_overlaps = (cls.from_overlap(p, i, o) for o in hsupp.supp_text.overlaps)
+        header_overlaps = (
+            cls.from_overlap(p, dataset_index, o) for o in hsupp.header.overlaps
+        )
+        supp_overlaps = (
+            cls.from_overlap(p, dataset_index, o) for o in hsupp.supp_text.overlaps
+        )
         ds = u.dataset.dataset_offsets
-        data_overlaps = (cls.from_overlap(p, i, o) for o in ds.data_origin.overlaps)
+        data_overlaps = (
+            cls.from_overlap(p, dataset_index, o) for o in ds.data_origin.overlaps
+        )
         analysis_overlaps = (
-            cls.from_overlap(p, i, o) for o in ds.analysis_origin.overlaps
+            cls.from_overlap(p, dataset_index, o) for o in ds.analysis_origin.overlaps
         )
         # TODO add data/analysis overlap
         return chain(header_overlaps, supp_overlaps, data_overlaps, analysis_overlaps)
@@ -347,16 +358,18 @@ class KeyValPair(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         return chain(
-            cls._bad_pairs(p, i, u),
-            cls._trimmed(p, i, u),
-            cls._dropped(p, i, u),
+            cls._bad_pairs(p, dataset_index, u),
+            cls._trimmed(p, dataset_index, u),
+            cls._dropped(p, dataset_index, u),
         )
 
     @classmethod
-    def _bad_pairs(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def _bad_pairs(
+        cls, p: Path, dataset_index: int, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         fd = u.flat_diagnostics
         byte_pairs = (("byte_pair", k, v) for k, v in fd.byte_pairs)
         non_unq_std = (("non_unique_std", k, v) for k, v in fd.non_unique_std_keywords)
@@ -367,18 +380,22 @@ class KeyValPair(WritableDiagnostic):
             ("ignored_std", k, v) for k, v in u.dataset.repair_diagnostics.ignored
         )
         return (
-            cls(p, i, t, k, v)
+            cls(p, dataset_index, t, k, v)
             for t, k, v in chain(byte_pairs, non_unq_std, non_unq_nonstd, ignored)
         )
 
     @classmethod
-    def _trimmed(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def _trimmed(
+        cls, p: Path, dataset_index: int, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         edge = (("edge", k, v) for k, v in u.flat_diagnostics.keys_with_trimmed_values)
         inner = (("inner", k, v) for k, v in u.dataset.std_diagnostics.trimmed)
-        return (cls(p, i, t, k, v) for t, k, v in chain(edge, inner))
+        return (cls(p, dataset_index, t, k, v) for t, k, v in chain(edge, inner))
 
     @classmethod
-    def _dropped(cls, p: Path, i: int, u: pfa.StdDatasetOutput) -> Iterable[Self]:
+    def _dropped(
+        cls, p: Path, dataset_index: int, u: pfa.StdDatasetOutput
+    ) -> Iterable[Self]:
         diag = u.dataset.std_diagnostics
         opt = (("optional", k, v) for k, v in diag.optional.items())
         pseudo = (("pseudostandard", k, v) for k, v in diag.pseudostandard.items())
@@ -391,7 +408,7 @@ class KeyValPair(WritableDiagnostic):
         )
 
         return (
-            cls(p, i, t, k, v)
+            cls(p, dataset_index, t, k, v)
             for t, k, v in chain(opt, pseudo, hyper_gate, hyper_par, other, tmp_opt, ts)
         )
 
@@ -413,7 +430,7 @@ class Token(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Token"]:
         def go(src: pfa.SplitTEXTDiagnostics, which: str) -> Iterable["Token"]:
             blank_values = (
@@ -426,7 +443,8 @@ class Token(WritableDiagnostic):
                 (f"{which}_boundary", k) for k in src.tokens_with_boundary_delims
             )
             return (
-                cls(p, i, t, k) for t, k in chain(blank_values, blank_keys, boundary)
+                cls(p, dataset_index, t, k)
+                for t, k in chain(blank_values, blank_keys, boundary)
             )
 
         primary = go(u.flat_diagnostics.primary_split, "primary")
@@ -458,16 +476,16 @@ class FixedScale(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         diag = u.dataset.std_diagnostics
         meas = (
-            cls(p, i, si, True, s[0], s[1])
+            cls(p, dataset_index, si, True, s[0], s[1])
             for si, s in enumerate(diag.scale)
             if s is not None
         )
         gate = (
-            cls(p, i, si, False, s[0], s[1])
+            cls(p, dataset_index, si, False, s[0], s[1])
             for si, s in enumerate(diag.gate_scale)
             if s is not None
         )
@@ -491,10 +509,10 @@ class OriginalName(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         return (
-            cls(p, i, si, n)
+            cls(p, dataset_index, si, n)
             for si, n in enumerate(u.dataset.std_diagnostics.dedup_names)
             if n is not None
         )
@@ -519,10 +537,10 @@ class Overrange(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         return (
-            cls(p, i, si, *x)
+            cls(p, dataset_index, si, *x)
             for si, x in enumerate(u.dataset.dataset_diagnostics.overrange_columns)
             if x is not None
         )
@@ -563,12 +581,12 @@ class VersionScores(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["VersionScores"]:
         def go(v: pt.FCSVersion, src: pfa.KeywordVersionScore) -> VersionScores:
             return cls(
                 p,
-                i,
+                dataset_index,
                 v,
                 src.good_req,
                 src.good_opt,
@@ -620,7 +638,7 @@ class Padding(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["Padding"]:
         acc = []
 
@@ -632,19 +650,23 @@ class Padding(WritableDiagnostic):
         )
         pre = u.flat_diagnostics.header_supp.header.dark_bytes
         if isinstance(pre, tuple):
-            acc.append(cls(p, i, "HEADER", "FIRST", header_width, pre[0], pre[1]))
+            acc.append(
+                cls(p, dataset_index, "HEADER", "FIRST", header_width, pre[0], pre[1])
+            )
 
         for d in u.dataset.dataset_diagnostics.intra_segment_dark_bytes:
             db = d.bytes
             if isinstance(db, tuple):
                 n0 = fmt_offset_name(d.prev)
                 n1 = fmt_offset_name(d.next)
-                acc.append(cls(p, i, n0, n1, d.start, db[0], db[1]))
+                acc.append(cls(p, dataset_index, n0, n1, d.start, db[0], db[1]))
 
         dataset_len = u.dataset.dataset_diagnostics.dataset_len
         post = u.dataset.dataset_diagnostics.post_dataset_dark_bytes
         if isinstance(post, tuple):
-            acc.append(cls(p, i, "LAST", "END", dataset_len, post[0], post[1]))
+            acc.append(
+                cls(p, dataset_index, "LAST", "END", dataset_len, post[0], post[1])
+            )
 
         return acc
 
@@ -654,7 +676,7 @@ class DarkBytes(WritableDiagnostic):
     prev_segment: str
     next_segment: str
     start_index: int
-    content: str
+    content: str | bytes
 
     @classmethod
     def to_header(self) -> list[str]:
@@ -662,7 +684,7 @@ class DarkBytes(WritableDiagnostic):
             "prev_segment",
             "next_segment",
             "start_index",
-            "content",
+            "nbytes",
         ]
 
     def to_row(self) -> list[str]:
@@ -670,12 +692,12 @@ class DarkBytes(WritableDiagnostic):
             self.prev_segment,
             self.next_segment,
             str(self.start_index),
-            self.content,
+            str(len(self.content)),
         ]
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable["DarkBytes"]:
         acc = []
 
@@ -686,19 +708,19 @@ class DarkBytes(WritableDiagnostic):
         )
         pre = u.flat_diagnostics.header_supp.header.dark_bytes
         if isinstance(pre, str | bytes):
-            acc.append(cls(p, i, "HEADER", "FIRST", header_width, encode_or_esc(pre)))
+            acc.append(cls(p, dataset_index, "HEADER", "FIRST", header_width, pre))
 
         for d in u.dataset.dataset_diagnostics.intra_segment_dark_bytes:
             db = d.bytes
             if isinstance(db, str | bytes):
                 n0 = fmt_offset_name(d.prev)
                 n1 = fmt_offset_name(d.next)
-                acc.append(cls(p, i, n0, n1, d.start, encode_or_esc(db)))
+                acc.append(cls(p, dataset_index, n0, n1, d.start, db))
 
         dataset_len = u.dataset.dataset_diagnostics.dataset_len
         post = u.dataset.dataset_diagnostics.post_dataset_dark_bytes
         if isinstance(post, str | bytes):
-            acc.append(cls(p, i, "LAST", "END", dataset_len, encode_or_esc(post)))
+            acc.append(cls(p, dataset_index, "LAST", "END", dataset_len, post))
 
         return acc
 
@@ -716,12 +738,14 @@ class MiscDiagnostics(WritableDiagnostic):
     prim_has_even_delims: bool
     prim_extra_leading_delim: int
     prim_last_odd_bytes: int
+    prim_multibyte: bool
     supp_delimiter: int | None
     supp_escaped: bool | None
     supp_skipped_pairs: int | None
     supp_has_even_delims: int | None
     supp_extra_leading_delim: int | None
     supp_last_odd_bytes: int | None
+    supp_multibyte: bool | None
     timestep_added: bool
     spillover_was_indexed: bool
     btim_pattern: bool
@@ -759,12 +783,14 @@ class MiscDiagnostics(WritableDiagnostic):
             "prim_has_even_delims",
             "prim_extra_leading_delim",
             "prim_last_odd_bytes",
+            "prim_multibyte",
             "supp_delimiter",
             "supp_escaped",
             "supp_skipped_pairs",
             "supp_has_even_delims",
             "supp_extra_leading_delim",
             "supp_last_odd_bytes",
+            "supp_multibyte",
             "timestep_added",
             "spillover_was_indexed",
             "btim_pattern",
@@ -800,12 +826,14 @@ class MiscDiagnostics(WritableDiagnostic):
             str(self.prim_has_even_delims),
             str(self.prim_extra_leading_delim),
             str(self.prim_last_odd_bytes),
+            str(self.prim_multibyte),
             maybe("", str, self.supp_delimiter),
             maybe("", str, self.supp_escaped),
             maybe("", str, self.supp_skipped_pairs),
             maybe("", str, self.supp_has_even_delims),
             maybe("", str, self.supp_extra_leading_delim),
             maybe("", str, self.supp_last_odd_bytes),
+            maybe("", str, self.supp_multibyte),
             str(self.timestep_added),
             str(self.spillover_was_indexed),
             str(self.btim_pattern),
@@ -832,7 +860,7 @@ class MiscDiagnostics(WritableDiagnostic):
 
     @classmethod
     def dataset_iter(
-        cls, p: Path, i: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
+        cls, p: Path, dataset_index: int, c: pt.AnyCoreDataset, u: pfa.StdDatasetOutput
     ) -> Iterable[Self]:
         flat = u.flat_diagnostics
         primary = flat.primary_split
@@ -848,7 +876,7 @@ class MiscDiagnostics(WritableDiagnostic):
         crc = u.dataset.dataset_diagnostics.file_crc
         ret = cls(
             p,
-            i,
+            dataset_index,
             flat.header_supp.header.version,
             c.version,
             flat.header_supp.header.dataset_offset,
@@ -860,12 +888,14 @@ class MiscDiagnostics(WritableDiagnostic):
             primary.has_even_delims,
             primary.extra_leading_delims,
             len(primary.last_odd_token),
+            primary.multibyte_encoded,
             fmap_maybe(lambda x: x.delimiter, supp),
             fmap_maybe(lambda x: x.escaped, supp),
             fmap_maybe(lambda x: x.skipped_pairs, supp),
             fmap_maybe(lambda x: x.has_even_delims, supp),
             fmap_maybe(lambda x: x.extra_leading_delims, supp),
             fmap_maybe(lambda x: len(x.last_odd_token), supp),
+            fmap_maybe(lambda x: x.multibyte_encoded, supp),
             std.timestep_added,
             std.spillover_was_indexed is True,
             isinstance(std.btim_pattern, str),
@@ -1026,6 +1056,31 @@ def main(smk: Any) -> None:
     MiscDiagnostics.write_all(
         Path(smk.output["misc"]), (y for x in test_out for y in x.misc)
     )
+
+    # dump dark bytes as either text or binary blobs in a separate subdir (much
+    # easier than just putting them in a table)
+
+    dark_dir = Path(smk.output["dark_bytes"]).parent / "dark_blobs"
+    dark_dir.mkdir(parents=True, exist_ok=True)
+    blob_index = 0
+
+    def write_txt(xs: str) -> None:
+        blob_path = dark_dir / f"{blob_index}.txt"
+        with open(blob_path, "wt") as f:
+            f.write(xs)
+
+    def write_bytes(xs: bytes) -> None:
+        blob_path = dark_dir / f"{blob_index}.bin"
+        with open(blob_path, "wb") as f:
+            f.write(xs)
+
+    for x in test_out:
+        for y in x.dark:
+            if isinstance(y.content, str):
+                write_txt(y.content)
+            else:
+                write_bytes(y.content)
+            blob_index += 1
 
     # dump list of output files, which should all be "clean"
     with open(fcs_out, "w") as f:

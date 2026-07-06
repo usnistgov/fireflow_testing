@@ -90,7 +90,7 @@ df_matrix_schema <- read_tsv(
 
 df_offsets <- read_tsv(
   snakemake@input[["offsets"]],
-  col_types = "ciciil"
+  col_types = "iciciil"
 ) %>%
   rename(filepath = fcs_path)
 
