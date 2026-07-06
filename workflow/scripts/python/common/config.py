@@ -83,8 +83,7 @@ class MachineId(Enum):
 
 class RepoType(Enum):
     PLAIN_URL = "plain_url"
-    ZIP_URL = "zip_url"
-    ZIP_DRYAD = "dryad_zip_url"
+    ARCHIVE_URL = "archive_url"
     FR = "flow_repository"
     IMMPORT = "immport"
 
@@ -101,14 +100,16 @@ class PlainUrlSrc(BaseModel):
     file_names: list[str]
 
 
-class ZipUrlSrc(BaseModel):
-    zip_url: str
-    dataset_id: str
-    file_paths: list[Path]
+class PlainUrl(BaseModel):
+    plain: str
 
 
-class DryadZipUrlSrc(BaseModel):
-    file_id: int
+class DryadUrl(BaseModel):
+    dryad_file_id: int
+
+
+class ArchiveSrc(BaseModel):
+    archive_url: PlainUrl | DryadUrl
     dataset_id: str
     file_paths: list[Path]
 
@@ -123,7 +124,7 @@ class ImmportSrc(BaseModel):
     file_names: list[str]
 
 
-AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ZipUrlSrc | DryadZipUrlSrc
+AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ArchiveSrc
 
 Strategy: TypeAlias = Literal["none", "scalpal", "sledgehammer"]
 
@@ -492,12 +493,12 @@ class FCSConfig(BaseModel):
         assert ret is not None, f"could not find root URL for {repo_id}"
         return ret
 
-    def get_zip_url(self, repo_id: str) -> str:
+    def get_archive_url(self, repo_id: str) -> PlainUrl | DryadUrl:
         ret = next(
             (
-                c.src.zip_url
+                c.src.archive_url
                 for c in self.test_files
-                if isinstance(c.src, ZipUrlSrc) and repo_id == c.src.dataset_id
+                if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
             ),
             None,
         )
@@ -509,31 +510,7 @@ class FCSConfig(BaseModel):
             (
                 c.src
                 for c in self.test_files
-                if isinstance(c.src, ZipUrlSrc) and repo_id == c.src.dataset_id
-            ),
-            None,
-        )
-        assert id_entry is not None, f"could not find paths for {repo_id}"
-        return id_entry.file_paths
-
-    def get_dryad_id(self, repo_id: str) -> int:
-        ret = next(
-            (
-                c.src.file_id
-                for c in self.test_files
-                if isinstance(c.src, DryadZipUrlSrc) and repo_id == c.src.dataset_id
-            ),
-            None,
-        )
-        assert ret is not None, f"could not find dryad id for {repo_id}"
-        return ret
-
-    def get_dryad_paths(self, repo_id: str) -> list[Path]:
-        id_entry = next(
-            (
-                c.src
-                for c in self.test_files
-                if isinstance(c.src, DryadZipUrlSrc) and repo_id == c.src.dataset_id
+                if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
             ),
             None,
         )
@@ -562,10 +539,8 @@ class FCSConfig(BaseModel):
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
             if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
                 return (src.dataset_id, list(src.file_names))
-            elif repo_type is RepoType.ZIP_URL and isinstance(src, ZipUrlSrc):
+            elif repo_type is RepoType.ARCHIVE_URL and isinstance(src, ArchiveSrc):
                 return (src.dataset_id, [str(p) for p in src.file_paths])
-            elif repo_type is RepoType.ZIP_DRYAD and isinstance(src, DryadZipUrlSrc):
-                return (src.dataset_id, list(map(str, src.file_paths)))
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):

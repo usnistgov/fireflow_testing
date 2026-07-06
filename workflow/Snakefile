@@ -2,7 +2,7 @@ from pathlib import Path
 from urllib.parse import quote, urlsplit, urljoin
 
 sys.path.extend(["./workflow/scripts/python"])
-from common.config import FCSConfig, FlowRepoSrc, PlainUrlSrc, ZipUrlSrc, DryadZipUrlSrc
+from common.config import FCSConfig, FlowRepoSrc, PlainUrlSrc, ArchiveSrc
 
 config = FCSConfig.parse_obj(config)
 
@@ -82,14 +82,9 @@ rule download_plain_url:
                 fo.write(str(target_path) + "\n")
 
 
-rule download_zip_url:
+rule download_archive_url:
     output:
-        "resources/zip_url/{id}/.downloaded.txt",
-    params:
-        url=lambda wildcards: quote_url(config.get_zip_url(wildcards.id)),
-        # quote strings to preserve spaces and allow direct shell expand
-        targets=lambda wildcards: [f'"{f}"' for f in config.get_zip_paths(wildcards.id)],
-        out_base=lambda wildcards, output: Path(output[0]).parent,
+        "resources/archive_url/{id}/.downloaded.txt",
     script:
         "scripts/python/fcsio/download_archive.py"
 
@@ -154,20 +149,12 @@ rule list_flow_repo_files:
 
 rule list_all_fcs_files:
     input:
-        zip_url=expand(
-            rules.download_zip_url.output,
+        archive_url=expand(
+            rules.download_archive_url.output,
             id=[
                 f.src.dataset_id
                 for f in config.test_files
-                if isinstance(f.src, ZipUrlSrc)
-            ],
-        ),
-        dryad_zip_url=expand(
-            rules.download_dryad_zip_url.output,
-            id=[
-                f.src.dataset_id
-                for f in config.test_files
-                if isinstance(f.src, DryadZipUrlSrc)
+                if isinstance(f.src, ArchiveSrc)
             ],
         ),
         plain_url=expand(
@@ -184,8 +171,7 @@ rule list_all_fcs_files:
         "resources/all_fcs_files.txt",
     shell:
         """
-        cat {input.zip_url} \
-            {input.dryad_zip_url} \
+        cat {input.archive_url} \
             {input.plain_url} \
             {input.immport} \
             {input.fr} \

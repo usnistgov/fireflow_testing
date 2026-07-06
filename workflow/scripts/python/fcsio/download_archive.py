@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
-from typing import Any
+from typing import Any, assert_never
 import requests
 from shutil import rmtree, copyfileobj
 import zipfile
-from common.config import FCSConfig
+from common.config import FCSConfig, PlainUrl, DryadUrl
 
 
 def main(smk: Any) -> None:
@@ -18,12 +18,29 @@ def main(smk: Any) -> None:
     # ensure the target is totally empty before doing anything
     rmtree(downloaded_dir)
 
-    # download the archive using "curl"
-    archive_src = conf.get_zip_url(id)
+    archive_src = conf.get_archive_url(id)
     archive_dst = downloaded_list.parent / "downloaded.archive"
     archive_dst.parent.mkdir(parents=True)
 
-    with requests.get(archive_src) as r:
+    # create request depending on where the archive is
+    if isinstance(archive_src, PlainUrl):
+        archive_req = requests.get(archive_src.plain, stream=True)
+    elif isinstance(archive_src, DryadUrl):
+        token = os.getenv("DRYAD_TOKEN")
+        assert token is not None, "Dryad token not provided"
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {token}",
+        }
+        dryad_id = archive_src.dryad_file_id
+        dryad_url = f"https://datadryad.org/api/v2/files/{dryad_id}/download"
+        archive_req = requests.get(dryad_url, headers=headers, stream=True)
+    else:
+        assert_never(archive_src)
+
+    # download the archive using "curl"
+    with archive_req as r:
         r.raise_for_status()
         with open(archive_dst, "wb") as f:
             for c in r.iter_content(chunk_size=8192):
