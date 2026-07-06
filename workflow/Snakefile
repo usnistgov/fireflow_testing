@@ -1,5 +1,4 @@
 from pathlib import Path
-from urllib.parse import quote, urlsplit, urljoin
 
 sys.path.extend(["./workflow/scripts/python"])
 from common.config import FCSConfig, FlowRepoSrc
@@ -8,21 +7,6 @@ config = FCSConfig.parse_obj(config)
 
 tools_dir = Path("resources/tools")
 aspera_base_dir = tools_dir / "immport-data-download-tool"
-
-
-# # quote a url without messing up the protocol
-# def quote_url(url: str) -> str:
-#     parts = urlsplit(url)
-
-#     scheme = parts.scheme
-#     netloc = quote(parts.netloc)
-#     path = quote(parts.path)
-
-#     # assume these won't be used
-#     assert parts.query == ""
-#     assert parts.fragment == ""
-
-#     return f"{scheme}://{netloc}/{path}"
 
 
 rule download_aspera:
@@ -48,38 +32,6 @@ rule download_immport:
         "results/log/immport",
     script:
         "scripts/python/immport/download_immport.py"
-
-
-# rule download_plain_url:
-#     output:
-#         "resources/plain_url/{id}/.downloaded.txt",
-#     params:
-#         url_root=lambda wildcards: config.get_plain_url_src(wildcards.id).url_root,
-#         targets=lambda wildcards: config.get_plain_url_src(wildcards.id).file_names,
-#     run:
-#         from urllib.request import urlopen
-#         from pathlib import Path
-
-#         size = 8192
-#         out = Path(output[0])
-
-#         with open(out, "w") as fo:
-#             for target in params.targets:
-#                 target_path = out.parent / target
-#                 full_url = urljoin(quote_url(params.url_root), quote(target))
-#                 # curl url to file
-#                 try:
-#                     with urlopen(full_url) as resp, open(target_path, "wb") as ft:
-#                         while True:
-#                             chunk = resp.read(size)
-#                             if not chunk:
-#                                 break
-#                             ft.write(chunk)
-#                             # record the new file path in
-#                 except Exception as e:
-#                     print("error for: " + target)
-#                     raise e
-#                 fo.write(str(target_path) + "\n")
 
 
 rule download_misc_repos:

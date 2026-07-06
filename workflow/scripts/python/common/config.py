@@ -520,42 +520,6 @@ class FCSConfig(BaseModel):
             if isinstance(c.src, ArchiveSrc | SingleUrlSrc | MultiUrlSrc)
         ]
 
-    # def get_plain_url_src(self, repo_id: str) -> MultiUrlSrc:
-    #     ret = next(
-    #         (
-    #             c.src
-    #             for c in self.test_files
-    #             if isinstance(c.src, MultiUrlSrc) and repo_id == c.src.dataset_id
-    #         ),
-    #         None,
-    #     )
-    #     assert ret is not None, f"could not find root URL for {repo_id}"
-    #     return ret
-
-    # def get_archive_url(self, repo_id: str) -> PlainUrl | DryadUrl:
-    #     ret = next(
-    #         (
-    #             c.src.archive_url
-    #             for c in self.test_files
-    #             if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
-    #         ),
-    #         None,
-    #     )
-    #     assert ret is not None, f"could not find zip URL for {repo_id}"
-    #     return ret
-
-    # def get_zip_paths(self, repo_id: str) -> list[Path]:
-    #     id_entry = next(
-    #         (
-    #             c.src
-    #             for c in self.test_files
-    #             if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
-    #         ),
-    #         None,
-    #     )
-    #     assert id_entry is not None, f"could not find paths for {repo_id}"
-    #     return id_entry.file_paths
-
     def find_file_options(self, path: Path) -> tuple[ParseConfig, RepoType, str, str]:
         ps = dropwhile(lambda n: n != "resources", path.parts)
         next(ps)
