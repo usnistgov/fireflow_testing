@@ -2,7 +2,7 @@ from pathlib import Path
 from urllib.parse import quote, urlsplit, urljoin
 
 sys.path.extend(["./workflow/scripts/python"])
-from common.config import FCSConfig, FlowRepoSrc, PlainUrlSrc, ArchiveSrc
+from common.config import FCSConfig, FlowRepoSrc
 
 config = FCSConfig.parse_obj(config)
 
@@ -10,19 +10,19 @@ tools_dir = Path("resources/tools")
 aspera_base_dir = tools_dir / "immport-data-download-tool"
 
 
-# quote a url without messing up the protocol
-def quote_url(url: str) -> str:
-    parts = urlsplit(url)
+# # quote a url without messing up the protocol
+# def quote_url(url: str) -> str:
+#     parts = urlsplit(url)
 
-    scheme = parts.scheme
-    netloc = quote(parts.netloc)
-    path = quote(parts.path)
+#     scheme = parts.scheme
+#     netloc = quote(parts.netloc)
+#     path = quote(parts.path)
 
-    # assume these won't be used
-    assert parts.query == ""
-    assert parts.fragment == ""
+#     # assume these won't be used
+#     assert parts.query == ""
+#     assert parts.fragment == ""
 
-    return f"{scheme}://{netloc}/{path}"
+#     return f"{scheme}://{netloc}/{path}"
 
 
 rule download_aspera:
@@ -50,81 +50,43 @@ rule download_immport:
         "scripts/python/immport/download_immport.py"
 
 
-rule download_plain_url:
+# rule download_plain_url:
+#     output:
+#         "resources/plain_url/{id}/.downloaded.txt",
+#     params:
+#         url_root=lambda wildcards: config.get_plain_url_src(wildcards.id).url_root,
+#         targets=lambda wildcards: config.get_plain_url_src(wildcards.id).file_names,
+#     run:
+#         from urllib.request import urlopen
+#         from pathlib import Path
+
+#         size = 8192
+#         out = Path(output[0])
+
+#         with open(out, "w") as fo:
+#             for target in params.targets:
+#                 target_path = out.parent / target
+#                 full_url = urljoin(quote_url(params.url_root), quote(target))
+#                 # curl url to file
+#                 try:
+#                     with urlopen(full_url) as resp, open(target_path, "wb") as ft:
+#                         while True:
+#                             chunk = resp.read(size)
+#                             if not chunk:
+#                                 break
+#                             ft.write(chunk)
+#                             # record the new file path in
+#                 except Exception as e:
+#                     print("error for: " + target)
+#                     raise e
+#                 fo.write(str(target_path) + "\n")
+
+
+rule download_misc_repos:
     output:
-        "resources/plain_url/{id}/.downloaded.txt",
-    params:
-        url_root=lambda wildcards: config.get_plain_url_src(wildcards.id).url_root,
-        targets=lambda wildcards: config.get_plain_url_src(wildcards.id).file_names,
-    run:
-        from urllib.request import urlopen
-        from pathlib import Path
-
-        size = 8192
-        out = Path(output[0])
-
-        with open(out, "w") as fo:
-            for target in params.targets:
-                target_path = out.parent / target
-                full_url = urljoin(quote_url(params.url_root), quote(target))
-                # curl url to file
-                try:
-                    with urlopen(full_url) as resp, open(target_path, "wb") as ft:
-                        while True:
-                            chunk = resp.read(size)
-                            if not chunk:
-                                break
-                            ft.write(chunk)
-                            # record the new file path in
-                except Exception as e:
-                    print("error for: " + target)
-                    raise e
-                fo.write(str(target_path) + "\n")
-
-
-rule download_archive_url:
-    output:
-        "resources/archive_url/{id}/.downloaded.txt",
+        "resources/misc_repo/{id}/.downloaded.txt",
     script:
         "scripts/python/fcsio/download_archive.py"
-
-
-# NOTE this requires DRYAD_TOKEN to be set in the environment
-rule download_dryad_zip_url:
-    output:
-        "resources/dryad_zip_url/{id}/.downloaded.txt",
-    params:
-        id=lambda wildcards: config.get_dryad_id(wildcards.id),
-        # quote strings to preserve spaces and allow direct shell expand
-        targets=lambda wildcards: [
-            f'"{f}"' for f in config.get_dryad_paths(wildcards.id)
-        ],
-        out_base=lambda wildcards, output: Path(output[0]).parent,
-    shell:
-        """
-        zip_file={params.out_base}/downloaded.zip
-
-        curl -SsLqf -J \
-            -H "Accept: application/json" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $DRYAD_TOKEN" \
-            -X GET https://datadryad.org/api/v2/files/{params.id}/download \
-        > "$zip_file"
-
-        rm -rf {output}
-
-        for i in {params.targets}; do
-            file_out={params.out_base}/$i
-            dir_out="$(dirname "$file_out")"
-            if [ -n "$dir_out" ]; then
-                mkdir -p "$dir_out"
-            fi
-            unzip -p "$zip_file" "$i" > "$file_out"
-            echo "$file_out" >> {output}
-        done
-
-        rm -rf "$zip_file"
-        """
 
 
 # these can't be downloaded automatically, so the user will need to extract them
@@ -149,30 +111,14 @@ rule list_flow_repo_files:
 
 rule list_all_fcs_files:
     input:
-        archive_url=expand(
-            rules.download_archive_url.output,
-            id=[
-                f.src.dataset_id
-                for f in config.test_files
-                if isinstance(f.src, ArchiveSrc)
-            ],
-        ),
-        plain_url=expand(
-            rules.download_plain_url.output,
-            id=[
-                f.src.dataset_id
-                for f in config.test_files
-                if isinstance(f.src, PlainUrlSrc)
-            ],
-        ),
+        misc=expand(rules.download_misc_repos.output, id=config.get_misc_dataset_ids()),
         immport=rules.download_immport.output,
         fr=rules.list_flow_repo_files.output,
     output:
         "resources/all_fcs_files.txt",
     shell:
         """
-        cat {input.archive_url} \
-            {input.plain_url} \
+        cat {input.misc} \
             {input.immport} \
             {input.fr} \
         > {output}

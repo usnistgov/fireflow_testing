@@ -1,31 +1,26 @@
 import os
+import tarfile
+from urllib.parse import urljoin
 from pathlib import Path
 from typing import Any, assert_never
-import requests
+import requests as req
 from shutil import rmtree, copyfileobj
 import zipfile
-from common.config import FCSConfig, PlainUrl, DryadUrl
+from common.config import (
+    FCSConfig,
+    PlainUrl,
+    DryadUrl,
+    ArchiveSrc,
+    MultiUrlSrc,
+    SingleUrlSrc,
+)
 
 
-def main(smk: Any) -> None:
-    conf: FCSConfig = smk.config
-
-    id = smk.wildcards["id"]
-
-    downloaded_list = Path(smk.output[0])
-    downloaded_dir = downloaded_list.parent
-
-    # ensure the target is totally empty before doing anything
-    rmtree(downloaded_dir)
-
-    archive_src = conf.get_archive_url(id)
-    archive_dst = downloaded_list.parent / "downloaded.archive"
-    archive_dst.parent.mkdir(parents=True)
-
-    # create request depending on where the archive is
-    if isinstance(archive_src, PlainUrl):
-        archive_req = requests.get(archive_src.plain, stream=True)
-    elif isinstance(archive_src, DryadUrl):
+# download something depending on what kind of url it is
+def make_url_request(url: DryadUrl | PlainUrl) -> req.Response:
+    if isinstance(url, PlainUrl):
+        return req.get(url.plain, stream=True)
+    elif isinstance(url, DryadUrl):
         token = os.getenv("DRYAD_TOKEN")
         assert token is not None, "Dryad token not provided"
         headers = {
@@ -33,14 +28,87 @@ def main(smk: Any) -> None:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {token}",
         }
-        dryad_id = archive_src.dryad_file_id
+        dryad_id = url.dryad_file_id
         dryad_url = f"https://datadryad.org/api/v2/files/{dryad_id}/download"
-        archive_req = requests.get(dryad_url, headers=headers, stream=True)
+        return req.get(dryad_url, headers=headers, stream=True)
     else:
-        assert_never(archive_src)
+        assert_never(url)
+
+
+def download_single(smk: Any, src: SingleUrlSrc, downloaded_list: Path) -> None:
+    target = downloaded_list.parent / src.output_path
+
+    resp = make_url_request(src.url)
+    if src.compression:
+        # TODO this only supports *.tar.gz compression. It should also support
+        # just plain *.gz and friends, but we have not encountered these yet
+        with tarfile.open(fileobj=resp.raw, mode="r:*") as tar_f:
+            # Iterate through archive until we find a file. There will be
+            # multiple members if the file is in a subdirectory relative to the
+            # tarball root
+            found_file = False
+            for member in tar_f:
+                if not member.isfile():
+                    continue
+                else:
+                    assert not found_file, "multiple FCS fils in this archive"
+                    member_f = tar_f.extractfile(member)
+                    assert member_f is not None
+                    print(member_f)
+                    with open(target, "wb") as f:
+                        copyfileobj(member_f, f)
+                    found_file = True
+    else:
+        # just stream the url to a file (like curl url > blablabla)
+        with resp as r:
+            r.raise_for_status()
+            with open(target, "wb") as f:
+                for c in r.iter_content(chunk_size=8192):
+                    if c:
+                        f.write(c)
+
+    # write target to list
+    with open(downloaded_list, "w") as f:
+        f.write(str(src.output_path) + "\n")
+
+
+def download_multi(smk: Any, src: MultiUrlSrc, downloaded_list: Path) -> None:
+    downloaded_dir = downloaded_list.parent
+
+    # ensure the target is totally empty before doing anything
+    rmtree(downloaded_dir)
+    downloaded_dir.mkdir(parents=True, exist_ok=True)
+
+    # pull all targets out of the archive
+    target_pairs = [(target, downloaded_dir / target) for target in src.file_names]
+
+    for target_src, target_dst in target_pairs:
+        full_url = urljoin(src.root_url, target_src)
+        with req.get(full_url, stream=True) as r:
+            r.raise_for_status()
+            with open(target_dst, "wb") as f:
+                for c in r.iter_content(chunk_size=8192):
+                    if c:
+                        f.write(c)
+
+    # write targets to list
+    with open(downloaded_list, "w") as f:
+        for _, target_dst in target_pairs:
+            f.write(str(target_dst) + "\n")
+
+
+def download_archive(smk: Any, src: ArchiveSrc, downloaded_list: Path) -> None:
+    downloaded_dir = downloaded_list.parent
+
+    # ensure the target is totally empty before doing anything
+    rmtree(downloaded_dir)
+
+    archive_dst = downloaded_list.parent / "downloaded.archive"
+    archive_dst.parent.mkdir(parents=True)
 
     # download the archive using "curl"
-    with archive_req as r:
+    archive_resp = make_url_request(src.archive_url)
+    with archive_resp as r:
         r.raise_for_status()
         with open(archive_dst, "wb") as f:
             for c in r.iter_content(chunk_size=8192):
@@ -48,9 +116,7 @@ def main(smk: Any) -> None:
                     f.write(c)
 
     # pull all targets out of the archive
-    target_pairs = [
-        (target, downloaded_dir / target) for target in conf.get_zip_paths(id)
-    ]
+    target_pairs = [(target, downloaded_dir / target) for target in src.file_paths]
 
     with zipfile.ZipFile(archive_dst, "r") as archive_f:
         for target_src, target_dst in target_pairs:
@@ -68,6 +134,23 @@ def main(smk: Any) -> None:
 
     # remove the archive file since we extracted all we care about
     os.remove(archive_dst)
+
+
+def main(smk: Any) -> None:
+    conf: FCSConfig = smk.config
+
+    src = conf.get_url_src(smk.wildcards["id"])
+
+    downloaded_list = Path(smk.output[0])
+
+    if isinstance(src, SingleUrlSrc):
+        download_single(smk, src, downloaded_list)
+    elif isinstance(src, MultiUrlSrc):
+        download_multi(smk, src, downloaded_list)
+    elif isinstance(src, ArchiveSrc):
+        download_archive(smk, src, downloaded_list)
+    else:
+        assert_never(src)
 
 
 main(snakemake)  # type: ignore

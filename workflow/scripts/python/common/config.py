@@ -1,7 +1,7 @@
 from pathlib import Path
-from itertools import dropwhile
+from itertools import dropwhile, groupby
 from enum import Enum
-from pydantic import BaseModel as BaseModel_
+from pydantic import BaseModel as BaseModel_, field_validator
 from typing import TypeAlias, NewType, Literal, Any
 from pyreflow.pydantic import PyreflowReadStdDatasetConfig
 
@@ -82,8 +82,7 @@ class MachineId(Enum):
 
 
 class RepoType(Enum):
-    PLAIN_URL = "plain_url"
-    ARCHIVE_URL = "archive_url"
+    MISC = "misc_repos"
     FR = "flow_repository"
     IMMPORT = "immport"
 
@@ -94,18 +93,25 @@ class BaseModel(BaseModel_):
         extra = "forbid"
 
 
-class PlainUrlSrc(BaseModel):
-    url_root: str
-    dataset_id: str
-    file_names: list[str]
-
-
 class PlainUrl(BaseModel):
     plain: str
 
 
 class DryadUrl(BaseModel):
     dryad_file_id: int
+
+
+class SingleUrlSrc(BaseModel):
+    url: PlainUrl | DryadUrl
+    dataset_id: str
+    output_path: Path
+    compression: bool = False
+
+
+class MultiUrlSrc(BaseModel):
+    root_url: str
+    dataset_id: str
+    file_names: list[str]
 
 
 class ArchiveSrc(BaseModel):
@@ -124,7 +130,7 @@ class ImmportSrc(BaseModel):
     file_names: list[str]
 
 
-AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | PlainUrlSrc | ArchiveSrc
+AnySrc: TypeAlias = FlowRepoSrc | ImmportSrc | SingleUrlSrc | MultiUrlSrc | ArchiveSrc
 
 Strategy: TypeAlias = Literal["none", "scalpal", "sledgehammer"]
 
@@ -455,6 +461,19 @@ assert len(all_cyt_values) == len(set(all_cyt_values)), "not all $CYT values are
 class FCSConfig(BaseModel):
     test_files: list[FileConfig]
 
+    @field_validator("test_files", mode="after")
+    @classmethod
+    def unique_dataset_ids(cls, value: list[FileConfig]) -> list[FileConfig]:
+        ds = [
+            c.src.dataset_id
+            for c in value
+            if isinstance(c.src, ArchiveSrc | SingleUrlSrc | MultiUrlSrc)
+        ]
+        ds.sort()
+        dupped = [k for k, g in groupby(ds) if len(list(g)) > 1]
+        assert len(dupped) == 0, f"all dataset ids must be unique, got {dupped}"
+        return value
+
     def get_machine(self, cyt: str | None, i: MachineId | None) -> MachineId | None:
         if i is not None:
             return i
@@ -481,41 +500,61 @@ class FCSConfig(BaseModel):
         assert ret is not None, f"could not find immport src for {repo_id}"
         return ret
 
-    def get_plain_url_src(self, repo_id: str) -> PlainUrlSrc:
+    def get_url_src(self, repo_id: str) -> SingleUrlSrc | MultiUrlSrc | ArchiveSrc:
         ret = next(
             (
                 c.src
                 for c in self.test_files
-                if isinstance(c.src, PlainUrlSrc) and repo_id == c.src.dataset_id
+                if isinstance(c.src, ArchiveSrc | SingleUrlSrc | MultiUrlSrc)
+                and repo_id == c.src.dataset_id
             ),
             None,
         )
-        assert ret is not None, f"could not find root URL for {repo_id}"
+        assert ret is not None, f"could not find URL src for {repo_id}"
         return ret
 
-    def get_archive_url(self, repo_id: str) -> PlainUrl | DryadUrl:
-        ret = next(
-            (
-                c.src.archive_url
-                for c in self.test_files
-                if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
-            ),
-            None,
-        )
-        assert ret is not None, f"could not find zip URL for {repo_id}"
-        return ret
+    def get_misc_dataset_ids(self) -> list[str]:
+        return [
+            c.src.dataset_id
+            for c in self.test_files
+            if isinstance(c.src, ArchiveSrc | SingleUrlSrc | MultiUrlSrc)
+        ]
 
-    def get_zip_paths(self, repo_id: str) -> list[Path]:
-        id_entry = next(
-            (
-                c.src
-                for c in self.test_files
-                if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
-            ),
-            None,
-        )
-        assert id_entry is not None, f"could not find paths for {repo_id}"
-        return id_entry.file_paths
+    # def get_plain_url_src(self, repo_id: str) -> MultiUrlSrc:
+    #     ret = next(
+    #         (
+    #             c.src
+    #             for c in self.test_files
+    #             if isinstance(c.src, MultiUrlSrc) and repo_id == c.src.dataset_id
+    #         ),
+    #         None,
+    #     )
+    #     assert ret is not None, f"could not find root URL for {repo_id}"
+    #     return ret
+
+    # def get_archive_url(self, repo_id: str) -> PlainUrl | DryadUrl:
+    #     ret = next(
+    #         (
+    #             c.src.archive_url
+    #             for c in self.test_files
+    #             if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
+    #         ),
+    #         None,
+    #     )
+    #     assert ret is not None, f"could not find zip URL for {repo_id}"
+    #     return ret
+
+    # def get_zip_paths(self, repo_id: str) -> list[Path]:
+    #     id_entry = next(
+    #         (
+    #             c.src
+    #             for c in self.test_files
+    #             if isinstance(c.src, ArchiveSrc) and repo_id == c.src.dataset_id
+    #         ),
+    #         None,
+    #     )
+    #     assert id_entry is not None, f"could not find paths for {repo_id}"
+    #     return id_entry.file_paths
 
     def find_file_options(self, path: Path) -> tuple[ParseConfig, RepoType, str, str]:
         ps = dropwhile(lambda n: n != "resources", path.parts)
@@ -537,10 +576,12 @@ class FCSConfig(BaseModel):
         file_name: str,
     ) -> ParseConfig:
         def file_names_and_id(src: AnySrc) -> tuple[str, list[str]] | None:
-            if repo_type is RepoType.PLAIN_URL and isinstance(src, PlainUrlSrc):
+            if repo_type is RepoType.MISC and isinstance(src, ArchiveSrc):
+                return (src.dataset_id, list(map(str, src.file_paths)))
+            elif repo_type is RepoType.MISC and isinstance(src, MultiUrlSrc):
                 return (src.dataset_id, list(src.file_names))
-            elif repo_type is RepoType.ARCHIVE_URL and isinstance(src, ArchiveSrc):
-                return (src.dataset_id, [str(p) for p in src.file_paths])
+            elif repo_type is RepoType.MISC and isinstance(src, SingleUrlSrc):
+                return (src.dataset_id, list(str(src.output_path)))
             elif repo_type is RepoType.IMMPORT and isinstance(src, ImmportSrc):
                 return (src.immport_id, src.file_names)
             elif repo_type is RepoType.FR and isinstance(src, FlowRepoSrc):
