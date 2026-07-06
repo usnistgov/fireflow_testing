@@ -96,7 +96,7 @@ df_misc_errors <- df_misc %>%
       c("unparsed", "malformed", "mismatch_header", "mismatch_text"),
     nc_offsets_analysis = data_origin_type %in%
       c("unparsed", "malformed", "mismatch_header", "mismatch_text"),
-    # $SPILLOVER should have names but not indicies
+    # $SPILLOVER should have names but not indices
     nc_parse_spillover_names = spillover_was_indexed,
     # timestamps should all have proper formats
     nc_parse_btim_fmt = btim_pattern,

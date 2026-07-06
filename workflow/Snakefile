@@ -90,24 +90,8 @@ rule download_zip_url:
         # quote strings to preserve spaces and allow direct shell expand
         targets=lambda wildcards: [f'"{f}"' for f in config.get_zip_paths(wildcards.id)],
         out_base=lambda wildcards, output: Path(output[0]).parent,
-    shell:
-        """
-        zip_file={params.out_base}/downloaded.zip
-        curl -SsLqf "{params.url}" > "$zip_file"
-        rm -rf {output}
-
-        for i in {params.targets}; do
-            file_out={params.out_base}/$i
-            dir_out="$(dirname "$file_out")"
-            if [ -n "$dir_out" ]; then
-                mkdir -p "$dir_out"
-            fi
-            unzip -p "$zip_file" "$i" > "$file_out"
-            echo "$file_out" >> {output}
-        done
-
-        rm -rf "$zip_file"
-        """
+    script:
+        "scripts/python/fcsio/download_archive.py"
 
 
 # NOTE this requires DRYAD_TOKEN to be set in the environment
