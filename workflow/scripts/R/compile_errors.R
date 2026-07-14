@@ -77,7 +77,7 @@ df_misc_errors <- df_misc %>%
     # both TEXT segments should be multibyte encoded (UTF-8)
     nc_text_utf8 = !prim_multibyte | replace_na(!supp_multibyte, FALSE),
     # timestep should not be missing
-    nc_key_val_timestep = timestep_added,
+    nc_key_val_timestep_missing = timestep_added,
     # DATA should not have a remainder (usually an off-by-one error)
     nc_offsets_data_len = replace_na(event_data_remainder > 0, FALSE),
     # $TOT should match the number of events in DATA
@@ -169,7 +169,7 @@ df_key_val_errors <- df_key_val %>%
     # keyword(s) is an optical keyword but found for a temporal measurement
     nc_extra_temporal_optical = "temporal_optical" %in% pair_type,
     # keyword(s) is $TIMESTEP which could not be parsed
-    nc_key_val_other_timestep = "timestep" %in% pair_type,
+    nc_key_val_timestep_invalid = "timestep" %in% pair_type,
     # keyword(s) had whitespace on beginning/end which needed to be trimmed
     nc_key_val_ws_edge = ("edge" %in% pair_type),
     # keyword(s) had whitespace in b/t comma-sep values which needed to be trimmed
@@ -191,7 +191,7 @@ df_key_val_errors <- df_key_val %>%
       nc_extra_hyper_gate = FALSE,
       nc_extra_other_verison = FALSE,
       nc_extra_temporal_optical = FALSE,
-      nc_key_val_other_timestep = FALSE,
+      nc_key_val_timestep_invalid = FALSE,
       nc_key_val_ws_edge = FALSE,
       nc_key_val_ws_inner = FALSE,
       nc_text_byte_pair = FALSE,
@@ -205,13 +205,13 @@ df_orig_names_errors <- df_orig_names %>%
   group_by(fcs_path, dataset) %>%
   summarize(
     # $PnN was non-unique and renamed
-    nc_key_value_pnn_non_unique = TRUE,
+    nc_key_val_pnn_non_unique = TRUE,
     .groups = "drop"
   ) %>%
   right_join(df_all, by = c("fcs_path", "dataset")) %>%
   replace_na(
     list(
-      nc_key_value_pnn_non_unique = FALSE
+      nc_key_val_pnn_non_unique = FALSE
     )
   ) %>%
   select(fcs_path, dataset, starts_with("nc_"))
@@ -235,6 +235,8 @@ df_token_errors <- df_tokens %>%
     # pair is a key with a blank value (escaped mode only)
     nc_text_token_blank_value = "prim_blank_value" %in% token_type |
       "supp_blank_value" %in% token_type,
+    # value was entirely whitespace and was trimmed to nothing (unescaped mode only)
+    nc_text_token_trimmed = "empty_trimmed" %in% token_type,
     # pair is a value with a blank key
     nc_text_token_blank_key = "prim_blank_keys" %in% token_type |
       "supp_blank_keys" %in% token_type,
@@ -248,7 +250,8 @@ df_token_errors <- df_tokens %>%
     list(
       nc_text_token_blank_value = FALSE,
       nc_text_token_blank_key = FALSE,
-      nc_text_token_boundary = FALSE
+      nc_text_token_boundary = FALSE,
+      nc_text_token_trimmed = FALSE
     )
   ) %>%
   select(fcs_path, dataset, starts_with("nc_"))
@@ -290,7 +293,10 @@ df_all_errors <- df_misc_errors %>%
   left_join(df_token_errors, by = c("fcs_path", "dataset")) %>%
   left_join(df_pseudoempty, by = c("fcs_path", "dataset")) %>%
   left_join(df_bitmask_overrange, by = c("fcs_path", "dataset")) %>%
-  left_join(df_machines, by = "fcs_path")
+  left_join(df_machines, by = "fcs_path") %>%
+  # combine these since they are basically the same thing with different keywords
+  mutate(nc_key_val_ws_inner = nc_key_val_scale_trimmed | nc_key_val_ws_inner) %>%
+  select(-nc_key_val_scale_trimmed)
 
 df_all_errors %>%
   mutate(
@@ -361,7 +367,7 @@ df_all_errors %>%
     values = c(
       "none" = "white",
       "<10%" = "#ffbbbb",
-      "10-90%" ="#ff8888",
+      "10-90%" = "#ff8888",
       ">90%" = "#ff5555",
       "all" = "#ff0000"
     )
@@ -371,7 +377,7 @@ df_all_errors %>%
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot"]], width = 12, height = 12, dpi = 125)
 
 df_all_errors %>%
   write_tsv(snakemake@output[["table"]])

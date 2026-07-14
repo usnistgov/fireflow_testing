@@ -1,7 +1,160 @@
 test_files:
+  # Navios (https://datadryad.org/dataset/doi:10.5061/dryad.4b8gthtcf)
+  #
+  # Unlike most dryad datasets, this just uploaded single FCS files, which each
+  # have their own ID
+  - src:
+      url:
+        dryad_file_id: 688166
+      dataset_id: dryad_688166_Navios0
+      output_path: TF_17.fcs
+  - src:
+      url:
+        dryad_file_id: 688169
+      dataset_id: dryad_688166_Navios1
+      output_path: TF_18.fcs
+  - src:
+      url:
+        dryad_file_id: 688170
+      dataset_id: dryad_688166_Navios2
+      output_path: TF_19.fcs
+  - src:
+      url:
+        dryad_file_id: 688171
+      dataset_id: dryad_688166_Navios3
+      output_path: TF_31.fcs
+  # TODO these two files are "special", instead of $PnB they have $PnNB (!)
+  # - src:
+  #     url:
+  #       dryad_file_id: 688167
+  #     dataset_id: dryad_688166_Navios4
+  #     output_path: TF_32.fcs
+  # - src:
+  #     url:
+  #       dryad_file_id: 688172
+  #     dataset_id: dryad_688166_Navios5
+  #     output_path: TF_5.fcs
+  - src:
+      url:
+        dryad_file_id: 688168
+      dataset_id: dryad_688166_Navios6
+      output_path: TF_65.fcs
+
+  # MoFlo Astrios
+  #
+  # each of these is a tarball, some of which only have one file in them :/
+  #
+  # hrs_06_10_Rep2_A13.tar.gz is totally empty so it isn't listed here
+  # - src:
+  #     url:
+  #       plain: https://zenodo.org/records/17449471/files/hrs_00_03_Rep1_A1.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios0
+  #     archive_type: tar
+  #     file_paths:
+  #       - cl563/hpc_evassvis 192787458 hrs_00_03_Rep1_A1/2023_05_23_Sample_112.fcs
+  #       - cl563/hpc_evassvis 192787458 hrs_00_03_Rep1_A1/2023_05_23_Sample_113.fcs
+  #       - cl563/hpc_evassvis 192787458 hrs_00_03_Rep1_A1/2023_05_23_Sample_114.fcs
+  #       - cl563/hpc_evassvis 192787458 hrs_00_03_Rep1_A1/2023_05_23_Sample_110.fcs
+  #       - cl563/hpc_evassvis 192787458 hrs_00_03_Rep1_A1/2023_05_23_Sample_111.fcs
+  # - src:
+  #     url:
+  #       plain: https://zenodo.org/records/17449471/files/hrs_00_03_Rep2_A9.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios1
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_00_03_Rep2_A9/2023_06_20_Sample_110.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_02_05_Rep1_A2.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios2
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_02_05_Rep1_A2/2023_05_23_Sample_115.fcs
+  #       - hrs_02_05_Rep1_A2/2023_05_23_Sample_116.fcs
+  #       - hrs_02_05_Rep1_A2/2023_05_23_Sample_118.fcs
+  #       - hrs_02_05_Rep1_A2/2023_05_23_Sample_117.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_02_05_Rep2_A10.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios3
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_02_05_Rep2_A10/2023_06_20_Sample_112.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_04_07_Rep1_A3.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios4
+  #     archive_type: tar
+  #     file_paths: 
+  #       - hrs_04_07_Rep1_A3/2023_05_23_Sample_120.fcs
+  #       - hrs_04_07_Rep1_A3/2023_05_23_Sample_119.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_04_07_Rep2_A11.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios5
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_04_07_Rep2_A11/2023_06_20_Sample_114.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_05_08_Rep1_A4.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios6
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_05_08_Rep1_A4/2023_05_23_Sample_121.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_05_08_Rep2_A12.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios7
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_05_08_Rep2_A12/2023_06_20_Sample_116.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_06_10_Rep1_A5.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios8
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_06_10_Rep1_A5/2023_05_31_Sample_110.fcs
+  #       - hrs_06_10_Rep1_A5/2023_05_31_Sample_111.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_09_13_Rep1_A6.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios10
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_09_13_Rep1_A6/2023_05_31_Sample_113.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_09_13_Rep2_A14.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios11
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_09_13_Rep2_A14/2023_06_27_Sample_111.fcs
+  # - src:
+  #     url: https://zenodo.org/records/17449471/files/hrs_12_17_Rep1_A7.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios12
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_12_17_Rep1_A7/2023_05_31_Sample_115.fcs
+  - src:
+      archive_url:
+        plain: https://zenodo.org/records/17449471/files/hrs_12_17_Rep2_A15.tar.gz
+      dataset_id: zenodo_17449471_Astrios13
+      archive_type: tar
+      file_paths:
+        - hrs_12_17_Rep2_A15/2023_06_27_Sample_113.fcs
+  # - src:
+  #     url:
+  #       plain: https://zenodo.org/records/17449471/files/hrs_16_22_Rep1_A8.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios14
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_16_22_Rep1_A8/2023_05_31_Sample_117.fcs
+  # - src:
+  #     url:
+  #       plain: https://zenodo.org/records/17449471/files/hrs_16_22_Rep2_A16.tar.gz
+  #     dataset_id: zenodo_17449471_Astrios15
+  #     archive_type: tar
+  #     file_paths:
+  #       - hrs_16_22_Rep2_A16/2023_06_27_Sample_115.fcs
+  #       - hrs_16_22_Rep2_A16/2023_06_27_Sample_116.fcs
+
   # S1400EX (https://datadryad.org/dataset/doi:10.5061/dryad.70rxwdbt3#usage)
   - src:
-      file_id: 671784
+      archive_url:
+        dryad_file_id: 671784
       dataset_id: dryad_671784_StratedigmS1400EX
       file_paths:
         - Fig1_S1_S2/data/doubledel/plate1_Tube 01_1_9_2019.fcs
@@ -775,7 +928,8 @@ test_files:
 
   # S1400EX (ditto)
   - src:
-      file_id: 671785
+      archive_url:
+        dryad_file_id: 671785
       dataset_id: dryad_671785_StratedigmS1400EX
       file_paths:
         - Fig2a_FigS4dehijk/Flow data/L108_data/20181218 Day 1/plate1_Tube 01_12_18_2018.fcs
@@ -980,7 +1134,8 @@ test_files:
 
   # S1400EX (ditto)
   - src:
-      file_id: 671783
+      archive_url:
+        dryad_file_id: 671783
       dataset_id: dryad_671783_StratedigmS1400EX
       file_paths:
         - FigS3/data/data_21hr/plate1_Tube 01_001.fcs
@@ -1947,7 +2102,8 @@ test_files:
   # Accuri C6 (same as FR-FCM-ZZNA)
   # https://datadryad.org/dataset/doi:10.5061/dryad.m1c04
   - src:
-      file_id: 3339
+      archive_url:
+        dryad_file_id: 3339
       dataset_id: dryad_3339_AccuriC6
       file_paths:
         - FlowRepository_FR-FCM-ZZNA_files/CYCLUS1_BEKKEN_0_0h_SYBR_START_rep1.fcs
@@ -2412,7 +2568,8 @@ test_files:
 
   # Gallios (https://datadryad.org/dataset/doi:10.5061/dryad.62fv1#usage)
   - src:
-      file_id: 5950
+      archive_url:
+        dryad_file_id: 5950
       dataset_id: dryad_5950_Gallios
       file_paths:
         - A2-1-2015-03-19-113136-4.fcs
@@ -2482,7 +2639,8 @@ test_files:
 
   # Influx (https://datadryad.org/dataset/doi:10.5061/dryad.f4qrfj71n#citations)
   - src:
-      file_id: 2382110
+      archive_url:
+        dryad_file_id: 2382110
       dataset_id: dryad_2382110_Influx
       file_paths:
         - Flow cytometry2/fcs data files/76.fcs
@@ -2701,7 +2859,8 @@ test_files:
 
   # Novocyte (https://datadryad.org/dataset/doi:10.5061/dryad.f4qrfj71n#citations)
   - src:
-      file_id: 2017562
+      archive_url:
+        dryad_file_id: 2017562
       dataset_id: dryad_2017562_Novocyte
       file_paths:
         - Environmental spike experiment/Negative (without spike)/FCS files/Filtered eff_10x_neg_D5_Rep_1.fcs
@@ -2727,7 +2886,8 @@ test_files:
 
   # Novocyte (ditto)
   - src:
-      file_id: 2017563
+      archive_url:
+        dryad_file_id: 2017563
       dataset_id: dryad_2017563_Novocyte
       file_paths:
         - Mixed-target experiment/16x dilution/FCS files (raw data)/Mixed_reps_D10_Rep 8.fcs
@@ -2783,7 +2943,8 @@ test_files:
 
   # Novocyte (ditto)
   - src:
-      file_id: 2017564
+      archive_url:
+        dryad_file_id: 2017564
       dataset_id: dryad_2017564_Novocyte
       file_paths:
         - T4 optimization/Replicate 1/Run 1 (Run Number 9)/Run 1 (Run Number 9)_D1_S.fcs
@@ -2898,7 +3059,8 @@ test_files:
 
   # Fusion (https://datadryad.org/dataset/doi:10.5061/dryad.cvdncjtcx#readme)
   - src:
-      file_id: 3554085
+      archive_url:
+        dryad_file_id: 3554085
       dataset_id: dryad_3554085_Fusion
       file_paths:
        - Hayatigolkhatmi043024FucciEdu_-_Kasumi1 Edu Fucci_001.fcs
@@ -2908,7 +3070,8 @@ test_files:
 
   # Cytoflex
   - src:
-      zip_url: https://zenodo.org/records/14018551/files/sytox_exp1.zip
+      archive_url:
+        plain: https://zenodo.org/records/14018551/files/sytox_exp1.zip
       dataset_id: zenodo_15019428_CytoFlex0
       file_paths:
         - sytox_exp1/syt_1_cdc15_Rho+_25.fcs
@@ -2926,7 +3089,8 @@ test_files:
 
   # Cytoflex
   - src:
-      zip_url: https://zenodo.org/records/14018551/files/sytox_exp2.zip
+      archive_url:
+        plain: https://zenodo.org/records/14018551/files/sytox_exp2.zip
       dataset_id: zenodo_15019428_CytoFlex1
       file_paths:
         - sytox_exp2/syt_2_cdc15_Rho+_25.fcs
@@ -2945,7 +3109,8 @@ test_files:
 
   # Cytoflex
   - src:
-      zip_url: https://zenodo.org/records/14018551/files/sytox_exp3.zip
+      archive_url:
+        plain: https://zenodo.org/records/14018551/files/sytox_exp3.zip
       dataset_id: zenodo_15019428_CytoFlex2
       file_paths:
         - sytox_exp3/syt_3_cdc15_Rho+_25.fcs
@@ -2963,7 +3128,8 @@ test_files:
 
   # Cytoflex
   - src:
-      zip_url: https://zenodo.org/records/15019428/files/Fig3A_human organoids_Raw data.zip
+      archive_url:
+        plain: https://zenodo.org/records/15019428/files/Fig3A_human organoids_Raw data.zip
       dataset_id: zenodo_15019428_CytoFlex
       file_paths:
         - Fig3A_human organoids_Raw data/D110_stained.fcs
@@ -2980,7 +3146,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/15019428/files/Fig3B_CD14 monos_Raw data.zip
+      archive_url:
+        plain: https://zenodo.org/records/15019428/files/Fig3B_CD14 monos_Raw data.zip
       dataset_id: zenodo_15019428_Fortessa0
       file_paths:
         - Fig3B_CD14 monos_Raw data/CD14 monos_Donor 1_stained.fcs
@@ -2996,7 +3163,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/15019428/files/SupplFig4A_U937_Raw data.zip
+      archive_url:
+        plain: https://zenodo.org/records/15019428/files/SupplFig4A_U937_Raw data.zip
       dataset_id: zenodo_15019428_Fortessa1
       file_paths:
         - SupplFig4A_U937_Raw data/U937 differentiated_CD11bCD14CD89_Exp1/U937 1_ctrl unstained.fcs
@@ -3025,7 +3193,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/15019428/files/SupplFig6A_BMDCs mouse_Raw data.zip
+      archive_url:
+        plain: https://zenodo.org/records/15019428/files/SupplFig6A_BMDCs mouse_Raw data.zip
       dataset_id: zenodo_15019428_Fortessa2
       file_paths:
       - SupplFig6A_BMDCs mouse_Raw data/Exp1_BMDCs CD89+7aad/CD89 mice +7AAD_001_1_001.fcs
@@ -3071,7 +3240,8 @@ test_files:
   # also, $CYTSN says "cytof2", which isn't a serial number but is also isn't
   # "Helios"
   - src:
-      zip_url: https://zenodo.org/records/4719468/files/fcs_data.zip
+      archive_url:
+        plain: https://zenodo.org/records/4719468/files/fcs_data.zip
       dataset_id: zenodo_4719468_Cytof2_0
       file_paths:
         - fcs_data/BMT01_D30_clean.fcs
@@ -3088,7 +3258,8 @@ test_files:
 
   # Cytof2 (see above)
   - src:
-      zip_url: https://zenodo.org/records/4719468/files/FR-FCM-Z244_gated.zip
+      archive_url:
+        plain: https://zenodo.org/records/4719468/files/FR-FCM-Z244_gated.zip
       dataset_id: zenodo_4719468_Cytof2_1
       file_paths:
         - FR-FCM-Z244_gated/BMT01_D30_clean.fcs
@@ -3124,7 +3295,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/10499157/files/Flow_cytometry_data_for_Yang_and_Hill_ORFIUS_complex_manuscript.zip
+      archive_url:
+        plain: https://zenodo.org/records/10499157/files/Flow_cytometry_data_for_Yang_and_Hill_ORFIUS_complex_manuscript.zip
       dataset_id: zenodo_10499157_Fortessa
       file_paths:
         - Flow cytometry data for Yang and Hill ORFIUS complex manuscript/Figure 4E OV8 siBRD1 siHBO1 cell cycle flow/OV8 siBRD1/1-10-23/SM 01-10-2023 OV8_Specimen_001_23 1-10-23 OV8 siControl_015.fcs
@@ -3355,7 +3527,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/3ss_bs_stem.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/3ss_bs_stem.zip
       dataset_id: zenodo_17160682_Fortessa0
       file_paths:
         - 3ss_bs_stem/3ss_bs_stem_bin01.fcs
@@ -3385,7 +3558,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/5ss_stem.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/5ss_stem.zip
       dataset_id: zenodo_17160682_Fortessa1
       file_paths:
         - 5ss_stem/5ss_stem_bin01.fcs
@@ -3411,7 +3585,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/5ss_stem_HA.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/5ss_stem_HA.zip
       dataset_id: zenodo_17160682_Fortessa2
       file_paths:
         - 5ss_stem_HA/5ss_stem_HA_bin01.fcs
@@ -3441,7 +3616,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/5ss_stem_MYC.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/5ss_stem_MYC.zip
       dataset_id: zenodo_17160682_Fortessa3
       file_paths:
       - 5ss_stem_MYC/5ss_stem_MYC_bin01.fcs
@@ -3460,7 +3636,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/mammalian.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/mammalian.zip
       dataset_id: zenodo_17160682_Fortessa4
       file_paths:
         - mammalian/HeLa_rep1_1.fcs
@@ -3514,7 +3691,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/random.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/random.zip
       dataset_id: zenodo_17160682_Fortessa5
       file_paths:
         - random/random_bin01.fcs
@@ -3546,7 +3724,8 @@ test_files:
 
   # Fortessa
   - src:
-      zip_url: https://zenodo.org/records/17160682/files/walking_stem.zip
+      archive_url:
+        plain: https://zenodo.org/records/17160682/files/walking_stem.zip
       dataset_id: zenodo_17160682_Fortessa6
       file_paths:
         - walking_stem/walking_stem_bin01.fcs
@@ -3575,7 +3754,8 @@ test_files:
   # FortessaX20
   - src:
       # TODO this has manyyyyyyy more zips in it, and supposedly a Fusion
-      zip_url: https://zenodo.org/records/5498282/files/Figure2_part1.zip
+      archive_url:
+        plain: https://zenodo.org/records/5498282/files/Figure2_part1.zip
       dataset_id: zenodo_5498282_FortessaX20
       file_paths:
         - "Figure2_part1/B-T_B220.fcs"
@@ -3613,7 +3793,8 @@ test_files:
 
   # Apogee A60 Micro
   - src:
-      zip_url: https://zenodo.org/records/4561815/files/Figure_2.zip
+      archive_url:
+        plain: https://zenodo.org/records/4561815/files/Figure_2.zip
       dataset_id: zenodo_4561815_ApogeeA60micro0
       file_paths:
         - Figure_2/2b/02_Si_182nm_dil1E5.fcs
@@ -3626,7 +3807,8 @@ test_files:
 
   # Apogee A60 Micro
   - src:
-      zip_url: https://zenodo.org/records/4561815/files/Figure_3_calibration.zip
+      archive_url:
+        plain: https://zenodo.org/records/4561815/files/Figure_3_calibration.zip
       dataset_id: zenodo_4561815_ApogeeA60micro1
       file_paths:
         - Figure_3_calibration/01A 40x CD61-APC CD62p-PE_A1_0_PSD_settings_1_PSD_settings_2_Flow-SR_medium_PBS_MESF_PSD_1.fcs
@@ -3636,7 +3818,8 @@ test_files:
 
   # easycyte
   - src:
-      zip_url: https://zenodo.org/records/10720746/files/Co-cultures_data.zip
+      archive_url:
+        plain: https://zenodo.org/records/10720746/files/Co-cultures_data.zip
       dataset_id: zenodo_10720746_easycyte
       file_paths:
         - Transwell co-cultures/2022-03-05_at_03-08-34pm.fcs
@@ -3666,7 +3849,7 @@ test_files:
 
   # Aurora
   - src:
-      url_root: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
+      root_url: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
       dataset_id: zenodo_15723074_Aurora
       file_names:
         - B_cells_donor1.fcs
@@ -3728,7 +3911,7 @@ test_files:
 
   # Sony SA3800
   - src:
-      url_root: https://zenodo.org/records/7971252/files/
+      root_url: https://zenodo.org/records/7971252/files/
       dataset_id: zenodo_7971252_SonySA3800
       file_names:
         - A01 Well - A01 WLSM.fcs
@@ -3830,7 +4013,7 @@ test_files:
 
   # Attune NxT
   - src:
-      url_root: https://zenodo.org/records/7352402/files/
+      root_url: https://zenodo.org/records/7352402/files/
       dataset_id: zenodo_7352402_AttuneNxt
       file_names:
         - Tmem119 x IAB AAV NJG 1.6.22_Compensation_BL1-A.fcs
@@ -3858,7 +4041,7 @@ test_files:
 
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
   - src:
-      url_root: https://zenodo.org/records/7982165/files/
+      root_url: https://zenodo.org/records/7982165/files/
       dataset_id: zenodo_7982165_Helios
       file_names:
         - AM_Non_JAK2.fcs
@@ -3877,7 +4060,7 @@ test_files:
         
   # FACSDiscover A8
   - src:
-      url_root: https://zenodo.org/records/15726118/files/
+      root_url: https://zenodo.org/records/15726118/files/
       dataset_id: zenodo_15726118_FACSDiscoverA8
       file_names:
         # - AML BM 1.fcs
@@ -3893,7 +4076,7 @@ test_files:
 
   # Imagestream (this is actually the same dataset as the previous)
   - src:
-      url_root: https://zenodo.org/records/15726118/files/
+      root_url: https://zenodo.org/records/15726118/files/
       dataset_id: zenodo_15726118_Imagestream
       file_names:
         - No ab 2_3.fcs
@@ -3901,7 +4084,7 @@ test_files:
 
   # FASCLyric
   - src:
-      url_root: https://zenodo.org/records/17222100/files/
+      root_url: https://zenodo.org/records/17222100/files/
       dataset_id: zenodo_17222100_FACSLyric
       file_names:
         - 20250409_DV2_4G2_T1_340.fcs
@@ -3919,7 +4102,7 @@ test_files:
 
   # FASCSymphony A5
   - src:
-      url_root: https://zenodo.org/records/13928969/files/
+      root_url: https://zenodo.org/records/13928969/files/
       dataset_id: zenodo_13928969_FACSSymphonyA5
       file_names:
         - ID1_Panel1_TP1.fcs
@@ -3975,7 +4158,7 @@ test_files:
 
   # Gallios
   - src:
-      url_root: https://zenodo.org/records/17197319/files/
+      root_url: https://zenodo.org/records/17197319/files/
       dataset_id: zenodo_17197319_Gallios
       file_names:
         - sample_10mem 009.LMD

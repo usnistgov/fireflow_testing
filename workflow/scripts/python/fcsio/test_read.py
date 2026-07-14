@@ -449,10 +449,14 @@ class Token(WritableDiagnostic):
 
         primary = go(u.flat_diagnostics.primary_split, "primary")
         supp = u.flat_diagnostics.primary_split
+        empty = (
+            cls(p, dataset_index, "empty_trimmed", v)
+            for v in u.flat_diagnostics.keys_with_empty_trimmed_values
+        )
         if supp is None:
-            return primary
+            return chain(empty, primary)
         else:
-            return chain(primary, go(supp, "supp"))
+            return chain(empty, primary, go(supp, "supp"))
 
 
 @dataclass(frozen=True)

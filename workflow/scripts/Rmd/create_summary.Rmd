@@ -1,0 +1,229 @@
+---
+title: "fireflow test summary"
+output: "html_document"
+---
+
+# FCS Feature Usage Overview
+
+The FCS standards have many features which are likely not evenly used across
+vendors and software. This attempts to enumerate some common (and less common)
+features.
+
+## Keyword usage
+
+These are optional keywords in all versions in which they are valid.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_kw_usage"]])`">
+
+## Scaling type
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_scaling"]])`">
+
+## CRC usage
+
+This checks for files that have a non-zero CRC word at the end.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_crc"]])`">
+
+## Datasets per file
+
+Most files will have only one dataset in them (ie a discrete FCS data unit
+defined by *\$NEXTDATA*)
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_datasets"]])`">
+
+## *DATA* schema usage
+
+These are different methods (schema) used to encode the bytes of data in *DATA*.
+
+Note that "uint-var" is only possible in 3.1 and 3.2, and "mixed" is only
+possible in 3.2.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_schema"]])`">
+
+## *\$BYTEORD* usage
+
+Checks for either big endian, little endian, or something else (ie the PDP-11
+layout which is 3,4,1,2)
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_byteord"]])`">
+
+## *ANALYSIS* segment usage
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_analysis"]])`">
+
+## *OTHER* segment usage
+
+These are segments that can be used for anything. Most files have zero.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_other_seg"]])`">
+
+## Supplemental *TEXT* segment usage
+
+Presumably this is only needed if *TEXT* gets so big that its ending offset
+exceeds 100,000,000 and thus won't fit in *HEADER*.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_supp_text"]])`">
+
+## Dark segment usage
+
+This isn't really a "feature" as much a loophole. Some files have extra data
+that isn't indexed by any segment offsets. In that sense these are "dark" since
+they can't be seen in a standards-compliant manner. However, they are still
+there and probably mean something to someone, somewhere. These are called "dark
+bytes" or "dark segments" (like "dark matter").
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_dark"]])`">
+
+# FCS Standard Compliance Errors
+
+This is an overview of all the errors that `fireflow` caught when parsing these
+files. These are described in some detail below. Note that in many cases these
+are aggregate errors in the sense that they indicate "at least one keyword" (or
+similar) had an error. 
+
+Each error on the x axis of the following plot is explained below.
+
+### Offset errors
+
+These are errors pertaining to offsets, ie the three offset pairs for *TEXT*,
+*DATA*, and *ANALYSIS* in the *HEADER* and the *\$BEGIN/END* offsets in *TEXT*.
+This also covers errors with *\$NEXTDATA* which is also an offset.
+
+1) nc_offsets_analysis: *ANALYSIS* offsets either could not be parsed or the
+   *HEADER* and *TEXT* offsets mismatched
+2) nc_offsets_data: analogous to (1) for *DATA*
+3) nc_offsets_data_len: *DATA* was not evenly divisible by the event width and
+   was truncated to make this true.
+4) nc_offsets_nextdata: *$NEXTDATA* does not actually point to the next dataset
+   if it is non-zero.
+5) nc_offsets_overflow_last: Final segment offset in the file exceeded the end
+   of the file
+6) nc_offsets_pseudoempty: At least one offset pair was empty but was written as
+   `0,-1` or similar.
+7) nc_offsets_supp: The supplemental *TEXT* offsets were either unparsable or
+   duplicated another segment offset pair exactly.
+
+### TEXT layout errors
+
+These are errors pertaining to the *TEXT* segment byte layout.
+
+Note that supplemental *TEXT* is included when evaluating these errors if it
+exists. For almost all files this is not relevant.
+
+1) nc_text_byte_pair: A key or value had an invalid byte sequence. For keys,
+   means a non-ASCII byte was encountered. For values this means a non-UTF8 byte
+   was encountered.
+2) nc_text_delim_number: The *TEXT* segment had an even number of delimiters.
+   Note that every value *TEXT* segment (regardless of escaping) must have an
+   odd delimiter number.
+3) nc_text_delimiter: The delimiter was not a byte from 1 to 126.
+4) nc_text_non_escape: The delimiter needed to be escaped for *TEXT* to be
+   parsed validly.
+5) nc_text_nonstd_nonunique: A given non-stdandard key (no prepended "$") was
+   encountered at least twice.
+6) nc_text_std_nonunique: A given stdandard key (prepended "$") was encountered
+   at least twice.
+7) nc_text_token_blank_key: A blank key was encountered.
+8) nc_text_token_blank_value: A blank value was encountered. This is only
+   possible for escaped *TEXT* segments.
+9) nc_text_token_boundary: An escaped delimiter pair was encountered next to
+   a real delimiter. This is an error because it is ambiguous.
+10) nc_text_token_number: The number of tokens was even. All valid *TEXT*
+    must have an even number of tokens since these need to be grouped as
+    key/value pairs.
+11) nc_text_token_trimmed: A value which was entirely whitespace was trimmed to
+    a blank value. This is only possible for unescaped *TEXT* segments.
+12) nc_text_utf8: *TEXT* had invalid UTF-8 bytes. `fireflow` in these cases
+    interprets *TEXT* as Latin-1 (aka ISO-8859-1).
+
+### Keyword value standardization errors
+
+These errors pertain to standardization of the keyword values into a
+higher-level data schema specific to each FCS version.
+
+They can be roughly grouped into general and specialized parsing errors:
+
+#### General
+
+1) nc_key_val_optional: At least one optional keyword could not be parsed and
+   was dropped.
+2) nc_key_val_scale_forced: At least one *\$PnE* keyword encoded a non-linear
+   scale for a measurement that required a linear scale (either the time
+   measurement or a floating-point measurement).
+3) nc_key_val_scale_log: At least one *\$PnE* keyword had an invalid log scale
+   value (something like `1,0`)
+4) nc_key_val_timestep_invalid: *\$TIMESTEP* could not be parsed and was required.
+5) nc_key_val_timestep_missing: *\$TIMESTEP* was missing and was required.
+6) nc_key_val_ws_edge: At least one value had whitespace on either the left or
+   right that was trimmed off to enable valid parsing of the value (usually a
+   number)
+7) nc_key_val_ws_inner: At least one sub-value in a comma-separated keyword
+   value had whitespace between the value and the comma that needed to be
+   trimmed to enable a valid parse.
+8) nc_key_val_pnn_non_unique: At least one pair of *\$PnN* values were not
+   unique.
+
+#### Specialized
+
+1) nc_parse_begindatetime_fmt: The format for *\$BEGINDATETIME* was invalid.
+2) nc_parse_enddatetime_fmt: Same as (1) for *\$ENDDATETIME*.
+3) nc_parse_btim_fmt: Same as (1) for *\$BTIM*.
+4) nc_parse_etim_fmt: Same as (1) for *\$ETIM*.
+5) nc_parse_date_fmt: Same as (1) for *\$DATE*.
+6) nc_parse_last_modified_fmt: Same as (1) for *\$LAST_MODIFIED*.
+7) nc_parse_spillover_names: The names for *\$SPILLOVER* were actually numbers
+   which should be properly interpreted as measurement indices.
+   
+### Extra keyword errors
+
+These are errors pertaining to keywords that look like standardized keywords (ie
+they have a "$" in the front) yet are not really part of the FCS standard for
+the file.
+
+Note, this has a relationship to the `nc_version` error in the next section
+because it depends on which FCS version the file is assumed to follow based on
+a heuristic that guesses the version given the keywords present. For a full
+description of this, see the `fireflow` documentation (specifically the
+`version_override` flag).
+
+For purposes here, the version is changed from that indicated in *HEADER* if a
+different version can be selected that drops no keywords (optional or required).
+If impossible, the version which drops the least optional keywords is selected.
+
+1) nc_extra_hyper_gate: At least one *\$Gm* keyword has an index which exceeds
+   *\$GATE*.
+2) nc_extra_hyper_par: At least one *\$Pn* keyword has an index which exceeds
+   *\$PAR*.
+3) nc_extra_other_version: At least one keywords was found which belongs to
+   another version but is invalid in this file's selected version.
+4) nc_extra_pseudostd: At least one keyword was found which starts with "$" but
+   does not belong any FCS standard version.
+5) nc_extra_temporal_optical: At least one keyword in the time measurement was
+   found which should only be present on an optical measurement (ie *\$PnL*,
+   *\$PnG*, etc).
+   
+### Misc errors
+
+1) nc_bitmask: At least one measurement had an integer value which exceeded the
+   *$PnR* bitmask.
+2) nc_byteord: *$BYTEORD* did not reflect the actual layout of data in the 
+   *DATA* segment. This only applies to integer layouts for FCS 2.0/3.0.
+3) nc_crc_validity: The CRC existed and matched the computed CRC of the file.
+4) nc_crc_word: The 8-byte CRC word was found immediately after the last segment
+   of the file. It may be all zero. No attempt is made to find CRCs after 
+   "other stuff" in the FCS file that are not indexed as segments (although 
+   these exist in many cases). This does not apply to FCS 2.0 since CRC was
+   introduced in FCS 3.0.
+5) nc_int_width: The width of *\$PnB* did not match the actual width of the data
+   in *DATA* and/or the *\$BYTEORD* keywords. This only applies to integer
+   datatypes for FCS 2.0/3.0.
+6) nc_tot: *\$TOT* did not match the actualy number of events in *DATA* (as
+   computed using the sum of *\$PnB* and the length of the *DATA* segment in
+   bytes.
+7) nc_version: The version in *HEADER* did not match the "real" version of the
+   file. "Real" version is defined here as the version which drops the least
+   number of optional keywords. If the *HEADER* version is tied on this metric
+   with a different version, the former is chosen.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">

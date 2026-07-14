@@ -1,5 +1,8 @@
 suppressMessages(library(tidyverse))
 
+DPI <- 125
+HEIGHT <- 12
+
 ## import data
 
 df_machines <- read_tsv(
@@ -157,7 +160,7 @@ df_root %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_datasets"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_datasets"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show files that use supp text
 
@@ -185,7 +188,7 @@ df_has_supp %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_supp_text"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_supp_text"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show files that use ANALYSIS
 
@@ -213,7 +216,7 @@ df_has_analysis %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_analysis"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_analysis"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show how many OTHER segments files use
 
@@ -241,7 +244,7 @@ df_n_other %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_other_seg"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_other_seg"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show which files use CRC
 
@@ -261,7 +264,7 @@ df_misc %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_crc"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_crc"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show which files use "dark bytes"
 
@@ -284,7 +287,7 @@ df_dark %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_dark"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_dark"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show how many machines use linear scaling
 
@@ -319,7 +322,7 @@ df_scale %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_scaling"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_scaling"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show which files use each byte order
 
@@ -338,7 +341,7 @@ df_byteord %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_byteord"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_byteord"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show which data layouts are used
 
@@ -380,7 +383,7 @@ df_all_schema %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_schema"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_schema"]], width = 11, height = HEIGHT, dpi = DPI)
 
 ## show which keywords are in use
 
@@ -517,4 +520,4 @@ df_all_kw %>%
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_kw_usage"]], width = 11, height = 11)
+ggsave(snakemake@output[["plot_kw_usage"]], width = 12, height = HEIGHT, dpi = DPI)
