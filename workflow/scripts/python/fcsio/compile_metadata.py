@@ -642,7 +642,7 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
             if "FACSDiva" in s:
                 return s.replace("BD FACSDiva Software Version", "FACSDiva")
             elif "DVSSCIENCES":
-                return re.sub("DVSSCIENCES-?", "", s)
+                return re.sub("DVSSCIENCES-(FLUIDIGM-)?-CYTOF", "CyTOF Software", s)
             else:
                 return s.replace("Development-only Version", "")
 

@@ -71,6 +71,7 @@ class MachineId(Enum):
     SBT_CYTOF = "sbt_cytof"
     SBT_CYTOF2 = "sbt_cytof2"
     SBT_HELIOS = "sbt_helios"
+    SBT_CYTOF_XT = "sbt_cytof_xt"
     MILTENYI_MQA = "miltenyi_mqa"
     SONY_ECLIPSE = "sony_eclipse"
     SONY_ID7000 = "sony_id7000"
@@ -390,6 +391,11 @@ SBT_MACHINES = {
     ),
     MachineId.SBT_HELIOS: Machine(
         name=MachineName("Helios"),
+        vendor=VendorId.SBT,
+        machine_type=MachineType.CYTOF,
+    ),
+    MachineId.SBT_CYTOF_XT: Machine(
+        name=MachineName("CyTOF XT"),
         vendor=VendorId.SBT,
         machine_type=MachineType.CYTOF,
     ),
