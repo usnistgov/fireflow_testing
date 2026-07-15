@@ -314,7 +314,7 @@ prepend to the operating system on the *\$SYS* keyword (like `<software> /
 ### Bio-Rad
 
 The ZE5 reports itself as a "YETI" in *\$CYT*, which was its former name when
-owned by Propel Labs.
+owned by Propel Labs. Software does not appear to be stored anywhere.
 
 ### Cytek
 
@@ -336,3 +336,10 @@ CyTOF machines are inconsistent. Some store the machine name in *\$CYTSN* (ie
 "cytof2") and *\$CYT* instead stores the software name and version. Some don't
 store the machine name at all and this must be assumed by reading the primary
 source publication.
+
+### Thermo Fisher
+
+The Attune NxT stores its exact model (including the laser configuration) in
+*\$CYT*. Software does not appear to be stored anywhere.
+
+The older Attune stores the software string in *\$CYT* and the model is implied.
