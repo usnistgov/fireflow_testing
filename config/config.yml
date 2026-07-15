@@ -4165,6 +4165,206 @@ test_files:
 
   # Aurora
   - src:
+      root_url: https://zenodo.org/records/15388817/files/
+      dataset_id: zenodo_15388817_Aurora
+      file_names:
+        # - B01_tcs3_CD45+CD14-.fcs
+        # - B01_tcs4_CD45+CD14-.fcs
+        - B01_tcu1_CD45+CD14-.fcs
+        - B01_tcu2_CD45+CD14-.fcs
+        # - B02_tcs3_CD45+CD14-.fcs
+        # - B02_tcs4_CD45+CD14-.fcs
+        # - B02_tcu1_CD45+CD14-.fcs
+        # - B02_tcu2_CD45+CD14-.fcs
+        # - B03_tcs3_CD45+CD14-.fcs
+        # - B03_tcs4_CD45+CD14-.fcs
+        # - B03_tcu1_CD45+CD14-.fcs
+        # - B03_tcu2_CD45+CD14-.fcs
+        # - B04_tcs3_CD45+CD14-.fcs
+        # - B04_tcs4_CD45+CD14-.fcs
+        # - B04_tcu1_CD45+CD14-.fcs
+        # - B04_tcu2_CD45+CD14-.fcs
+        # - B05_tcs3_CD45+CD14-.fcs
+        # - B05_tcs4_CD45+CD14-.fcs
+        # - B05_tcu1_CD45+CD14-.fcs
+        # - B05_tcu2_CD45+CD14-.fcs
+        # - B06_tcs3_CD45+CD14-.fcs
+        # - B06_tcs4_CD45+CD14-.fcs
+        # - B06_tcu1_CD45+CD14-.fcs
+        # - B06_tcu2_CD45+CD14-.fcs
+        # - B07_tcs3_CD45+CD14-.fcs
+        # - B07_tcs4_CD45+CD14-.fcs
+        # - B07_tcu1_CD45+CD14-.fcs
+        # - B07_tcu2_CD45+CD14-.fcs
+        # - B08_tcs3_CD45+CD14-.fcs
+        # - B08_tcs4_CD45+CD14-.fcs
+        # - B08_tcu1_CD45+CD14-.fcs
+        # - B08_tcu2_CD45+CD14-.fcs
+        # - B09_tcs3_CD45+CD14-.fcs
+        # - B09_tcs4_CD45+CD14-.fcs
+        # - B09_tcu1_CD45+CD14-.fcs
+        # - B09_tcu2_CD45+CD14-.fcs
+        # - B10_tcs3_CD45+CD14-.fcs
+        # - B10_tcs4_CD45+CD14-.fcs
+        # - B10_tcu1_CD45+CD14-.fcs
+        # - B10_tcu2_CD45+CD14-.fcs
+        # - B11_tcs3_CD45+CD14-.fcs
+        # - B11_tcs4_CD45+CD14-.fcs
+        # - B11_tcu1_CD45+CD14-.fcs
+        # - B11_tcu2_CD45+CD14-.fcs
+        # - B12_tcs3_CD45+CD14-.fcs
+        # - B12_tcs4_CD45+CD14-.fcs
+        # - B12_tcu1_CD45+CD14-.fcs
+        # - B12_tcu2_CD45+CD14-.fcs
+        # - B13_tcs3_CD45+CD14-.fcs
+        # - B13_tcs4_CD45+CD14-.fcs
+        # - B13_tcu1_CD45+CD14-.fcs
+        # - B13_tcu2_CD45+CD14-.fcs
+        # - B14_tcs3_CD45+CD14-.fcs
+        # - B14_tcs4_CD45+CD14-.fcs
+        # - B14_tcu1_CD45+CD14-.fcs
+        # - B14_tcu2_CD45+CD14-.fcs
+        # - B15_tcs3_CD45+CD14-.fcs
+        # - B15_tcs4_CD45+CD14-.fcs
+        # - B15_tcu1_CD45+CD14-.fcs
+        # - B15_tcu2_CD45+CD14-.fcs
+        # - B16_tcs3_CD45+CD14-.fcs
+        # - B16_tcs4_CD45+CD14-.fcs
+        # - B16_tcu1_CD45+CD14-.fcs
+        # - B16_tcu2_CD45+CD14-.fcs
+        # - B17_tcs3_CD45+CD14-.fcs
+        # - B17_tcs4_CD45+CD14-.fcs
+        # - B17_tcu1_CD45+CD14-.fcs
+        # - B17_tcu2_CD45+CD14-.fcs
+        # - B18_tcs3_CD45+CD14-.fcs
+        # - B18_tcs4_CD45+CD14-.fcs
+        # - B18_tcu1_CD45+CD14-.fcs
+        # - B18_tcu2_CD45+CD14-.fcs 
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/14198396/files/
+      dataset_id: zenodo_14198396_Aurora
+      file_names:
+        # - Batch1_HT01.fcs
+        # - Batch1_HT02.fcs
+        # - Batch1_HT03.fcs
+        # - Batch1_HT04.fcs
+        # - Batch1_HT06.fcs
+        # - Batch1_LT01.fcs
+        # - Batch1_LT02.fcs
+        # - Batch1_LT03.fcs
+        # - Batch1_LT04.fcs
+        # - Batch1_LT05.fcs
+        # - Batch1_LT06.fcs
+        # - Batch1_LT07.fcs
+        # - Batch1_LT11.fcs
+        # - Batch1_REF.fcs
+        # - Batch2n_HT11.fcs
+        # - Batch2n_HT13.fcs
+        - Batch2n_HT14.fcs
+        # - Batch2n_HT15.fcs
+        # - Batch2n_HT17.fcs
+        # - Batch2n_LT09.fcs
+        # - Batch2n_LT10.fcs
+        # - Batch2n_LT12.fcs
+        # - Batch2n_REF.fcs
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/20628167/files/
+      dataset_id: zenodo_20628167_Aurora
+      file_names:
+        # - 01 Brain_Naive_2026_02_06_08_52_19.fcs
+        # - 01 Brain_Tumor-Bearing_2026_01_30_10_15_14.fcs
+        - 01 Brain_Unstained_2026_01_14_15_22_55.fcs
+        # - 02 Meninges_Naive_2026_01_30_10_17_34.fcs
+        # - 02 Meninges_Tumor-Bearing_2026_01_30_10_17_47.fcs
+        - 02 Meninges_Unstained_2026_01_14_15_24_00.fcs
+        # - 03 Spleen_Naive_2026_01_30_09_49_16.fcs
+        - 03 Spleen_Unstained_2026_01_30_09_24_17.fcs
+        # - 04 dcLN_Naive_2026_01_30_10_16_02.fcs
+        # - 04 dcLN_Tumor-Bearing_2026_01_30_10_17_00.fcs
+        # - 04 dcLN_Unstained_2026_01_14_15_23_25.fcs
+        # - 05 sLN_Naive_2026_01_30_10_18_36.fcs
+        # - 05 sLN_Tumor-Bearing_2026_01_30_10_18_49.fcs
+        # - 05 sLN_Unstained_2026_01_14_15_24_19.fcs
+        # - 06 Blood_Naive_2026_01_30_10_14_43.fcs
+        # - 06 Blood_Unstained_2026_01_30_09_26_44.fcs
+        # - 07 Brain FMOs_CD80 BUV661_2026_01_30_10_20_39.fcs
+        # - 07 Brain FMOs_CD83 RY610_2026_01_30_10_22_37.fcs
+        # - 07 Brain FMOs_ICAM-1 BV650_2026_01_30_10_19_32.fcs
+        # - 07 Brain FMOs_OX40L BV421_2026_01_30_10_22_08.fcs
+        # - 07 Brain FMOs_PD-L1 BUV395_2026_01_30_10_21_34.fcs
+        # - 07 Brain FMOs_Siglec-H BUV615_2026_01_30_10_19_44.fcs
+        # - 07 Brain FMOs_TMEM119 PE-Cy7_2026_01_30_10_19_15.fcs
+        # - 08 LN FMOs_B220 APC-Fire 810_2026_01_30_11_52_53.fcs
+        # - 08 LN FMOs_CCR7 BUV737_2026_01_30_12_19_08.fcs
+        # - 08 LN FMOs_CD103 BV711_2026_01_30_11_33_15.fcs
+        # - 08 LN FMOs_CD172a APC-Fire 750_2026_01_30_11_47_39.fcs
+        # - 08 LN FMOs_CD19 BV480_2026_01_30_11_27_45.fcs
+        # - 08 LN FMOs_CD3e PE_2026_01_30_11_15_55.fcs
+        # - 08 LN FMOs_CD4 SparkBlue 574_2026_01_30_10_39_37.fcs
+        # - 08 LN FMOs_CD40 APC_2026_01_30_11_42_53.fcs
+        # - 08 LN FMOs_CD45 Alexa Fluor 532_2026_01_30_11_02_00.fcs
+        # - 08 LN FMOs_CD86 PE-Cy5_2026_01_30_12_01_20.fcs
+        # - 08 LN FMOs_CD8a RB744_2026_01_30_10_56_53.fcs
+        # - 08 LN FMOs_CX3CR1 PE-Fire 700_2026_01_30_10_44_38.fcs
+        # - 08 LN FMOs_IA-IE BUV496_2026_01_30_11_20_06.fcs
+        # - 08 LN FMOs_Live-Dead Blue_2026_01_30_12_11_11.fcs
+        # - 08 LN FMOs_OX40L BV421_2026_01_30_11_57_21.fcs
+        # - 08 LN FMOs_pDCA-1 Alexa Fluor 700_2026_01_30_10_48_58.fcs
+        # - 09 Spleen FMOs_CD11b BV570_2026_01_30_12_03_50.fcs
+        # - 09 Spleen FMOs_CD11c BB515_2026_01_30_10_51_34.fcs
+        # - 09 Spleen FMOs_F4-80 BUV805_2026_01_30_11_38_36.fcs
+        # - 09 Spleen FMOs_ICAM-1 BV650_2026_01_30_10_33_13.fcs
+        # - 09 Spleen FMOs_Ly6C BV605_2026_01_30_11_36_14.fcs
+        # - 09 Spleen FMOs_Siglec-F BUV563_2026_01_30_11_23_22.fcs
+        # - 09 Spleen FMOs_XCR1 BV785_2026_01_30_12_06_42.fcs
+        # - 10 Blood FMO_Ly6G PE-Fire 810_2026_01_30_10_29_21.fcs
+        # - Reference Group_B220 APC-Fire 810 (Cells)_2026_01_14_14_42_38.fcs
+        # - Reference Group_CCR7 BUV737 (Cells)_2026_01_14_15_04_12.fcs
+        # - Reference Group_CD103 BV711 (Cells)_2026_01_14_15_06_28.fcs
+        # - Reference Group_CD11b BV570 (Cells)_2026_01_14_15_05_20.fcs
+        # - Reference Group_CD11c BB515 (Cells)_2026_01_14_15_07_08.fcs
+        # - Reference Group_CD172a APC-Fire 750 (Cells)_2026_01_14_14_46_30.fcs
+        # - Reference Group_CD19 BV480 (Cells)_2026_01_14_15_04_57.fcs
+        # - Reference Group_CD3e PE (Cells)_2026_01_14_14_41_26.fcs
+        # - Reference Group_CD4 Spark Blue 574 (Cells)_2026_01_14_14_35_59.fcs
+        # - Reference Group_CD40 APC (Cells)_2026_01_14_15_19_51.fcs
+        # - Reference Group_CD45 Alexa Fluor 532 (Cells)_2026_01_14_15_14_49.fcs
+        # - Reference Group_CD80 BUV661 (Beads)_2026_01_14_15_20_56.fcs
+        # - Reference Group_CD83 RY610 (Beads)_2026_01_14_15_21_58.fcs
+        # - Reference Group_CD86 PE-Cy5 (Beads)_2026_01_14_15_22_12.fcs
+        # - Reference Group_CD8a RB744 (Cells)_2026_01_14_14_38_03.fcs
+        # - Reference Group_CX3CR1 PE-Fire 700 (Cells)_2026_01_14_14_55_31.fcs
+        # - Reference Group_F4-80 BUV805 (Cells)_2026_01_14_14_30_42.fcs
+        # - Reference Group_IA-IE BUV496 (Cells)_2026_01_14_14_40_22.fcs
+        # - Reference Group_ICAM-1 BV650 (Beads)_2026_01_14_15_21_26.fcs
+        # - Reference Group_LIVE DEAD Blue (Cells)_2026_01_30_09_20_53.fcs
+        # - Reference Group_Ly6C BV605 (Cells)_2026_01_14_14_48_52.fcs
+        # - Reference Group_Ly6G PE-Fire810 (Cells)_2026_01_14_14_51_30.fcs
+        # - Reference Group_OX40L BV421 (Beads)_2026_01_14_15_21_08.fcs
+        # - Reference Group_PD-L1 BUV395 (Beads)_2026_01_14_15_20_23.fcs
+        # - Reference Group_pDCA1 Alexa Fluor 700 (Beads)_2026_01_14_15_22_26.fcs
+        # - Reference Group_Siglec-F BUV563 (Cells)_2026_01_30_09_17_12.fcs
+        # - Reference Group_Siglec-H BUV615 (Beads)_2026_01_14_15_20_39.fcs
+        # - Reference Group_TMEM119 PE-Cy7 (Beads)_2026_02_03_10_15_00.fcs
+        # - Reference Group_Unstained (Cells)_2026_01_14_14_58_18.fcs
+        # - Reference Group_XCR1 BV785 (Beads)_2026_01_14_15_21_41.fcs
+
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/17153347/files/
+      dataset_id: zenodo_17153347_Aurora
+      file_names:
+        - export_1. DPBS.fcs
+        - export_17. urine_e100_thr1500.fcs
+        - export_20240221_ME_Rosetta.fcs 
+
+  # Aurora
+  - src:
       root_url: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
       dataset_id: zenodo_15723074_Aurora
       file_names:
