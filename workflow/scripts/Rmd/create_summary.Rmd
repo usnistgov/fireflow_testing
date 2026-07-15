@@ -308,7 +308,7 @@ with a version.
 Software on newer machines is stored in a the nonstandard keyword *SWVER*.
 Software on the Gallios is stored in *@ACQSOFTWARE*. Software on older machines
 such as the CyAn and MoFlo (of varying submodels) will report their software
-prepend to the operating system on the *\$SYS* keyword (like `<software> /
+prepended to the operating system on the *\$SYS* keyword (like `<software> /
 <OS>`).
 
 ### Bio-Rad
@@ -330,7 +330,7 @@ Software is listed in *CREATOR* on newer machines.
 *\$CYT* reports the machine model. Software (including version and build) is
 stored in the nonstandard keywords *SOFTWARE*.
 
-### Standard Biotools (aka Fluidigm)
+### Standard Biotools
 
 CyTOF machines are inconsistent. Some store the machine name in *\$CYTSN* (ie
 "cytof2") and *\$CYT* instead stores the software name and version. Some don't
