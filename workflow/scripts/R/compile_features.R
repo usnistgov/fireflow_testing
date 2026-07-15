@@ -115,30 +115,9 @@ df_all <- df_root %>%
   select(filepath, dataset)
 
 df_machines_pretty <- df_machines %>%
-  mutate(
-    vendor = case_when(
-      str_detect(vendor, "BD") ~ "BD",
-      str_detect(vendor, "Agilent") ~ "Agilent",
-      str_detect(vendor, "Beckman") ~ "BC",
-      str_detect(vendor, "Thermo") ~ "TFS",
-      str_detect(vendor, "Biotools") ~ "SBT",
-      str_detect(vendor, "Cytek") ~ "Cytek",
-      str_detect(vendor, "Sony") ~ "Sony",
-      str_detect(vendor, "Verity") ~ "Verity",
-      TRUE ~ vendor
-    ),
-    software = case_when(
-      str_detect(software, "FACSDiva") ~
-        str_replace(software, "BD FACSDiva Software Version", "FACSDiva"),
-      str_detect(software, "DVSSCIENCES") ~
-        str_replace(software, "DVSSCIENCES-?", ""),
-      TRUE ~ software
-    )
-  ) %>%
-  replace_na(list(software = "UNK")) %>%
-  mutate(ms = sprintf("%s_%s", machine, software)) %>%
+  mutate(ms = sprintf("%s_%s", machine, software_short)) %>%
   filter(dataset == 0) %>%
-  select(filepath, vendor, machine, software, ms)
+  select(filepath, vendor_short, machine, software_short, ms)
 
 ## show number of datasets per file
 
@@ -150,7 +129,7 @@ df_root %>%
   ggplot(aes(x = n, y = fct_rev(ms))) +
   geom_point() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -178,7 +157,7 @@ df_has_supp %>%
   ggplot(aes(y = fct_rev(ms), fill = has_supp)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -206,7 +185,7 @@ df_has_analysis %>%
   ggplot(aes(y = fct_rev(ms), fill = has_analysis)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -234,7 +213,7 @@ df_n_other %>%
   ggplot(aes(x = n, y = fct_rev(ms))) +
   geom_point() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -254,7 +233,7 @@ df_misc %>%
   ggplot(aes(y = fct_rev(ms), fill = has_crc)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -277,7 +256,7 @@ df_dark %>%
   ggplot(aes(y = fct_rev(ms), fill = has_dark)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -312,7 +291,7 @@ df_scale %>%
   ggplot(aes(y = fct_rev(ms), fill = scaling)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -331,7 +310,7 @@ df_byteord %>%
   ggplot(aes(y = fct_rev(ms), fill = byteord)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -373,7 +352,7 @@ df_all_schema %>%
   ggplot(aes(y = fct_rev(ms), fill = schema_type)) +
   geom_bar() +
   facet_grid(
-    "vendor",
+    "vendor_short",
     scales = "free",
     switch = "y",
     space = "free"
@@ -491,9 +470,9 @@ df_all_kw %>%
 
 df_all_kw %>%
   left_join(df_machines_pretty, by = c("filepath")) %>%
-  group_by(vendor, ms, key) %>%
+  group_by(vendor_short, ms, key) %>%
   mutate(tot = n()) %>%
-  group_by(vendor, ms, software, key) %>%
+  group_by(vendor_short, ms, software_short, key) %>%
   summarize(
     used = mean(used),
     .groups = "drop"
@@ -509,7 +488,7 @@ df_all_kw %>%
   ggplot(aes(key, fct_rev(ms), color = used)) +
   geom_point() +
   facet_grid(
-    vendor ~ category,
+    vendor_short~ category,
     scales = "free",
     switch = "y",
     space = "free"

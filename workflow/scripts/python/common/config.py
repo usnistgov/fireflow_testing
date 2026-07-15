@@ -77,7 +77,10 @@ class MachineId(Enum):
     STRAT_S1400 = "strat_s1400"
     STRAT_S1400EX = "strat_s1400ex"
     THERMO_ATTUNE = "thermo_attune"
-    THERMO_ATTUNE_NXT = "thermo_attune_nxt"
+    THERMO_ATTUNE_NXT_B = "thermo_attune_nxt_b"
+    THERMO_ATTUNE_NXT_BV = "thermo_attune_nxt_bv"
+    THERMO_ATTUNE_NXT_BVY = "thermo_attune_nxt_bvy"
+    THERMO_ATTUNE_NXT_BRVY = "thermo_attune_nxt_brvy"
     VERITY_GEMSTONE = "verity_gemstone"
 
 
@@ -399,15 +402,42 @@ SONY_MACHINES = {
     ),
 }
 
-# $CYT is misleading since it seems to reflect software and version
 THERMO_MACHINES = {
+    # $CYT is misleading since it seems to reflect software and version
     MachineId.THERMO_ATTUNE: Machine(
         name=MachineName("Attune"),
         vendor=VendorId.THERMO,
     ),
-    MachineId.THERMO_ATTUNE_NXT: Machine(
-        name=MachineName("Attune NxT"),
+    # The NxT machines can be further broken down by different laser configs,
+    # which are technically different model numbers
+    MachineId.THERMO_ATTUNE_NXT_B: Machine(
+        name=MachineName("Attune NxT (B)"),
         vendor=VendorId.THERMO,
+        cyt_values=[
+            "4486515 Attune NxT Acoustic Focusing Cytometer (Lasers: BXXX)",
+        ],
+    ),
+    MachineId.THERMO_ATTUNE_NXT_BV: Machine(
+        name=MachineName("Attune NxT (BV)"),
+        vendor=VendorId.THERMO,
+        cyt_values=[
+            "4486518 Attune NxT Acoustic Focusing Cytometer (Lasers: BYXX)",
+        ],
+    ),
+    MachineId.THERMO_ATTUNE_NXT_BVY: Machine(
+        name=MachineName("Attune NxT (BVY)"),
+        vendor=VendorId.THERMO,
+        cyt_values=[
+            "4486520 Attune NxT Acoustic Focusing Cytometer (Lasers: BVYX)",
+        ],
+    ),
+    MachineId.THERMO_ATTUNE_NXT_BRVY: Machine(
+        name=MachineName("Attune NxT (BRVY)"),
+        vendor=VendorId.THERMO,
+        cyt_values=[
+            "0A29009 Attune NxT Acoustic Focusing Cytometer (Lasers: BRV6Y)",
+            "4486521 Attune NxT Acoustic Focusing Cytometer (Lasers: BRVY)",
+        ],
     ),
 }
 

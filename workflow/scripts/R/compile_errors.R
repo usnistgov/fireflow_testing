@@ -48,7 +48,14 @@ df_overrange <- read_tsv(snakemake@input[["overrange"]], col_types = "iciiil")
 
 df_machines <- read_tsv(
   snakemake@input[["machines"]],
-  col_types = "ci-ccccc---"
+  col_types = cols(
+    filepath = "c",
+    dataset = "i",
+    vendor_short = "c",
+    machine = "c",
+    software_short = "c",
+    .default = "-"
+  ),
 ) %>%
   filter(dataset == 0) %>%
   rename(fcs_path = filepath) %>%
@@ -299,29 +306,8 @@ df_all_errors <- df_misc_errors %>%
   select(-nc_key_val_scale_trimmed)
 
 df_all_errors %>%
-  mutate(
-    vendor = case_when(
-      str_detect(vendor, "BD") ~ "BD",
-      str_detect(vendor, "Agilent") ~ "Agilent",
-      str_detect(vendor, "Beckman") ~ "BC",
-      str_detect(vendor, "Thermo") ~ "TFS",
-      str_detect(vendor, "Biotools") ~ "SBT",
-      str_detect(vendor, "Cytek") ~ "Cytek",
-      str_detect(vendor, "Sony") ~ "Sony",
-      str_detect(vendor, "Verity") ~ "Verity",
-      TRUE ~ vendor
-    ),
-    software = case_when(
-      str_detect(software, "FACSDiva") ~
-        str_replace(software, "BD FACSDiva Software Version", "FACSDiva"),
-      str_detect(software, "DVSSCIENCES") ~
-        str_replace(software, "DVSSCIENCES-?", ""),
-      TRUE ~ software %>% str_replace("Development-only Version", ""),
-    )
-  ) %>%
-  replace_na(list(software = "UNK")) %>%
-  mutate(machine = sprintf("%s_%s", machine, software)) %>%
-  group_by(vendor, machine) %>%
+  mutate(machine = sprintf("%s_%s", machine, software_short)) %>%
+  group_by(vendor_short, machine) %>%
   summarize(
     across(starts_with("nc_"), mean),
     .groups = "drop",
@@ -358,7 +344,7 @@ df_all_errors %>%
   ) +
   geom_point() +
   facet_grid(
-    vendor ~ category,
+    vendor_short ~ category,
     scales = "free",
     switch = "y",
     space = "free"

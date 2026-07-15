@@ -187,6 +187,7 @@ rule create_summary:
     input:
         **rules.compile_features.output,
         plot_errors=rules.compile_errors.output.plot,
+        machines=rules.compile_metadata.output.machine_table,
     output:
         "results/summaries/summary.html",
     conda:

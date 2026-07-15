@@ -72,6 +72,7 @@ class DatasetMetadata(NamedTuple):
     vendor: str
     machine: Machine | None
     software: str | None
+    serial: str | None
     # machine-specific keywords
     cyt: str | None
     cytsn: str | None
@@ -128,50 +129,109 @@ class DatasetMetadata(NamedTuple):
     spill_or_comp_present: bool
 
 
-# Get the "software version" using some messy heuristics
-def get_software_string(
+class MachineDetails(NamedTuple):
+    vendor: VendorId | None
+    machine: MachineId | None
+    software: str | None
+    serial: str | None
+
+
+# Get the machine and "software version" using some messy heuristics
+def get_machine_details(
     core: pft.AnyCoreTEXT,
-    vendorid: VendorId | None,
-    machineid: MachineId | None,
-) -> str | None:
+    pconf: ParseConfig,
+    conf: FCSConfig,
+) -> MachineDetails:
+    cyt = core.cyt
+    cytsn = None if isinstance(core, pf.CoreTEXT2_0) else core.cytsn
+
+    def find_sbt_version(s: str) -> str | None:
+        if re.search("[0-9]+\\.[0-9]+\\.[0-9]+", s) is not None:
+            return s
+        else:
+            return None
+
+    # Try to figure out the machine based on CYT, this will return non-None
+    # if the config supplies the machine id, which will be used first over the
+    # $CYT keyword.
+    machineid: MachineId | None = conf.get_machine(cyt, pconf.machine)
+
+    # Some (not all) cytof instruments store their instrument name in $CYTSN.
+    # Check that first. This also assumes that we don't already know the machine
+    # based on user override or getting a matching machine hit from $CYT (which
+    # probably won't happen for cytof instruments since these use $CYT for
+    # software version)
+    sbt_software = fmap_maybe(find_sbt_version, cyt)
+    if (machineid is None or machineid == MachineId.SBT_CYTOF) and cytsn == "CyTOF":
+        return MachineDetails(
+            VendorId.SBT,
+            MachineId.SBT_CYTOF,
+            sbt_software,
+            None,
+        )
+    elif (machineid is None or machineid == MachineId.SBT_CYTOF2) and cytsn == "cytof2":
+        return MachineDetails(
+            VendorId.SBT,
+            MachineId.SBT_CYTOF2,
+            sbt_software,
+            None,
+        )
+    elif (
+        machineid is None or machineid == MachineId.SBT_HELIOS
+    ) is None and cytsn == "helios":
+        return MachineDetails(
+            VendorId.SBT,
+            MachineId.SBT_HELIOS,
+            sbt_software,
+            None,
+        )
+
+    # Attune (not NxT) stores software version in $CYT. Machine is implied
+    # (probably?)
+    if (
+        (machineid is None or MachineId.THERMO_ATTUNE)
+        and cyt is not None
+        and "Attune Cytometric Software" in cyt
+    ):
+        return MachineDetails(VendorId.THERMO, MachineId.THERMO_ATTUNE, cyt, cytsn)
+
+    vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
+
     # BD and Cytek store their software in the "CREATOR" keyword
     if vendorid in [VendorId.BD, VendorId.CYTEK]:
-        return key_maybe(core.nonstandard_keywords, "CREATOR")
+        software = key_maybe(core.nonstandard_keywords, "CREATOR")
     # Agilent stores their software in the "#NCCreator" keyword
     elif vendorid in [VendorId.AGILENT]:
-        return key_maybe(core.nonstandard_keywords, "#NCCreator")
-    # Thermo stores the software string in $CYT (and the cytometer name is
-    # supposedly implied)
-    elif machineid is MachineId.THERMO_ATTUNE:
-        return core.cyt
+        software = key_maybe(core.nonstandard_keywords, "#NCCreator")
     # A few random machines store software in $SYS as "X" in an "X / Y" pattern
     elif machineid in [MachineId.BC_CYAN, MachineId.BC_XDP, MachineId.BC_ASTRIOS]:
-        return fmap_maybe(lambda sys: sys.split(" / ")[0], core.sys)
+        software = fmap_maybe(lambda sys: sys.split(" / ")[0], core.sys)
     # The FC500 stores software in $SYS
     elif machineid is MachineId.BC_FC500:
-        return core.sys
+        software = core.sys
     # Beckman (with the exception of other machines above) generally stores
     # their software in "SWVER"
     elif vendorid in [VendorId.COULTER]:
         # except the gallios sometimes uses @ACQSOFTWARE
         if machineid is MachineId.BC_GALLIOS:
-            return key_maybe(core.nonstandard_keywords, "@ACQSOFTWARE")
+            software = key_maybe(core.nonstandard_keywords, "@ACQSOFTWARE")
         else:
-            return key_maybe(core.nonstandard_keywords, "SWVER")
+            software = key_maybe(core.nonstandard_keywords, "SWVER")
     # Stratedigm stores software in $SOFTWARE (makes sense)
     elif vendorid is VendorId.STRAT:
-        return key_maybe(core.nonstandard_keywords, "SOFTWARE")
+        software = key_maybe(core.nonstandard_keywords, "SOFTWARE")
     # Cytof machines store their software in $CYT...sometimes
     elif vendorid in [VendorId.SBT]:
         if (
             core.cyt is not None
             and re.search("[0-9]+\\.[0-9]+\\.[0-9]+", core.cyt) is not None
         ):
-            return core.cyt
+            software = core.cyt
         else:
-            return None
+            software = None
     else:
-        return None
+        software = None
+    return MachineDetails(vendorid, machineid, software, cytsn)
 
 
 def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
@@ -190,9 +250,7 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
 
     for i, (core, _) in enumerate(out):
         version = core.version
-        machineid: MachineId | None = fcs_conf.get_machine(core.cyt, parse.machine)
-        vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
-        software = get_software_string(core, vendorid, machineid)
+        details = get_machine_details(core, parse, fcs_conf)
 
         cytsn = None if isinstance(core, pf.CoreTEXT2_0) else core.cytsn
 
@@ -452,9 +510,10 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
             cyt=core.cyt,
             cytsn=cytsn,
             sys=core.sys,
-            vendor=maybe("unknown", lambda i: i.value, vendorid),
-            machine=fmap_maybe(lambda i: ALL_MACHINES[i], machineid),
-            software=software,
+            vendor=maybe("unknown", lambda i: i.value, details.vendor),
+            machine=fmap_maybe(lambda i: ALL_MACHINES[i], details.machine),
+            software=details.software,
+            serial=details.serial,
             date=core.date,
             btim=core.btim,
             etim=core.etim,
@@ -525,8 +584,11 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
             "dataset",
             "version",
             "vendor",
+            "vendor_short",
             "machine",
             "software",
+            "software_short",
+            "serial",
             "machine_type",
             "sorting",
             "CYT",
@@ -535,6 +597,41 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
         ]
         w.writerow(header)
     else:
+
+        def short_vendor(s: str) -> str:
+            if "BD" in s:
+                return "BD"
+            elif "Beckman" in s:
+                return "BC"
+            elif "Cytek" in s:
+                return "Cytek"
+            elif "Thermo" in s:
+                return "Thermo"
+            elif "Miltenyi" in s:
+                return "Miltenyi"
+            elif "Sony" in s:
+                return "Sony"
+            elif "Verity" in s:
+                return "Verity"
+            elif "Agilent" in s:
+                return "Agilent"
+            elif "Apogee" in s:
+                return "Apogee"
+            elif "Partec" in s:
+                return "Partec"
+            elif "Biotools" in s:
+                return "SBT"
+            else:
+                return s
+
+        def short_software(s: str) -> str:
+            if "FACSDiva" in s:
+                return s.replace("BD FACSDiva Software Version", "FACSDiva")
+            elif "DVSSCIENCES":
+                return re.sub("DVSSCIENCES-?", "", s)
+            else:
+                return s.replace("Development-only Version", "")
+
         for d in ds:
             w.writerow(
                 [
@@ -542,8 +639,11 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                     d.dataset_index,
                     d.version,
                     d.vendor,
+                    short_vendor(d.vendor),
                     maybe("unknown", lambda x: x.name, d.machine),
                     d.software,
+                    maybe("UNK", short_software, d.software),
+                    d.serial,
                     maybe("unknown", lambda x: x.machine_type.value, d.machine),
                     maybe("unknown", lambda x: str(x.sorting), d.machine),
                     d.cyt,

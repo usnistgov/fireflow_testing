@@ -4036,9 +4036,6 @@ test_files:
         - Tmem119 x IAB AAV NJG 1.6.22_Experimental_E4.fcs
         - Tmem119 x IAB AAV NJG 1.6.22_Experimental_E5.fcs
 
-    parse:
-      machine: thermo_attune_nxt
-
   # Helios (according to https://elifesciences.org/reviewed-preprints/95494v2)
   - src:
       root_url: https://zenodo.org/records/7982165/files/
@@ -46141,8 +46138,6 @@ test_files:
         # - SDY1655/ResultFiles/Flow_cytometry_result/2020-05-28_HuTSurf_Drop052_Experiment_Group_Pt259.828376.fcs
         # - SDY1655/ResultFiles/Flow_cytometry_result/2020-05-29_HuTIC_Drop052_Experiment_Group_Pt258.828241.fcs
         # - SDY1655/ResultFiles/Flow_cytometry_result/2020-05-29_HuTIC_Drop052_Experiment_Group_Pt259.828289.fcs
-    parse:
-      machine: thermo_attune_nxt
 
   # FACSverse
   - src:
