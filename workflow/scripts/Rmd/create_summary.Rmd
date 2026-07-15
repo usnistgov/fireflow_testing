@@ -278,8 +278,7 @@ cases, this was found explicity by going to the publication which listed the
 exact machine they used. This is surprisingly less common than one would think.
 
 In most cases this information could be found automatically using the following
-heuristics (see
-[compile_metadata.py](workflow/scripts/python/fcsio/compile_metadata.py) for 
+heuristics (see `workflow/scripts/python/fcsio/compile_metadata.py` for
 details):
 
 ### Agilent
