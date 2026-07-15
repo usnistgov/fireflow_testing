@@ -3847,6 +3847,322 @@ test_files:
     parse:
       machine: cytek_easycyte
 
+
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/17364766/files/
+      dataset_id: zenodo_17364766_Aurora
+      file_names:
+        - A1 417pre.fcs
+        - A1 541_2.fcs
+        - A1 669_2_p.fcs
+        # - A2 417post.fcs
+        # - A2 541_6.fcs
+        # - A2 669_6_p.fcs
+        # - A3 417prerv.fcs
+        # - A3 541_2_rv.fcs
+        # - A3 669_2_rv.fcs
+        # - A4 417postrv.fcs
+        # - A4 541_6_rv.fcs
+        # - A4 669_6_rv.fcs
+        # - A5 669_2_d.fcs
+        # - A6 669_6_d.fcs
+        # - A7 417predmso.fcs
+        # - A7 541_2_d.fcs
+        # - A8 417postdmso.fcs
+        # - A8 541_6_d.fcs
+        # - B1 478_2_p.fcs
+        # - B1 680_2_p.fcs
+        # - B2 478_6_p.fcs
+        # - B2 680_6_p.fcs
+        # - B3 478_2_rv.fcs
+        # - B3 680_2_rv.fcs
+        # - B4 478_6_rv.fcs
+        # - B4 680_6_rv.fcs
+        # - B5 478_2_d.fcs
+        # - B5 680_2_d.fcs
+        # - B6 478_6_d.fcs
+        # - B6 680_6_d.fcs
+        # - C1 519_2_p.fcs
+        # - C1 698_2_p.fcs
+        # - C2 519_6_p.fcs
+        # - C2 698_6_p.fcs
+        # - C3 519_2_rv.fcs
+        # - C3 698_2_rv.fcs
+        # - C4 519_6_rv.fcs
+        # - C4 698_6_rv.fcs
+        # - C5 519_2_d.fcs
+        # - C5 698_2_d.fcs
+        # - C6 519_6_d.fcs
+        # - C6 698_6_d.fcs
+        # - D1 705_2_p.fcs
+        # - D1 898_2_p.fcs
+        # - D2 705_6_p.fcs
+        # - D2 898_6_p.fcs
+        # - D3 705_2_rv.fcs
+        # - D3 898_2_rv.fcs
+        # - D4 705_6_rv.fcs
+        # - D4 898_6_rv.fcs
+        # - D5 705_2_d.fcs
+        # - D5 898_2_d.fcs
+        # - D6 705_6_d.fcs
+        # - D6 898_6_d.fcs
+        # - E1 679_2_p.fcs
+        # - E1 707_2_p.fcs
+        # - E2 679_6_p.fcs
+        # - E2 707_6_p.fcs
+        # - E3 679_2_rv.fcs
+        # - E3 707_2_rv.fcs
+        # - E4 679_6_rv.fcs
+        # - E4 707_6_rv.fcs
+        # - E5 679_2_d.fcs
+        # - E5 707_2_d.fcs
+        # - E6 679_6_d.fcs
+        # - E6 707_6_d.fcs
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/17363218/files/
+      dataset_id: zenodo_17363218_Aurora
+      file_names:
+        - A1 211_pre.fcs
+        - A1 371_2_p.fcs
+        - A2 211_post.fcs
+        # - A2 371_6_p.fcs
+        # - A3 211_pre_rv.fcs
+        # - A3 371_2_rv.fcs
+        # - A4 211_post_rv.fcs
+        # - A4 371_6_rv.fcs
+        # - A5 211_pre_c.fcs
+        # - A6 211_post_c.fcs
+        # - A7 211_pre D.fcs
+        # - A7 371_2_d.fcs
+        # - A8 211_post D.fcs
+        # - A8 371_6_d.fcs
+        # - B1 214_pre.fcs
+        # - B1 223_pre.fcs
+        # - B1 266_2.fcs
+        # - B2 214_post.fcs
+        # - B2 223_post.fcs
+        # - B2 266_6.fcs
+        # - B3 214_pre_RV.fcs
+        # - B3 223_p_R.fcs
+        # - B3 266_2_rv.fcs
+        # - B4 214_post_RV.fcs
+        # - B4 223_post_r.fcs
+        # - B4 266_6_rv.fcs
+        # - B5 214_pre_CMV.fcs
+        # - B5 223_pre_C.fcs
+        # - B5 266_2_c.fcs
+        # - B6 214_post_CMV.fcs
+        # - B6 223_post_c.fcs
+        # - B6 266_6_c.fcs
+        # - B7 214_pre_DMSO.fcs
+        # - B7 223_pre_D.fcs
+        # - B7 266_2_d.fcs
+        # - B8 214_post_DMSO.fcs
+        # - B8 223_post_D.fcs
+        # - B8 266_6_d.fcs
+        # - C1 249_pre.fcs
+        # - C1 375_2.fcs
+        # - C1 844_2.fcs
+        # - C2 249_post.fcs
+        # - C2 375_6.fcs
+        # - C2 844_6.fcs
+        # - C3 249_pre_RV.fcs
+        # - C3 375_2_rv.fcs
+        # - C3 844_2_rv.fcs
+        # - C4 249_post_RV.fcs
+        # - C4 375_6_rv.fcs
+        # - C4 844_6_rv.fcs
+        # - C5 249_pre_CMV.fcs
+        # - C5 375_2_c.fcs
+        # - C6 249_post_CMV.fcs
+        # - C6 375_6_c.fcs
+        # - C7 249_pre_DMSO.fcs
+        # - C7 375_2_d.fcs
+        # - C7 844_2_d.fcs
+        # - C8 249_post_DMSO.fcs
+        # - C8 375_6_d.fcs
+        # - C8 844_6_d.fcs
+        # - D1 259_pre.fcs
+        # - D1 324_pre.fcs
+        # - D1 715_2.fcs
+        # - D2 259_post.fcs
+        # - D2 324_post.fcs
+        # - D2 715_6.fcs
+        # - D3 259_pre_RV.fcs
+        # - D3 324_pre_r.fcs
+        # - D3 715_2_rv.fcs
+        # - D4 259_post_RV.fcs
+        # - D4 324_post_r.fcs
+        # - D4 715_6_rv.fcs
+        # - D5 324_pre_CMV.fcs
+        # - D6 324_post_CMV.fcs
+        # - D7 259_pre_DMSO.fcs
+        # - D7 324_pre D.fcs
+        # - D7 715_2_d.fcs
+        # - D8 259_post_DMSO.fcs
+        # - D8 324_postD.fcs
+        # - D8 715_6_d.fcs
+        # - E1 330_pre.fcs
+        # - E1 353_2.fcs
+        # - E1 357_pre.fcs
+        # - E2 330_post.fcs
+        # - E2 353_6.fcs
+        # - E2 357_post.fcs
+        # - E3 330_pre_RV.fcs
+        # - E3 353_2_rv.fcs
+        # - E3 357_pre_RV.fcs
+        # - E4 330_post_RV.fcs
+        # - E4 353_6_rv.fcs
+        # - E4 357_post_RV.fcs
+        # - E5 330_pre_C.fcs
+        # - E6 330_post_C.fcs
+        # - E7 330_pre_D.fcs
+        # - E7 353_2_d.fcs
+        # - E7 357_pre_DMSO.fcs
+        # - E8 330_post_D.fcs
+        # - E8 353_6_d.fcs
+        # - E8 357__post_DMSO.fcs
+
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/21069081/files/
+      dataset_id: zenodo_21069081_Aurora
+      file_names:
+        - "21AL13_PECs-PECs-Work Order %23001.fcs"
+        - "21AL13_PECs-PECs-Work Order %23002.fcs"
+        - "21AL13_PECs-PECs-Work Order %23003.fcs"
+        # - "21AL13_PECs-PECs-Work Order #004.fcs"
+        # - "21AL13_PECs-PECs-Work Order #005.fcs"
+        # - "21AL13_PECs-PECs-Work Order #006.fcs"
+        # - "21AL13_PECs-PECs-Work Order #007.fcs"
+        # - "21AL13_PECs-PECs-Work Order #008.fcs"
+        # - "21AL13_PECs-PECs-Work Order #009.fcs"
+        # - "21AL13_PECs-PECs-Work Order #010.fcs"
+        # - "21AL13_PECs-PECs-Work Order #011.fcs"
+        # - "21AL13_PECs-PECs-Work Order #012.fcs"
+        # - "21AL13_PECs-PECs-Work Order #013.fcs"
+        # - "21AL13_PECs-PECs-Work Order #014.fcs"
+        # - "21AL13_PECs-Reference Group-CD11b BV750 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-CD11c BV605 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-CD19-CD3-Ly6G BV711 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-CD45 Pacific Blue (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-CD49b PE-Dazzle594 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-F4-80 BV421 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-Live-Dead Zombie NIR (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-Ly6c BV570 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-MHCII APC-Fire 750 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-Nkp46 PE-Cy7 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-P30 Alexa Fluor 647 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-T-bet Alexa Fluor 488 (Cells).fcs"
+        # - "21AL13_PECs-Reference Group-Unstained (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-CD11b BV750 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-CD11c BV605 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-CD19-CD3-Ly6G BV711 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-CD45 Pacific Blue (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-CD49b PE-Dazzle594 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-F4-80 BV421 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-Live-Dead Zombie NIR (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-Ly6c BV570 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-MHCII APC-Fire 750 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-Nkp46 PE-Cy7 (Cells).fcs"
+        # - "21AL13_Spleens-Reference Group-P30 Alexa Fluor 647 (Beads).fcs"
+        # - "21AL13_Spleens-Reference Group-T-bet Alexa Fluor 488 (Cells).fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #001.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #002.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #003.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #004.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #005.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #006.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #007.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #008.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #009.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #010.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #011.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #012.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #013.fcs"
+        # - "21AL13_Spleens-Spleens-Work Order #014.fcs"
+
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/20627793/files/
+      dataset_id: zenodo_20627793_Aurora
+      file_names:
+        - 01 Brain_Naive_2026_02_06_08_53_54.fcs
+        - 01 Brain_Tumor-Bearing_2026_02_06_08_53_54.fcs
+        - 01 Brain_Unstained_2026_02_06_08_53_54.fcs
+        # - 02 Meninges_Naive_2026_02_06_08_53_54.fcs
+        # - 02 Meninges_Tumor-Bearing_2026_02_06_08_53_54.fcs
+        # - 02 Meninges_Unstained_2026_02_06_08_53_54.fcs
+        # - 03 Spleen_Naive_2026_02_06_08_53_54.fcs
+        # - 03 Spleen_Unstained_2026_02_06_08_53_54.fcs
+        # - 04 dcLN_Naive_2026_02_06_08_53_54.fcs
+        # - 04 dcLN_Tumor-Bearing_2026_02_06_08_53_54.fcs
+        # - 04 dcLN_Unstained_2026_02_06_08_53_54.fcs
+        # - 05 sLN_Naive_2026_02_06_08_53_54.fcs
+        # - 05 sLN_Tumor-Bearing_2026_02_06_08_53_54.fcs
+        # - 05 sLN_Unstained_2026_02_06_08_53_54.fcs
+        # - 06 Blood_Naive_2026_02_06_08_53_54.fcs
+        # - 06 Blood_Unstained_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_CD80 BUV661_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_CD83 RY610_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_ICAM-1 BV650_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_PD-L1 BUV395_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_Siglec-H BUV615_2026_02_06_08_53_54.fcs
+        # - 07 Brain FMOs_TMEM119 PE-Cy7_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_B220 APC-Fire 810_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CCR7 BUV737_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD103 BV711_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD172a APC-Fire 750_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD19 BV480_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD3e PE_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD4 SparkBlue 574_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD40 APC_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD45 Alexa Fluor 532_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD86 PE-Cy5_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CD8a RB744_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_CX3CR1 PE-Fire 700_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_IA-IE BUV496_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_Live-Dead Blue_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_OX40L BV421_2026_02_06_08_53_54.fcs
+        # - 08 LN FMOs_pDCA-1 Alexa Fluor 700_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_CD11b BV570_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_CD11c BB515_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_F4-80 BUV805_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_ICAM-1 BV650_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_Ly6C BV605_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_Siglec-F BUV563_2026_02_06_08_53_54.fcs
+        # - 09 Spleen FMOs_XCR1 BV785_2026_02_06_08_53_54.fcs
+        # - 10 Blood FMO_Ly6G PE-Fire 810_2026_02_06_08_53_54.fcs
+
+
+  # Aurora
+  - src:
+      root_url: https://zenodo.org/records/18275173/files/
+      dataset_id: zenodo_18275173_Aurora
+      file_names:
+        - B1_control1.fcs
+        - B1_control2.fcs
+        - B2_control1.fcs
+        # - B2_control2.fcs
+        # - B3_control1.fcs
+        # - B3_control2.fcs
+        # - B4_control1.fcs
+        # - B4_control2.fcs
+        # - B5_control1.fcs
+        # - B5_control2.fcs
+        # - B6_control1.fcs
+        # - B6_control2.fcs
+        # - B7_control1.fcs
+        # - B7_control2.fcs
+        # - B8_control1.fcs
+        # - B8_control2.fcs
+
   # Aurora
   - src:
       root_url: https://zenodo.org/records/15723074/files/B_cells_donor1.fcs
