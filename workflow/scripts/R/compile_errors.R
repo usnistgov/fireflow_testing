@@ -355,7 +355,7 @@ df_all_errors %>%
       "<10%" = "#ffbbbb",
       "10-90%" = "#ff8888",
       ">90%" = "#ff5555",
-      "all" = "#ff0000"
+      "all" = "#000000"
     )
   )  +
   labs(x = NULL, y = NULL, color = "Fraction\nwith errors") +

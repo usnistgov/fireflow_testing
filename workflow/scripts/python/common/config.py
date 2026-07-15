@@ -63,7 +63,9 @@ class MachineId(Enum):
     BC_SYSTEM2 = "bc_system2"
     BC_XDP = "bc_xdp"
     BR_ZE5 = "br_ze5"
-    CYTEK_AURORA = "cytek_aurora"
+    CYTEK_AURORA_3 = "cytek_aurora3"
+    CYTEK_AURORA_4 = "cytek_aurora4"
+    CYTEK_AURORA_5 = "cytek_aurora5"
     CYTEK_EASYCYTE = "cytek_easycyte"
     CYTEK_IMGSTR = "cytek_imgstr"
     SBT_CYTOF = "sbt_cytof"
@@ -346,11 +348,20 @@ BC_MACHINES = {
 }
 
 CYTEK_MACHINES = {
-    MachineId.CYTEK_AURORA: Machine(
-        name=MachineName("Aurora"),
+    MachineId.CYTEK_AURORA_3: Machine(
+        name=MachineName("Aurora (3L)"),
         vendor=VendorId.CYTEK,
         machine_type=MachineType.SPECTRAL,
-        cyt_values=["Aurora"],
+    ),
+    MachineId.CYTEK_AURORA_4: Machine(
+        name=MachineName("Aurora (4L)"),
+        vendor=VendorId.CYTEK,
+        machine_type=MachineType.SPECTRAL,
+    ),
+    MachineId.CYTEK_AURORA_5: Machine(
+        name=MachineName("Aurora (5L)"),
+        vendor=VendorId.CYTEK,
+        machine_type=MachineType.SPECTRAL,
     ),
     MachineId.CYTEK_EASYCYTE: Machine(
         name=MachineName("Guava easyCyte"),

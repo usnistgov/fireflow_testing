@@ -189,11 +189,25 @@ def get_machine_details(
     # Attune (not NxT) stores software version in $CYT. Machine is implied
     # (probably?)
     if (
-        (machineid is None or MachineId.THERMO_ATTUNE)
+        (machineid is None or machineid == MachineId.THERMO_ATTUNE)
         and cyt is not None
         and "Attune Cytometric Software" in cyt
     ):
         return MachineDetails(VendorId.THERMO, MachineId.THERMO_ATTUNE, cyt, cytsn)
+
+    # Aurora is usually just called an "Aurora" in $CYT but this doesn't say
+    # how many lasers it has
+    if machineid is None and cyt == "Aurora":
+        has_laser3 = "LASER3NAME" in core.nonstandard_keywords
+        has_laser4 = "LASER4NAME" in core.nonstandard_keywords
+        has_laser5 = "LASER5NAME" in core.nonstandard_keywords
+        match (has_laser3, has_laser4, has_laser5):
+            case (True, True, True):
+                machineid = MachineId.CYTEK_AURORA_5
+            case (True, True, False):
+                machineid = MachineId.CYTEK_AURORA_4
+            case (True, False, False):
+                machineid = MachineId.CYTEK_AURORA_3
 
     vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
 
