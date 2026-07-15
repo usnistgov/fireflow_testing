@@ -258,15 +258,81 @@ If impossible, the version which drops the least optional keywords is selected.
 
 <img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">
 
-## Machine and Software Assignment
+## Machine Identification
 
-Machine is almost always stored in *\$CYT*. There are a few exceptions. CyTOF
-instruments sometimes store the name of the machine (CyTOF, CyTOF 2, Helios,
-etc) in *\$CYTSN*.
+Ideally, the machine model is given in *\$CYT* (with the vendor implied) and the
+serial number is given in *\$CYTSN*. This is not always the case. First, some
+machines list their instrument "family" in *\$CYT* (for example, "Aurora"
+without the number of lasers, which are all technically different models). Of
+course, some machines just store this information whereever they want.
 
 There is no standardized way to report software in FCS files. In practice this
 is often a combination of appending a version string to *\$CYT*, using *\$SYS*
 (which may otherwise be the operating system of the host machine), or adding
-additional keywords.
+additional keywords. When it exists, the software name sometimes has version and
+build number, or sometimes is just the name of the application.
 
-The following heuristics were used to determine software 
+In order to make the above plots, vendor, machine (ideally the exact model), and
+software (ideally with version and build information) need to be found. In some
+cases, this was found explicity by going to the publication which listed the
+exact machine they used. This is surprisingly less common than one would think.
+
+In most cases this information could be found automatically using the following
+heuristics (see
+[compile_metadata.py](workflow/scripts/python/fcsio/compile_metadata.py) for 
+details):
+
+### Agilent
+
+Novocyte family machines report themeselves accurately in *\$CYT*.
+
+Software name and version is stored in the *#NCCreator* nonstandard keyword.
+
+### BD
+
+Most BD machines report themselves accurately in *\$CYT*. No attempt has been
+made so far to identify different laser configurations. Sometimes *\$CYT* has a
+nickname but these usually have the machine model listed after.
+
+Older machines may not have *\$CYT*. Machines with a Cytek upgrade will usually
+say something like "Cytek DxP10", sometimes with the base machine after
+(FACScan, FACSCalibur, or FACSsort).
+
+Software is reported often in a non-standard keyword called *CREATOR*, usually
+with a version.
+
+### BC
+
+*\$CYT* is usually accurate, especially on modern machines.
+
+Software on newer machines is stored in a the nonstandard keyword *SWVER*.
+Software on the Gallios is stored in *@ACQSOFTWARE*. Software on older machines
+such as the CyAn and MoFlo (of varying submodels) will report their software
+prepend to the operating system on the *\$SYS* keyword (like `<software> /
+<OS>`).
+
+### Bio-Rad
+
+The ZE5 reports itself as a "YETI" in *\$CYT*, which was its former name when
+owned by Propel Labs.
+
+### Cytek
+
+Machines are accurately identified in *\$CYT*. However, Aurora's are further
+identified by the number of lasers, which are consistent across three different
+models (3, 4, and 5 lasers) which is done by checking the nonstandard keywords
+*LASERnNAME*.
+
+Software is listed in *CREATOR* on newer machines.
+
+### Stratedigm
+
+*\$CYT* reports the machine model. Software (including version and build) is
+stored in the nonstandard keywords *SOFTWARE*.
+
+### Standard Biotools (aka Fluidigm)
+
+CyTOF machines are inconsistent. Some store the machine name in *\$CYTSN* (ie
+"cytof2") and *\$CYT* instead stores the software name and version. Some don't
+store the machine name at all and this must be assumed by reading the primary
+source publication.
