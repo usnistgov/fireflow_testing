@@ -3,6 +3,36 @@ title: "fireflow test summary"
 output: "html_document"
 ---
 
+# Results Overview
+
+```{r, results = "asis", echo = FALSE, fig.height = 11, fig.width = 12}
+suppressMessages(library(tidyverse))
+df_machines <- read_tsv(
+  snakemake@input[["machines"]],
+  col_types = cols(
+    dataset = "i",
+    .default = "c"
+  )
+)
+
+df_machines %>%
+  mutate(repo = map_chr(filepath, \(x) str_split_1(x, "/")[[2]])) %>%
+  mutate(repo = if_else(repo == "misc_repo", "zenodo", repo)) %>%
+  mutate(machine = sprintf("%s_%s", machine, software_short)) %>%
+  ggplot(aes(y = fct_rev(machine), fill = repo)) +
+  geom_bar() +
+  facet_grid(
+    "vendor_short",
+    scales = "free",
+    switch = "y",
+    space = "free"
+  ) +
+  labs(y = NULL, x = "N FCS Files") +
+  theme(
+    strip.text.y.left = element_text(angle = 0),
+  )
+```
+
 # FCS Feature Usage Overview
 
 The FCS standards have many features which are likely not evenly used across
@@ -227,3 +257,16 @@ If impossible, the version which drops the least optional keywords is selected.
    with a different version, the former is chosen.
 
 <img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">
+
+## Machine and Software Assignment
+
+Machine is almost always stored in *\$CYT*. There are a few exceptions. CyTOF
+instruments sometimes store the name of the machine (CyTOF, CyTOF 2, Helios,
+etc) in *\$CYTSN*.
+
+There is no standardized way to report software in FCS files. In practice this
+is often a combination of appending a version string to *\$CYT*, using *\$SYS*
+(which may otherwise be the operating system of the host machine), or adding
+additional keywords.
+
+The following heuristics were used to determine software 
