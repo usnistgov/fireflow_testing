@@ -115,9 +115,9 @@ df_all <- df_root %>%
   select(filepath, dataset)
 
 df_machines_pretty <- df_machines %>%
-  mutate(ms = sprintf("%s_%s", machine, software_short)) %>%
+  mutate(ms = sprintf("%s_%s", machine_short, software_short)) %>%
   filter(dataset == 0) %>%
-  select(filepath, vendor_short, machine, software_short, ms)
+  select(filepath, vendor_short, machine_short, software_short, ms)
 
 ## show number of datasets per file
 

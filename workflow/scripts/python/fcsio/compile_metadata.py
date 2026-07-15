@@ -600,6 +600,7 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
             "vendor",
             "vendor_short",
             "machine",
+            "machine_short",
             "software",
             "software_short",
             "serial",
@@ -638,11 +639,21 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
             else:
                 return s
 
+        def short_machine(s: str) -> str:
+            if "GemStone" in s:
+                return "GemStone"
+            elif s == "MACSQuant Analyzer":
+                return "MQA"
+            elif "LSRFortessa" in s:
+                return s.replace("LSR", "")
+            else:
+                return s
+
         def short_software(s: str) -> str:
             if "FACSDiva" in s:
                 return s.replace("BD FACSDiva Software Version", "FACSDiva")
-            elif "DVSSCIENCES":
-                return re.sub("DVSSCIENCES-(FLUIDIGM-)?-CYTOF", "CyTOF Software", s)
+            elif "DVSSCIENCES" in s:
+                return re.sub("DVSSCIENCES-(FLUIDIGM-)?CYTOF", "CyTOF Software", s)
             else:
                 return s.replace("Development-only Version", "")
 
@@ -655,6 +666,7 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                     d.vendor,
                     short_vendor(d.vendor),
                     maybe("unknown", lambda x: x.name, d.machine),
+                    maybe("UNK", lambda x: short_machine(x.name), d.machine),
                     d.software,
                     maybe("UNK", short_software, d.software),
                     d.serial,

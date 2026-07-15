@@ -5,8 +5,9 @@ output: "html_document"
 
 # Results Overview
 
-```{r, results = "asis", echo = FALSE, fig.height = 11, fig.width = 12}
+```{r, results = "asis", echo = FALSE, fig.height = 15, fig.width = 12}
 suppressMessages(library(tidyverse))
+suppressMessages(library(ggh4x))
 df_machines <- read_tsv(
   snakemake@input[["machines"]],
   col_types = cols(
@@ -15,21 +16,34 @@ df_machines <- read_tsv(
   )
 )
 
-df_machines %>%
+df_plot <- df_machines %>%
   mutate(repo = map_chr(filepath, \(x) str_split_1(x, "/")[[2]])) %>%
-  mutate(repo = if_else(repo == "misc_repo", "zenodo", repo)) %>%
-  mutate(machine = sprintf("%s_%s", machine, software_short)) %>%
-  ggplot(aes(y = fct_rev(machine), fill = repo)) +
+  mutate(repo = if_else(repo == "misc_repo", "zenodo", repo))
+
+colors <- df_plot %>%
+  arrange(vendor_short) %>%
+  select(vendor_short, machine_short) %>%
+  unique() %>%
+  group_by(vendor_short) %>%
+  mutate(color = if_else((cur_group_id() %% 2) == 0, "#e8e8e8", "#c6c6c6")) %>%
+  pull(color)
+
+df_plot %>%
+  ggplot(aes(y = fct_rev(software_short), fill = repo)) +
   geom_bar() +
-  facet_grid(
-    "vendor_short",
+  facet_grid2(
+    vendor_short + machine_short ~ .,
     scales = "free",
     switch = "y",
-    space = "free"
+    space = "free",
+    strip = strip_themed(
+      background_y = elem_list_rect(fill = colors)
+    )
   ) +
   labs(y = NULL, x = "N FCS Files") +
   theme(
     strip.text.y.left = element_text(angle = 0),
+    legend.position="bottom"
   )
 ```
 

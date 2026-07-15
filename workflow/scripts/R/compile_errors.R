@@ -52,7 +52,7 @@ df_machines <- read_tsv(
     filepath = "c",
     dataset = "i",
     vendor_short = "c",
-    machine = "c",
+    machine_short = "c",
     software_short = "c",
     .default = "-"
   ),
@@ -306,7 +306,7 @@ df_all_errors <- df_misc_errors %>%
   select(-nc_key_val_scale_trimmed)
 
 df_all_errors %>%
-  mutate(machine = sprintf("%s_%s", machine, software_short)) %>%
+  mutate(machine = sprintf("%s_%s", machine_short, software_short)) %>%
   group_by(vendor_short, machine) %>%
   summarize(
     across(starts_with("nc_"), mean),
