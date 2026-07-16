@@ -225,14 +225,23 @@ def get_machine_details(
 
     vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
 
+    # Cellstream stores software in INSPIRE_VERSION
+    if machineid is MachineId.CYTEK_CELLSTR:
+        version = key_maybe(core.nonstandard_keywords, "INSPIRE_VERSION")
+        software = fmap_maybe(lambda v: f"Inspire-{v}", version)
     # BD and Cytek store their software in the "CREATOR" keyword
-    if vendorid in [VendorId.BD, VendorId.CYTEK]:
+    elif vendorid in [VendorId.BD, VendorId.CYTEK]:
         software = key_maybe(core.nonstandard_keywords, "CREATOR")
     # Agilent stores their software in the "#NCCreator" keyword
     elif vendorid in [VendorId.AGILENT]:
         software = key_maybe(core.nonstandard_keywords, "#NCCreator")
     # A few random machines store software in $SYS as "X" in an "X / Y" pattern
-    elif machineid in [MachineId.BC_CYAN, MachineId.BC_XDP, MachineId.BC_ASTRIOS]:
+    elif machineid in [
+        MachineId.BC_CYAN,
+        MachineId.BC_MOFLO,
+        MachineId.BC_MOFLO_ASTRIOS,
+        MachineId.BC_MOFLO_XDP,
+    ]:
         software = fmap_maybe(lambda sys: sys.split(" / ")[0], core.sys)
     # The FC500 stores software in $SYS
     elif machineid is MachineId.BC_FC500:
@@ -694,6 +703,8 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                 return s.replace("CollectorsEdition", "CE")
             elif "Summit" in s:
                 return re.sub(" ?(Development-only|Released) Version", "", s)
+            elif "DxFLEX" in s:
+                return s.replace(" for DxFLEX", "")
             else:
                 return s
 

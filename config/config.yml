@@ -151,6 +151,51 @@ test_files:
   #       - hrs_16_22_Rep2_A16/2023_06_27_Sample_115.fcs
   #       - hrs_16_22_Rep2_A16/2023_06_27_Sample_116.fcs
 
+  # FACSMelody
+  - src:
+      archive_url:
+        plain: https://zenodo.org/records/15119245/files/Figure_S1.zip
+      dataset_id: zenodo_15119245_FACSMelody0
+      archive_type: zip
+      file_paths:
+        - 20231213 sac incorporation different tRNA synthesaes_PBS 20s.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk168 - SAC 0 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk168 - SAC 0.3 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk168 - SAC 1 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk168 - SAC 4 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk168 - neg control.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk268 - SAC 0 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk268 - SAC 0.3 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk268 - SAC 1 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk268 - SAC 4 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk268 - neg control.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk269 - SAC 0 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk269 - SAC 0.3 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk269 - SAC 1 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk269 - SAC 4 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk269 - neg control.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk270 - SAC 0 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk270 - SAC 0.3 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk270 - SAC 1 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk270 - SAC 4 mM.fcs
+        - 20231213 sac incorporation different tRNA synthesaes_nk270 - neg control.fcs
+
+  # FACSMelody
+  - src:
+      archive_url:
+        plain: https://zenodo.org/records/15119245/files/Figure_S5B.zip
+      dataset_id: zenodo_15119245_FACSMelody1
+      archive_type: zip
+      file_paths:
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_1 hour - no sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_1 hour - with sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_2 hours - no sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_2 hours - with sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_27 hours - no sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_27 hours - with sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_3 hours - no sac.fcs
+        - 20231118 nk168 + sac labelling with py-tet488 reaction time_3 hours - with sac.fcs
+
   # S1400EX (https://datadryad.org/dataset/doi:10.5061/dryad.70rxwdbt3#usage)
   - src:
       archive_url:
@@ -3847,6 +3892,238 @@ test_files:
     parse:
       machine: cytek_easycyte
 
+  # DxFlex
+  - src:
+      root_url: https://zenodo.org/records/14246044/files/
+      dataset_id: zenodo_14246044_DxFlex
+      file_names:
+        - 0cc0aa47-4d04-4a6d-9c9a-d8951e21cbdd_1.fcs
+        - 0cc0aa47-4d04-4a6d-9c9a-d8951e21cbdd_2.fcs
+        - 20210210_2_DEX.fcs
+        # - 20210210_2_DEX_Iso.fcs
+        # - 20210210_2_iDC.fcs
+        # - 20210210_2_iDC_Iso.fcs
+        # - 20210210_2_LPS1.fcs
+        # - 20210210_2_LPS10.fcs
+        # - 20210210_2_LPS10_Iso.fcs
+        # - 20210210_2_LPS1_Iso.fcs
+        # - 20210210_2_LPS5.fcs
+        # - 20210210_2_LPS5_Iso.fcs
+        # - 20210210_2_mDC.fcs
+        # - 20210210_2_mDC_Iso.fcs
+        # - 20210210_2_Unstained.fcs
+        # - 20210210_DEX.fcs
+        # - 20210210_DEX_Iso.fcs
+        # - 20210210_iDC.fcs
+        # - 20210210_iDC_Iso.fcs
+        # - 20210210_LPS1.fcs
+        # - 20210210_LPS10.fcs
+        # - 20210210_LPS10_Iso.fcs
+        # - 20210210_LPS1_Iso.fcs
+        # - 20210210_LPS5.fcs
+        # - 20210210_LPS5_Iso.fcs
+        # - 20210210_mDC.fcs
+        # - 20210210_mDC_Iso.fcs
+        # - 20210210_Unstained.fcs
+        # - 20210211_DEX_Gain3.fcs
+        # - 20210211_iDC_Gain3.fcs
+        # - 20211025_CFSE_D13_iDC.fcs
+        # - 20211025_CFSE_D13_iDC_1to10.fcs
+        # - 20211025_CFSE_D13_iDC_1to2.5.fcs
+        # - 20211025_CFSE_D13_iDC_1to2.5_act.fcs
+        # - 20211025_CFSE_D13_iDC_1to5.fcs
+        # - 20211025_CFSE_D13_iDC_1to5_act.fcs
+        # - 20211025_CFSE_D13_iDC_1to7.5.fcs
+        # - 20211025_CFSE_D13_mDC.fcs
+        # - 20211025_CFSE_D13_mDC_1to10.fcs
+        # - 20211025_CFSE_D13_mDC_1to2.5.fcs
+        # - 20211025_CFSE_D13_mDC_1to2.5_act.fcs
+        # - 20211025_CFSE_D13_mDC_1to5.fcs
+        # - 20211025_CFSE_D13_mDC_1to5_act.fcs
+        # - 20211025_CFSE_D13_mDC_1to7.5.fcs
+        # - 20211025_CFSE_D13_Tcells.fcs
+        # - 20211025_CFSE_D13_Tcells_act.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_act1.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_act2.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_act3.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_act4.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_nonact1.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_nonact2.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_nonact3.fcs
+        # - 20211130_CFSE_D14_96w_Tcells_nonact4.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to10_act1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to10_act2.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to10_nonact1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to10_nonact2.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to5_act1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to5_act2.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to5_nonact1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to5_nonact2.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to7.5_act1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to7.5_act2.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to7.5_nonact1.fcs
+        # - 20211130_CFSE_D14_96w_TiDC_1to7.5_nonact2.fcs
+        # - 20211130_CFSE_D14_96w_TmDC_1to10_act1.fcs
+        # - 20211130_CFSE_D14_96w_TmDC_1to10_act2.fcs
+        # - 20211130_CFSE_D14_96w_TmDC_1to10_nonact1.fcs
+        # - 275d6438-6992-4771-9b8d-27c29f974075_1.fcs
+        # - 6fbfad1c-8380-4f80-906a-053acb774ee4_1.fcs
+        # - 8a053298-83cb-4b91-94a1-6d1f20130fbc_1.fcs
+        # - 8c2e2263-3ba8-45fd-9d47-c66cc7a48662_1.fcs
+        # - 90947109-7c5c-4a4a-bb5f-3051e84ec8fb_1.fcs
+        # - 90947109-7c5c-4a4a-bb5f-3051e84ec8fb_2.fcs
+        # - 94633c5c-9319-4ad2-b1df-f46d218960b2_1.fcs
+        # - 9bb9e765-1879-4b13-b688-f1e994f795c8_1.fcs
+        # - adfd3b42-d47c-42df-987f-df1e6a1b26ed_1.fcs
+        # - b6325120-c134-4327-969d-3ae5bce8501e_1.fcs
+        # - ba77d809-2c89-4a06-92c3-56aa8bf3aa25_1.fcs
+        # - c8a7fb64-490b-4999-8085-58760dc141b3_1.fcs
+        # - f450db49-84f1-4502-b9e1-1bae3478cbcf_1.fcs
+        # - Unst2.fcs
+
+  # CytoFlex S
+  - src:
+      root_url: https://zenodo.org/records/17196740/files/
+      dataset_id: zenodo_17196740_CytoFlexS
+      file_names:
+        # - 07-dLN_Foxp3_Ki-A4.fcs
+        # - 07-dLN_Foxp3_Ki-B3.fcs
+        # - 07-dLN_Foxp3_Ki-B4.fcs
+        # - 07-dLN_Foxp3_Ki-C3.fcs
+        # - 07-dLN_Foxp3_Ki-C4.fcs
+        # - 07-dLN_Foxp3_Ki-D3.fcs
+        # - 07-dLN_Foxp3_Ki-D4.fcs
+        # - 07-dLN_Foxp3_Ki-E3.fcs
+        # - 07-dLN_Foxp3_Ki-E4.fcs
+        # - 07-dLN_Foxp3_Ki-F3.fcs
+        - 07-dLN_Foxp3_Ki-F4.fcs
+        - 07-dLN_Foxp3_Ki-G3.fcs
+        # - 07-dLN_Foxp3_Ki-G4.fcs
+        # - 07-dLN_Foxp3_Ki-H3.fcs
+        # - 08-Tumor_Foxp3_Ki67-A1.fcs
+        # - 08-Tumor_Foxp3_Ki67-A2.fcs
+        # - 08-Tumor_Foxp3_Ki67-B1.fcs
+        # - 08-Tumor_Foxp3_Ki67-B2.fcs
+        # - 08-Tumor_Foxp3_Ki67-C1.fcs
+        # - 08-Tumor_Foxp3_Ki67-C2.fcs
+        # - 08-Tumor_Foxp3_Ki67-D1.fcs
+        # - 08-Tumor_Foxp3_Ki67-D2.fcs
+        - 08-Tumor_Foxp3_Ki67-E1.fcs
+        # - 08-Tumor_Foxp3_Ki67-E2.fcs
+        # - 08-Tumor_Foxp3_Ki67-F1.fcs
+        # - 08-Tumor_Foxp3_Ki67-F2.fcs
+        # - 08-Tumor_Foxp3_Ki67-G1.fcs
+        # - 08-Tumor_Foxp3_Ki67-G2.fcs
+        # - 08-Tumor_Foxp3_Ki67-H1.fcs
+        # - 08-Tumor_Foxp3_Ki67-H2.fcs
+        # - 09-dLN_Foxp3_Ki67-A3.fcs
+        # - 09-dLN_Foxp3_Ki67-A4.fcs
+        # - 09-dLN_Foxp3_Ki67-B3.fcs
+        # - 09-dLN_Foxp3_Ki67-B4.fcs
+        # - 09-dLN_Foxp3_Ki67-C3.fcs
+        # - 09-dLN_Foxp3_Ki67-C4.fcs
+        # - 09-dLN_Foxp3_Ki67-D4.fcs
+        # - 09-dLN_Foxp3_Ki67-E3.fcs
+        # - 09-dLN_Foxp3_Ki67-E4.fcs
+        # - 09-dLN_Foxp3_Ki67-F3.fcs
+        # - 09-dLN_Foxp3_Ki67-F4.fcs
+        # - 09-dLN_Foxp3_Ki67-G3.fcs
+        # - 09-dLN_Foxp3_Ki67-G4.fcs
+        # - 09-dLN_Foxp3_Ki67-H3.fcs
+        # - 09-Tumor_Foxp3_ki67-A1.fcs
+        # - 09-Tumor_Foxp3_ki67-A2.fcs
+        # - 09-Tumor_Foxp3_ki67-B1.fcs
+        # - 09-Tumor_Foxp3_ki67-B2.fcs
+        # - 09-Tumor_Foxp3_ki67-C1.fcs
+        # - 09-Tumor_Foxp3_ki67-C2.fcs
+        # - 09-Tumor_Foxp3_ki67-D1.fcs
+        # - 09-Tumor_Foxp3_ki67-D2.fcs
+        # - 09-Tumor_Foxp3_ki67-E1.fcs
+        # - 09-Tumor_Foxp3_ki67-E2.fcs
+        # - 09-Tumor_Foxp3_ki67-F1.fcs
+        # - 09-Tumor_Foxp3_ki67-F2.fcs
+        # - 09-Tumor_Foxp3_ki67-G1.fcs
+        # - 09-Tumor_Foxp3_ki67-G2.fcs
+        # - 09-Tumor_Foxp3_ki67-H1.fcs
+        # - 09-Tumor_Foxp3_ki67-H2.fcs
+
+  # MoFlo
+  - src:
+      root_url: https://zenodo.org/records/20427837/files/
+      dataset_id: zenodo_20427837_MoFlo
+      file_names:
+        - 112-2_d0.fcs
+        - 112-2_d15.fcs
+        - 112-2_d4.fcs
+        # - 112-2_d6.fcs
+        # - 112-2_d8.fcs
+        # - 112-3_d0.fcs
+        # - 112-3_d10.fcs
+        # - 112-3_d15.fcs
+        # - 112-3_d4.fcs
+        # - 112-3_d6.fcs
+        # - 112-3_d8.fcs
+        # - 113-2_d0.fcs
+        # - 113-2_d10.fcs
+        # - 113-2_d4.fcs
+        # - 113-2_d6.fcs
+        # - 113-2_d8.fcs
+        # - 113-3_d0.fcs
+        # - 113-3_d10.fcs
+        # - 113-3_d15.fcs
+        # - 113-3_d4.fcs
+        # - 113-3_d6.fcs
+        # - 113-3_d8.fcs
+        # - 94-1_d0.fcs
+        # - 94-1_d11.fcs
+        # - 94-1_d12.fcs
+        # - 94-1_d3.fcs
+        # - 94-1_d5.fcs
+        # - 94-1_d7.fcs
+        # - 94-1_d9.fcs
+        # - 94-2_d0.fcs
+        # - 94-2_d11.fcs
+        # - 94-2_d12.fcs
+        # - 94-2_d3.fcs
+        # - 94-2_d5.fcs
+        # - 94-2_d7.fcs
+        # - 94-2_d9.fcs
+        # - 97-1_d0.fcs
+        # - 97-1_d11.fcs
+        # - 97-1_d12.fcs
+        # - 97-1_d3.fcs
+        # - 97-1_d5.fcs
+        # - 97-1_d7.fcs
+        # - 97-1_d9.fcs
+        # - 97-2_d0.fcs
+        # - 97-2_d11.fcs
+        # - 97-2_d12.fcs
+        # - 97-2_d3.fcs
+        # - 97-2_d5.fcs
+        # - 97-2_d7.fcs
+        # - 97-2_d9.fcs
+        # - Healthy_01.fcs
+        # - Healthy_02.fcs
+        # - Healthy_03.fcs
+        # - Healthy_04.fcs
+        # - PBS1_0.fcs
+        # - PBS1_120.fcs
+        # - PBS1_15.fcs
+        # - PBS1_180.fcs
+        # - PBS1_30.fcs
+        # - PBS1_45.fcs
+        # - PBS1_60.fcs
+        # - PBS2_0.fcs
+        # - PBS2_120.fcs
+        # - PBS2_15.fcs
+        # - PBS2_180.fcs
+        # - PBS2_30.fcs
+        # - PBS2_45.fcs
+        # - PBS2_60.fcs
+        # - Wt_01.fcs
+        # - Wt_02.fcs
+        # - Wt_03.fcs
+        # - Wt_04.fcs
 
 
   # Aurora
@@ -5147,6 +5424,26 @@ test_files:
 
   # FASCSymphony A5
   - src:
+      root_url: https://zenodo.org/records/14928071/files/
+      dataset_id: zenodo_14928071_FACSSymphonyA1
+      file_names:
+        - Specimen_001_12_001.fcs
+        - Specimen_001_12_002.fcs
+        - Specimen_001_24_001.fcs
+        - Specimen_001_24_002.fcs
+        - Specimen_001_48_001.fcs
+        - Specimen_001_48_002.fcs
+        - Specimen_001_AI_0_001.fcs
+        - Specimen_001_AI_24_002.fcs
+        - Specimen_001_AI_48_003.fcs
+        - Specimen_001_AI_72_004.fcs
+        - Specimen_001_AX_0_005.fcs
+        - Specimen_001_AX_24_006.fcs
+        - Specimen_001_AX_48_007.fcs
+        - Specimen_001_AX_72_008.fcs
+
+  # FASCSymphony A5
+  - src:
       root_url: https://zenodo.org/records/13928969/files/
       dataset_id: zenodo_13928969_FACSSymphonyA5
       file_names:
@@ -5200,6 +5497,114 @@ test_files:
         - ID8_Panel2_TP3.fcs
     parse:
       machine: bd_symph_a5
+
+  # FASCSymphony A5 SE
+  - src:
+      root_url: https://zenodo.org/records/10829181/files/
+      dataset_id: zenodo_10829181_FACSSymphonyA5_SE
+      file_names:
+        - S1__Late_expon_STm_PsicA-gfp.fcs
+        - S1__Stationary_STm.fcs
+        - S1__Stationary_STm_PsicA-gfp.fcs
+
+  # CantoII
+  - src:
+      root_url: https://zenodo.org/records/15090064/files/
+      dataset_id: zenodo_15090064_CantoII
+      file_names:
+        - Esp10_pz10_Tube 16 DPSC + Lympho Unstimulated Mix2.fcs
+        - Esp10_pz10_Tube 17 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp10_pz10_Tube 18 DPSC + Lympho CD3CD28 Mix2.fcs
+        - Esp10_pz10_Tube 19 DPSC + Lympho ODN2006 Mix2.fcs
+        - Esp10_pz10_Tube 20 DPSC + Mono Unstimulated Mix2.fcs
+        - Esp10_pz10_Tube 21 DPSC + Mono LPS Mix2.fcs
+        - Esp10_pz10_Tube 3 DPSC + Lympho Unstimulated Mix1.fcs
+        - Esp10_pz10_Tube 4 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp10_pz10_Tube 5 DPSC + Lympho CD3CD28 Mix1.fcs
+        - Esp10_pz10_Tube 6 DPSC + Lympho ODN2006 Mix1.fcs
+        - Esp10_pz10_Tube 7 DPSC + Mono Unstimulated Mix1.fcs
+        - Esp10_pz10_Tube 8 DPSC + Mono LPS Mix1.fcs
+        - Esp10_pz11_Tube 10 DPSC + Lympho CD3CD28 Mix1.fcs
+        - Esp10_pz11_Tube 11 DPSC + Lympho ODN2006 Mix1.fcs
+        - Esp10_pz11_Tube 12 DPSC + Mono Unstimulated Mix1.fcs
+        - Esp10_pz11_Tube 13 DPSC + Mono LPS Mix1.fcs
+        - Esp10_pz11_Tube 22 DPSC + Lympho Unstimulated Mix2.fcs
+        - Esp10_pz11_Tube 23 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp10_pz11_Tube 24 DPSC + Lympho CD3CD28 Mix2.fcs
+        - Esp10_pz11_Tube 25 DPSC + Lympho ODN2006 Mix2.fcs
+        - Esp10_pz11_Tube 26 DPSC + Mono Unstimulated Mix2.fcs
+        - Esp10_pz11_Tube 27 DPSC + Mono LPS Mix2.fcs
+        - Esp10_pz11_Tube 9 DPSC + Lympho Unstimulated Mix1.fcs
+        - Esp10_Tube 1 DPSC Blank.fcs
+        - Esp10_Tube 14 DPSC Fixed Blank.fcs
+        - Esp10_Tube 15 DPSC Fixed Mix2.fcs
+        - Esp10_Tube 2 DPSC Mix1.fcs
+        - Esp11_pz12_Tube 11 DPSC + Lympho Unstimulated Mix2.fcs
+        - Esp11_pz12_Tube 12 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp11_pz12_Tube 13 DPSC + Lympho CD3CD28 Mix2.fcs
+        - Esp11_pz12_Tube 14 DPSC + Lympho ODN2006 Mix2.fcs
+        - Esp11_pz12_Tube 15 DPSC + Mono Unstimulated Mix2.fcs
+        - Esp11_pz12_Tube 16 DPSC + Mono LPS Mix2.fcs
+        - Esp11_pz12_Tube 3 DPSC + Lympho Unstimulated Mix1.fcs
+        - Esp11_pz12_Tube 4 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp11_pz12_Tube 5 DPSC + Lympho CD3CD28 Mix1.fcs
+        - Esp11_pz12_Tube 6 DPSC + Lympho ODN2006 Mix1.fcs
+        - Esp11_pz12_Tube 7 DPSC + Mono Unstimulated Mix1.fcs
+        - Esp11_pz12_Tube 8 DPSC + Mono LPS Mix1.fcs
+        - Esp11_Tube 1 DPSC Blank.fcs
+        - Esp11_Tube 10 DPSC Fixed Mix2.fcs
+        - Esp11_Tube 2 DPSC Mix1.fcs
+        - Esp11_Tube 9 DPSC Fixed Blank.fcs
+        - Esp12_pz3_Tube 3 DPSC + Lympho Unstimulated Mix2.fcs
+        - Esp12_pz3_Tube 4 DPSC Fixed + Lympho CD3CD28 Blank.fcs
+        - Esp12_pz3_Tube 5 DPSC + Lympho CD3CD28 Mix2.fcs
+        - Esp12_pz3_Tube 7 DPSC + Mono Unstimulated Mix2.fcs
+        - Esp12_pz3_Tube 8 DPSC + Mono LPS Mix2.fcs
+        - Esp12_Tube 1 DPSC Fixed Blank.fcs
+        - Esp12_Tube 2 DPSC Fixed Mix2.fcs
+        - Esp9_pz9_Tube 11 DPSC + Lympho Unstimulated Mix2.fcs
+        - Esp9_pz9_Tube 12 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp9_pz9_Tube 13 DPSC + Lympho CD3CD28 Mix2.fcs
+        - Esp9_pz9_Tube 14 DPSC + Lympho ODN2006 Mix2.fcs
+        - Esp9_pz9_Tube 15 DPSC + Mono Unstimulated Mix2.fcs
+        - Esp9_pz9_Tube 16 DPSC + Mono LPS Mix2.fcs
+        - Esp9_pz9_Tube 3 DPSC + Lympho Unstimulated Mix1.fcs
+        - Esp9_pz9_Tube 4 DPSC + Lympho CD3CD28 Blank.fcs
+        - Esp9_pz9_Tube 5 DPSC + Lympho CD3CD28 Mix1.fcs
+        - Esp9_pz9_Tube 6 DPSC + Lympho ODN2006 Mix1.fcs
+        - Esp9_pz9_Tube 7 DPSC + Mono Unstimulated Mix1.fcs
+        - Esp9_pz9_Tube 8 DPSC + Mono LPS Mix1.fcs
+        - Esp9_Tube 1 DPSC Blank.fcs
+        - Esp9_Tube 10 DPSC Fixed Mix2.fcs
+        - Esp9_Tube 2 DPSC Mix1.fcs
+        - Esp9_Tube 9 DPSC Fixed Blank.fcs 
+
+  # CellStream
+  - src:
+      root_url: https://zenodo.org/records/14989800/files/
+      dataset_id: zenodo_14989800_CellStream
+      file_names:
+        # - mixed1.fcs
+        # - mixed10.fcs
+        # - mixed11.fcs
+        # - mixed12.fcs
+        # - mixed13.fcs
+        # - mixed14.fcs
+        # - mixed15.fcs
+        # - mixed16.fcs
+        - mixed17.fcs
+        - mixed18.fcs
+        # - mixed19.fcs
+        # - mixed2.fcs
+        - mixed20.fcs
+        # - mixed21.fcs
+        # - mixed3.fcs
+        # - mixed4.fcs
+        # - mixed5.fcs
+        # - mixed6.fcs
+        # - mixed7.fcs
+        # - mixed8.fcs
+        # - mixed9.fcs
 
   # Gallios
   - src:

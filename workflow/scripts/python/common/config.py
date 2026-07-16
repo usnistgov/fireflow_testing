@@ -54,21 +54,28 @@ class MachineId(Enum):
     BD_INFLUX = "bd_influx"
     BD_LSR2 = "bd_lsr2"
     BD_LYRIC = "bd_lyric"
+    BD_MELODY = "bd_melody"
+    BD_SYMPH_A1 = "bd_symph_a1"
     BD_SYMPH_A5 = "bd_symph_a5"
-    BC_ASTRIOS = "bc_astrios"
+    BD_SYMPH_A5_SE = "bd_symph_a5_se"
+    BC_MOFLO = "bc_moflo"
+    BC_MOFLO_ASTRIOS = "bc_moflo_astrios"
+    BC_MOFLO_XDP = "bc_moflo_xdp"
     BC_CYAN = "bc_cyan"
     BC_CYTOFLEX = "bc_cytoflex"
+    BC_CYTOFLEX_S = "bc_cytoflex_s"
+    BC_DXFLEX = "bc_dxflex"
     BC_FC500 = "bc_fc500"
     BC_GALLIOS = "bc_gallios"
     BC_NAVIOS = "bc_navios"
     BC_SYSTEM2 = "bc_system2"
-    BC_XDP = "bc_xdp"
     BR_ZE5 = "br_ze5"
     CYTEK_AURORA_3 = "cytek_aurora3"
     CYTEK_AURORA_4 = "cytek_aurora4"
     CYTEK_AURORA_5 = "cytek_aurora5"
     CYTEK_EASYCYTE = "cytek_easycyte"
     CYTEK_IMGSTR = "cytek_imgstr"
+    CYTEK_CELLSTR = "cytek_cellstr"
     SBT_CYTOF = "sbt_cytof"
     SBT_CYTOF2 = "sbt_cytof2"
     SBT_HELIOS = "sbt_helios"
@@ -304,18 +311,45 @@ BD_MACHINES = {
         vendor=VendorId.BD,
         cyt_values=["BD FACSLyric"],
     ),
+    MachineId.BD_MELODY: Machine(
+        name=MachineName("FACSMelody"),
+        vendor=VendorId.BD,
+        cyt_values=["FACSMelody"],
+    ),
+    MachineId.BD_SYMPH_A1: Machine(
+        name=MachineName("FACSymphony A1"),
+        vendor=VendorId.BD,
+        cyt_values=["FACSymphonyA1"],
+    ),
     MachineId.BD_SYMPH_A5: Machine(
         name=MachineName("FACSymphony A5"),
         vendor=VendorId.BD,
     ),
+    MachineId.BD_SYMPH_A5_SE: Machine(
+        name=MachineName("FACSymphony A5 SE"),
+        vendor=VendorId.BD,
+        cyt_values=["Symphony-SE (FACSymphony Analyzer)"],
+    ),
 }
 
 BC_MACHINES = {
-    MachineId.BC_ASTRIOS: Machine(
+    MachineId.BC_MOFLO: Machine(
+        name=MachineName("MoFlo"),
+        vendor=VendorId.COULTER,
+        sorting=True,
+        cyt_values=["MoFlo"],
+    ),
+    MachineId.BC_MOFLO_ASTRIOS: Machine(
         name=MachineName("MoFlo Astrios"),
         vendor=VendorId.COULTER,
         sorting=True,
         cyt_values=["MoFlo Astrios"],
+    ),
+    MachineId.BC_MOFLO_XDP: Machine(
+        name=MachineName("MoFlo XDP"),
+        vendor=VendorId.COULTER,
+        sorting=True,
+        cyt_values=["MoFlo XDP"],
     ),
     MachineId.BC_CYAN: Machine(
         name=MachineName("CyAn"),
@@ -325,6 +359,16 @@ BC_MACHINES = {
         name=MachineName("CytoFLEX"),
         vendor=VendorId.COULTER,
         cyt_values=["CytoFLEX"],
+    ),
+    MachineId.BC_CYTOFLEX_S: Machine(
+        name=MachineName("CytoFLEX S"),
+        vendor=VendorId.COULTER,
+        cyt_values=["CytoFLEX S"],
+    ),
+    MachineId.BC_DXFLEX: Machine(
+        name=MachineName("DxFLEX"),
+        vendor=VendorId.COULTER,
+        cyt_values=["DxFLEX"],
     ),
     MachineId.BC_FC500: Machine(
         name=MachineName("Cytomics FC 500"),
@@ -344,12 +388,6 @@ BC_MACHINES = {
     MachineId.BC_SYSTEM2: Machine(
         name=MachineName("System II"),
         vendor=VendorId.COULTER,
-    ),
-    MachineId.BC_XDP: Machine(
-        name=MachineName("MoFlo XDP"),
-        vendor=VendorId.COULTER,
-        sorting=True,
-        cyt_values=["MoFlo XDP"],
     ),
 }
 
@@ -378,6 +416,12 @@ CYTEK_MACHINES = {
         vendor=VendorId.CYTEK,
         machine_type=MachineType.IMAGING,
         cyt_values=["Image Stream"],
+    ),
+    MachineId.CYTEK_CELLSTR: Machine(
+        name=MachineName("CellStream"),
+        vendor=VendorId.CYTEK,
+        machine_type=MachineType.IMAGING,
+        cyt_values=["CellStream"],
     ),
 }
 
