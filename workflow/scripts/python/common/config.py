@@ -76,6 +76,7 @@ class MachineId(Enum):
     SONY_ECLIPSE = "sony_eclipse"
     SONY_ID7000 = "sony_id7000"
     SONY_SA3800 = "sony_sa3800"
+    SONY_SH800S = "sony_sh800s"
     PARTEC_PAS = "partec_pas"
     STRAT_S1400 = "strat_s1400"
     STRAT_S1400EX = "strat_s1400ex"
@@ -417,6 +418,11 @@ SONY_MACHINES = {
         vendor=VendorId.SONY,
         cyt_values=["SA3800"],
     ),
+    MachineId.SONY_SH800S: Machine(
+        name=MachineName("SH800S"),
+        vendor=VendorId.SONY,
+        cyt_values=["LE-SH800SZFCPL"],
+    ),
 }
 
 THERMO_MACHINES = {
@@ -485,6 +491,7 @@ MISC_MACHINES = {
     MachineId.STRAT_S1400: Machine(
         name=MachineName("S1400"),
         vendor=VendorId.STRAT,
+        cyt_values=["1400-8"],
     ),
     MachineId.STRAT_S1400EX: Machine(
         name=MachineName("S1400EX"),

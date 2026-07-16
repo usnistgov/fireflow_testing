@@ -4425,6 +4425,61 @@ test_files:
         - TEMRA_CD8+_T_cells_donor6.fcs
         - TEMRA_CD8+_T_cells_donor7.fcs 
 
+  # Sony ID7000
+  - src:
+      root_url: https://zenodo.org/records/7867212/files/
+      dataset_id: zenodo_7867212_SonyID7000
+      file_names:
+        # - 20220201_E12_WT_FL_001_007.fcs
+        # - 20220201_E12_WT_FL_002_002.fcs
+        # - 20220201_E12_WT_FL_003_003.fcs
+        # - 20220201_E12_WT_FL_004_004.fcs
+        # - 20220201_E12_WT_FL_005_005.fcs
+        # - 20220201_E12_WT_FL_006_006.fcs
+        # - 20220201_E12_WT_FL_007_008.fcs
+        # - E02 E14.5 WLSM.fcs
+        # - FL Mds1 12 07 2024_FL 2 12 07 2024_007.fcs
+        # - FL Mds1 12 07 2024_FL 3 12 07 2024_008.fcs
+        # - FL Mds1 12 07 2024_FL 4 12 07 2024_009.fcs
+        # - FL Mds1 12 07 2024_FL 6 12 07 2024_010.fcs
+        # - FL Mds1 17 07 2024_FL1_008.fcs
+        # - FL Mds1 17 07 2024_FL2_009.fcs
+        - G01 E12.5 WLSM.fcs
+        - G02 E18.5 WLSM.fcs
+        # - G04 E18.5 WLSM.fcs
+        - G06 E12.5_2 WLSM.fcs
+        # - H01 E14.5 WLSM.fcs
+        # - H02 E14.5 WLSM.fcs
+
+  # Sony SH800S
+  - src:
+      root_url: https://zenodo.org/records/18924843/files/
+      dataset_id: zenodo_18924843_SonySH800S
+      file_names:
+        - Ald4_colony_check_Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_high - 1_[96 Well] Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_high - 2_[96 Well] Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_high - 3_[96 Well] Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_high_Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_low- 4 - 1_[96 Well] Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_low- 4 - 2_[96 Well] Data Source - 1.fcs
+        - Ald4_myc_4_5_6h_low- 4_[96 Well] Data Source - 1.fcs
+        - Ald4_nodrug_6h_check - 1_Data Source - 1.fcs
+
+  # Sony SH800S
+  - src:
+      root_url: https://zenodo.org/records/7659210/files/
+      dataset_id: zenodo_7659210_SonySH800S
+      file_names:
+        - figure 1A- 2nd-647-ncin_Data Source - 1.fcs
+        - figure 1A- 2nd-647_Data Source - 1.fcs
+        - figure 1A- 647-4h mli_Data Source - 1.fcs
+        - figure 1A- 647-control_Data Source - 1.fcs
+        - figure 1A- 647-ncin-1h_Data Source - 1.fcs
+        - figure 1A- 647-ncin-2h _Data Source - 1.fcs
+        - figure 1A- 647-ncin-4h _Data Source - 1.fcs
+        - figure 1A- 647-ncin-4h mli_Data Source - 1.fcs
+
   # Sony SA3800
   - src:
       root_url: https://zenodo.org/records/7971252/files/
@@ -66019,9 +66074,8 @@ test_files:
       file_names:
         - Stratedigm - S1400 - 8 Peaks Beads.fcs
     parse:
-      machine: strat_s1400
       options:
-        # TODO not sure what this should be, all I can is that it's not standard
+        # TODO not sure what this should be, all I know is that it's not standard
         time_pattern: "%H:%M:%S:%@"
       
   - src:
