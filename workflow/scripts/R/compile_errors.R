@@ -363,7 +363,7 @@ df_all_errors %>%
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_errors"]], width = 12, height = 12, dpi = 125)
+ggsave(snakemake@output[["plot_errors"]], width = 12, height = 16, dpi = 125)
 
 
 df_misc %>%
@@ -396,7 +396,7 @@ df_misc %>%
   theme(
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot_version_change"]], width = 12, height = 12, dpi = 125)
+ggsave(snakemake@output[["plot_version_change"]], width = 12, height = 16, dpi = 125)
 
 df_all_errors %>%
   write_tsv(snakemake@output[["table"]])

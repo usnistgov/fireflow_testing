@@ -24,6 +24,7 @@ class VendorId(Enum):
     BIORAD = "Bio-Rad"
     CYTEK = "Cytek Biosciences"
     MILTENYI = "Miltenyi Biotec"
+    NANO_FCM = "NanoFCM"
     SONY = "Sony Biotechnology"
     THERMO = "Thermo Fisher Scientific"
     SBT = "Standard Biotools"
@@ -73,6 +74,8 @@ class MachineId(Enum):
     SBT_HELIOS = "sbt_helios"
     SBT_CYTOF_XT = "sbt_cytof_xt"
     MILTENYI_MQA = "miltenyi_mqa"
+    MILTENYI_MQA10 = "miltenyi_mqa10"
+    NFCM_NANOANALYZER = "nanofcm_nanoanalyzer"
     SONY_ECLIPSE = "sony_eclipse"
     SONY_ID7000 = "sony_id7000"
     SONY_SA3800 = "sony_sa3800"
@@ -83,6 +86,7 @@ class MachineId(Enum):
     THERMO_ATTUNE = "thermo_attune"
     THERMO_ATTUNE_NXT_B = "thermo_attune_nxt_b"
     THERMO_ATTUNE_NXT_BV = "thermo_attune_nxt_bv"
+    THERMO_ATTUNE_NXT_BY = "thermo_attune_nxt_by"
     THERMO_ATTUNE_NXT_BVY = "thermo_attune_nxt_bvy"
     THERMO_ATTUNE_NXT_BRVY = "thermo_attune_nxt_brvy"
     VERITY_GEMSTONE = "verity_gemstone"
@@ -444,6 +448,13 @@ THERMO_MACHINES = {
         name=MachineName("Attune NxT (BV)"),
         vendor=VendorId.THERMO,
         cyt_values=[
+            "4486517 Attune NxT Acoustic Focusing Cytometer (Lasers: BVXX)",
+        ],
+    ),
+    MachineId.THERMO_ATTUNE_NXT_BY: Machine(
+        name=MachineName("Attune NxT (BY)"),
+        vendor=VendorId.THERMO,
+        cyt_values=[
             "4486518 Attune NxT Acoustic Focusing Cytometer (Lasers: BYXX)",
         ],
     ),
@@ -469,6 +480,11 @@ MISC_MACHINES = {
         name=MachineName("A60-Micro"),
         vendor=VendorId.APOGEE,
     ),
+    MachineId.NFCM_NANOANALYZER: Machine(
+        name=MachineName("NanoAnalyzer"),
+        vendor=VendorId.NANO_FCM,
+        cyt_values=["Flow NanoAnalyzer"],
+    ),
     MachineId.AGILENT_NOVOCYTE: Machine(
         name=MachineName("Novocyte"),
         vendor=VendorId.AGILENT,
@@ -481,6 +497,11 @@ MISC_MACHINES = {
     ),
     MachineId.MILTENYI_MQA: Machine(
         name=MachineName("MACSQuant Analyzer"),
+        vendor=VendorId.MILTENYI,
+        cyt_values=["MACSQuant"],
+    ),
+    MachineId.MILTENYI_MQA10: Machine(
+        name=MachineName("MACSQuant Analyzer 10"),
         vendor=VendorId.MILTENYI,
     ),
     MachineId.PARTEC_PAS: Machine(

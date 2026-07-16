@@ -1,7 +1,7 @@
 suppressMessages(library(tidyverse))
 
 DPI <- 125
-HEIGHT <- 13
+HEIGHT <- 16
 
 ## import data
 

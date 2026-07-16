@@ -213,6 +213,16 @@ def get_machine_details(
             case (True, False, False):
                 machineid = MachineId.CYTEK_AURORA_3
 
+    # MQA10+ stores software in the $CYT keyword
+    if cyt is not None and (
+        (machineid is None and cyt.startswith("MACSQuant Analyzer 10"))
+        or machineid == MachineId.MILTENYI_MQA10
+    ):
+        if (m := re.match("MACSQuant Analyzer 10,(.*)", cyt)) is not None:
+            return MachineDetails(
+                VendorId.MILTENYI, MachineId.MILTENYI_MQA10, m[1], cytsn
+            )
+
     vendorid = fmap_maybe(lambda i: ALL_MACHINES[i].vendor, machineid)
 
     # BD and Cytek store their software in the "CREATOR" keyword
@@ -660,6 +670,7 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                 "Guava easyCyte": "easyCyte",
                 "Eclipse Analyzer": "Eclipse",
                 "MACSQuant Analyzer": "MQA",
+                "MACSQuant Analyzer 10": "MQA10",
             }
             if s in mapping:
                 return mapping[s]

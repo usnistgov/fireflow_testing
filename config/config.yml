@@ -4582,6 +4582,483 @@ test_files:
         - H11 Well - H11 WLSM.fcs
         - H12 Well - H12 WLSM.fcs
 
+  # FlowFCM NanoAnalyzer
+  - src:
+      root_url: https://zenodo.org/records/14270559/files/
+      dataset_id: zenodo_14270559_NanoAnalyzer
+      file_names:
+        - 2d 0.01 HCMV 10-fold dilution.fcs
+        - 2d 0.1 HCMV 10-fold dilution.fcs
+        - 2d 1.0 HCMV 10-fold dilution.fcs
+        # - 2d uninfected 10-fold dilution.fcs
+        # - 4d 0.01 HCMV 10-fold dilution.fcs
+        # - 4d 0.1 HCMV 10-fold dilution.fcs
+        # - 4d 1.0 HCMV 10-fold dilution.fcs
+        # - 4d uninfected 10-fold dilution.fcs
+        # - 4h 0.01 HCMV 10-fold dilution.fcs
+        # - 4h 0.1 HCMV 10-fold dilution.fcs
+        # - 4h 1.0 HCMV 10-fold dilution.fcs
+        # - 4h uninfected 10-fold dilution.fcs
+        # - 6d 0.01 HCMV 10-fold dilution.fcs
+        # - 6d 0.01 HCMV 30-fold dilution.fcs
+        # - 6d 0.1 HCMV 10-fold dilution.fcs
+        # - 6d 0.1 HCMV 30-fold dilution.fcs
+        # - 6d 1.0 HCMV 30-fold dilution.fcs
+        # - 6d uninfected 10-fold dilution.fcs
+        # - 8d 0.01 HCMV 30-fold dilution.fcs
+        # - 8d 0.1 HCMV 30-fold dilution.fcs
+        # - 8d 1.0 HCMV 50-fold dilution.fcs
+        # - 8d uninfected 10-fold dilution.fcs
+        # - DPBS blank.fcs
+        # - QC beads 100-fold dilution.fcs
+        # - Size beads 100-fold dilution.fcs
+
+  # Miltenyi MQA10
+  - src:
+      root_url: https://zenodo.org/records/4404888/files/
+      dataset_id: zenodo_4404888_MQA10
+      file_names:
+        # - AZMono Antonella HD.0001.fcs
+        - AZMono Covid1.0001.fcs
+        - AZMono Covid2.0001.fcs
+        - AZMono Covid3.0001.fcs
+        # - AZMono Covid_10.0001.fcs
+        # - AZMono Covid_11.0001.fcs
+        # - AZMono Covid_12.0001.fcs
+        # - AZMono Covid_13.0001.fcs
+        # - AZMono Covid_14.0001.fcs
+        # - AZMono Covid_15.0001.fcs
+        # - AZMono Covid_16.0001.fcs
+        # - AZMono Covid_17.0001.fcs
+        # - AZMono Covid_18.0001.fcs
+        # - AZMono Covid_19.0001.fcs
+        # - AZMono Covid_20.0001.fcs
+        # - AZMono Covid_21.0001.fcs
+        # - AZMono Covid_22.0001.fcs
+        # - AZMono Covid_23.0001.fcs
+        # - AZMono Covid_24.0001.fcs
+        # - AZMono Covid_25.0001.fcs
+        # - AZMono Covid_26.0001.fcs
+        # - AZMono Covid_27.0001.fcs
+        # - AZMono Covid_28.0001.fcs
+        # - AZMono Covid_29.0001.fcs
+        # - AZMono Covid_30.0001.fcs
+        # - AZMono Covid_31.0001.fcs
+        # - AZMono Covid_32.0001.fcs
+        # - AZMono Covid_33.0001.fcs
+        # - AZMono Covid_34.0001.fcs
+        # - AZMono Covid_35.0001.fcs
+        # - AZMono Covid_36.0001.fcs
+        # - AZMono Covid_37.0001.fcs
+        # - AZMono Covid_38.0001.fcs
+        # - AZMono Covid_39.0001.fcs
+        # - AZMono Covid_4.0001.fcs
+        # - AZMono Covid_40.0001.fcs
+        # - AZMono Covid_41.0001.fcs
+        # - AZMono Covid_42.0001.fcs
+        # - AZMono Covid_43.0001.fcs
+        # - AZMono Covid_44.0001.fcs
+        # - AZMono Covid_45.0001.fcs
+        # - AZMono Covid_46.0001.fcs
+        # - AZMono Covid_47.0001.fcs
+        # - AZMono Covid_5.0001.fcs
+        # - AZMono Covid_6.0001.fcs
+        # - AZMono Covid_7.0001.fcs
+        # - AZMono Covid_8.0001.fcs
+        # - AZMono Covid_9.0001.fcs
+        # - AZMono CovidHD_1.0001.fcs
+        # - AZMono CovidHD_10.0001.fcs
+        # - AZMono CovidHD_11.0001.fcs
+        # - AZMono CovidHD_11.0002.fcs
+        # - AZMono CovidHD_12.0001.fcs
+        # - AZMono CovidHD_13.0001.fcs
+        # - AZMono CovidHD_14.0001.fcs
+        # - AZMono CovidHD_15.0001.fcs
+        # - AZMono CovidHD_16.0001.fcs
+        # - AZMono CovidHD_17.0001.fcs
+        # - AZMono CovidHD_18.0001.fcs
+        # - AZMono CovidHD_2.0001.fcs
+        # - AZMono CovidHD_3 .0001.fcs
+        # - AZMono CovidHD_4 .0001.fcs
+        # - AZMono CovidHD_5 .0001.fcs
+        # - AZMono CovidHD_6 .0001.fcs
+        # - AZMono CovidHD_7.0001.fcs
+        # - AZMono CovidHD_8.0001.fcs
+        # - AZMono CovidHD_9.0001.fcs
+
+  # Attune NxT (B)
+  - src:
+      root_url: https://zenodo.org/records/14982475/files/
+      dataset_id: zenodo_14982475_AttuneNxt_B
+      file_names:
+        - HUA1.fcs
+        - HUA2.fcs
+        - HUA3.fcs
+        - N1.fcs
+        - N2.fcs
+        - N3.fcs
+
+  # Attune NxT (BV)
+  - src:
+      root_url: https://zenodo.org/records/4151380/files/
+      dataset_id: zenodo_4151380_AttuneNxt_BV
+      file_names:
+        - uAb 052820_Group_T1.fcs
+        - uAb 052820_Group_T10.fcs
+        - uAb 052820_Group_T11.fcs
+        - uAb 052820_Group_T12.fcs
+        - uAb 052820_Group_T13.fcs
+        - uAb 052820_Group_T14.fcs
+        - uAb 052820_Group_T15.fcs
+        - uAb 052820_Group_T16.fcs
+        - uAb 052820_Group_T17.fcs
+        - uAb 052820_Group_T18.fcs
+        - uAb 052820_Group_T19.fcs
+        - uAb 052820_Group_T2.fcs
+        - uAb 052820_Group_T20.fcs
+        - uAb 052820_Group_T21.fcs
+        - uAb 052820_Group_T22.fcs
+        - uAb 052820_Group_T23.fcs
+        - uAb 052820_Group_T24.fcs
+        - uAb 052820_Group_T25.fcs
+        - uAb 052820_Group_T26.fcs
+        - uAb 052820_Group_T27.fcs
+        - uAb 052820_Group_T28.fcs
+        - uAb 052820_Group_T29.fcs
+        - uAb 052820_Group_T3.fcs
+        - uAb 052820_Group_T30.fcs
+        - uAb 052820_Group_T31.fcs
+        - uAb 052820_Group_T32.fcs
+        - uAb 052820_Group_T4.fcs
+        - uAb 052820_Group_T5.fcs
+        - uAb 052820_Group_T6.fcs
+        - uAb 052820_Group_T7.fcs
+        - uAb 052820_Group_T8.fcs
+        - uAb 052820_Group_T9.fcs
+
+  # Attune NxT (BY)
+  - src:
+      root_url: https://zenodo.org/records/4592976/files/
+      dataset_id: zenodo_4592976_AttuneNxt_BY
+      file_names:
+        - Fig 2AB - MS153 - WT + p5055-5 t=8.0(1).fcs
+        - Fig 2AB - MS153 - WT + p5055-5 t=8.0h(2).fcs
+        - Fig 2AB - MS153 - WT + p5055-5 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5084-13 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5084-13 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5084-13 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5085-12 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5085-12 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5085-12 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5204 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5204 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5204 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5205-6 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5205-6 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5205-6 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5300-1 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5300-1 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5300-1 t=8.0h.fcs
+        # - Fig 2AB - MS153 - WT + p5302-2 t=8.0h(1).fcs
+        # - Fig 2AB - MS153 - WT + p5302-2 t=8.0h(2).fcs
+        # - Fig 2AB - MS153 - WT + p5302-2 t=8.0h.fcs
+        # - Fig 3 - MS103 - MvP1890+p5084 8 h(1).fcs
+        # - Fig 3 - MS103 - MvP1890+p5084 8 h(2).fcs
+        # - Fig 3 - MS103 - MvP1890+p5084 8 h.fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 16 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 16 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 16 h AHT.fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 8 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 8 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP1890+p5205 8 h AHT.fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 16 h(1).fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 16 h(2).fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 16 h.fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 8 h(1).fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 8 h(2).fcs
+        # - Fig 3 - MS103 - MvP1980+p5084 8 h.fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 16 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 16 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 16 h AHT.fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 8 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 8 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP1980+p5205 8 h AHT.fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 16 h(1).fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 16 h(2).fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 16 h.fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 8 h(1).fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 8 h(2).fcs
+        # - Fig 3 - MS103 - MvP2600+p5084 8 h.fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 16 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 16 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 16 h AHT.fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 8 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 8 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP2600+p5205 8 h AHT.fcs
+        # - Fig 3 - MS103 - MvP503+p5084 16 h(1).fcs
+        # - Fig 3 - MS103 - MvP503+p5084 16 h(2).fcs
+        # - Fig 3 - MS103 - MvP503+p5084 16 h.fcs
+        # - Fig 3 - MS103 - MvP503+p5084 8 h(1).fcs
+        # - Fig 3 - MS103 - MvP503+p5084 8 h(2).fcs
+        # - Fig 3 - MS103 - MvP503+p5084 8 h.fcs
+        # - Fig 3 - MS103 - MvP503+p5205 16 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP503+p5205 16 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP503+p5205 16 h AHT.fcs
+        # - Fig 3 - MS103 - MvP503+p5205 8 h AHT(1).fcs
+        # - Fig 3 - MS103 - MvP503+p5205 8 h AHT(2).fcs
+        # - Fig 3 - MS103 - MvP503+p5205 8 h AHT.fcs
+        # - Fig 3 - MS103 - MvpP1890+p5084 16 h(1).fcs
+        # - Fig 3 - MS103 - MvpP1890+p5084 16 h(2).fcs
+        # - Fig 3 - MS103 - MvpP1890+p5084 16 h.fcs
+        # - Fig 3 - MS103 - WT+p5084 16 h(1).fcs
+        # - Fig 3 - MS103 - WT+p5084 16 h(2).fcs
+        # - Fig 3 - MS103 - WT+p5084 16 h.fcs
+        # - Fig 3 - MS103 - WT+p5084 8 h(1).fcs
+        # - Fig 3 - MS103 - WT+p5084 8 h(2).fcs
+        # - Fig 3 - MS103 - WT+p5084 8 h.fcs
+        # - Fig 3 - MS103 - WT+p5204 16 h(1).fcs
+        # - Fig 3 - MS103 - WT+p5204 16 h(2).fcs
+        # - Fig 3 - MS103 - WT+p5204 16 h.fcs
+        # - Fig 3 - MS103 - WT+p5204 8 h(1).fcs
+        # - Fig 3 - MS103 - WT+p5204 8 h(2).fcs
+        # - Fig 3 - MS103 - WT+p5204 8 h.fcs
+        # - Fig 3 - MS103 - WT+p5205 16 h AHT(1).fcs
+        # - Fig 3 - MS103 - WT+p5205 16 h AHT(2).fcs
+        # - Fig 3 - MS103 - WT+p5205 16 h AHT.fcs
+        # - Fig 3 - MS103 - WT+p5205 8 h AHT(1).fcs
+        # - Fig 3 - MS103 - WT+p5205 8 h AHT(2).fcs
+        # - Fig 3 - MS103 - WT+p5205 8 h AHT.fcs
+        # - Fig 3 - MS104 - MvP1890+p5205 24 h AHT(1).fcs
+        # - Fig 3 - MS104 - MvP1890+p5205 24 h AHT(2).fcs
+        # - Fig 3 - MS104 - MvP1890+p5205 24 h AHT.fcs
+        # - Fig 3 - MS104 - MvP1980+p5084 24 h(1).fcs
+        # - Fig 3 - MS104 - MvP1980+p5084 24 h(2).fcs
+        # - Fig 3 - MS104 - MvP1980+p5084 24 h.fcs
+        # - Fig 3 - MS104 - MvP1980+p5205 24 h AHT(1).fcs
+        # - Fig 3 - MS104 - MvP1980+p5205 24 h AHT(2).fcs
+        # - Fig 3 - MS104 - MvP1980+p5205 24 h AHT.fcs
+        # - Fig 3 - MS104 - MvP2600+p5084 24 h(1).fcs
+        # - Fig 3 - MS104 - MvP2600+p5084 24 h(2).fcs
+        # - Fig 3 - MS104 - MvP2600+p5084 24 h.fcs
+        # - Fig 3 - MS104 - MvP2600+p5205 24 h AHT(1).fcs
+        # - Fig 3 - MS104 - MvP2600+p5205 24 h AHT(2).fcs
+        # - Fig 3 - MS104 - MvP2600+p5205 24 h AHT.fcs
+        # - Fig 3 - MS104 - MvP503+p5084 24 h(1).fcs
+        # - Fig 3 - MS104 - MvP503+p5084 24 h(2).fcs
+        # - Fig 3 - MS104 - MvP503+p5084 24 h.fcs
+        # - Fig 3 - MS104 - MvP503+p5205 24 h AHT(1).fcs
+        # - Fig 3 - MS104 - MvP503+p5205 24 h AHT(2).fcs
+        # - Fig 3 - MS104 - MvP503+p5205 24 h AHT.fcs
+        # - Fig 3 - MS104 - MvpP1890+p5084 24 h(1).fcs
+        # - Fig 3 - MS104 - MvpP1890+p5084 24 h(2).fcs
+        # - Fig 3 - MS104 - MvpP1890+p5084 24 h.fcs
+        # - Fig 3 - MS104 - WT+p5084 24 h(1).fcs
+        # - Fig 3 - MS104 - WT+p5084 24 h(2).fcs
+        # - Fig 3 - MS104 - WT+p5084 24 h.fcs
+        # - Fig 3 - MS104 - WT+p5204 24 h(1).fcs
+        # - Fig 3 - MS104 - WT+p5204 24 h(2).fcs
+        # - Fig 3 - MS104 - WT+p5204 24 h.fcs
+        # - Fig 3 - MS104 - WT+p5205 24 h AHT(1).fcs
+        # - Fig 3 - MS104 - WT+p5205 24 h AHT(2).fcs
+        # - Fig 3 - MS104 - WT+p5205 24 h AHT.fcs
+        # - Fig 4A - MS141 - WT + p5426-5 extr. Ara + AHT(1).fcs
+        # - Fig 4A - MS141 - WT + p5426-5 ohne Ara und AHT.fcs
+        # - Fig 4BC - MS141_Grou1_WT + p5426-5 extr. Ara + AHT(1).fcs
+        # - Fig 4BC - MS141_Grou1_WT + p5426-5 extr. Ara + AHT(2).fcs
+        # - Fig 4BC - MS141_Grou1_WT + p5426-5 extr. Ara + AHT.fcs
+        # - Fig 4F-L - MS141 WT + p5426-5 extr. Ara + AHT 22 h p.i. (1).fcs
+        # - Fig 4F-L - MS141 WT + p5426-5 extr. Ara + AHT 22 h p.i. (2).fcs
+        # - Fig 4F-L - MS141 WT + p5426-5 extr. Ara + AHT 22 h p.i..fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 2hpi(1).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 2hpi(2).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 2hpi.fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 4hpi(1).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 4hpi(2).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 4hpi.fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 6hpi(1).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 6hpi(2).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 6hpi.fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 8hpi(1).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 8hpi(2).fcs
+        # - Fig 4F-L - MS144 - WT + p5426-5 extr. Ara + AHT 8hpi.fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 10 hpi(1).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 10 hpi(2).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 10 hpi.fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 14 hpi(1).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 14 hpi(2).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 14 hpi.fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 16 hpi(1).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 16 hpi(2).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 16 hpi.fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 18 hpi(1).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 18 hpi(2).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 18 hpi.fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 20 hpi(1).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 20 hpi(2).fcs
+        # - Fig 4F-L - MS148 - WT + p5426-5 extr. Ara + AHT 20 hpi.fcs
+        # - Fig 5AB - MS123 - WT+p5084 200 Cefo(1).fcs
+        # - Fig 5AB - MS123 - WT+p5084 200 Cefo(2).fcs
+        # - Fig 5AB - MS123 - WT+p5084 200 Cefo.fcs
+        # - Fig 5AB - MS123 - WT+p5084 Ohne Cipro und Cefo(1).fcs
+        # - Fig 5AB - MS123 - WT+p5084 Ohne Cipro und Cefo(2).fcs
+        # - Fig 5AB - MS123 - WT+p5084 Ohne Cipro und Cefo.fcs
+        # - Fig 5AB - MS123 - WT+p5204(1).fcs
+        # - Fig 5AB - MS123 - WT+p5204(2).fcs
+        # - Fig 5AB - MS123 - WT+p5204.fcs
+        # - Fig 5AB - MS123 - WT+p5205 200 Cefo(1).fcs
+        # - Fig 5AB - MS123 - WT+p5205 200 Cefo(2).fcs
+        # - Fig 5AB - MS123 - WT+p5205 200 Cefo.fcs
+        # - Fig 5AB - MS123 - WT+p5205 Ohne Cipro und Cefo(1).fcs
+        # - Fig 5AB - MS123 - WT+p5205 Ohne Cipro und Cefo(2).fcs
+        # - Fig 5AB - MS123 - WT+p5205 Ohne Cipro und Cefo.fcs
+        # - Fig 6 - MS126 - WT + p5084-13 human Mac(1).fcs
+        # - Fig 6 - MS126 - WT + p5084-13 human Mac(2).fcs
+        # - Fig 6 - MS126 - WT + p5084-13 human Mac.fcs
+        # - Fig 6 - MS126 - WT + p5084-13 RAW.fcs
+        # - Fig 6 - MS126 - WT + p5084-13(1) RAW.fcs
+        # - Fig 6 - MS126 - WT + p5084-13(2) RAW.fcs
+        # - Fig 6 - MS126 - WT + p5204 human Mac(1).fcs
+        # - Fig 6 - MS126 - WT + p5204 human Mac(2).fcs
+        # - Fig 6 - MS126 - WT + p5204 human Mac.fcs
+        # - Fig 6 - MS126 - WT + p5204(1).fcs
+        # - Fig 6 - MS126 - WT + p5204(2).fcs
+        # - Fig 6 - MS126 - WT + p5204.fcs
+        # - Fig 6 - MS126 - WT + p5205-6 human Mac(1).fcs
+        # - Fig 6 - MS126 - WT + p5205-6 human Mac(2).fcs
+        # - Fig 6 - MS126 - WT + p5205-6 human Mac.fcs
+        # - Fig 6 - MS126 - WT + p5205-6 RAW.fcs
+        # - Fig 6 - MS126 - WT + p5205-6(1) RAW.fcs
+        # - Fig 6 - MS126 - WT + p5205-6(2) RAW.fcs
+
+  # Attune NxT (BVY)
+  - src:
+      root_url: https://zenodo.org/records/7390697/files/
+      dataset_id: zenodo_7390697_AttuneNxt_BVY
+      file_names:
+        - 4OHJ72_males.fcs
+        - 5OHJ72_accum.fcs
+        - JB_07122018_Filter_620_60_YL2_1OHJ72_normmales.fcs
+        # - JB_07122018_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_07122018_Filter_620_60_YL2_3OHJ67_accum.fcs
+        # - JB_10042019_Filter_620_60_YL2_1OHJ72_normmale.fcs
+        # - JB_10042019_Filter_620_60_YL2_4OHJ72_accum.fcs
+        # - JB_12102018_Filter_620_60_YL2_1k8x69n1_males.fcs
+        # - JB_12102018_Filter_620_60_YL2_2k8x69n1_eggs.fcs
+        # - JB_12102018_Filter_620_60_YL2_3k8x69n1_accum.fcs
+        # - JB_12102018_Filter_620_60_YL2_4OHJ72_males.fcs
+        # - JB_12102018_Filter_620_60_YL2_5OHJ72_accum.fcs
+        # - JB_12102018_Filter_620_60_YL2_6OHJ72_eggs.fcs
+        # - JB_14022019_Filter_620_60_YL2_1OHJ72_normmales.fcs
+        # - JB_14022019_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_14022019_Filter_620_60_YL2_3OHJ67_accum.fcs
+        # - JB_14022019_Filter_620_60_YL2_4OHJ72_accum.fcs
+        # - JB_15022019_Filter_620_60_YL2_1OHJ72_normmales.fcs
+        # - JB_15022019_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_15022019_Filter_620_60_YL2_3OHJ67_accum.fcs
+        # - JB_15022019_Filter_620_60_YL2_4OHJ72_accum.fcs
+        # - JB_17102018_Filter_620_60_YL2_1k8x69n1_males.fcs
+        # - JB_17102018_Filter_620_60_YL2_2k8x69n1_eggs.fcs
+        # - JB_17102018_Filter_620_60_YL2_3k8x69n1_accum.fcs
+        # - JB_17102018_Filter_620_60_YL2_4OHJ72_males.fcs
+        # - JB_17102018_Filter_620_60_YL2_5OHJ72_accum.fcs
+        # - JB_17102018_Filter_620_60_YL2_6OHJ72_eggs.fcs
+        # - JB_19102018_Filter_620_60_YL2_1k8x69n1_males.fcs
+        # - JB_19102018_Filter_620_60_YL2_2k8x69n1_eggs.fcs
+        # - JB_19102018_Filter_620_60_YL2_3k8x69n1_accum.fcs
+        # - JB_19102018_Filter_620_60_YL2_4OHJ72_males.fcs
+        # - JB_19102018_Filter_620_60_YL2_5OHJ72_accum.fcs
+        # - JB_19102018_Filter_620_60_YL2_6OHJ72_eggs.fcs
+        # - JB_21022019_Filter_620_60_YL2_7OHJ67_accum.fcs
+        # - JB_21022019_Filter_620_60_YL2_8OHJ67_males.fcs
+        # - JB_27032019_Filter_620_60_YL2_1OHJ67_accum.fcs
+        # - JB_27032019_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_27092018_Filter_620_60_YL2_1k8x69n1_males.fcs
+        # - JB_27092018_Filter_620_60_YL2_2k8x69n1_eggs.fcs
+        # - JB_27092018_Filter_620_60_YL2_3k8x69n1_accum.fcs
+        # - JB_29012019_Filter_620_60_YL2_1OHJ72_normmales.fcs
+        # - JB_29012019_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_29012019_Filter_620_60_YL2_3OHJ67_accum.fcs
+        # - JB_30012019_Filter_620_60_YL2_1OHJ72_normmales.fcs
+        # - JB_30012019_Filter_620_60_YL2_2OHJ67_males.fcs
+        # - JB_30012019_Filter_620_60_YL2_3OHJ67_accum.fcs
+        # - MP_01062017_Filter_620_60_YL2_OHJ71.fcs
+        # - MP_01062017_Filter_620_60_YL2_OHJ76.fcs
+        # - MP_01062017_Filter_620_60_YL2_OHJ80.fcs
+        # - MP_01062017_Filter_620_60_YL2_OHJ81.fcs
+        # - MP_22062017_Filter_620_60_YL2_OHJ76.fcs
+        # - MP_22062017_Filter_620_60_YL2_OHJ80.fcs
+        # - PS_02082018_Filter_620_60_YL2_MNCHU024.fcs
+        # - PS_02082018_Filter_620_60_YL2_OHJ13x107n2.fcs
+        # - PS_02082018_Filter_620_60_YL2_OHJ13x109n1.fcs
+        # - PS_02082018_Filter_620_60_YL2_OHJ72_accum.fcs
+        # - PS_02082018_Filter_620_60_YL2_OHJ72_hatched.fcs
+        # - PS_02082018_Filter_620_60_YL2_OHJ72_maleeggs.fcs
+        # - PS_04102017_Filter_620_60_YL2_OHJ7i2n10.fcs
+        # - PS_04102017_Filter_620_60_YL2_OHJ7i3n2.fcs
+        # - PS_04102017_Filter_620_60_YL2_OHJ7i3n3.fcs
+        # - PS_04102017_Filter_620_60_YL2_OHJ7i3n5.fcs
+        # - PS_04102017_Filter_620_60_YL2_OHJ7i3n9.fcs
+        # - PS_06122017_Filter_620_60_YL2_OHJ7.fcs
+        # - PS_06122017_Filter_620_60_YL2_OHJ7i2n11.fcs
+        # - PS_06122017_Filter_620_60_YL2_OHJ7i3n7.fcs
+        # - PS_09082018_Filter_620_60_YL2_IK1.fcs
+        # - PS_09082018_Filter_620_60_YL2_IK6.fcs
+        # - PS_09082018_Filter_620_60_YL2_k110x109n1.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ72_accum.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ72_hatched.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ72_maleeggs.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ7i2n11.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ7i3n10.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ7i3n5.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ7i3n7.fcs
+        # - PS_09082018_Filter_620_60_YL2_OHJ7i3n8.fcs
+        # - PS_17052017_Filter_620_60_YL2_OHJ104.fcs
+        # - PS_17052017_Filter_620_60_YL2_OHJ105.fcs
+        # - PS_21062017_Filter_620_60_YL2_13x107n2.fcs
+        # - PS_21062017_Filter_620_60_YL2_8x69n1.fcs
+        # - PS_21062017_Filter_620_60_YL2_8x69n1_mE.fcs
+        # - PS_23082018_Filter_620_60_YL2_IK2.fcs
+        # - PS_23082018_Filter_620_60_YL2_IK3.fcs
+        # - PS_23082018_Filter_620_60_YL2_IK4.fcs
+        # - PS_23082018_Filter_620_60_YL2_IK5.fcs
+        # - PS_23082018_Filter_620_60_YL2_IK7.fcs
+        # - PS_23082018_Filter_620_60_YL2_OHJ72_accum.fcs
+        # - PS_23082018_Filter_620_60_YL2_OHJ72_hatched.fcs
+        # - PS_23082018_Filter_620_60_YL2_OHJ72_maleeggs.fcs
+        # - PS_23082018_Filter_620_60_YL2_OHJ7i3n2.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ103.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ67.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ69.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ85.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ90.fcs
+        # - PS_24052017_Filter_620_60_YL2_OHJ91.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ104.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ69.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ72_hatched.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ72_maleeggs.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ91.fcs
+        # - PS_26072018_Filter_620_60_YL2_OHJ96.fcs
+        # - PS_28062017_Filter_620_60_YL2_OHJ105.fcs
+        # - PS_28062017_Filter_620_60_YL2_OHJ105_mE.fcs
+        # - PS_28062017_Filter_620_60_YL2_OHJ96_mE.fcs
+        # - PS_28062017_Filter_620_60_YL2_OHJ98.fcs
+        # - PS_28062017_Filter_620_60_YL2_OHJ98_mE.fcs
+        # - PS_28062018_Filter_620_60_YL2_K109x13n2.fcs
+        # - PS_28062018_Filter_620_60_YL2_K13x109n1.fcs
+        # - PS_28062018_Filter_620_60_YL2_K93x22n1.fcs
+        # - PS_28062018_Filter_620_60_YL2_K93x69n1.fcs
+        # - PS_28062018_Filter_620_60_YL2_OHJ103.fcs
+        # - PS_28062018_Filter_620_60_YL2_OHJ109.fcs
+        # - PS_28062018_Filter_620_60_YL2_OHJ7.fcs
+        # - PS_28062018_Filter_620_60_YL2_OHJ71.fcs
+        # - PS_28062018_Filter_620_60_YL2_OHJ85.fcs
+        # - PS_29112017_Filter_620_60_YL2_IK6.fcs
+        # - PS_29112017_Filter_620_60_YL2_OHJ7i3n2.fcs
+        # - PS_31052017_Filter_620_60_YL2_K109x13n2.fcs
+        # - PS_31052017_Filter_620_60_YL2_K13x109n1.fcs
+        # - PS_31052017_Filter_620_60_YL2_K13x110n2.fcs
+        # - PS_31052017_Filter_620_60_YL2_K8x69n1.fcs
+
   # Attune NxT
   - src:
       root_url: https://zenodo.org/records/7352402/files/

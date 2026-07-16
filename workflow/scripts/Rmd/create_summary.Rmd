@@ -10,7 +10,7 @@ output:
 
 # Results Overview
 
-```{r, results = "asis", echo = FALSE, fig.height = 15, fig.width = 12}
+```{r, results = "asis", echo = FALSE, fig.height = 16, fig.width = 12}
 suppressMessages(library(tidyverse))
 suppressMessages(library(ggh4x))
 df_machines <- read_tsv(
