@@ -363,7 +363,40 @@ df_all_errors %>%
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
   )
-ggsave(snakemake@output[["plot"]], width = 12, height = 12, dpi = 125)
+ggsave(snakemake@output[["plot_errors"]], width = 12, height = 12, dpi = 125)
+
+
+df_misc %>%
+  mutate(
+    file_version = str_replace(file_version, "FCS", ""),
+    real_version = str_replace(real_version, "FCS", ""),
+    version_change = if_else(
+      file_version == real_version,
+      file_version,
+      sprintf("%s->%s", file_version, real_version)
+    )
+  ) %>%
+  select(index, fcs_path, dataset, version_change) %>%
+  left_join(df_machines, by = "fcs_path") %>%
+  mutate(machine = sprintf("%s_%s", machine_short, software_short)) %>%
+  ggplot(
+    aes(
+      y = fct_rev(machine),
+      fill = version_change,
+    )
+  ) +
+  geom_bar() +
+  facet_grid(
+    vendor_short ~ .,
+    scales = "free",
+    switch = "y",
+    space = "free"
+  ) +
+  labs(x = NULL, y = NULL, fill = "Version Change") +
+  theme(
+    strip.text.y.left = element_text(angle = 0),
+  )
+ggsave(snakemake@output[["plot_version_change"]], width = 12, height = 12, dpi = 125)
 
 df_all_errors %>%
   write_tsv(snakemake@output[["table"]])

@@ -124,14 +124,16 @@ bytes" or "dark segments" (like "dark matter").
 
 <img src="`r knitr::image_uri(snakemake@input[["plot_dark"]])`">
 
-# FCS Standard Compliance Errors
+# Compliance Assessment
 
-This is an overview of all the errors that `fireflow` caught when parsing these
-files. These are described in some detail below. Note that in many cases these
-are aggregate errors in the sense that they indicate "at least one keyword" (or
-similar) had an error. 
+## Parse Errors
 
-Each error on the x axis of the following plot is explained below.
+This is a summary of all errors that `fireflow` detected when parsing files. A
+description of each error (see x axis) is given below. Note that in many cases
+these are aggregate errors in the sense that they indicate "at least one
+keyword" (or similar) had an error.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">
 
 ### Offset errors
 
@@ -232,13 +234,7 @@ the file.
 
 Note, this has a relationship to the `nc_version` error in the next section
 because it depends on which FCS version the file is assumed to follow based on
-a heuristic that guesses the version given the keywords present. For a full
-description of this, see the `fireflow` documentation (specifically the
-`version_override` flag).
-
-For purposes here, the version is changed from that indicated in *HEADER* if a
-different version can be selected that drops no keywords (optional or required).
-If impossible, the version which drops the least optional keywords is selected.
+a heuristic that guesses the version given the keywords present.
 
 1) nc_extra_hyper_gate: At least one *\$Gm* keyword has an index which exceeds
    *\$GATE*.
@@ -270,58 +266,86 @@ If impossible, the version which drops the least optional keywords is selected.
 6) nc_tot: *\$TOT* did not match the actualy number of events in *DATA* (as
    computed using the sum of *\$PnB* and the length of the *DATA* segment in
    bytes.
-7) nc_version: The version in *HEADER* did not match the "real" version of the
-   file. "Real" version is defined here as the version which drops the least
-   number of optional keywords. If the *HEADER* version is tied on this metric
-   with a different version, the former is chosen.
+7) nc_version: The version in *HEADER* did not match the "true" version of the
+   file. See next section for more details on this error.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">
+
+## Determining "True" Version
+
+Many files have keywords that are not compatible with the version indicated in
+*HEADER*; usually this is lower than the "true" version.
+
+Note that in many cases the "true" version is somewhat arbitrary since several
+will work, especially if the comparison is between 3.1 and 3.2.
+
+To find the "true" version, start will each version and eliminate those which
+drop required keywords. As a special case, 2.0 and 3.0 are eliminated if *\$PnB*
+has different widths and *\$DATATYPE* is `I` (the so-called "uint-var" schema).
+From whatever is left, choose the version which drops the least number of
+optional keywords. In many cases this will leave at least two versions which
+drop zero optional keywords each. In this case the version with the greatest
+number of optional keywords is selected, or the current version is selected if
+it has not been eliminated.
+
+<img src="`r knitr::image_uri(snakemake@input[["plot_version_change"]])`">
 
 ## Machine Identification
 
-Ideally, the machine model is given in *\$CYT* (with the vendor implied) and the
-serial number is given in *\$CYTSN*. This is not always the case. First, some
-machines list their instrument "family" in *\$CYT* (for example, "Aurora"
-without the number of lasers, which are all technically different models). Of
-course, some machines just store this information whereever they want.
+In order to construct the plots above we need to determine the machine, vendor,
+and ideally it software name and version. This information is not always
+available in the file itself, so sometimes this is determined based on the
+publication (if it exists) alongside the file.
 
-There is no standardized way to report software in FCS files. In practice this
-is often a combination of appending a version string to *\$CYT*, using *\$SYS*
-(which may otherwise be the operating system of the host machine), or adding
-additional keywords. When it exists, the software name sometimes has version and
-build number, or sometimes is just the name of the application.
+### Direct mapping from *\$CYT*
 
-In order to make the above plots, vendor, machine (ideally the exact model), and
-software (ideally with version and build information) need to be found. In some
-cases, this was found explicity by going to the publication which listed the
-exact machine they used. This is surprisingly less common than one would think.
+In the simple case, machine and vendor can be inferred directly from *\$CYT*.
+Ideally, *\$CYT* would store the exact model number but instead stores the
+overall product family name. For example, all Auroras are simple called "Aurora"
+even though they have different laser configurations that map onto differnt
+products. When possible, these machines are further deliniated using heuristics
+(see next section).
 
-In most cases this information could be found automatically using the following
-heuristics (see `workflow/scripts/python/fcsio/compile_metadata.py` for
-details):
+The following lookup table is used to make this determination (using exact
+matches):
 
-### Agilent
+```{r, results = "asis", echo = FALSE}
+read_tsv(snakemake@input[["cyt_mapping"]], col_types = "ccc") %>%
+  knitr::kable()
+```
 
-Novocyte family machines report themeselves accurately in *\$CYT*.
+### Special cases and software determination
+
+The above *\$CYT* lookup does not always work, so other heuristics are needed
+(described below). Furthermore, heuristics are needed to find software since
+the FCS standards provide no way to report the name, version, build, etc of the
+software that wrote the file. In some cases, no indication of software is given
+in the file at all.
+
+These heuristics are described in depth in
+`workflow/scripts/python/fcsio/compile_metadata.py` (function
+`get_machine_details`).
+
+Unless otherwise noted, machine is found using *\$CYT* using the lookup table
+above.
+
+#### Agilent
 
 Software name and version is stored in the *#NCCreator* nonstandard keyword.
 
-### BD
+#### BD
 
-Most BD machines report themselves accurately in *\$CYT*. No attempt has been
-made so far to identify different laser configurations. Sometimes *\$CYT* has a
-nickname but these usually have the machine model listed after.
+Sometimes *\$CYT* has a nickname but these usually have the machine model listed
+after.
 
-Older machines may not have *\$CYT*. Machines with a Cytek upgrade will usually
-say something like "Cytek DxP10", sometimes with the base machine after
-(FACScan, FACSCalibur, or FACSsort).
+Older machines may not have *\$CYT* at all; these usually need to be determined
+manually. Machines with a Cytek upgrade will usually say something like "Cytek
+DxP10", sometimes with the base machine after (FACScan, FACSCalibur, or
+FACSsort).
 
 Software is reported often in a non-standard keyword called *CREATOR*, usually
 with a version.
 
-### BC
-
-*\$CYT* is usually accurate, especially on modern machines.
+#### BC
 
 Software on newer machines is stored in a the nonstandard keyword *SWVER*.
 Software on the Gallios is stored in *@ACQSOFTWARE*. Software on older machines
@@ -329,12 +353,11 @@ such as the CyAn and MoFlo (of varying submodels) will report their software
 prepended to the operating system on the *\$SYS* keyword (like `<software> /
 <OS>`).
 
-### Bio-Rad
+#### Bio-Rad
 
-The ZE5 reports itself as a "YETI" in *\$CYT*, which was its former name when
-owned by Propel Labs. Software does not appear to be stored anywhere.
+Software does not appear to be stored anywhere.
 
-### Cytek
+#### Cytek
 
 Machines are accurately identified in *\$CYT*. However, Aurora's are further
 identified by the number of lasers, which are consistent across three different
@@ -343,21 +366,18 @@ models (3, 4, and 5 lasers) which is done by checking the nonstandard keywords
 
 Software is listed in *CREATOR* on newer machines.
 
-### Stratedigm
+#### Stratedigm
 
-*\$CYT* reports the machine model. Software (including version and build) is
-stored in the nonstandard keywords *SOFTWARE*.
+Software (including version and build) is stored in the nonstandard keywords
+*SOFTWARE*.
 
-### Standard Biotools
+#### Standard Biotools
 
-CyTOF machines are inconsistent. Some store the machine name in *\$CYTSN* (ie
-"cytof2") and *\$CYT* instead stores the software name and version. Some don't
-store the machine name at all and this must be assumed by reading the primary
-source publication.
+TODO (this is a mess)
 
-### Thermo Fisher
+#### Thermo Fisher
 
-The Attune NxT stores its exact model (including the laser configuration) in
-*\$CYT*. Software does not appear to be stored anywhere.
+For the Attune NxT, software does not appear to be stored anywhere.
 
-The older Attune stores the software string in *\$CYT* and the model is implied.
+The original Attune stores the software string in *\$CYT* and the model is
+implied.

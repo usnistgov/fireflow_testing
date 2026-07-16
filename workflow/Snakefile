@@ -151,7 +151,8 @@ rule compile_errors:
         machines=rules.compile_metadata.output.machine_table,
     output:
         table="results/reports/errors.tsv",
-        plot="results/reports/errors.png",
+        plot_errors="results/reports/errors.png",
+        plot_version_change="results/reports/version_change.png",
     conda:
         "envs/tidyverse.yml"
     script:
@@ -183,11 +184,20 @@ rule compile_features:
         "scripts/R/compile_features.R"
 
 
+rule dump_cyt_mapping:
+    output:
+        "results/features/cyt_mapping.tsv",
+    script:
+        "scripts/python/fcsio/dump_cyt_mapping.py"
+
+
 rule create_summary:
     input:
         **rules.compile_features.output,
-        plot_errors=rules.compile_errors.output.plot,
+        plot_errors=rules.compile_errors.output.plot_errors,
+        plot_version_change=rules.compile_errors.output.plot_version_change,
         machines=rules.compile_metadata.output.machine_table,
+        cyt_mapping=rules.dump_cyt_mapping.output,
     output:
         "results/summaries/summary.html",
     conda:
