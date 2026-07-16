@@ -1,6 +1,11 @@
 ---
-title: "fireflow test summary"
-output: "html_document"
+title: "Fireflow Test Results"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    df_print: paged
 ---
 
 # Results Overview

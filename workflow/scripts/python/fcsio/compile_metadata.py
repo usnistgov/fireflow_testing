@@ -82,6 +82,10 @@ class DatasetMetadata(NamedTuple):
     etim: time | None
     begindatetime: datetime | None
     enddatetime: datetime | None
+    # subset keyowrds
+    csvbits: int | None
+    cstot: int | None
+    csvflags: str | None
     # other keywords
     mode: str | None
     last_modifier: str | None
@@ -473,9 +477,7 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
             )
 
             meas_type = (
-                rest.measurement_type
-                if isinstance(rest, pf.Optical3_2)
-                else ("Time" if isinstance(rest, pf.Temporal3_2) else None)
+                rest.measurement_type if isinstance(rest, pf.Optical3_2) else None
             )
 
             return MeasMetadata(
@@ -512,6 +514,15 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
         else:
             assert_never(core)
 
+        if isinstance(core, pf.CoreTEXT3_0 | pf.CoreTEXT3_1):
+            csvbits = core.csvbits if core.csvbits > 0 else None
+            cstot = core.cstot if core.cstot > 0 else None
+            csvflags = ",".join(maybe("NA", str, x) for x in core.csvflags)
+        else:
+            csvbits = None
+            cstot = None
+            csvflags = None
+
         meas = [
             make_meas_meta(n, s0, s1, m)
             for n, (s0, s1), m in zip(shortnames, scales, core.measurements)
@@ -534,6 +545,9 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
             mode=core.mode,
             begindatetime=begindatetime,
             enddatetime=enddatetime,
+            csvbits=csvbits,
+            cstot=cstot,
+            csvflags=csvflags,
             last_modifier=last_modifier,
             last_modified=last_modified,
             originality=originality,
@@ -743,6 +757,9 @@ def dump_other_root_keywords(
             "TIMESTEP",
             "TR_name",
             "TR_value",
+            "CSTOT",
+            "CSVBITS",
+            "CSVFLAGS",
             "spill_or_comp",
         ]
         w.writerow(header)
@@ -780,6 +797,9 @@ def dump_other_root_keywords(
                     d.timestep,
                     d.trigger_name,
                     d.trigger_value,
+                    d.cstot,
+                    d.csvbits,
+                    d.csvflags,
                     d.spill_or_comp_present,
                 ]
             )

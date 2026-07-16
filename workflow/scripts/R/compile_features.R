@@ -19,6 +19,8 @@ df_root <- read_tsv(
     dataset = "i",
     ABRT = "i",
     LOST = "i",
+    CSTOT = "i",
+    CSVBITS = "i",
     TIMESTEP = "d",
     TR_value = "d",
     spill_or_comp = "l",
@@ -396,7 +398,6 @@ df_meas_optical <- df_meas %>%
     PnL = any(!is.na(PnL)),
     PnF = any(!is.na(PnF)),
     PnO = any(!is.na(PnO)),
-    PnE = any(!is.na(PnE)),
     PnV = any(!is.na(PnV)),
     PnCALIBRATION = any(!is.na(PnCALIBRATION_unit)),
     PnANALYTE = any(!is.na(PnANALYTE)),
@@ -441,7 +442,10 @@ df_root_has_kw <- df_root %>%
         PROJ,
         SMNO,
         SRC,
-        GATING
+        GATING,
+        CSTOT,
+        CSVBITS,
+        CSVFLAGS
       ),
       ~ !is.na(.x)
     ),
@@ -481,11 +485,32 @@ df_all_kw %>%
     category = case_when(
       str_starts(key, "Pn") ~ "meas",
       key %in% c("Gn*", "GATING") ~ "gate",
+      key %in% c("PKNn", "PKn") ~ "peak",
+      key %in% c("LAST_MODIFIER", "LAST_MODIFIED", "ORIGINALITY") ~ "mod",
+      key %in% c("UNSTAINEDCENTERS", "UNSTAINEDINFO") ~ "spillref",
+      key %in% c("PLATEID", "PLATENAME", "WELLID") ~ "plate",
+      key %in% c("CARRIERID", "CARRIERTYPE", "LOCATIONID") ~ "carrier",
+      key %in% c("CSTOT", "CSVFLAGS", "CSVBITS") ~ "subset",
       key %in% c("DATE", "ETIM", "BTIM", "BEGINDATETIME", "ENDDATETIME") ~ "time",
       TRUE ~ "misc"
     )
   ) %>%
-  ggplot(aes(key, fct_rev(ms), color = used)) +
+  mutate(
+    used = case_when(
+      used == 1.0 ~ "all",
+      used == 0.0 ~ "none",
+      used < 0.1 ~ "<10%",
+      used < 0.9 ~ "10-90%",
+      TRUE ~ ">90%"
+    )
+  ) %>%
+  ggplot(
+    aes(
+      key,
+      fct_rev(ms),
+      color = fct_relevel(used, "all", ">90%", "10-90%", "<10%", "none")
+    )
+  )+
   geom_point() +
   facet_grid(
     vendor_short~ category,
@@ -493,10 +518,19 @@ df_all_kw %>%
     switch = "y",
     space = "free"
   ) +
-  scale_color_gradient2(low = "white", high = "red") +
+  scale_color_manual(
+    values = c(
+      "none" = "white",
+      "<10%" = "#ffbbbb",
+      "10-90%" = "#ff8888",
+      ">90%" = "#ff5555",
+      "all" = "#000000"
+    )
+  )  +
   labs(x = NULL, y = NULL, color = "Fraction\nkey usage") +
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
+    strip.text.x.top = element_text(angle = 90),
   )
 ggsave(snakemake@output[["plot_kw_usage"]], width = 12, height = HEIGHT, dpi = DPI)
