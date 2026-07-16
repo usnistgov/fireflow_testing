@@ -369,7 +369,7 @@ CYTEK_MACHINES = {
         vendor=VendorId.CYTEK,
     ),
     MachineId.CYTEK_IMGSTR: Machine(
-        name=MachineName("Image Stream"),
+        name=MachineName("ImageStream"),
         vendor=VendorId.CYTEK,
         machine_type=MachineType.IMAGING,
         cyt_values=["Image Stream"],

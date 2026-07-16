@@ -654,12 +654,21 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                 return s
 
         def short_machine(s: str) -> str:
-            if "GemStone" in s:
-                return "GemStone"
-            elif s == "MACSQuant Analyzer":
-                return "MQA"
+            mapping = {
+                "GemStone (software only)": "GemStone",
+                "FACSAria Fusion": "Fusion",
+                "Guava easyCyte": "easyCyte",
+                "Eclipse Analyzer": "Eclipse",
+                "MACSQuant Analyzer": "MQA",
+            }
+            if s in mapping:
+                return mapping[s]
             elif "LSRFortessa" in s:
                 return s.replace("LSR", "")
+            elif "FACSDiscover" in s:
+                return s.replace("FACSDiscover", "FACSDisc.")
+            elif "FACSSymphony" in s:
+                return s.replace("FACSSymphony", "FACSSymph.")
             else:
                 return s
 
@@ -668,8 +677,14 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                 return s.replace("BD FACSDiva Software Version", "FACSDiva")
             elif "DVSSCIENCES" in s:
                 return re.sub("DVSSCIENCES-(FLUIDIGM-)?CYTOF", "CyTOF Software", s)
+            elif "CellCapTure" in s or "Stratedigm" in s:
+                return re.sub(",? ?Build: .*", "", s)
+            elif "FlowJoCollectorsEdition" in s:
+                return s.replace("CollectorsEdition", "CE")
+            elif "Summit" in s:
+                return re.sub(" ?(Development-only|Released) Version", "", s)
             else:
-                return s.replace("Development-only Version", "")
+                return s
 
         for d in ds:
             w.writerow(
