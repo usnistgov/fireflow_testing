@@ -14,6 +14,7 @@ aspera_base_dir = tools_dir / "immport-data-download-tool"
 log_dir = results_dir / "log"
 
 test_read_dir = results_dir / "test_read"
+flowio_dir = results_dir / "flowio"
 diag_dir = results_dir / "diagnostics"
 metadata_dir = results_dir / "metadata"
 errors_dir = results_dir / "compliance_errors"
@@ -86,6 +87,32 @@ rule list_all_fcs_files:
             {input.fr} \
         > {output}
         """
+
+
+rule clone_flowio:
+    output:
+        directory(tools_dir / "flowio")
+    params:
+        url="https://bitbucket.org/Mira_Koblizek/flowio/commits/47ef24487ead37efbe3d06674a37b769c6be49ab"
+        # target = lambda wildcards, output: Path(output[0]).parent
+    shell:
+        """
+        git clone {params.url} {output}
+        """
+
+
+rule run_flowio:
+    input:
+        files=rules.list_all_fcs_files.output,
+        flowio=rules.clone_flowio.output,
+    output:
+        results=flowio_dir / "results.tsv",
+        errors=flowio_dir / "errors.tsv",
+    conda:
+        "envs/flowio.yml"
+    threads: 20
+    script:
+        "scripts/R/run_flowio.R"
 
 
 rule test_read:
@@ -221,3 +248,4 @@ rule all:
         rules.compile_errors.output,
         rules.compile_features.output,
         rules.create_summary.output,
+        rules.run_flowio.output,
