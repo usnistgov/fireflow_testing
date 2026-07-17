@@ -772,6 +772,10 @@ class MiscDiagnostics(WritableDiagnostic):
     # things when they are at the end
     prim_last_odd_token: str | bytes
     supp_last_odd_token: str | bytes | None
+    # NOTE these aren't going to be written when this is dumped to a TSV file
+    # since they will be explicitly written as blobs elsewhere
+    analysis: str | bytes
+    others: list[str | bytes]
 
     @classmethod
     def to_header(self) -> list[str]:
@@ -920,6 +924,8 @@ class MiscDiagnostics(WritableDiagnostic):
             u.dataset.dataset_diagnostics.computed_crc,
             encode_or_esc(primary.last_odd_token),
             fmap_maybe(lambda x: encode_or_esc(x.last_odd_token), supp),
+            c.analysis,
+            c.others,
         )
         return (ret,)
 
@@ -1066,25 +1072,45 @@ def main(smk: Any) -> None:
 
     dark_dir = Path(smk.output["dark_bytes"]).parent / "dark_blobs"
     dark_dir.mkdir(parents=True, exist_ok=True)
-    blob_index = 0
+    # this will match the index in the first column of the dark_bytes.tsv file
+    dark_blob_index = 0
 
-    def write_txt(xs: str) -> None:
-        blob_path = dark_dir / f"{blob_index}.txt"
-        with open(blob_path, "wt") as f:
+    def write_txt(prefix: Path, xs: str) -> None:
+        with open(prefix.with_suffix(".txt"), "wt") as f:
             f.write(xs)
 
-    def write_bytes(xs: bytes) -> None:
-        blob_path = dark_dir / f"{blob_index}.bin"
-        with open(blob_path, "wb") as f:
+    def write_bytes(prefix: Path, xs: bytes) -> None:
+        with open(prefix.with_suffix(".bin"), "wb") as f:
             f.write(xs)
 
     for x in test_out:
         for y in x.dark:
+            prefix = dark_dir / f"dark_{dark_blob_index:08}"
             if isinstance(y.content, str):
-                write_txt(y.content)
+                write_txt(prefix, y.content)
             else:
-                write_bytes(y.content)
-            blob_index += 1
+                write_bytes(prefix, y.content)
+            dark_blob_index += 1
+
+    # Do same thing with analysis and other segments. These will be indexed
+    # according to that of the "misc.tsv" file which should include all datasets
+    segment_dir = Path(smk.output["misc"]).parent / "segment_blobs"
+    segment_dir.mkdir(parents=True, exist_ok=True)
+
+    for i, misc in enumerate(misc for test in test_out for misc in test.misc):
+        prefix = segment_dir / f"analysis_{i:08}"
+        if len(misc.analysis) > 0:
+            if isinstance(misc.analysis, str):
+                write_txt(prefix, misc.analysis)
+            else:
+                write_bytes(prefix, misc.analysis)
+        for j, o in enumerate(misc.others):
+            if len(o) > 0:
+                prefix = segment_dir / f"other_{i:08}_{j:04}.txt"
+                if isinstance(o, str):
+                    write_txt(prefix, o)
+                else:
+                    write_bytes(prefix, o)
 
     # dump list of output files, which should all be "clean"
     with open(fcs_out, "w") as f:

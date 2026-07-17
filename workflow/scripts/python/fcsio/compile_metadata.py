@@ -155,6 +155,9 @@ def get_machine_details(
         else:
             return None
 
+    # TODO Apogee stores its software version (and other stuff) in an OTHER
+    # segment
+
     # Try to figure out the machine based on CYT, this will return non-None
     # if the config supplies the machine id, which will be used first over the
     # $CYT keyword.
