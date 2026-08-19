@@ -4,3 +4,4 @@ channels:
 dependencies:
   - r-tidyverse
   - r-ggh4x
+  - r-svglite

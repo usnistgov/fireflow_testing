@@ -6,7 +6,23 @@ output:
     toc_depth: 2
     toc_float: true
     df_print: paged
+    # this is important to prevent pandoc from splitting figure captions across
+    # multiple lines, which results in some weird-looking plots
+    pandoc_args: ["--wrap=none"]
 ---
+
+``` {r echo = FALSE}
+# read SVG and strip off the SVG bit on top
+embed_svg <- function(path) {
+  svg_lines <- readLines(path)
+  out <- if (grepl("^\\s*<\\?xml", svg_lines[1])) {
+    svg_lines[-1]
+  } else {
+    svg_lines
+  }
+  cat(out, sep = "\n")
+}
+```
 
 # Results Overview
 
@@ -62,24 +78,32 @@ features.
 
 These are optional keywords in all versions in which they are valid.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_kw_usage"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_kw_usage"]])
+```
 
 ## Scaling type
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_scaling"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_scaling"]])
+```
 
 ## CRC usage
 
 This checks for files that have a non-zero CRC word at the end.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_crc"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_crc"]])
+```
 
 ## Datasets per file
 
 Most files will have only one dataset in them (ie a discrete FCS data unit
 defined by *\$NEXTDATA*)
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_datasets"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_datasets"]])
+```
 
 ## *DATA* schema usage
 
@@ -88,31 +112,41 @@ These are different methods (schema) used to encode the bytes of data in *DATA*.
 Note that "uint-var" is only possible in 3.1 and 3.2, and "mixed" is only
 possible in 3.2.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_schema"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_schema"]])
+```
 
 ## *\$BYTEORD* usage
 
 Checks for either big endian, little endian, or something else (ie the PDP-11
 layout which is 3,4,1,2)
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_byteord"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_byteord"]])
+```
 
 ## *ANALYSIS* segment usage
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_analysis"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_analysis"]])
+```
 
 ## *OTHER* segment usage
 
 These are segments that can be used for anything. Most files have zero.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_other_seg"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_other_seg"]])
+```
 
 ## Supplemental *TEXT* segment usage
 
 Presumably this is only needed if *TEXT* gets so big that its ending offset
 exceeds 100,000,000 and thus won't fit in *HEADER*.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_supp_text"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_supp_text"]])
+```
 
 ## Dark segment usage
 
@@ -122,7 +156,9 @@ they can't be seen in a standards-compliant manner. However, they are still
 there and probably mean something to someone, somewhere. These are called "dark
 bytes" or "dark segments" (like "dark matter").
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_dark"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_dark"]])
+```
 
 # Compliance Assessment
 
@@ -133,7 +169,9 @@ description of each error (see x axis) is given below. Note that in many cases
 these are aggregate errors in the sense that they indicate "at least one
 keyword" (or similar) had an error.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_errors"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_errors"]])
+```
 
 ### Offset errors
 
@@ -287,7 +325,9 @@ drop zero optional keywords each. In this case the version with the greatest
 number of optional keywords is selected, or the current version is selected if
 it has not been eliminated.
 
-<img src="`r knitr::image_uri(snakemake@input[["plot_version_change"]])`">
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_version_change"]])
+```
 
 ## Machine Identification
 

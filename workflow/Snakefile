@@ -185,8 +185,8 @@ rule compile_errors:
         machines=rules.compile_metadata.output.machine_table,
     output:
         table=errors_dir / "errors.tsv",
-        plot_errors=errors_dir / "errors.png",
-        plot_version_change=errors_dir / "version_change.png",
+        plot_errors=errors_dir / "errors.svg",
+        plot_version_change=errors_dir / "version_change.svg",
     conda:
         "envs/tidyverse.yml"
     script:
@@ -202,16 +202,16 @@ rule compile_features:
         kw_usage=features_dir / "kw_usage.tsv",
         schema=features_dir / "schema.tsv",
         # plots
-        plot_datasets=features_dir / "datasets.png",
-        plot_supp_text=features_dir / "supp_text.png",
-        plot_analysis=features_dir / "analysis.png",
-        plot_other_seg=features_dir / "other_seg.png",
-        plot_crc=features_dir / "crc.png",
-        plot_dark=features_dir / "dark.png",
-        plot_scaling=features_dir / "scaling.png",
-        plot_byteord=features_dir / "byteord.png",
-        plot_schema=features_dir / "schema.png",
-        plot_kw_usage=features_dir / "kw_usage.png",
+        plot_datasets=features_dir / "datasets.svg",
+        plot_supp_text=features_dir / "supp_text.svg",
+        plot_analysis=features_dir / "analysis.svg",
+        plot_other_seg=features_dir / "other_seg.svg",
+        plot_crc=features_dir / "crc.svg",
+        plot_dark=features_dir / "dark.svg",
+        plot_scaling=features_dir / "scaling.svg",
+        plot_byteord=features_dir / "byteord.svg",
+        plot_schema=features_dir / "schema.svg",
+        plot_kw_usage=features_dir / "kw_usage.svg",
     conda:
         "envs/tidyverse.yml"
     script:

@@ -1,5 +1,7 @@
 suppressMessages(library(tidyverse))
 
+WIDTH <- 10
+
 # TODO
 # - how to assess overrange columns? this should be done for ints above their bitmask
 # - get missing nextdata
@@ -362,8 +364,9 @@ df_all_errors %>%
   theme(
     axis.text.x = element_text(angle = 90, hjust = 1.0, vjust = 0.5),
     strip.text.y.left = element_text(angle = 0),
+    legend.position="bottom",
   )
-ggsave(snakemake@output[["plot_errors"]], width = 12, height = 16, dpi = 125)
+ggsave(snakemake@output[["plot_errors"]], width = WIDTH, height = 16, dpi = 125)
 
 
 df_misc %>%
@@ -395,8 +398,9 @@ df_misc %>%
   labs(x = NULL, y = NULL, fill = "Version Change") +
   theme(
     strip.text.y.left = element_text(angle = 0),
+    legend.position="bottom",
   )
-ggsave(snakemake@output[["plot_version_change"]], width = 12, height = 16, dpi = 125)
+ggsave(snakemake@output[["plot_version_change"]], width = WIDTH, height = 16, dpi = 125)
 
 df_all_errors %>%
   write_tsv(snakemake@output[["table"]])
