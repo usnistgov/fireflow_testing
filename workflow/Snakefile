@@ -91,9 +91,9 @@ rule list_all_fcs_files:
 
 rule clone_flowio:
     output:
-        directory(tools_dir / "flowio")
+        directory(tools_dir / "flowio"),
     params:
-        url="https://bitbucket.org/Mira_Koblizek/flowio/commits/47ef24487ead37efbe3d06674a37b769c6be49ab"
+        url="https://bitbucket.org/Mira_Koblizek/flowio/commits/47ef24487ead37efbe3d06674a37b769c6be49ab",
         # target = lambda wildcards, output: Path(output[0]).parent
     shell:
         """
@@ -212,6 +212,7 @@ rule compile_features:
         plot_byteord=features_dir / "byteord.svg",
         plot_schema=features_dir / "schema.svg",
         plot_kw_usage=features_dir / "kw_usage.svg",
+        plot_dates=features_dir / "kw_dates.svg",
     conda:
         "envs/tidyverse.yml"
     script:
