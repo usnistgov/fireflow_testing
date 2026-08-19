@@ -690,24 +690,30 @@ def dump_machine_table(f: TextIOWrapper, ds: list[DatasetMetadata] | None) -> No
                 return s.replace("LSR", "")
             elif "FACSDiscover" in s:
                 return s.replace("FACSDiscover", "FACSDisc.")
-            elif "FACSSymphony" in s:
-                return s.replace("FACSSymphony", "FACSSymph.")
+            elif "FACSymphony" in s:
+                return s.replace("FACSymphony", "FACSymph.")
             else:
                 return s
 
         def short_software(s: str) -> str:
             if "FACSDiva" in s:
                 return s.replace("BD FACSDiva Software Version", "FACSDiva")
+            elif "FACSChorus" in s:
+                return s.replace("BD FACSChorus", "FACSChorus")
+            elif "FACSuite" in s:
+                return s.replace("BD FACSuite", "FACSuite")
             elif "DVSSCIENCES" in s:
                 return re.sub("DVSSCIENCES-(FLUIDIGM-)?CYTOF", "CyTOF Software", s)
             elif "CellCapTure" in s or "Stratedigm" in s:
-                return re.sub(",? ?Build: .*", "", s)
+                return re.sub(",? ?Build: .*", "", s.replace("Stratedigm ", ""))
             elif "FlowJoCollectorsEdition" in s:
                 return s.replace("CollectorsEdition", "CE")
             elif "Summit" in s:
                 return re.sub(" ?(Development-only|Released) Version", "", s)
             elif "DxFLEX" in s:
                 return s.replace(" for DxFLEX", "")
+            elif "Attune Cytometric Software" in s:
+                return s.replace("Attune ", "")
             else:
                 return s
 
