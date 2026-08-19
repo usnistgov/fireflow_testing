@@ -1,0 +1,21 @@
+name: fireflow-testing-tidyverse
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-tidyverse
+  # lots of deps for flowio (most of which won't really be needed)
+  - bioconductor-flowcore
+  - bioconductor-flowrepositoryr
+  - r-shiny
+  - r-kableExtra
+  - r-xlsx
+  - r-scales
+  - r-pdftools
+  - r-bitops
+  - r-rcurl
+  # needed to load flowIO from a git repo
+  - r-devtools
+  # make cpu go burrrrrrr
+  - r-furrr
+  - r-future
