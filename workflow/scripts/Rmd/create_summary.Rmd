@@ -24,9 +24,9 @@ embed_svg <- function(path) {
 }
 ```
 
-# Results Overview
+# Dataset Overview
 
-```{r, results = "asis", echo = FALSE, fig.height = 16, fig.width = 12}
+```{r, echo = FALSE}
 suppressMessages(library(tidyverse))
 suppressMessages(library(ggh4x))
 df_machines <- read_tsv(
@@ -48,7 +48,15 @@ colors <- df_plot %>%
   group_by(vendor_short) %>%
   mutate(color = if_else((cur_group_id() %% 2) == 0, "#e8e8e8", "#c6c6c6")) %>%
   pull(color)
+```
 
+Total files: `r nrow(df_plot)`
+
+FCS files were gathered from across the open web from several repositories.
+Dataset composition is summarized below, broken down by machine and software
+version:
+
+```{r, results = "asis", echo = FALSE, fig.height = 16, fig.width = 12}
 df_plot %>%
   ggplot(aes(y = fct_rev(software_short), fill = repo)) +
   geom_bar() +
@@ -82,7 +90,22 @@ These are optional keywords in all versions in which they are valid.
 embed_svg(snakemake@input[["plot_kw_usage"]])
 ```
 
+## File creation date
+
+Year was extracted from each *\$DATE* keyword and grouped/counted for each
+machine and vendor. Files without *\$DATE* were arbitrarily assumed to be made
+in 1960.
+
+Note, some machines Y2K-ed themselves (ie they claim to be made in the year
+"0003", "0098", or similar). This was fixed for purposes of plotting below.
+
+``` {r, results = "asis", echo = FALSE}
+embed_svg(snakemake@input[["plot_dates"]])
+```
+
 ## Scaling type
+
+The scaling type based on the value of *\$PnE*.
 
 ``` {r, results = "asis", echo = FALSE}
 embed_svg(snakemake@input[["plot_scaling"]])
@@ -91,6 +114,9 @@ embed_svg(snakemake@input[["plot_scaling"]])
 ## CRC usage
 
 This checks for files that have a non-zero CRC word at the end.
+
+This does not check that the CRC actually matches the computed CRC (see
+compliance errors below).
 
 ``` {r, results = "asis", echo = FALSE}
 embed_svg(snakemake@input[["plot_crc"]])
@@ -107,7 +133,8 @@ embed_svg(snakemake@input[["plot_datasets"]])
 
 ## *DATA* schema usage
 
-These are different methods (schema) used to encode the bytes of data in *DATA*.
+These are different arrangements (schema) used to encode the bytes of data in
+*DATA*.
 
 Note that "uint-var" is only possible in 3.1 and 3.2, and "mixed" is only
 possible in 3.2.
@@ -119,7 +146,7 @@ embed_svg(snakemake@input[["plot_schema"]])
 ## *\$BYTEORD* usage
 
 Checks for either big endian, little endian, or something else (ie the PDP-11
-layout which is 3,4,1,2)
+layout which is `3,4,1,2`)
 
 ``` {r, results = "asis", echo = FALSE}
 embed_svg(snakemake@input[["plot_byteord"]])
@@ -177,7 +204,7 @@ embed_svg(snakemake@input[["plot_errors"]])
 
 These are errors pertaining to offsets, ie the three offset pairs for *TEXT*,
 *DATA*, and *ANALYSIS* in the *HEADER* and the *\$BEGIN/END* offsets in *TEXT*.
-This also covers errors with *\$NEXTDATA* which is also an offset.
+This also covers errors with *\$NEXTDATA*.
 
 1) nc_offsets_analysis: *ANALYSIS* offsets either could not be parsed or the
    *HEADER* and *TEXT* offsets mismatched
@@ -209,9 +236,9 @@ exists. For almost all files this is not relevant.
 3) nc_text_delimiter: The delimiter was not a byte from 1 to 126.
 4) nc_text_non_escape: The delimiter needed to be escaped for *TEXT* to be
    parsed validly.
-5) nc_text_nonstd_nonunique: A given non-stdandard key (no prepended "$") was
+5) nc_text_nonstd_nonunique: A given non-standard key (no prepended "$") was
    encountered at least twice.
-6) nc_text_std_nonunique: A given stdandard key (prepended "$") was encountered
+6) nc_text_std_nonunique: A given standard key (prepended "$") was encountered
    at least twice.
 7) nc_text_token_blank_key: A blank key was encountered.
 8) nc_text_token_blank_value: A blank value was encountered. This is only
@@ -292,38 +319,37 @@ a heuristic that guesses the version given the keywords present.
    *$PnR* bitmask.
 2) nc_byteord: *$BYTEORD* did not reflect the actual layout of data in the 
    *DATA* segment. This only applies to integer layouts for FCS 2.0/3.0.
-3) nc_crc_validity: The CRC existed and matched the computed CRC of the file.
-4) nc_crc_word: The 8-byte CRC word was found immediately after the last segment
-   of the file. It may be all zero. No attempt is made to find CRCs after 
-   "other stuff" in the FCS file that are not indexed as segments (although 
-   these exist in many cases). This does not apply to FCS 2.0 since CRC was
-   introduced in FCS 3.0.
+3) nc_crc_validity: The CRC word was found at the end of the dataset but did not
+   match the computed CRC.
+4) nc_crc_word: The 8-byte CRC word was not found immediately after the last
+   segment of the file. Valid CRC values may be all zero. No attempt is made to
+   find CRCs after "other stuff" in the FCS file that are not indexed as
+   segments (although these exist in many cases). This does not apply to FCS 2.0
+   since CRC was introduced in FCS 3.0.
 5) nc_int_width: The width of *\$PnB* did not match the actual width of the data
    in *DATA* and/or the *\$BYTEORD* keywords. This only applies to integer
    datatypes for FCS 2.0/3.0.
-6) nc_tot: *\$TOT* did not match the actualy number of events in *DATA* (as
-   computed using the sum of *\$PnB* and the length of the *DATA* segment in
-   bytes.
+6) nc_tot: *\$TOT* did not match the number of events in *DATA* (as computed
+   using the sum of *\$PnB* and the length of the *DATA* segment in bytes.
 7) nc_version: The version in *HEADER* did not match the "true" version of the
    file. See next section for more details on this error.
-
 
 ## Determining "True" Version
 
 Many files have keywords that are not compatible with the version indicated in
-*HEADER*; usually this is lower than the "true" version.
+*HEADER*. Usually these keywords are from a later version.
 
-Note that in many cases the "true" version is somewhat arbitrary since several
-will work, especially if the comparison is between 3.1 and 3.2.
+In many cases the "true" version is somewhat arbitrary since several will work,
+especially comparing 3.1 and 3.2.
 
 To find the "true" version, start will each version and eliminate those which
 drop required keywords. As a special case, 2.0 and 3.0 are eliminated if *\$PnB*
 has different widths and *\$DATATYPE* is `I` (the so-called "uint-var" schema).
 From whatever is left, choose the version which drops the least number of
-optional keywords. In many cases this will leave at least two versions which
-drop zero optional keywords each. In this case the version with the greatest
-number of optional keywords is selected, or the current version is selected if
-it has not been eliminated.
+optional keywords. This will usually leave at least two versions which drop zero
+optional keywords each. In this case the version with the greatest number of
+optional keywords is selected, or the current version is selected if it has not
+been eliminated.
 
 ``` {r, results = "asis", echo = FALSE}
 embed_svg(snakemake@input[["plot_version_change"]])
@@ -339,14 +365,14 @@ publication (if it exists) alongside the file.
 ### Direct mapping from *\$CYT*
 
 In the simple case, machine and vendor can be inferred directly from *\$CYT*.
-Ideally, *\$CYT* would store the exact model number but instead stores the
-overall product family name. For example, all Auroras are simple called "Aurora"
-even though they have different laser configurations that map onto differnt
-products. When possible, these machines are further deliniated using heuristics
-(see next section).
+Ideally, *\$CYT* would store the exact model number. Instead, it often stores
+the overall product family name. For example, all Auroras are simply called
+"Aurora" even though they have different laser configurations that map onto
+different products. When possible, these machines are further delineated using
+heuristics (see next section).
 
-The following lookup table is used to make this determination (using exact
-matches):
+The following lookup table is used to determine the machine from *\$CYT* (using
+exact matches):
 
 ```{r, results = "asis", echo = FALSE}
 read_tsv(snakemake@input[["cyt_mapping"]], col_types = "ccc") %>%
@@ -390,7 +416,7 @@ with a version.
 Software on newer machines is stored in a the nonstandard keyword *SWVER*.
 Software on the Gallios is stored in *@ACQSOFTWARE*. Software on older machines
 such as the CyAn and MoFlo (of varying submodels) will report their software
-prepended to the operating system on the *\$SYS* keyword (like `<software> /
+prepended to the operating system in the *\$SYS* keyword (like `<software> /
 <OS>`).
 
 #### Bio-Rad
@@ -413,7 +439,7 @@ Software (including version and build) is stored in the nonstandard keywords
 
 #### Standard Biotools
 
-TODO (this is a mess)
+TODO
 
 #### Thermo Fisher
 

@@ -127,9 +127,13 @@ df_machines_pretty <- df_machines %>%
 df_root %>%
   select(filepath) %>%
   group_by(filepath) %>%
-  mutate(n = n()) %>%
+  tally() %>%
+  rename(n_datasets = n) %>%
   left_join(df_machines_pretty, by = c("filepath")) %>%
-  ggplot(aes(x = n, y = fct_rev(ms))) +
+  group_by(ms, vendor_short, n_datasets) %>%
+  tally() %>%
+  mutate(n = log10(n)) %>%
+  ggplot(aes(x = n_datasets, y = fct_rev(ms), color = n)) +
   geom_point() +
   facet_grid(
     "vendor_short",
@@ -137,7 +141,7 @@ df_root %>%
     switch = "y",
     space = "free"
   ) +
-  labs(x = "log(N datasets)", y = NULL) +
+  labs(x = "log(N datasets)", y = NULL, color = "log(N files)") +
   scale_x_log10() +
   theme(
     strip.text.y.left = element_text(angle = 0),
@@ -211,12 +215,16 @@ df_n_other <- df_offsets %>%
   filter(start > 0) %>%
   group_by(filepath, dataset) %>%
   tally() %>%
+  mutate(n_other = n) %>%
   right_join(df_all, by = c("filepath", "dataset")) %>%
-  replace_na(list(n = 0))
+  replace_na(list(n_other = 0))
 
 df_n_other %>%
   right_join(df_machines_pretty, by = "filepath") %>%
-  ggplot(aes(x = n, y = fct_rev(ms))) +
+  group_by(n_other, ms, vendor_short) %>%
+  tally() %>%
+  mutate(n = log10(n)) %>%
+  ggplot(aes(x = n_other, y = fct_rev(ms), color = n)) +
   geom_point() +
   facet_grid(
     "vendor_short",
@@ -224,7 +232,7 @@ df_n_other %>%
     switch = "y",
     space = "free"
   ) +
-  labs(x = "N other seg", y = NULL) +
+  labs(x = "N other seg", y = NULL, color = "log10(N datasets)") +
   scale_x_continuous() +
   theme(
     strip.text.y.left = element_text(angle = 0),
@@ -545,3 +553,36 @@ df_all_kw %>%
     legend.position="bottom"
   ) 
 ggsave(snakemake@output[["plot_kw_usage"]], width = WIDTH, height = HEIGHT, dpi = DPI)
+
+# show $DATE distribution for each machine
+
+df_time %>%
+  mutate(
+    # some machines y2k-ed themselves
+    year = year(DATE),
+    year = case_when(
+      year < 1900 & year > 80 ~ year + 1900,
+      year < 1900 ~ year + 2000,
+      TRUE ~ year
+    ),
+  ) %>%
+  select(filepath, year) %>%
+  left_join(df_machines_pretty, by = c("filepath")) %>%
+  replace_na(list(year = 1960)) %>%
+  group_by(year, ms, vendor_short) %>%
+  tally() %>%
+  mutate(n = log10(n)) %>%
+  ggplot(aes(x = year, y = fct_rev(ms), color = n)) +
+  geom_point() +
+  facet_grid(
+    "vendor_short",
+    scales = "free",
+    switch = "y",
+    space = "free"
+  ) +
+  labs(x = "Year of $DATE", y = NULL, color = "log10(N datasets)") +
+  theme(
+    strip.text.y.left = element_text(angle = 0),
+    legend.position="bottom",
+  )
+ggsave(snakemake@output[["plot_dates"]], width = WIDTH, height = HEIGHT, dpi = DPI)
