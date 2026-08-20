@@ -38,6 +38,11 @@ Date created: `r Sys.Date()`
 # Dataset Overview
 
 ```{r, echo = FALSE}
+df_files <- read_tsv(
+  snakemake@input[["file_paths"]],
+  col_types = "c",
+)
+
 df_machines <- read_tsv(
   snakemake@input[["machines"]],
   col_types = cols(
@@ -59,7 +64,9 @@ colors <- df_plot %>%
   pull(color)
 ```
 
-Total files: `r nrow(df_plot)`
+Total files: `r nrow(df_files)`
+
+Total datasets: `r nrow(df_plot)`
 
 FCS files were gathered from across the open web from several repositories.
 Dataset composition is summarized below, broken down by machine and software
