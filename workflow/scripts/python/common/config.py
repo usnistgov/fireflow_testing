@@ -613,6 +613,18 @@ class FCSConfig(BaseModel):
         else:
             return None
 
+    def get_fr_src(self, repo_id: str) -> FlowRepoSrc:
+        ret = next(
+            (
+                c.src
+                for c in self.test_files
+                if isinstance(c.src, FlowRepoSrc) and repo_id == c.src.fr_id
+            ),
+            None,
+        )
+        assert ret is not None, f"could not find immport src for {repo_id}"
+        return ret
+
     def get_immport_src(self, repo_id: str) -> ImmportSrc:
         ret = next(
             (

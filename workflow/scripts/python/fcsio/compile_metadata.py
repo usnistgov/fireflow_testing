@@ -4,7 +4,7 @@ from io import TextIOWrapper
 import warnings
 import pyreflow as pf
 import pyreflow.typing as pft
-from typing import Any, NamedTuple, assert_never, Literal, TypeAlias
+from typing import Any, NamedTuple, assert_never, Literal, TypeAlias, Self
 from pathlib import Path
 from datetime import date, time, datetime
 from common.functional import key_maybe, fmap_maybe, maybe, esc
@@ -16,6 +16,12 @@ from common.config import (
     VendorId,
     MachineId,
     ParseConfig,
+    ArchiveType,
+    SingleUrlSrc,
+    MultiUrlSrc,
+    ArchiveSrc,
+    DryadUrl,
+    PlainUrl,
 )
 
 SaneDatatype: TypeAlias = Literal["uint", "float", "ascii"]
@@ -23,10 +29,62 @@ SaneDatatype: TypeAlias = Literal["uint", "float", "ascii"]
 
 class FileMetadata(NamedTuple):
     filepath: Path
+    # zenodo url, immport id, or FR id
+    source: str
+    # true if source file was an archive that has a subpath in it which reflects
+    # the real name used here
+    source_archive_type: ArchiveType | None
     repo: RepoType
-    repo_id: str
+    local_repo_id: str
     file_name: str
     conf: ParseConfig
+
+    @classmethod
+    def from_path(cls, fcs_path: Path, fcs_conf: FCSConfig) -> Self:
+        conf, repo_type, local_repo_id, file_name = fcs_conf.find_file_options(fcs_path)
+
+        def get_url_src(plain_url: DryadUrl | PlainUrl) -> str:
+            if isinstance(plain_url, DryadUrl):
+                dryad_id = plain_url.dryad_file_id
+                return f"https://datadryad.org/api/v2/files/{dryad_id}/download"
+            elif isinstance(plain_url, PlainUrl):
+                return plain_url.plain
+
+        if repo_type is RepoType.IMMPORT:
+            ip_src = fcs_conf.get_immport_src(local_repo_id)
+            source_id = ip_src.immport_id
+            # TODO Hack, we downloaded immport files without the leading path.
+            # This adds it back for the sake of documentation. We could do this
+            # correctly by just downloading more intelligently, but that part of
+            # the pipeline will be totally re-written anyway when this scales to
+            # 100k files.
+            file_name = next(p for p in ip_src.file_names if p.endswith(file_name))
+            archive_type = None
+        elif repo_type is RepoType.FR:
+            source_id = fcs_conf.get_fr_src(local_repo_id).fr_id
+            archive_type = None
+        elif repo_type is RepoType.MISC:
+            url_src = fcs_conf.get_url_src(local_repo_id)
+            if isinstance(url_src, SingleUrlSrc):
+                source_id = get_url_src(url_src.url)
+                archive_type = None
+            elif isinstance(url_src, MultiUrlSrc):
+                source_id = url_src.root_url
+                archive_type = None
+            elif isinstance(url_src, ArchiveSrc):
+                source_id = get_url_src(url_src.archive_url)
+                archive_type = url_src.archive_type
+        else:
+            assert_never(repo_type)
+        return cls(
+            filepath=fcs_path,
+            repo=repo_type,
+            local_repo_id=local_repo_id,
+            file_name=file_name,
+            conf=conf,
+            source=source_id,
+            source_archive_type=archive_type,
+        )
 
 
 class MatrixSchemaMetadata(NamedTuple):
@@ -612,14 +670,24 @@ def read_file(m: FileMetadata, fcs_conf: FCSConfig) -> list[DatasetMetadata]:
 def dump_file_meta(f: TextIOWrapper, fs: FileMetadata | None) -> None:
     w = csv.writer(f, delimiter="\t")
     if fs is None:
-        header = ["filepath", "repo_type", "repo_id", "file_name", "file_size"]
+        header = [
+            "filepath",
+            "repo_type",
+            "source",
+            "source_archive_type",
+            "local_repo_id",
+            "file_name",
+            "file_size",
+        ]
         w.writerow(header)
     else:
         w.writerow(
             [
                 fs.filepath,
                 fs.repo.value,
-                fs.repo_id,
+                fs.source,
+                fmap_maybe(lambda x: x.value, fs.source_archive_type),
+                fs.local_repo_id,
                 fs.file_name,
                 fs.filepath.stat().st_size,
             ]
@@ -1088,14 +1156,7 @@ def main(smk: Any) -> None:
 
     with open(smk.input[0], "r") as f:
         src_paths = [
-            FileMetadata(
-                filepath=(p := Path(fcs_path.rstrip())),
-                repo=(out := fcs_conf.find_file_options(p))[1],
-                repo_id=out[2],
-                file_name=out[3],
-                conf=out[0],
-            )
-            for fcs_path in f
+            FileMetadata.from_path(Path(fcs_path.rstrip()), fcs_conf) for fcs_path in f
         ]
 
     with (
