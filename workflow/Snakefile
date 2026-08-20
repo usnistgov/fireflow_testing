@@ -232,6 +232,7 @@ rule create_summary:
         plot_errors=rules.compile_errors.output.plot_errors,
         plot_version_change=rules.compile_errors.output.plot_version_change,
         machines=rules.compile_metadata.output.machine_table,
+        file_paths=rules.compile_metadata.output.file_paths,
         cyt_mapping=rules.dump_cyt_mapping.output,
     output:
         results_dir / "summaries" / "summary.html",
