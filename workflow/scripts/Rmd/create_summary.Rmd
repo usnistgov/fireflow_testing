@@ -11,7 +11,10 @@ output:
     pandoc_args: ["--wrap=none"]
 ---
 
-``` {r echo = FALSE}
+```{r, echo = FALSE}
+suppressMessages(library(tidyverse))
+suppressMessages(library(ggh4x))
+
 # read SVG and strip off the SVG bit on top
 embed_svg <- function(path) {
   svg_lines <- readLines(path)
@@ -24,11 +27,17 @@ embed_svg <- function(path) {
 }
 ```
 
+```{sh, echo = FALSE, results = "asis"}
+commit=$(git rev-parse HEAD)
+echo "Repo/commit: https://github.com/usnistgov/fireflow_testing/tree/$commit"
+```
+
+Date created: `r Sys.Date()`
+
+
 # Dataset Overview
 
 ```{r, echo = FALSE}
-suppressMessages(library(tidyverse))
-suppressMessages(library(ggh4x))
 df_machines <- read_tsv(
   snakemake@input[["machines"]],
   col_types = cols(
